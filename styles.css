@@ -273,7 +273,12 @@ button:hover {
 .profile-box {
   margin-top: 10px;
   display: grid;
-  gap: 8px;
+  gap: 0;
+}
+
+.profile-frame-button {
+  display: inline-block;
+  cursor: pointer;
 }
 
 .profile-frame {
@@ -285,6 +290,10 @@ button:hover {
   overflow: hidden;
   background: linear-gradient(145deg, #ffd76f, #7dc8ff);
   box-shadow: 0 10px 20px rgba(41, 97, 148, 0.25);
+}
+
+.profile-frame:hover {
+  transform: translateY(-1px);
 }
 
 .profile-image {
@@ -303,25 +312,22 @@ button:hover {
   display: grid;
   place-items: center;
   background: linear-gradient(180deg, #ecf7ff, #f7fbff);
-  color: #48739b;
+}
+
+.profile-plus {
+  position: absolute;
+  right: 8px;
+  bottom: 8px;
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  background: linear-gradient(145deg, #ffb748, #ff975f);
+  color: #ffffff;
+  font-size: 1.05rem;
   font-weight: 800;
-  font-size: 0.9rem;
-}
-
-.profile-actions {
-  display: flex;
-  gap: 8px;
-  align-items: center;
-}
-
-.profile-upload {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-  min-height: 34px;
-  padding: 8px 12px;
-  font-size: 0.88rem;
+  box-shadow: 0 5px 12px rgba(255, 140, 66, 0.35);
 }
 
 .status-chips {
@@ -711,12 +717,6 @@ button:hover {
 
   .small-btn {
     width: 100%;
-  }
-
-  .profile-actions {
-    width: 100%;
-    display: grid;
-    grid-template-columns: 1fr;
   }
 
   .profile-frame {

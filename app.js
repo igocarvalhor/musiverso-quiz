@@ -91,7 +91,6 @@ const el = {
   profileInput: document.getElementById("profileInput"),
   profileImage: document.getElementById("profileImage"),
   profilePlaceholder: document.getElementById("profilePlaceholder"),
-  clearPhotoBtn: document.getElementById("clearPhotoBtn"),
   levelChip: document.getElementById("levelChip"),
   timerChip: document.getElementById("timerChip"),
   titleChip: document.getElementById("titleChip"),
@@ -305,11 +304,6 @@ function loadProfileImage() {
 function saveProfileImage(dataUrl) {
   localStorage.setItem(getProfilePhotoStorageKey(), dataUrl);
   setProfileImage(dataUrl);
-}
-
-function clearProfileImage() {
-  localStorage.removeItem(getProfilePhotoStorageKey());
-  setProfileImage("");
 }
 
 function getSeenSet(level) {
@@ -595,11 +589,6 @@ function wireEvents() {
 
     reader.readAsDataURL(file);
     event.target.value = "";
-  });
-
-  el.clearPhotoBtn.addEventListener("click", () => {
-    clearProfileImage();
-    setFeedback("Foto removida.", "ok");
   });
 
   el.nextBtn.addEventListener("click", nextQuestion);

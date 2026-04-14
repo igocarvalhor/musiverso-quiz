@@ -39,14 +39,13 @@
               <p class="mini-label">Jogador</p>
               <h2 id="playerLabel">-</h2>
               <div class="profile-box">
-                <div class="profile-frame">
-                  <span id="profilePlaceholder" class="profile-placeholder">Foto</span>
-                  <img id="profileImage" class="profile-image" alt="Foto de perfil" />
-                </div>
-                <div class="profile-actions">
-                  <label for="profileInput" class="pill-btn profile-upload">Escolher foto</label>
-                  <button id="clearPhotoBtn" class="ghost-btn small-btn" type="button">Remover</button>
-                </div>
+                <label for="profileInput" class="profile-frame-button" aria-label="Adicionar foto de perfil">
+                  <div class="profile-frame">
+                    <span id="profilePlaceholder" class="profile-placeholder"></span>
+                    <img id="profileImage" class="profile-image" alt="Foto de perfil" />
+                    <span class="profile-plus" aria-hidden="true">+</span>
+                  </div>
+                </label>
                 <input id="profileInput" type="file" accept="image/*" hidden />
               </div>
             </div>
