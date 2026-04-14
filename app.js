@@ -217,6 +217,7 @@ function handleTimeOut() {
   clearQuestionTimer();
 
   getSeenSet(state.activeLevel).add(String(question.id));
+  saveSeenIds(state.activeLevel);
 
   const buttons = Array.from(el.answersWrap.querySelectorAll(".answer-btn"));
   buttons.forEach((btn) => {
@@ -334,6 +335,36 @@ function saveProfileImage(dataUrl) {
   setProfileImage(dataUrl);
 }
 
+function getSeenStorageKey(level) {
+  const safeName = (state.playerName || "anon").toLowerCase();
+  return `musiversoSeen_${safeName}_${level}`;
+}
+
+function loadSeenIds(level) {
+  try {
+    const raw = localStorage.getItem(getSeenStorageKey(level));
+    if (!raw) return new Set();
+    return new Set(JSON.parse(raw));
+  } catch (_e) {
+    return new Set();
+  }
+}
+
+function saveSeenIds(level) {
+  try {
+    localStorage.setItem(
+      getSeenStorageKey(level),
+      JSON.stringify(Array.from(state.seenQuestionIdsByLevel[level] || []))
+    );
+  } catch (_e) {}
+}
+
+function clearSeenIds(level) {
+  try {
+    localStorage.removeItem(getSeenStorageKey(level));
+  } catch (_e) {}
+}
+
 function getSeenSet(level) {
   if (!state.seenQuestionIdsByLevel[level]) {
     state.seenQuestionIdsByLevel[level] = new Set();
@@ -367,6 +398,7 @@ async function loadQuestions(level) {
     if (!Array.isArray(data.questions) || !data.questions.length) {
       // Quando o nivel acaba, reinicia o pool daquele nivel para manter jogabilidade.
       getSeenSet(level).clear();
+      clearSeenIds(level);
       const retryData = await apiFetch(
         `/api/questions?level=${level}&limit=${LEVEL_META[level].roundSize}`
       );
@@ -421,6 +453,7 @@ function handleAnswer(selectedIndex) {
   clearQuestionTimer();
 
   getSeenSet(state.activeLevel).add(String(question.id));
+  saveSeenIds(state.activeLevel);
 
   const buttons = Array.from(el.answersWrap.querySelectorAll(".answer-btn"));
   buttons.forEach((btn) => {
@@ -665,6 +698,11 @@ async function bootstrap() {
   state.playerName = sessionUser.nickname;
   state.totalScore = Number(sessionUser.totalScore) || 0;
   state.activeLevel = sessionUser.currentLevel || "facil";
+
+  // Restaurar IDs de perguntas ja vistas de sessoes anteriores
+  for (const level of Object.keys(LEVEL_META)) {
+    state.seenQuestionIdsByLevel[level] = loadSeenIds(level);
+  }
 
   const startCollapsed = window.matchMedia("(max-width: 640px)").matches;
   setHeaderCollapsed(startCollapsed);
