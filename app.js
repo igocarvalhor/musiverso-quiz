@@ -98,6 +98,8 @@ const el = {
   streakValue: document.getElementById("streakValue"),
   correctValue: document.getElementById("correctValue"),
   questionCounter: document.getElementById("questionCounter"),
+  timebarWrap: document.getElementById("timebarWrap"),
+  timebarFill: document.getElementById("timebarFill"),
   questionText: document.getElementById("questionText"),
   answersWrap: document.getElementById("answersWrap"),
   feedbackText: document.getElementById("feedbackText"),
@@ -177,6 +179,24 @@ function updateTimerChip() {
   el.timerChip.textContent = state.isRoundStarted ? `Tempo: ${state.secondsLeft}s` : "Tempo: --";
 }
 
+function updateTimeBar() {
+  const limit = LEVEL_META[state.activeLevel].timeLimit;
+  const pct = state.isRoundStarted ? Math.max(0, (state.secondsLeft / limit) * 100) : 0;
+
+  el.timebarFill.style.width = `${pct}%`;
+  el.timebarWrap.classList.remove("timebar-warning", "timebar-danger");
+
+  if (!state.isRoundStarted) {
+    return;
+  }
+
+  if (pct <= 25) {
+    el.timebarWrap.classList.add("timebar-danger");
+  } else if (pct <= 50) {
+    el.timebarWrap.classList.add("timebar-warning");
+  }
+}
+
 function showStartCta(show) {
   el.quizStartCta.style.display = show ? "grid" : "none";
 }
@@ -213,10 +233,12 @@ function startQuestionTimer() {
   clearQuestionTimer();
   state.secondsLeft = LEVEL_META[state.activeLevel].timeLimit;
   updateTimerChip();
+  updateTimeBar();
 
   state.questionTimerId = setInterval(() => {
     state.secondsLeft -= 1;
     updateTimerChip();
+    updateTimeBar();
 
     if (state.secondsLeft <= 0) {
       handleTimeOut();
@@ -458,6 +480,7 @@ function resetToIdleState() {
   el.nextBtn.disabled = true;
   el.finishBtn.disabled = true;
   updateUiStats();
+  updateTimeBar();
 }
 
 async function startRound() {

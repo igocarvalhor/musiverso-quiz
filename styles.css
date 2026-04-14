@@ -462,6 +462,32 @@ button:hover {
   opacity: 0.7;
 }
 
+.timebar-wrap {
+  margin: 8px 0 10px;
+  width: 100%;
+  height: 10px;
+  border-radius: 999px;
+  overflow: hidden;
+  background: #e6f2ff;
+  border: 1px solid #c7e4ff;
+}
+
+.timebar-fill {
+  width: 0;
+  height: 100%;
+  border-radius: inherit;
+  background: linear-gradient(90deg, #57df9f, #1fc7a8);
+  transition: width 0.2s linear, background 0.2s ease;
+}
+
+.timebar-wrap.timebar-warning .timebar-fill {
+  background: linear-gradient(90deg, #ffd26b, #ffa24d);
+}
+
+.timebar-wrap.timebar-danger .timebar-fill {
+  background: linear-gradient(90deg, #ff8da8, #ff5d8f);
+}
+
 .question-box h3 {
   margin: 8px 0 14px;
   font-size: clamp(1.1rem, 2.4vw, 1.4rem);
