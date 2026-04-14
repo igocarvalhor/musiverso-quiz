@@ -34,33 +34,43 @@
 
       <section class="grid-layout">
         <article class="panel game-panel" id="gamePanel">
-          <div class="game-top">
-            <div>
-              <p class="mini-label">Jogador</p>
-              <h2 id="playerLabel">-</h2>
-              <div class="profile-box">
-                <label for="profileInput" class="profile-frame-button" aria-label="Adicionar foto de perfil">
-                  <div class="profile-frame">
-                    <span id="profilePlaceholder" class="profile-placeholder"></span>
-                    <img id="profileImage" class="profile-image" alt="Foto de perfil" />
-                    <span class="profile-plus" aria-hidden="true">+</span>
-                  </div>
-                </label>
-                <input id="profileInput" type="file" accept="image/*" hidden />
-              </div>
-            </div>
-            <div class="status-chips">
-              <span id="levelChip" class="chip">Nivel: Facil</span>
-              <span id="timerChip" class="chip chip-time">Tempo: --</span>
-              <span id="titleChip" class="chip chip-gold">Aventureiro Ritmico</span>
-              <button id="logoutBtn" class="ghost-btn small-btn">Sair</button>
-            </div>
+          <div class="mobile-header-tools">
+            <button id="toggleHeaderBtn" class="header-toggle-btn" type="button" aria-expanded="true">
+              Ocultar cabecalho
+            </button>
           </div>
 
-          <div class="score-strip">
-            <p>Pontos: <strong id="scoreValue">0</strong></p>
-            <p>Acertos seguidos: <strong id="streakValue">0</strong></p>
-            <p>Acertos: <strong id="correctValue">0</strong></p>
+          <div id="quizHeader" class="quiz-header">
+            <div class="game-top">
+              <div>
+                <p class="mini-label">Jogador</p>
+                <h2 id="playerLabel">-</h2>
+                <div class="profile-box">
+                  <label for="profileInput" class="profile-frame-button" aria-label="Adicionar foto de perfil">
+                    <div class="profile-frame">
+                      <span id="profilePlaceholder" class="profile-placeholder"></span>
+                      <img id="profileImage" class="profile-image" alt="Foto de perfil" />
+                      <span class="profile-plus" aria-hidden="true">+</span>
+                    </div>
+                  </label>
+                  <input id="profileInput" type="file" accept="image/*" hidden />
+                </div>
+              </div>
+              <div class="status-chips">
+                <span id="levelChip" class="chip">Nivel: Facil</span>
+                <span id="timerChip" class="chip chip-time">Tempo: --</span>
+                <span id="titleChip" class="chip chip-gold">Aventureiro Ritmico</span>
+                <button id="logoutBtn" class="logout-power" type="button" title="Sair" aria-label="Sair">
+                  <span aria-hidden="true">⏻</span>
+                </button>
+              </div>
+            </div>
+
+            <div class="score-strip">
+              <p>Pontos: <strong id="scoreValue">0</strong></p>
+              <p>Acertos seguidos: <strong id="streakValue">0</strong></p>
+              <p>Acertos: <strong id="correctValue">0</strong></p>
+            </div>
           </div>
 
           <div class="level-select" id="levelSelect"></div>

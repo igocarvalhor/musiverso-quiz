@@ -114,7 +114,15 @@ const el = {
   rankingHint: document.getElementById("rankingHint"),
   answerButtonTemplate: document.getElementById("answerButtonTemplate"),
   quizStartCta: document.getElementById("quizStartCta"),
+  quizHeader: document.getElementById("quizHeader"),
+  toggleHeaderBtn: document.getElementById("toggleHeaderBtn"),
 };
+
+function setHeaderCollapsed(collapsed) {
+  el.quizHeader.classList.toggle("collapsed", collapsed);
+  el.toggleHeaderBtn.textContent = collapsed ? "Mostrar cabecalho" : "Ocultar cabecalho";
+  el.toggleHeaderBtn.setAttribute("aria-expanded", String(!collapsed));
+}
 
 function apiFetch(path, options = {}) {
   return fetch(path, options).then((res) => {
@@ -577,6 +585,11 @@ async function loadRanking() {
 }
 
 function wireEvents() {
+  el.toggleHeaderBtn.addEventListener("click", () => {
+    const collapsed = !el.quizHeader.classList.contains("collapsed");
+    setHeaderCollapsed(collapsed);
+  });
+
   el.startGameBtn.addEventListener("click", async () => {
     if (!state.authenticated || !state.playerName) {
       setFeedback("Faca login ou crie conta para jogar.", "error");
@@ -654,6 +667,9 @@ async function bootstrap() {
   state.playerName = sessionUser.nickname;
   state.totalScore = Number(sessionUser.totalScore) || 0;
   state.activeLevel = sessionUser.currentLevel || "facil";
+
+  const startCollapsed = window.matchMedia("(max-width: 640px)").matches;
+  setHeaderCollapsed(startCollapsed);
 
   wireEvents();
   loadProfileImage();
