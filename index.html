@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Musiverso Quiz</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;700;800&family=Nunito:wght@400;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div class="aurora aurora-a"></div>
+    <div class="aurora aurora-b"></div>
+    <div class="stars"></div>
+
+    <main class="app-shell">
+      <header class="hero">
+        <p class="badge">Musiverso</p>
+        <h1>Quiz Musical Infantil</h1>
+        <p class="subtitle">
+          Aprenda musica brincando, suba de nivel e entre no ranking galactico.
+        </p>
+      </header>
+
+      <section class="panel start-panel" id="startPanel">
+        <label for="playerName">Seu nome de explorador musical</label>
+        <div class="input-row">
+          <input
+            id="playerName"
+            name="playerName"
+            type="text"
+            maxlength="30"
+            placeholder="Digite seu apelido"
+          />
+          <button id="startGameBtn" class="primary-btn">Comecar</button>
+        </div>
+        <p class="hint">Nivel inicial: Facil</p>
+      </section>
+
+      <section class="grid-layout">
+        <article class="panel game-panel" id="gamePanel">
+          <div class="game-top">
+            <div>
+              <p class="mini-label">Jogador</p>
+              <h2 id="playerLabel">-</h2>
+            </div>
+            <div class="status-chips">
+              <span id="levelChip" class="chip">Nivel: Facil</span>
+              <span id="titleChip" class="chip chip-gold">Aventureiro Ritmico</span>
+            </div>
+          </div>
+
+          <div class="score-strip">
+            <p>Pontos: <strong id="scoreValue">0</strong></p>
+            <p>Acertos seguidos: <strong id="streakValue">0</strong></p>
+            <p>Acertos: <strong id="correctValue">0</strong></p>
+          </div>
+
+          <div class="level-select" id="levelSelect"></div>
+
+          <div class="progress-wrap">
+            <div class="progress-bar" id="progressBar"></div>
+          </div>
+
+          <div class="question-box">
+            <p id="questionCounter" class="question-counter">Pergunta 0/0</p>
+            <h3 id="questionText">Clique em comecar para jogar.</h3>
+            <div id="answersWrap" class="answers-wrap"></div>
+            <p id="feedbackText" class="feedback"></p>
+          </div>
+
+          <div class="action-row">
+            <button id="nextBtn" class="secondary-btn" disabled>Proxima</button>
+            <button id="finishBtn" class="ghost-btn" disabled>Finalizar rodada</button>
+          </div>
+        </article>
+
+        <aside class="panel ranking-panel">
+          <div class="ranking-head">
+            <h2>Top Ranking</h2>
+            <div class="ranking-actions">
+              <button id="overallBtn" class="pill-btn active">Geral</button>
+              <button id="byLevelBtn" class="pill-btn">Por nivel</button>
+            </div>
+          </div>
+
+          <ul id="rankingList" class="ranking-list"></ul>
+          <p id="rankingHint" class="hint">Complete uma rodada para atualizar sua posicao.</p>
+        </aside>
+      </section>
+    </main>
+
+    <template id="answerButtonTemplate">
+      <button class="answer-btn"></button>
+    </template>
+
+    <script src="app.js"></script>
+  </body>
+</html>

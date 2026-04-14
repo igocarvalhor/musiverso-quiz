@@ -1,0 +1,441 @@
+:root {
+  --bg-deep: #0b1020;
+  --bg-sky: #14213d;
+  --mint: #3cd6a8;
+  --orange: #ff9f1c;
+  --sun: #ffd166;
+  --rose: #ff5d8f;
+  --ink: #14213d;
+  --paper: #f8fbff;
+  --panel: rgba(255, 255, 255, 0.88);
+  --shadow: 0 16px 35px rgba(7, 14, 36, 0.22);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  font-family: "Nunito", sans-serif;
+  color: var(--ink);
+  background: radial-gradient(circle at 16% 18%, #1e3a67 0, transparent 32%),
+    radial-gradient(circle at 84% 24%, #1b4d5d 0, transparent 28%),
+    linear-gradient(145deg, var(--bg-deep), var(--bg-sky));
+  overflow-x: hidden;
+}
+
+.aurora {
+  position: fixed;
+  width: 48vw;
+  height: 48vw;
+  border-radius: 50%;
+  filter: blur(60px);
+  opacity: 0.32;
+  z-index: 0;
+  animation: drift 9s ease-in-out infinite alternate;
+}
+
+.aurora-a {
+  left: -12vw;
+  top: -8vw;
+  background: var(--mint);
+}
+
+.aurora-b {
+  right: -15vw;
+  bottom: -15vw;
+  background: var(--rose);
+  animation-duration: 12s;
+}
+
+.stars {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  background-image: radial-gradient(circle at 12% 22%, rgba(255, 255, 255, 0.8) 0 1px, transparent 2px),
+    radial-gradient(circle at 56% 65%, rgba(255, 255, 255, 0.7) 0 1px, transparent 2px),
+    radial-gradient(circle at 78% 32%, rgba(255, 255, 255, 0.9) 0 1px, transparent 2px),
+    radial-gradient(circle at 26% 82%, rgba(255, 255, 255, 0.7) 0 1px, transparent 2px);
+  opacity: 0.45;
+}
+
+.app-shell {
+  width: min(1120px, 92vw);
+  margin: 28px auto;
+  position: relative;
+  z-index: 1;
+}
+
+.hero {
+  text-align: center;
+  color: var(--paper);
+  margin-bottom: 16px;
+  animation: float-in 0.7s ease-out both;
+}
+
+.badge {
+  margin: 0 auto 8px;
+  width: fit-content;
+  padding: 6px 12px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.16);
+  font-weight: 800;
+  letter-spacing: 0.04em;
+}
+
+.hero h1 {
+  margin: 0;
+  font-family: "Baloo 2", sans-serif;
+  font-size: clamp(2rem, 4vw, 3.1rem);
+}
+
+.subtitle {
+  margin: 4px 0 0;
+  font-size: 1.05rem;
+}
+
+.panel {
+  background: var(--panel);
+  backdrop-filter: blur(8px);
+  border: 1px solid rgba(255, 255, 255, 0.6);
+  border-radius: 22px;
+  box-shadow: var(--shadow);
+}
+
+.start-panel {
+  padding: 16px;
+  margin-bottom: 16px;
+}
+
+.start-panel label {
+  display: block;
+  margin-bottom: 8px;
+  font-weight: 700;
+}
+
+.input-row {
+  display: flex;
+  gap: 10px;
+}
+
+input {
+  flex: 1;
+  border: 2px solid #d0d9ea;
+  background: #ffffff;
+  border-radius: 12px;
+  padding: 12px;
+  font-size: 1rem;
+  font-family: inherit;
+}
+
+button {
+  border: 0;
+  cursor: pointer;
+  font-family: inherit;
+  transition: transform 0.2s ease, opacity 0.2s ease, box-shadow 0.2s ease;
+}
+
+button:hover {
+  transform: translateY(-1px);
+}
+
+.primary-btn,
+.secondary-btn,
+.ghost-btn,
+.pill-btn,
+.answer-btn {
+  border-radius: 12px;
+  font-weight: 800;
+}
+
+.primary-btn {
+  background: linear-gradient(145deg, var(--orange), #ffb347);
+  color: #202124;
+  padding: 12px 18px;
+}
+
+.secondary-btn {
+  background: linear-gradient(145deg, #14c8ff, #46dbff);
+  color: #00273a;
+  padding: 11px 16px;
+}
+
+.ghost-btn {
+  background: #edf2ff;
+  color: #21324d;
+  padding: 11px 16px;
+}
+
+.grid-layout {
+  display: grid;
+  grid-template-columns: 1.45fr 0.9fr;
+  gap: 16px;
+  align-items: start;
+}
+
+.game-panel,
+.ranking-panel {
+  padding: 16px;
+}
+
+.game-top {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+  align-items: flex-start;
+}
+
+.mini-label {
+  margin: 0;
+  font-size: 0.8rem;
+  opacity: 0.7;
+}
+
+.game-top h2 {
+  margin: 2px 0 0;
+  font-size: 1.4rem;
+  font-family: "Baloo 2", sans-serif;
+}
+
+.status-chips {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.chip {
+  display: inline-block;
+  padding: 6px 10px;
+  border-radius: 999px;
+  background: #e3f7ff;
+  font-size: 0.88rem;
+  font-weight: 800;
+}
+
+.chip-gold {
+  background: #fff4cf;
+}
+
+.score-strip {
+  margin-top: 10px;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 8px;
+}
+
+.score-strip p {
+  margin: 0;
+  background: #ffffff;
+  border-radius: 10px;
+  padding: 8px;
+  text-align: center;
+}
+
+.level-select {
+  margin-top: 14px;
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.pill-btn {
+  background: #edf2f7;
+  color: #34455f;
+  padding: 8px 12px;
+}
+
+.pill-btn.active {
+  background: linear-gradient(145deg, var(--mint), #88f3d2);
+  color: #033326;
+  box-shadow: 0 8px 18px rgba(29, 154, 122, 0.3);
+}
+
+.pill-btn:disabled {
+  opacity: 0.55;
+  cursor: not-allowed;
+}
+
+.progress-wrap {
+  margin-top: 14px;
+  width: 100%;
+  background: #e8eef7;
+  border-radius: 999px;
+  overflow: hidden;
+  height: 11px;
+}
+
+.progress-bar {
+  width: 0;
+  height: 100%;
+  background: linear-gradient(90deg, var(--orange), var(--sun));
+  transition: width 0.22s ease;
+}
+
+.question-box {
+  margin-top: 15px;
+  background: #ffffff;
+  border-radius: 18px;
+  padding: 16px;
+}
+
+.question-counter {
+  margin: 0;
+  font-size: 0.86rem;
+  opacity: 0.7;
+}
+
+.question-box h3 {
+  margin: 8px 0 14px;
+  font-size: clamp(1.1rem, 2.4vw, 1.4rem);
+  line-height: 1.25;
+  font-family: "Baloo 2", sans-serif;
+}
+
+.answers-wrap {
+  display: grid;
+  gap: 8px;
+}
+
+.answer-btn {
+  text-align: left;
+  background: #f4f8ff;
+  color: #22314d;
+  padding: 12px;
+  border: 2px solid transparent;
+}
+
+.answer-btn.correct {
+  background: #d5ffe8;
+  border-color: #47db92;
+}
+
+.answer-btn.wrong {
+  background: #ffe0ea;
+  border-color: #ff7ca5;
+}
+
+.answer-btn:disabled {
+  opacity: 0.75;
+  cursor: not-allowed;
+}
+
+.feedback {
+  min-height: 24px;
+  margin: 10px 0 0;
+  font-weight: 800;
+}
+
+.feedback.ok {
+  color: #0c8d5f;
+}
+
+.feedback.error {
+  color: #be325d;
+}
+
+.action-row {
+  margin-top: 12px;
+  display: flex;
+  gap: 10px;
+}
+
+.ranking-head {
+  display: flex;
+  justify-content: space-between;
+  gap: 8px;
+  align-items: center;
+}
+
+.ranking-head h2 {
+  margin: 0;
+  font-family: "Baloo 2", sans-serif;
+}
+
+.ranking-actions {
+  display: flex;
+  gap: 6px;
+}
+
+.ranking-list {
+  list-style: none;
+  margin: 12px 0;
+  padding: 0;
+  display: grid;
+  gap: 8px;
+}
+
+.ranking-list li {
+  background: #ffffff;
+  border-radius: 12px;
+  padding: 10px;
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  gap: 8px;
+  align-items: center;
+}
+
+.rank-index {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: #ffe8b2;
+  font-weight: 800;
+}
+
+.rank-name {
+  font-weight: 800;
+}
+
+.rank-score {
+  font-weight: 800;
+  color: #0f5e8c;
+}
+
+.hint {
+  margin: 8px 0 0;
+  font-size: 0.9rem;
+  opacity: 0.75;
+}
+
+@keyframes drift {
+  from {
+    transform: translateY(0) scale(1);
+  }
+  to {
+    transform: translateY(20px) scale(1.06);
+  }
+}
+
+@keyframes float-in {
+  from {
+    opacity: 0;
+    transform: translateY(-12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media (max-width: 900px) {
+  .grid-layout {
+    grid-template-columns: 1fr;
+  }
+
+  .score-strip {
+    grid-template-columns: 1fr;
+  }
+
+  .input-row {
+    flex-direction: column;
+  }
+
+  .action-row {
+    flex-direction: column;
+  }
+}
