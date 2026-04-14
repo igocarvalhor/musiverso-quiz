@@ -26,19 +26,38 @@
         </p>
       </header>
 
-      <section class="panel start-panel" id="startPanel">
-        <label for="playerName">Seu nome de explorador musical</label>
+      <section class="panel auth-panel" id="authPanel">
+        <h2>Entrar ou Criar Conta</h2>
+        <p class="hint">Use um nickname unico e sua senha para acessar.</p>
         <div class="input-row">
           <input
-            id="playerName"
-            name="playerName"
+            id="authNickname"
+            name="authNickname"
             type="text"
-            maxlength="30"
-            placeholder="Digite seu apelido"
+            maxlength="20"
+            placeholder="Nickname (3-20, sem espacos)"
           />
+          <input
+            id="authPassword"
+            name="authPassword"
+            type="password"
+            maxlength="72"
+            placeholder="Senha (minimo 6 caracteres)"
+          />
+        </div>
+        <div class="auth-actions">
+          <button id="loginBtn" class="secondary-btn">Entrar</button>
+          <button id="registerBtn" class="primary-btn">Criar conta</button>
+        </div>
+        <p id="authStatus" class="feedback"></p>
+      </section>
+
+      <section class="panel start-panel" id="startPanel">
+        <label>Comecar rodada</label>
+        <div class="input-row">
           <button id="startGameBtn" class="primary-btn">Comecar</button>
         </div>
-        <p class="hint">Nivel inicial: Facil</p>
+        <p class="hint">Voce precisa estar logado para iniciar.</p>
       </section>
 
       <section class="grid-layout">

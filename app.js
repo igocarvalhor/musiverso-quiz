@@ -1,4 +1,5 @@
 const state = {
+  authenticated: false,
   playerName: "",
   activeLevel: "facil",
   unlockedLevels: ["facil"],
@@ -80,8 +81,12 @@ const fallbackQuestions = {
 };
 
 const el = {
+  authNicknameInput: document.getElementById("authNickname"),
+  authPasswordInput: document.getElementById("authPassword"),
+  loginBtn: document.getElementById("loginBtn"),
+  registerBtn: document.getElementById("registerBtn"),
+  authStatus: document.getElementById("authStatus"),
   startGameBtn: document.getElementById("startGameBtn"),
-  playerNameInput: document.getElementById("playerName"),
   playerLabel: document.getElementById("playerLabel"),
   levelChip: document.getElementById("levelChip"),
   titleChip: document.getElementById("titleChip"),
@@ -185,6 +190,18 @@ function renderLevelButtons() {
 function setFeedback(message, type = "") {
   el.feedbackText.textContent = message;
   el.feedbackText.className = `feedback ${type}`.trim();
+}
+
+function setAuthStatus(message, type = "") {
+  el.authStatus.textContent = message;
+  el.authStatus.className = `feedback ${type}`.trim();
+}
+
+function setAuthEnabled(enabled) {
+  el.authNicknameInput.disabled = !enabled;
+  el.authPasswordInput.disabled = !enabled;
+  el.loginBtn.disabled = !enabled;
+  el.registerBtn.disabled = !enabled;
 }
 
 function getSeenSet(level) {
@@ -399,19 +416,60 @@ async function loadRanking() {
 }
 
 function wireEvents() {
-  el.startGameBtn.addEventListener("click", async () => {
-    const typedName = el.playerNameInput.value.trim();
-    if (!typedName) {
-      setFeedback("Digite seu nome para comecar.", "error");
+  async function handleAuth(mode) {
+    const nickname = el.authNicknameInput.value.trim();
+    const password = el.authPasswordInput.value;
+
+    if (!nickname || !password) {
+      setAuthStatus("Informe nickname e senha.", "error");
       return;
     }
 
-    state.playerName = typedName;
-    state.totalScore = 0;
+    setAuthEnabled(false);
+    setAuthStatus(mode === "login" ? "Entrando..." : "Criando conta...");
+
+    try {
+      const response = await apiFetch(`/api/auth/${mode}`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ nickname, password }),
+      });
+
+      state.authenticated = true;
+      state.playerName = response.user.nickname;
+      state.totalScore = response.user.totalScore || 0;
+      state.activeLevel = response.user.currentLevel || "facil";
+      updateUiStats();
+      setAuthStatus(`Conta ativa: ${state.playerName}`, "ok");
+      setFeedback("Login realizado! Clique em Comecar para iniciar.", "ok");
+      el.authPasswordInput.value = "";
+    } catch (error) {
+      setAuthStatus(error.message || "Falha na autenticacao.", "error");
+      state.authenticated = false;
+    } finally {
+      if (!state.authenticated) {
+        setAuthEnabled(true);
+      }
+    }
+  }
+
+  el.loginBtn.addEventListener("click", async () => {
+    await handleAuth("login");
+  });
+
+  el.registerBtn.addEventListener("click", async () => {
+    await handleAuth("register");
+  });
+
+  el.startGameBtn.addEventListener("click", async () => {
+    if (!state.authenticated || !state.playerName) {
+      setFeedback("Faca login ou crie conta para jogar.", "error");
+      return;
+    }
+
     state.roundScore = 0;
     state.roundCorrectAnswers = 0;
     state.roundBestStreak = 0;
-    state.activeLevel = "facil";
     state.seenQuestionIdsByLevel = {
       facil: new Set(),
       medio: new Set(),

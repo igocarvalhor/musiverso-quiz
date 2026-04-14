@@ -3,6 +3,7 @@ require("dotenv").config();
 const express = require("express");
 const cors = require("cors");
 const path = require("path");
+const bcrypt = require("bcryptjs");
 const { createClient } = require("@supabase/supabase-js");
 const { perguntas } = require("./question-bank");
 
@@ -120,6 +121,32 @@ function calculateTitle(totalScore) {
   return chosenTitle;
 }
 
+function normalizeNickname(value) {
+  return String(value || "").trim();
+}
+
+function isValidNickname(nickname) {
+  return /^[a-zA-Z0-9_]{3,20}$/.test(nickname);
+}
+
+function isValidPassword(password) {
+  return typeof password === "string" && password.length >= 6 && password.length <= 72;
+}
+
+async function findPlayerByNickname(nickname) {
+  const { data, error } = await supabase
+    .from("players")
+    .select("id,name")
+    .eq("name", nickname)
+    .maybeSingle();
+
+  if (error) {
+    throw error;
+  }
+
+  return data;
+}
+
 async function getOrCreatePlayer(playerName) {
   const trimmedName = String(playerName || "").trim();
 
@@ -208,6 +235,165 @@ app.get("/api/health", (_req, res) => {
     supabaseConfigured: hasSupabaseConfig,
     timestamp: new Date().toISOString(),
   });
+});
+
+app.post("/api/auth/register", async (req, res) => {
+  if (!supabase) {
+    return res.status(503).json({
+      error: "Supabase nao configurado",
+    });
+  }
+
+  try {
+    const nickname = normalizeNickname(req.body?.nickname);
+    const password = req.body?.password;
+
+    if (!isValidNickname(nickname)) {
+      return res.status(400).json({
+        error: "Nickname invalido. Use 3-20 caracteres (letras, numeros e underscore).",
+      });
+    }
+
+    if (!isValidPassword(password)) {
+      return res.status(400).json({
+        error: "Senha invalida. Use de 6 a 72 caracteres.",
+      });
+    }
+
+    let player = await findPlayerByNickname(nickname);
+
+    if (!player) {
+      const { data: createdPlayer, error: createError } = await supabase
+        .from("players")
+        .insert({ name: nickname })
+        .select("id,name")
+        .single();
+
+      if (createError) {
+        throw createError;
+      }
+
+      player = createdPlayer;
+    }
+
+    const { data: existingAuth, error: authFindError } = await supabase
+      .from("player_auth")
+      .select("player_id")
+      .eq("player_id", player.id)
+      .maybeSingle();
+
+    if (authFindError) {
+      throw authFindError;
+    }
+
+    if (existingAuth) {
+      return res.status(409).json({
+        error: "Nickname ja cadastrado.",
+      });
+    }
+
+    const passwordHash = await bcrypt.hash(password, 10);
+
+    const { error: insertAuthError } = await supabase.from("player_auth").insert({
+      player_id: player.id,
+      password_hash: passwordHash,
+    });
+
+    if (insertAuthError) {
+      throw insertAuthError;
+    }
+
+    const progress = await upsertProgress(player.id, 0);
+
+    return res.status(201).json({
+      ok: true,
+      user: {
+        nickname: player.name,
+        totalScore: progress.totalScore,
+        currentLevel: progress.currentLevel,
+      },
+    });
+  } catch (error) {
+    return res.status(500).json({
+      error: "Falha ao criar conta",
+      details: error.message,
+    });
+  }
+});
+
+app.post("/api/auth/login", async (req, res) => {
+  if (!supabase) {
+    return res.status(503).json({
+      error: "Supabase nao configurado",
+    });
+  }
+
+  try {
+    const nickname = normalizeNickname(req.body?.nickname);
+    const password = req.body?.password;
+
+    if (!nickname || typeof password !== "string") {
+      return res.status(400).json({
+        error: "Informe nickname e senha.",
+      });
+    }
+
+    const player = await findPlayerByNickname(nickname);
+
+    if (!player) {
+      return res.status(401).json({
+        error: "Conta nao encontrada.",
+      });
+    }
+
+    const { data: authRow, error: authError } = await supabase
+      .from("player_auth")
+      .select("password_hash")
+      .eq("player_id", player.id)
+      .maybeSingle();
+
+    if (authError) {
+      throw authError;
+    }
+
+    if (!authRow) {
+      return res.status(401).json({
+        error: "Conta nao encontrada.",
+      });
+    }
+
+    const isMatch = await bcrypt.compare(password, authRow.password_hash);
+
+    if (!isMatch) {
+      return res.status(401).json({
+        error: "Senha incorreta.",
+      });
+    }
+
+    const { data: progressRow, error: progressError } = await supabase
+      .from("player_progress")
+      .select("total_score,current_level")
+      .eq("player_id", player.id)
+      .maybeSingle();
+
+    if (progressError) {
+      throw progressError;
+    }
+
+    return res.status(200).json({
+      ok: true,
+      user: {
+        nickname: player.name,
+        totalScore: progressRow?.total_score || 0,
+        currentLevel: toAppLevel(progressRow?.current_level),
+      },
+    });
+  } catch (error) {
+    return res.status(500).json({
+      error: "Falha ao autenticar",
+      details: error.message,
+    });
+  }
 });
 
 app.get("/api/levels", (_req, res) => {

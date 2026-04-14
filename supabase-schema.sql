@@ -32,6 +32,15 @@ create table if not exists public.players (
 );
 
 -- -------------------------------------
+-- Credenciais de login do jogador
+-- -------------------------------------
+create table if not exists public.player_auth (
+  player_id uuid primary key references public.players(id) on delete cascade,
+  password_hash text not null,
+  created_at timestamptz not null default now()
+);
+
+-- -------------------------------------
 -- Progresso do jogador
 -- -------------------------------------
 create table if not exists public.player_progress (
@@ -165,6 +174,7 @@ on conflict do nothing;
 -- RLS e politicas
 -- -------------------------------------
 alter table public.players enable row level security;
+alter table public.player_auth enable row level security;
 alter table public.player_progress enable row level security;
 alter table public.quiz_questions enable row level security;
 alter table public.game_sessions enable row level security;

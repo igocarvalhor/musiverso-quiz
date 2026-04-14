@@ -109,6 +109,22 @@ body {
   margin-bottom: 16px;
 }
 
+.auth-panel {
+  padding: 16px;
+  margin-bottom: 16px;
+}
+
+.auth-panel h2 {
+  margin: 0 0 4px;
+  font-family: "Baloo 2", sans-serif;
+}
+
+.auth-actions {
+  margin-top: 10px;
+  display: flex;
+  gap: 10px;
+}
+
 .start-panel label {
   display: block;
   margin-bottom: 8px;
@@ -432,6 +448,10 @@ button:hover {
   }
 
   .input-row {
+    flex-direction: column;
+  }
+
+  .auth-actions {
     flex-direction: column;
   }
 
