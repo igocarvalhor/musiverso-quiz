@@ -1,0 +1,20 @@
+{
+  "name": "Musiverso Quiz",
+  "short_name": "Musiverso",
+  "description": "Quiz musical infantil com ranking e progressao.",
+  "lang": "pt-BR",
+  "start_url": "/auth.html",
+  "scope": "/",
+  "display": "standalone",
+  "background_color": "#8fe9ff",
+  "theme_color": "#4da9ff",
+  "orientation": "portrait-primary",
+  "icons": [
+    {
+      "src": "/icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}

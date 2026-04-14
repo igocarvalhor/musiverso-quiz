@@ -3,7 +3,13 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#4da9ff" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="default" />
     <title>Musiverso Login</title>
+    <link rel="manifest" href="manifest.webmanifest" />
+    <link rel="icon" href="icon.svg" type="image/svg+xml" />
+    <link rel="apple-touch-icon" href="icon.svg" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -21,12 +27,12 @@
       <header class="hero">
         <p class="badge">Musiverso</p>
         <h1>Entrar no Quiz</h1>
-        <p class="subtitle">Use seu nickname unico para continuar sua jornada musical.</p>
+        <p class="subtitle">Entre com seu nickname e continue sua aventura musical.</p>
       </header>
 
       <section class="panel auth-panel" id="authPanel">
         <h2>Login / Criar conta</h2>
-        <p class="hint">Nickname: 3-20 caracteres (letras, numeros e underscore).</p>
+        <p class="hint">Seu nickname e unico: use de 3 a 20 caracteres.</p>
 
         <div class="input-row">
           <input
@@ -54,6 +60,7 @@
       </section>
     </main>
 
+    <script src="pwa.js"></script>
     <script src="auth.js"></script>
   </body>
 </html>

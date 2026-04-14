@@ -3,7 +3,13 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#4da9ff" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="default" />
     <title>Musiverso Quiz</title>
+    <link rel="manifest" href="manifest.webmanifest" />
+    <link rel="icon" href="icon.svg" type="image/svg+xml" />
+    <link rel="apple-touch-icon" href="icon.svg" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -22,7 +28,7 @@
         <p class="badge">Musiverso</p>
         <h1>Quiz Musical</h1>
         <p class="subtitle">
-          Aprenda musica brincando, suba de nivel e entre no ranking galactico.
+          Aprenda musica brincando, conquiste titulos e brilhe no ranking galactico.
         </p>
       </header>
 
@@ -32,7 +38,7 @@
           <button id="startGameBtn" class="primary-btn">Comecar</button>
           <button id="logoutBtn" class="ghost-btn">Trocar conta</button>
         </div>
-        <p class="hint">Para entrar ou criar conta, use a tela de autenticacao.</p>
+        <p class="hint">Use Trocar conta sempre que quiser entrar com outro mini artista.</p>
       </section>
 
       <section class="grid-layout">
@@ -92,6 +98,7 @@
       <button class="answer-btn"></button>
     </template>
 
+    <script src="pwa.js"></script>
     <script src="app.js"></script>
   </body>
 </html>
