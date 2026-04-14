@@ -1,4 +1,4 @@
-const CACHE_NAME = "musiverso-v1";
+const CACHE_NAME = "musiverso-v2";
 const APP_ASSETS = [
   "/",
   "/index.html",

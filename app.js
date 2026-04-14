@@ -11,6 +11,7 @@ const state = {
   questionIndex: 0,
   questions: [],
   questionTimerId: null,
+  currentTimeLimit: 10,
   secondsLeft: 0,
   hasAnsweredCurrent: false,
   isRoundStarted: false,
@@ -164,6 +165,7 @@ function updateUiStats() {
   const progress = (state.questionIndex / total) * 100;
   el.progressBar.style.width = `${Math.min(progress, 100)}%`;
   el.timerChip.textContent = state.isRoundStarted ? `Tempo: ${state.secondsLeft}s` : "Tempo: --";
+  updateTimeBar();
 
   renderLevelButtons();
 }
@@ -180,8 +182,9 @@ function updateTimerChip() {
 }
 
 function updateTimeBar() {
-  const limit = LEVEL_META[state.activeLevel].timeLimit;
-  const pct = state.isRoundStarted ? Math.max(0, (state.secondsLeft / limit) * 100) : 0;
+  const safeLimit = Number(state.currentTimeLimit) > 0 ? Number(state.currentTimeLimit) : 10;
+  const safeSeconds = Number.isFinite(state.secondsLeft) ? Math.max(0, state.secondsLeft) : 0;
+  const pct = state.isRoundStarted ? Math.max(0, Math.min(100, (safeSeconds / safeLimit) * 100)) : 0;
 
   el.timebarFill.style.width = `${pct}%`;
   el.timebarWrap.classList.remove("timebar-warning", "timebar-danger");
@@ -231,7 +234,8 @@ function handleTimeOut() {
 
 function startQuestionTimer() {
   clearQuestionTimer();
-  state.secondsLeft = LEVEL_META[state.activeLevel].timeLimit;
+  state.currentTimeLimit = LEVEL_META[state.activeLevel]?.timeLimit || 10;
+  state.secondsLeft = state.currentTimeLimit;
   updateTimerChip();
   updateTimeBar();
 
@@ -471,6 +475,7 @@ function resetToIdleState() {
   state.streak = 0;
   state.roundCorrectAnswers = 0;
   state.roundBestStreak = 0;
+  state.currentTimeLimit = LEVEL_META[state.activeLevel]?.timeLimit || 10;
   state.secondsLeft = 0;
 
   showStartCta(true);
@@ -480,7 +485,6 @@ function resetToIdleState() {
   el.nextBtn.disabled = true;
   el.finishBtn.disabled = true;
   updateUiStats();
-  updateTimeBar();
 }
 
 async function startRound() {
