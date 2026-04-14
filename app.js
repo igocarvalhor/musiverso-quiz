@@ -81,12 +81,8 @@ const fallbackQuestions = {
 };
 
 const el = {
-  authNicknameInput: document.getElementById("authNickname"),
-  authPasswordInput: document.getElementById("authPassword"),
-  loginBtn: document.getElementById("loginBtn"),
-  registerBtn: document.getElementById("registerBtn"),
-  authStatus: document.getElementById("authStatus"),
   startGameBtn: document.getElementById("startGameBtn"),
+  logoutBtn: document.getElementById("logoutBtn"),
   playerLabel: document.getElementById("playerLabel"),
   levelChip: document.getElementById("levelChip"),
   titleChip: document.getElementById("titleChip"),
@@ -192,16 +188,29 @@ function setFeedback(message, type = "") {
   el.feedbackText.className = `feedback ${type}`.trim();
 }
 
-function setAuthStatus(message, type = "") {
-  el.authStatus.textContent = message;
-  el.authStatus.className = `feedback ${type}`.trim();
+function getSessionUser() {
+  const raw = localStorage.getItem("musiversoUser");
+
+  if (!raw) {
+    return null;
+  }
+
+  try {
+    return JSON.parse(raw);
+  } catch (_error) {
+    return null;
+  }
 }
 
-function setAuthEnabled(enabled) {
-  el.authNicknameInput.disabled = !enabled;
-  el.authPasswordInput.disabled = !enabled;
-  el.loginBtn.disabled = !enabled;
-  el.registerBtn.disabled = !enabled;
+function saveSessionUser() {
+  localStorage.setItem(
+    "musiversoUser",
+    JSON.stringify({
+      nickname: state.playerName,
+      totalScore: state.totalScore,
+      currentLevel: state.activeLevel,
+    })
+  );
 }
 
 function getSeenSet(level) {
@@ -370,6 +379,7 @@ async function submitScore() {
 
     if (data?.progress?.totalScore) {
       state.totalScore = data.progress.totalScore;
+      saveSessionUser();
     }
   } catch (_error) {
     // O app continua funcional mesmo sem backend configurado.
@@ -416,51 +426,6 @@ async function loadRanking() {
 }
 
 function wireEvents() {
-  async function handleAuth(mode) {
-    const nickname = el.authNicknameInput.value.trim();
-    const password = el.authPasswordInput.value;
-
-    if (!nickname || !password) {
-      setAuthStatus("Informe nickname e senha.", "error");
-      return;
-    }
-
-    setAuthEnabled(false);
-    setAuthStatus(mode === "login" ? "Entrando..." : "Criando conta...");
-
-    try {
-      const response = await apiFetch(`/api/auth/${mode}`, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ nickname, password }),
-      });
-
-      state.authenticated = true;
-      state.playerName = response.user.nickname;
-      state.totalScore = response.user.totalScore || 0;
-      state.activeLevel = response.user.currentLevel || "facil";
-      updateUiStats();
-      setAuthStatus(`Conta ativa: ${state.playerName}`, "ok");
-      setFeedback("Login realizado! Clique em Comecar para iniciar.", "ok");
-      el.authPasswordInput.value = "";
-    } catch (error) {
-      setAuthStatus(error.message || "Falha na autenticacao.", "error");
-      state.authenticated = false;
-    } finally {
-      if (!state.authenticated) {
-        setAuthEnabled(true);
-      }
-    }
-  }
-
-  el.loginBtn.addEventListener("click", async () => {
-    await handleAuth("login");
-  });
-
-  el.registerBtn.addEventListener("click", async () => {
-    await handleAuth("register");
-  });
-
   el.startGameBtn.addEventListener("click", async () => {
     if (!state.authenticated || !state.playerName) {
       setFeedback("Faca login ou crie conta para jogar.", "error");
@@ -479,6 +444,11 @@ function wireEvents() {
     updateUiStats();
     await startRound();
     await loadRanking();
+  });
+
+  el.logoutBtn.addEventListener("click", () => {
+    localStorage.removeItem("musiversoUser");
+    window.location.href = "/auth.html";
   });
 
   el.nextBtn.addEventListener("click", nextQuestion);
@@ -506,8 +476,21 @@ function wireEvents() {
 }
 
 async function bootstrap() {
+  const sessionUser = getSessionUser();
+
+  if (!sessionUser?.nickname) {
+    window.location.href = "/auth.html";
+    return;
+  }
+
+  state.authenticated = true;
+  state.playerName = sessionUser.nickname;
+  state.totalScore = Number(sessionUser.totalScore) || 0;
+  state.activeLevel = sessionUser.currentLevel || "facil";
+
   wireEvents();
   updateUiStats();
+  setFeedback(`Conta ativa: ${state.playerName}`, "ok");
   await loadRanking();
 }
 

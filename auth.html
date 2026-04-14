@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Musiverso Login</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;700;800&family=Nunito:wght@400;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div class="aurora aurora-a"></div>
+    <div class="aurora aurora-b"></div>
+    <div class="stars"></div>
+
+    <main class="app-shell auth-shell">
+      <header class="hero">
+        <p class="badge">Musiverso</p>
+        <h1>Entrar no Quiz</h1>
+        <p class="subtitle">Use seu nickname unico para continuar sua jornada musical.</p>
+      </header>
+
+      <section class="panel auth-panel" id="authPanel">
+        <h2>Login / Criar conta</h2>
+        <p class="hint">Nickname: 3-20 caracteres (letras, numeros e underscore).</p>
+
+        <div class="input-row">
+          <input
+            id="authNickname"
+            name="authNickname"
+            type="text"
+            maxlength="20"
+            placeholder="Nickname"
+          />
+          <input
+            id="authPassword"
+            name="authPassword"
+            type="password"
+            maxlength="72"
+            placeholder="Senha (minimo 6 caracteres)"
+          />
+        </div>
+
+        <div class="auth-actions">
+          <button id="loginBtn" class="secondary-btn">Entrar</button>
+          <button id="registerBtn" class="primary-btn">Criar conta</button>
+        </div>
+
+        <p id="authStatus" class="feedback"></p>
+      </section>
+    </main>
+
+    <script src="auth.js"></script>
+  </body>
+</html>

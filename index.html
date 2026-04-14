@@ -20,44 +20,19 @@
     <main class="app-shell">
       <header class="hero">
         <p class="badge">Musiverso</p>
-        <h1>Quiz Musical </h1>
+        <h1>Quiz Musical</h1>
         <p class="subtitle">
           Aprenda musica brincando, suba de nivel e entre no ranking galactico.
         </p>
       </header>
 
-      <section class="panel auth-panel" id="authPanel">
-        <h2>Entrar ou Criar Conta</h2>
-        <p class="hint">Use um nickname unico e sua senha para acessar.</p>
-        <div class="input-row">
-          <input
-            id="authNickname"
-            name="authNickname"
-            type="text"
-            maxlength="20"
-            placeholder="Nickname (3-20, sem espacos)"
-          />
-          <input
-            id="authPassword"
-            name="authPassword"
-            type="password"
-            maxlength="72"
-            placeholder="Senha (minimo 6 caracteres)"
-          />
-        </div>
-        <div class="auth-actions">
-          <button id="loginBtn" class="secondary-btn">Entrar</button>
-          <button id="registerBtn" class="primary-btn">Criar conta</button>
-        </div>
-        <p id="authStatus" class="feedback"></p>
-      </section>
-
       <section class="panel start-panel" id="startPanel">
         <label>Comecar rodada</label>
         <div class="input-row">
           <button id="startGameBtn" class="primary-btn">Comecar</button>
+          <button id="logoutBtn" class="ghost-btn">Trocar conta</button>
         </div>
-        <p class="hint">Voce precisa estar logado para iniciar.</p>
+        <p class="hint">Para entrar ou criar conta, use a tela de autenticacao.</p>
       </section>
 
       <section class="grid-layout">
