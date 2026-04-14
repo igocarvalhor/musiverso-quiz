@@ -93,6 +93,21 @@ function shuffleList(list) {
   return [...list].sort(() => Math.random() - 0.5);
 }
 
+function shuffleOptionsWithCorrectIndex(options, correctOption) {
+  const pairs = options.map((text, index) => ({
+    text,
+    isCorrect: index === correctOption,
+  }));
+
+  const shuffledPairs = shuffleList(pairs);
+  const newCorrectOption = shuffledPairs.findIndex((item) => item.isCorrect);
+
+  return {
+    options: shuffledPairs.map((item) => item.text),
+    correctOption: newCorrectOption,
+  };
+}
+
 function calculateTitle(totalScore) {
   let chosenTitle = TITLES_BY_SCORE[0].title;
 
@@ -224,14 +239,18 @@ app.get("/api/questions", async (req, res) => {
 
     const selectedQuestions = shuffleList(questionsFromLevel).slice(0, limit);
 
-    const publicQuestions = selectedQuestions.map((item) => ({
-      id: item.id,
-      level: item.nivel,
-      question: item.pergunta,
-      options: item.opcoes,
-      correct_option: item.resposta,
-      explanation: "",
-    }));
+    const publicQuestions = selectedQuestions.map((item) => {
+      const shuffledQuestion = shuffleOptionsWithCorrectIndex(item.opcoes, item.resposta);
+
+      return {
+        id: item.id,
+        level: item.nivel,
+        question: item.pergunta,
+        options: shuffledQuestion.options,
+        correct_option: shuffledQuestion.correctOption,
+        explanation: "",
+      };
+    });
 
     return res.status(200).json({
       level,
