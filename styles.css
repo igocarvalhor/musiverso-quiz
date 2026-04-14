@@ -298,11 +298,15 @@ button:hover {
 
 .profile-image {
   position: absolute;
-  inset: 4px;
+  top: 4px;
+  left: 4px;
+  width: calc(100% - 8px);
+  height: calc(100% - 8px);
   border-radius: 20px;
-  object-fit: cover;
+  object-fit: contain;
+  object-position: center;
   display: none;
-  background: #ffffff;
+  background: #f5fbff;
 }
 
 .profile-placeholder {
