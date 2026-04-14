@@ -28,13 +28,13 @@ const LEVELS = {
   },
   medio: {
     label: "Medio",
-    unlockScore: 100,
+    unlockScore: 500,
     basePoints: 15,
     roundSize: 10,
   },
   dificil: {
     label: "Dificil",
-    unlockScore: 200,
+    unlockScore: 1000,
     basePoints: 20,
     roundSize: 10,
   },

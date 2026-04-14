@@ -19,8 +19,8 @@ const state = {
 
 const LEVEL_META = {
   facil: { label: "Facil", basePoints: 10, unlockScore: 0, roundSize: 10 },
-  medio: { label: "Medio", basePoints: 15, unlockScore: 100, roundSize: 10 },
-  dificil: { label: "Dificil", basePoints: 20, unlockScore: 200, roundSize: 10 },
+  medio: { label: "Medio", basePoints: 15, unlockScore: 500, roundSize: 10 },
+  dificil: { label: "Dificil", basePoints: 20, unlockScore: 1000, roundSize: 10 },
 };
 
 const TITLES = [
