@@ -4,6 +4,7 @@ const express = require("express");
 const cors = require("cors");
 const path = require("path");
 const { createClient } = require("@supabase/supabase-js");
+const { perguntas } = require("./question-bank");
 
 const app = express();
 const PORT = Number(process.env.PORT) || 3000;
@@ -19,24 +20,36 @@ const hasSupabaseConfig = Boolean(SUPABASE_URL && SUPABASE_KEY);
 const supabase = hasSupabaseConfig ? createClient(SUPABASE_URL, SUPABASE_KEY) : null;
 
 const LEVELS = {
-  easy: {
+  facil: {
     label: "Facil",
     unlockScore: 0,
     basePoints: 10,
-    roundSize: 8,
+    roundSize: 10,
   },
-  medium: {
+  medio: {
     label: "Medio",
-    unlockScore: 60,
+    unlockScore: 100,
     basePoints: 15,
-    roundSize: 8,
+    roundSize: 10,
   },
-  hard: {
+  dificil: {
     label: "Dificil",
-    unlockScore: 140,
+    unlockScore: 200,
     basePoints: 20,
-    roundSize: 8,
+    roundSize: 10,
   },
+};
+
+const DB_LEVEL_BY_APP = {
+  facil: "easy",
+  medio: "medium",
+  dificil: "hard",
+};
+
+const APP_LEVEL_BY_DB = {
+  easy: "facil",
+  medium: "medio",
+  hard: "dificil",
 };
 
 const TITLES_BY_SCORE = [
@@ -52,11 +65,32 @@ const TITLES_BY_SCORE = [
 
 function resolveLevel(level) {
   if (typeof level !== "string") {
-    return "easy";
+    return "facil";
   }
 
   const normalized = level.toLowerCase();
-  return LEVELS[normalized] ? normalized : "easy";
+
+  if (LEVELS[normalized]) {
+    return normalized;
+  }
+
+  return APP_LEVEL_BY_DB[normalized] || "facil";
+}
+
+function toDbLevel(appLevel) {
+  return DB_LEVEL_BY_APP[resolveLevel(appLevel)] || "easy";
+}
+
+function toAppLevel(dbLevel) {
+  if (!dbLevel) {
+    return "facil";
+  }
+
+  return APP_LEVEL_BY_DB[String(dbLevel).toLowerCase()] || "facil";
+}
+
+function shuffleList(list) {
+  return [...list].sort(() => Math.random() - 0.5);
 }
 
 function calculateTitle(totalScore) {
@@ -119,11 +153,11 @@ async function upsertProgress(playerId, sessionScore) {
   const previousScore = progressRow?.total_score || 0;
   const newTotalScore = previousScore + sessionScore;
 
-  let currentLevel = "easy";
-  if (newTotalScore >= LEVELS.hard.unlockScore) {
-    currentLevel = "hard";
-  } else if (newTotalScore >= LEVELS.medium.unlockScore) {
-    currentLevel = "medium";
+  let currentLevel = "facil";
+  if (newTotalScore >= LEVELS.dificil.unlockScore) {
+    currentLevel = "dificil";
+  } else if (newTotalScore >= LEVELS.medio.unlockScore) {
+    currentLevel = "medio";
   }
 
   const highestTitle = calculateTitle(newTotalScore);
@@ -132,7 +166,7 @@ async function upsertProgress(playerId, sessionScore) {
     {
       player_id: playerId,
       total_score: newTotalScore,
-      current_level: currentLevel,
+      current_level: toDbLevel(currentLevel),
       highest_title: highestTitle,
       updated_at: new Date().toISOString(),
     },
@@ -169,37 +203,34 @@ app.get("/api/levels", (_req, res) => {
 });
 
 app.get("/api/questions", async (req, res) => {
-  if (!supabase) {
-    return res.status(503).json({
-      error: "Supabase nao configurado",
-    });
-  }
-
   try {
     const level = resolveLevel(req.query.level);
     const requestedLimit = Number(req.query.limit) || LEVELS[level].roundSize;
     const limit = Math.min(Math.max(requestedLimit, 1), 20);
+    const excludeIds = String(req.query.excludeIds || "")
+      .split(",")
+      .map((item) => item.trim())
+      .filter(Boolean);
 
-    const { data, error } = await supabase
-      .from("quiz_questions")
-      .select("id,level,question_text,options,correct_option,explanation")
-      .eq("level", level)
-      .eq("active", true)
-      .limit(limit);
+    const excludeSet = new Set(excludeIds);
 
-    if (error) {
-      throw error;
-    }
+    const questionsFromLevel = perguntas
+      .map((item, index) => ({
+        id: index + 1,
+        ...item,
+      }))
+      .filter((item) => item.nivel === level)
+      .filter((item) => !excludeSet.has(String(item.id)));
 
-    const shuffled = (data || []).sort(() => Math.random() - 0.5);
+    const selectedQuestions = shuffleList(questionsFromLevel).slice(0, limit);
 
-    const publicQuestions = shuffled.map((item) => ({
+    const publicQuestions = selectedQuestions.map((item) => ({
       id: item.id,
-      level: item.level,
-      question: item.question_text,
-      options: item.options,
-      correct_option: item.correct_option,
-      explanation: item.explanation,
+      level: item.nivel,
+      question: item.pergunta,
+      options: item.opcoes,
+      correct_option: item.resposta,
+      explanation: "",
     }));
 
     return res.status(200).json({
@@ -224,6 +255,7 @@ app.get("/api/ranking", async (req, res) => {
 
   try {
     const level = req.query.level ? resolveLevel(req.query.level) : null;
+    const dbLevel = level ? toDbLevel(level) : null;
     const requestedLimit = Number(req.query.limit) || 10;
     const limit = Math.min(Math.max(requestedLimit, 1), 30);
 
@@ -231,7 +263,7 @@ app.get("/api/ranking", async (req, res) => {
       const { data, error } = await supabase
         .from("leaderboard_by_level")
         .select("player_name,level,best_score,total_sessions,last_played_at")
-        .eq("level", level)
+        .eq("level", dbLevel)
         .order("best_score", { ascending: false })
         .order("last_played_at", { ascending: false })
         .limit(limit);
@@ -243,7 +275,10 @@ app.get("/api/ranking", async (req, res) => {
       return res.status(200).json({
         scope: "level",
         level,
-        entries: data || [],
+        entries: (data || []).map((item) => ({
+          ...item,
+          level: toAppLevel(item.level),
+        })),
       });
     }
 
@@ -260,7 +295,10 @@ app.get("/api/ranking", async (req, res) => {
 
     return res.status(200).json({
       scope: "overall",
-      entries: data || [],
+      entries: (data || []).map((item) => ({
+        ...item,
+        current_level: toAppLevel(item.current_level),
+      })),
     });
   } catch (error) {
     return res.status(500).json({
@@ -288,6 +326,7 @@ app.post("/api/submit-score", async (req, res) => {
     } = req.body || {};
 
     const safeLevel = resolveLevel(level);
+    const safeDbLevel = toDbLevel(safeLevel);
     const safeScore = Math.max(Number(score) || 0, 0);
     const safeTotalQuestions = Math.max(Number(totalQuestions) || 0, 0);
     const safeCorrectAnswers = Math.max(Number(correctAnswers) || 0, 0);
@@ -298,7 +337,7 @@ app.post("/api/submit-score", async (req, res) => {
     const { error: sessionError } = await supabase.from("game_sessions").insert({
       player_id: player.id,
       score: safeScore,
-      level: safeLevel,
+      level: safeDbLevel,
       total_questions: safeTotalQuestions,
       correct_answers: safeCorrectAnswers,
       best_streak: safeBestStreak,

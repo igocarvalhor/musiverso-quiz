@@ -1,7 +1,7 @@
 const state = {
   playerName: "",
-  activeLevel: "easy",
-  unlockedLevels: ["easy"],
+  activeLevel: "facil",
+  unlockedLevels: ["facil"],
   totalScore: 0,
   roundScore: 0,
   streak: 0,
@@ -9,13 +9,18 @@ const state = {
   roundCorrectAnswers: 0,
   questionIndex: 0,
   questions: [],
+  seenQuestionIdsByLevel: {
+    facil: new Set(),
+    medio: new Set(),
+    dificil: new Set(),
+  },
   rankingScope: "overall",
 };
 
 const LEVEL_META = {
-  easy: { label: "Facil", basePoints: 10, unlockScore: 0, roundSize: 8 },
-  medium: { label: "Medio", basePoints: 15, unlockScore: 60, roundSize: 8 },
-  hard: { label: "Dificil", basePoints: 20, unlockScore: 140, roundSize: 8 },
+  facil: { label: "Facil", basePoints: 10, unlockScore: 0, roundSize: 10 },
+  medio: { label: "Medio", basePoints: 15, unlockScore: 100, roundSize: 10 },
+  dificil: { label: "Dificil", basePoints: 20, unlockScore: 200, roundSize: 10 },
 };
 
 const TITLES = [
@@ -30,7 +35,7 @@ const TITLES = [
 ];
 
 const fallbackQuestions = {
-  easy: [
+  facil: [
     {
       question: "Qual destes instrumentos tem teclas?",
       options: ["Tambor", "Piano", "Chocalho", "Triangulo"],
@@ -44,7 +49,7 @@ const fallbackQuestions = {
       explanation: "Som baixo significa volume fraquinho.",
     },
   ],
-  medium: [
+  medio: [
     {
       question: "Qual palavra indica velocidade da musica?",
       options: ["Tempo", "Cor", "Peso", "Sabor"],
@@ -58,7 +63,7 @@ const fallbackQuestions = {
       explanation: "O violao produz som pelas cordas.",
     },
   ],
-  hard: [
+  dificil: [
     {
       question: "Um grupo de notas em sequencia forma uma...",
       options: ["Melodia", "Pintura", "Escultura", "Fotografia"],
@@ -120,12 +125,12 @@ function getTitleByScore(score) {
 }
 
 function recalculateUnlockedLevels() {
-  const unlocked = ["easy"];
-  if (state.totalScore >= LEVEL_META.medium.unlockScore) {
-    unlocked.push("medium");
+  const unlocked = ["facil"];
+  if (state.totalScore >= LEVEL_META.medio.unlockScore) {
+    unlocked.push("medio");
   }
-  if (state.totalScore >= LEVEL_META.hard.unlockScore) {
-    unlocked.push("hard");
+  if (state.totalScore >= LEVEL_META.dificil.unlockScore) {
+    unlocked.push("dificil");
   }
   state.unlockedLevels = unlocked;
 
@@ -182,28 +187,53 @@ function setFeedback(message, type = "") {
   el.feedbackText.className = `feedback ${type}`.trim();
 }
 
+function getSeenSet(level) {
+  if (!state.seenQuestionIdsByLevel[level]) {
+    state.seenQuestionIdsByLevel[level] = new Set();
+  }
+
+  return state.seenQuestionIdsByLevel[level];
+}
+
 function normalizeQuestion(question) {
   return {
     id: question.id || Math.random().toString(36).slice(2),
-    question: question.question || question.question_text,
-    options: question.options,
+    question: question.question || question.question_text || question.pergunta,
+    options: question.options || question.opcoes,
     correctOption:
       typeof question.correctOption === "number"
         ? question.correctOption
-        : question.correct_option,
+        : typeof question.correct_option === "number"
+          ? question.correct_option
+          : question.resposta,
     explanation: question.explanation || "",
   };
 }
 
 async function loadQuestions(level) {
   try {
-    const data = await apiFetch(`/api/questions?level=${level}&limit=${LEVEL_META[level].roundSize}`);
+    const seenIds = Array.from(getSeenSet(level)).join(",");
+    const data = await apiFetch(
+      `/api/questions?level=${level}&limit=${LEVEL_META[level].roundSize}&excludeIds=${encodeURIComponent(seenIds)}`
+    );
+
     if (!Array.isArray(data.questions) || !data.questions.length) {
-      throw new Error("Sem perguntas nesse nivel");
+      // Quando o nivel acaba, reinicia o pool daquele nivel para manter jogabilidade.
+      getSeenSet(level).clear();
+      const retryData = await apiFetch(
+        `/api/questions?level=${level}&limit=${LEVEL_META[level].roundSize}`
+      );
+
+      if (!Array.isArray(retryData.questions) || !retryData.questions.length) {
+        throw new Error("Sem perguntas nesse nivel");
+      }
+
+      return retryData.questions.map(normalizeQuestion);
     }
+
     return data.questions.map(normalizeQuestion);
   } catch (_error) {
-    const fallback = fallbackQuestions[level] || fallbackQuestions.easy;
+    const fallback = fallbackQuestions[level] || fallbackQuestions.facil;
     const copied = fallback.map((q) => normalizeQuestion(q));
     return copied.sort(() => Math.random() - 0.5);
   }
@@ -241,6 +271,8 @@ function handleAnswer(selectedIndex) {
   if (!question) {
     return;
   }
+
+  getSeenSet(state.activeLevel).add(String(question.id));
 
   const buttons = Array.from(el.answersWrap.querySelectorAll(".answer-btn"));
   buttons.forEach((btn) => {
@@ -379,7 +411,12 @@ function wireEvents() {
     state.roundScore = 0;
     state.roundCorrectAnswers = 0;
     state.roundBestStreak = 0;
-    state.activeLevel = "easy";
+    state.activeLevel = "facil";
+    state.seenQuestionIdsByLevel = {
+      facil: new Set(),
+      medio: new Set(),
+      dificil: new Set(),
+    };
 
     updateUiStats();
     await startRound();
