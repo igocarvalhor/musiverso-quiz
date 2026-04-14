@@ -10,6 +10,10 @@ const state = {
   roundCorrectAnswers: 0,
   questionIndex: 0,
   questions: [],
+  questionTimerId: null,
+  secondsLeft: 0,
+  hasAnsweredCurrent: false,
+  isRoundStarted: false,
   seenQuestionIdsByLevel: {
     facil: new Set(),
     medio: new Set(),
@@ -19,9 +23,9 @@ const state = {
 };
 
 const LEVEL_META = {
-  facil: { label: "Facil", basePoints: 10, unlockScore: 0, roundSize: 10 },
-  medio: { label: "Medio", basePoints: 15, unlockScore: 500, roundSize: 10 },
-  dificil: { label: "Dificil", basePoints: 20, unlockScore: 1000, roundSize: 10 },
+  facil: { label: "Facil", basePoints: 10, unlockScore: 0, roundSize: 10, timeLimit: 10 },
+  medio: { label: "Medio", basePoints: 15, unlockScore: 500, roundSize: 10, timeLimit: 15 },
+  dificil: { label: "Dificil", basePoints: 20, unlockScore: 1000, roundSize: 10, timeLimit: 20 },
 };
 
 const TITLES = [
@@ -85,6 +89,7 @@ const el = {
   logoutBtn: document.getElementById("logoutBtn"),
   playerLabel: document.getElementById("playerLabel"),
   levelChip: document.getElementById("levelChip"),
+  timerChip: document.getElementById("timerChip"),
   titleChip: document.getElementById("titleChip"),
   scoreValue: document.getElementById("scoreValue"),
   streakValue: document.getElementById("streakValue"),
@@ -102,6 +107,7 @@ const el = {
   byLevelBtn: document.getElementById("byLevelBtn"),
   rankingHint: document.getElementById("rankingHint"),
   answerButtonTemplate: document.getElementById("answerButtonTemplate"),
+  quizStartCta: document.getElementById("quizStartCta"),
 };
 
 function apiFetch(path, options = {}) {
@@ -152,8 +158,67 @@ function updateUiStats() {
   const total = state.questions.length || 1;
   const progress = (state.questionIndex / total) * 100;
   el.progressBar.style.width = `${Math.min(progress, 100)}%`;
+  el.timerChip.textContent = state.isRoundStarted ? `Tempo: ${state.secondsLeft}s` : "Tempo: --";
 
   renderLevelButtons();
+}
+
+function clearQuestionTimer() {
+  if (state.questionTimerId) {
+    clearInterval(state.questionTimerId);
+    state.questionTimerId = null;
+  }
+}
+
+function updateTimerChip() {
+  el.timerChip.textContent = state.isRoundStarted ? `Tempo: ${state.secondsLeft}s` : "Tempo: --";
+}
+
+function showStartCta(show) {
+  el.quizStartCta.style.display = show ? "grid" : "none";
+}
+
+function handleTimeOut() {
+  const question = state.questions[state.questionIndex];
+  if (!question || state.hasAnsweredCurrent) {
+    return;
+  }
+
+  state.hasAnsweredCurrent = true;
+  clearQuestionTimer();
+
+  getSeenSet(state.activeLevel).add(String(question.id));
+
+  const buttons = Array.from(el.answersWrap.querySelectorAll(".answer-btn"));
+  buttons.forEach((btn) => {
+    btn.disabled = true;
+  });
+
+  state.streak = 0;
+  if (buttons[question.correctOption]) {
+    buttons[question.correctOption].classList.add("correct");
+  }
+
+  const reason = question.explanation ? ` ${question.explanation}` : "";
+  setFeedback(`Tempo esgotado! A resposta certa foi destacada.${reason}`, "error");
+  updateUiStats();
+  el.nextBtn.disabled = false;
+  el.finishBtn.disabled = false;
+}
+
+function startQuestionTimer() {
+  clearQuestionTimer();
+  state.secondsLeft = LEVEL_META[state.activeLevel].timeLimit;
+  updateTimerChip();
+
+  state.questionTimerId = setInterval(() => {
+    state.secondsLeft -= 1;
+    updateTimerChip();
+
+    if (state.secondsLeft <= 0) {
+      handleTimeOut();
+    }
+  }, 1000);
 }
 
 function renderLevelButtons() {
@@ -176,7 +241,11 @@ function renderLevelButtons() {
       }
 
       state.activeLevel = levelKey;
-      startRound();
+      resetToIdleState();
+      setFeedback(
+        `Nivel ${LEVEL_META[levelKey].label} selecionado. Toque em Comecar Quiz para iniciar.`,
+        "ok"
+      );
     });
 
     el.levelSelect.appendChild(button);
@@ -267,16 +336,21 @@ async function loadQuestions(level) {
 
 function renderCurrentQuestion() {
   const question = state.questions[state.questionIndex];
+  state.hasAnsweredCurrent = false;
 
   if (!question) {
+    clearQuestionTimer();
+    state.secondsLeft = 0;
     el.questionCounter.textContent = "Rodada concluida";
     el.questionText.textContent = "Parabens! Finalize a rodada para salvar sua pontuacao.";
     el.answersWrap.innerHTML = "";
     el.nextBtn.disabled = true;
     el.finishBtn.disabled = false;
+    updateTimerChip();
     return;
   }
 
+  showStartCta(false);
   el.questionCounter.textContent = `Pergunta ${state.questionIndex + 1}/${state.questions.length}`;
   el.questionText.textContent = question.question;
   el.answersWrap.innerHTML = "";
@@ -290,13 +364,17 @@ function renderCurrentQuestion() {
 
   el.nextBtn.disabled = true;
   el.finishBtn.disabled = true;
+  startQuestionTimer();
 }
 
 function handleAnswer(selectedIndex) {
   const question = state.questions[state.questionIndex];
-  if (!question) {
+  if (!question || state.hasAnsweredCurrent) {
     return;
   }
+
+  state.hasAnsweredCurrent = true;
+  clearQuestionTimer();
 
   getSeenSet(state.activeLevel).add(String(question.id));
 
@@ -331,10 +409,31 @@ function handleAnswer(selectedIndex) {
 }
 
 function nextQuestion() {
+  clearQuestionTimer();
   state.questionIndex += 1;
   setFeedback("");
   updateUiStats();
   renderCurrentQuestion();
+}
+
+function resetToIdleState() {
+  clearQuestionTimer();
+  state.isRoundStarted = false;
+  state.questions = [];
+  state.questionIndex = 0;
+  state.roundScore = 0;
+  state.streak = 0;
+  state.roundCorrectAnswers = 0;
+  state.roundBestStreak = 0;
+  state.secondsLeft = 0;
+
+  showStartCta(true);
+  el.questionCounter.textContent = "Pergunta 0/0";
+  el.questionText.textContent = "Toque em Comecar Quiz para iniciar sua rodada.";
+  el.answersWrap.innerHTML = "";
+  el.nextBtn.disabled = true;
+  el.finishBtn.disabled = true;
+  updateUiStats();
 }
 
 async function startRound() {
@@ -343,6 +442,7 @@ async function startRound() {
   }
 
   setFeedback("Carregando perguntas...");
+  state.isRoundStarted = true;
 
   state.questions = await loadQuestions(state.activeLevel);
   state.questionIndex = 0;
@@ -432,16 +532,6 @@ function wireEvents() {
       return;
     }
 
-    state.roundScore = 0;
-    state.roundCorrectAnswers = 0;
-    state.roundBestStreak = 0;
-    state.seenQuestionIdsByLevel = {
-      facil: new Set(),
-      medio: new Set(),
-      dificil: new Set(),
-    };
-
-    updateUiStats();
     await startRound();
     await loadRanking();
   });
@@ -457,7 +547,7 @@ function wireEvents() {
     await submitScore();
     await loadRanking();
     setFeedback("Pontuacao salva! Inicie outra rodada quando quiser.", "ok");
-    await startRound();
+    resetToIdleState();
   });
 
   el.overallBtn.addEventListener("click", async () => {
@@ -489,8 +579,8 @@ async function bootstrap() {
   state.activeLevel = sessionUser.currentLevel || "facil";
 
   wireEvents();
-  updateUiStats();
-  setFeedback(`Conta ativa: ${state.playerName}`, "ok");
+  resetToIdleState();
+  setFeedback(`Conta ativa: ${state.playerName}. Escolha um nivel e toque em Comecar Quiz.`, "ok");
   await loadRanking();
 }
 

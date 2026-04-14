@@ -32,15 +32,6 @@
         </p>
       </header>
 
-      <section class="panel start-panel" id="startPanel">
-        <label>Comecar rodada</label>
-        <div class="input-row">
-          <button id="startGameBtn" class="primary-btn">Comecar</button>
-          <button id="logoutBtn" class="ghost-btn">Trocar conta</button>
-        </div>
-        <p class="hint">Use Trocar conta sempre que quiser entrar com outro mini artista.</p>
-      </section>
-
       <section class="grid-layout">
         <article class="panel game-panel" id="gamePanel">
           <div class="game-top">
@@ -50,7 +41,9 @@
             </div>
             <div class="status-chips">
               <span id="levelChip" class="chip">Nivel: Facil</span>
+              <span id="timerChip" class="chip chip-time">Tempo: --</span>
               <span id="titleChip" class="chip chip-gold">Aventureiro Ritmico</span>
+              <button id="logoutBtn" class="ghost-btn small-btn">Sair</button>
             </div>
           </div>
 
@@ -67,6 +60,10 @@
           </div>
 
           <div class="question-box">
+            <div id="quizStartCta" class="quiz-start-cta">
+              <button id="startGameBtn" class="start-quiz-btn">Comecar Quiz</button>
+              <p class="hint">Responda rapido e ganhe mais pontos.</p>
+            </div>
             <p id="questionCounter" class="question-counter">Pergunta 0/0</p>
             <h3 id="questionText">Clique em comecar para jogar.</h3>
             <div id="answersWrap" class="answers-wrap"></div>
