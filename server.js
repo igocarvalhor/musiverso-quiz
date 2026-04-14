@@ -198,6 +198,7 @@ app.get("/api/questions", async (req, res) => {
       level: item.level,
       question: item.question_text,
       options: item.options,
+      correct_option: item.correct_option,
       explanation: item.explanation,
     }));
 
