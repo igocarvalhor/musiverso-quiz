@@ -103,7 +103,6 @@ const el = {
   answersWrap: document.getElementById("answersWrap"),
   feedbackText: document.getElementById("feedbackText"),
   nextBtn: document.getElementById("nextBtn"),
-  finishBtn: document.getElementById("finishBtn"),
   levelSelect: document.getElementById("levelSelect"),
   progressBar: document.getElementById("progressBar"),
   rankingList: document.getElementById("rankingList"),
@@ -233,7 +232,6 @@ function handleTimeOut() {
   setFeedback(`Tempo esgotado! A resposta certa foi destacada.${reason}`, "error");
   updateUiStats();
   el.nextBtn.disabled = false;
-  el.finishBtn.disabled = false;
 }
 
 function startQuestionTimer() {
@@ -393,14 +391,7 @@ function renderCurrentQuestion() {
   state.hasAnsweredCurrent = false;
 
   if (!question) {
-    clearQuestionTimer();
-    state.secondsLeft = 0;
-    el.questionCounter.textContent = "Rodada concluida";
-    el.questionText.textContent = "Parabens! Finalize a rodada para salvar sua pontuacao.";
-    el.answersWrap.innerHTML = "";
-    el.nextBtn.disabled = true;
-    el.finishBtn.disabled = false;
-    updateTimerChip();
+    autoFinishRound();
     return;
   }
 
@@ -417,7 +408,6 @@ function renderCurrentQuestion() {
   });
 
   el.nextBtn.disabled = true;
-  el.finishBtn.disabled = true;
   startQuestionTimer();
 }
 
@@ -459,14 +449,34 @@ function handleAnswer(selectedIndex) {
 
   updateUiStats();
   el.nextBtn.disabled = false;
-  el.finishBtn.disabled = false;
 }
 
-function nextQuestion() {
+async function autoFinishRound() {
+  clearQuestionTimer();
+  el.nextBtn.disabled = true;
+  el.questionCounter.textContent = "Rodada concluida";
+  el.questionText.textContent = "Calculando pontuacao...";
+  el.answersWrap.innerHTML = "";
+  state.secondsLeft = 0;
+  updateTimeBar();
+  await submitScore();
+  await loadRanking();
+  setFeedback(
+    `Rodada finalizada! Voce marcou ${state.roundScore} pontos. Inicie outra rodada quando quiser.`,
+    "ok"
+  );
+  resetToIdleState();
+}
+
+async function nextQuestion() {
   clearQuestionTimer();
   state.questionIndex += 1;
   setFeedback("");
   updateUiStats();
+  if (state.questionIndex >= state.questions.length) {
+    await autoFinishRound();
+    return;
+  }
   renderCurrentQuestion();
 }
 
@@ -487,7 +497,6 @@ function resetToIdleState() {
   el.questionText.textContent = "Toque em Comecar Quiz para iniciar sua rodada.";
   el.answersWrap.innerHTML = "";
   el.nextBtn.disabled = true;
-  el.finishBtn.disabled = true;
   updateUiStats();
 }
 
@@ -628,13 +637,6 @@ function wireEvents() {
   });
 
   el.nextBtn.addEventListener("click", nextQuestion);
-
-  el.finishBtn.addEventListener("click", async () => {
-    await submitScore();
-    await loadRanking();
-    setFeedback("Pontuacao salva! Inicie outra rodada quando quiser.", "ok");
-    resetToIdleState();
-  });
 
   el.overallBtn.addEventListener("click", async () => {
     state.rankingScope = "overall";
