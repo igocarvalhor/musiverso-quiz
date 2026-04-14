@@ -92,8 +92,6 @@ const el = {
   profileInput: document.getElementById("profileInput"),
   profileImage: document.getElementById("profileImage"),
   profilePlaceholder: document.getElementById("profilePlaceholder"),
-  levelChip: document.getElementById("levelChip"),
-  timerChip: document.getElementById("timerChip"),
   titleChip: document.getElementById("titleChip"),
   scoreValue: document.getElementById("scoreValue"),
   streakValue: document.getElementById("streakValue"),
@@ -163,7 +161,6 @@ function recalculateUnlockedLevels() {
 function updateUiStats() {
   recalculateUnlockedLevels();
   el.playerLabel.textContent = state.playerName || "-";
-  el.levelChip.textContent = `Nivel: ${LEVEL_META[state.activeLevel].label}`;
   el.titleChip.textContent = getTitleByScore(state.totalScore);
   el.scoreValue.textContent = state.roundScore;
   el.streakValue.textContent = state.streak;
@@ -172,7 +169,6 @@ function updateUiStats() {
   const total = state.questions.length || 1;
   const progress = (state.questionIndex / total) * 100;
   el.progressBar.style.width = `${Math.min(progress, 100)}%`;
-  el.timerChip.textContent = state.isRoundStarted ? `Tempo: ${state.secondsLeft}s` : "Tempo: --";
   updateTimeBar();
 
   renderLevelButtons();
@@ -186,7 +182,7 @@ function clearQuestionTimer() {
 }
 
 function updateTimerChip() {
-  el.timerChip.textContent = state.isRoundStarted ? `Tempo: ${state.secondsLeft}s` : "Tempo: --";
+  // Timer visual is represented by the progress bar in the question area.
 }
 
 function updateTimeBar() {
