@@ -88,6 +88,10 @@ const el = {
   startGameBtn: document.getElementById("startGameBtn"),
   logoutBtn: document.getElementById("logoutBtn"),
   playerLabel: document.getElementById("playerLabel"),
+  profileInput: document.getElementById("profileInput"),
+  profileImage: document.getElementById("profileImage"),
+  profilePlaceholder: document.getElementById("profilePlaceholder"),
+  clearPhotoBtn: document.getElementById("clearPhotoBtn"),
   levelChip: document.getElementById("levelChip"),
   timerChip: document.getElementById("timerChip"),
   titleChip: document.getElementById("titleChip"),
@@ -280,6 +284,32 @@ function saveSessionUser() {
       currentLevel: state.activeLevel,
     })
   );
+}
+
+function getProfilePhotoStorageKey() {
+  const safeName = (state.playerName || "anon").toLowerCase();
+  return `musiversoProfilePhoto_${safeName}`;
+}
+
+function setProfileImage(src = "") {
+  el.profileImage.src = src || "";
+  el.profileImage.style.display = src ? "block" : "none";
+  el.profilePlaceholder.style.display = src ? "none" : "grid";
+}
+
+function loadProfileImage() {
+  const stored = localStorage.getItem(getProfilePhotoStorageKey()) || "";
+  setProfileImage(stored);
+}
+
+function saveProfileImage(dataUrl) {
+  localStorage.setItem(getProfilePhotoStorageKey(), dataUrl);
+  setProfileImage(dataUrl);
+}
+
+function clearProfileImage() {
+  localStorage.removeItem(getProfilePhotoStorageKey());
+  setProfileImage("");
 }
 
 function getSeenSet(level) {
@@ -541,6 +571,37 @@ function wireEvents() {
     window.location.href = "/auth.html";
   });
 
+  el.profileInput.addEventListener("change", (event) => {
+    const file = event.target.files?.[0];
+    if (!file) {
+      return;
+    }
+
+    const reader = new FileReader();
+    reader.onload = () => {
+      const result = typeof reader.result === "string" ? reader.result : "";
+      if (!result) {
+        setFeedback("Nao foi possivel carregar a imagem.", "error");
+        return;
+      }
+
+      saveProfileImage(result);
+      setFeedback("Foto de perfil atualizada!", "ok");
+    };
+
+    reader.onerror = () => {
+      setFeedback("Falha ao ler a imagem.", "error");
+    };
+
+    reader.readAsDataURL(file);
+    event.target.value = "";
+  });
+
+  el.clearPhotoBtn.addEventListener("click", () => {
+    clearProfileImage();
+    setFeedback("Foto removida.", "ok");
+  });
+
   el.nextBtn.addEventListener("click", nextQuestion);
 
   el.finishBtn.addEventListener("click", async () => {
@@ -579,6 +640,7 @@ async function bootstrap() {
   state.activeLevel = sessionUser.currentLevel || "facil";
 
   wireEvents();
+  loadProfileImage();
   resetToIdleState();
   setFeedback(`Conta ativa: ${state.playerName}. Escolha um nivel e toque em Comecar Quiz.`, "ok");
   await loadRanking();
