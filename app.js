@@ -21,6 +21,7 @@ const state = {
     dificil: new Set(),
   },
   rankingScope: "overall",
+  activeTopic: null,
 };
 
 const LEVEL_META = {
@@ -28,6 +29,12 @@ const LEVEL_META = {
   medio: { label: "Medio", basePoints: 15, unlockScore: 500, roundSize: 10, timeLimit: 15 },
   dificil: { label: "Dificil", basePoints: 20, unlockScore: 1000, roundSize: 10, timeLimit: 20 },
 };
+
+const TOPICS = [
+  { id: "teoria-musical",     label: "Teoria Musical" },
+  { id: "harmonia-funcional", label: "Harmonia Funcional" },
+  { id: "historia-da-musica", label: "Historia da Musica" },
+];
 
 const TITLES = [
   { minScore: 0, title: "Aventureiro Ritmico" },
@@ -104,6 +111,7 @@ const el = {
   feedbackText: document.getElementById("feedbackText"),
   nextBtn: document.getElementById("nextBtn"),
   levelSelect: document.getElementById("levelSelect"),
+  topicSelect: document.getElementById("topicSelect"),
   progressBar: document.getElementById("progressBar"),
   rankingList: document.getElementById("rankingList"),
   overallBtn: document.getElementById("overallBtn"),
@@ -171,6 +179,7 @@ function updateUiStats() {
   updateTimeBar();
 
   renderLevelButtons();
+  renderTopicButtons();
 }
 
 function clearQuestionTimer() {
@@ -253,6 +262,35 @@ function startQuestionTimer() {
   }, 1000);
 }
 
+function renderTopicButtons() {
+  el.topicSelect.innerHTML = "";
+
+  // Botao "Todos"
+  const allBtn = document.createElement("button");
+  allBtn.className = `topic-btn ${state.activeTopic === null ? "active" : ""}`;
+  allBtn.textContent = "Todos os topicos";
+  allBtn.addEventListener("click", () => {
+    if (state.isRoundStarted) return;
+    state.activeTopic = null;
+    renderTopicButtons();
+    setFeedback("Topico: Todos os topicos selecionado.", "ok");
+  });
+  el.topicSelect.appendChild(allBtn);
+
+  for (const topic of TOPICS) {
+    const btn = document.createElement("button");
+    btn.className = `topic-btn ${state.activeTopic === topic.id ? "active" : ""}`;
+    btn.textContent = topic.label;
+    btn.addEventListener("click", () => {
+      if (state.isRoundStarted) return;
+      state.activeTopic = topic.id;
+      renderTopicButtons();
+      setFeedback(`Topico: ${topic.label} selecionado.`, "ok");
+    });
+    el.topicSelect.appendChild(btn);
+  }
+}
+
 function renderLevelButtons() {
   el.levelSelect.innerHTML = "";
 
@@ -273,6 +311,7 @@ function renderLevelButtons() {
       }
 
       state.activeLevel = levelKey;
+      state.activeTopic = null;
       resetToIdleState();
       setFeedback(
         `Nivel ${LEVEL_META[levelKey].label} selecionado. Toque em Comecar Quiz para iniciar.`,
@@ -391,16 +430,17 @@ function normalizeQuestion(question) {
 async function loadQuestions(level) {
   try {
     const seenIds = Array.from(getSeenSet(level)).join(",");
+    const topicParam = state.activeTopic ? `&topic=${encodeURIComponent(state.activeTopic)}` : "";
     const data = await apiFetch(
-      `/api/questions?level=${level}&limit=${LEVEL_META[level].roundSize}&excludeIds=${encodeURIComponent(seenIds)}`
+      `/api/questions?level=${level}&limit=${LEVEL_META[level].roundSize}&excludeIds=${encodeURIComponent(seenIds)}${topicParam}`
     );
 
     if (!Array.isArray(data.questions) || !data.questions.length) {
-      // Quando o nivel acaba, reinicia o pool daquele nivel para manter jogabilidade.
+      // Quando o pool esgota, reinicia as vistas desse nivel+topico.
       getSeenSet(level).clear();
       clearSeenIds(level);
       const retryData = await apiFetch(
-        `/api/questions?level=${level}&limit=${LEVEL_META[level].roundSize}`
+        `/api/questions?level=${level}&limit=${LEVEL_META[level].roundSize}${topicParam}`
       );
 
       if (!Array.isArray(retryData.questions) || !retryData.questions.length) {

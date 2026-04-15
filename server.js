@@ -5,7 +5,7 @@ const cors = require("cors");
 const path = require("path");
 const bcrypt = require("bcryptjs");
 const { createClient } = require("@supabase/supabase-js");
-const { perguntas } = require("./question-bank");
+const { perguntas, TOPICOS } = require("./question-bank");
 
 const app = express();
 const PORT = Number(process.env.PORT) || 3000;
@@ -403,6 +403,10 @@ app.get("/api/levels", (_req, res) => {
   });
 });
 
+app.get("/api/topics", (_req, res) => {
+  res.status(200).json({ topics: TOPICOS });
+});
+
 app.get("/api/questions", async (req, res) => {
   try {
     const level = resolveLevel(req.query.level);
@@ -412,6 +416,7 @@ app.get("/api/questions", async (req, res) => {
       .split(",")
       .map((item) => item.trim())
       .filter(Boolean);
+    const topicFilter = req.query.topic ? String(req.query.topic).trim() : null;
 
     const excludeSet = new Set(excludeIds);
 
@@ -421,6 +426,7 @@ app.get("/api/questions", async (req, res) => {
         ...item,
       }))
       .filter((item) => item.nivel === level)
+      .filter((item) => !topicFilter || item.topico === topicFilter)
       .filter((item) => !excludeSet.has(String(item.id)));
 
     const selectedQuestions = shuffleList(questionsFromLevel).slice(0, limit);
