@@ -89,6 +89,28 @@ const perguntas = [
   { nivel: "dificil", topico: "harmonia-funcional", pergunta: "Na progressao G - Am, ocorre:", opcoes: ["Cadencia perfeita", "Resolucao plagal", "Cadencia deceptiva", "Modulacao direta"], resposta: 2 },
   { nivel: "dificil", topico: "harmonia-funcional", pergunta: "Qual analise correta para Dm - G - C?", opcoes: ["I - IV - V", "II - V - I", "III - VI - II", "V - I - IV"], resposta: 1 },
   { nivel: "dificil", topico: "harmonia-funcional", pergunta: "Qual grau geralmente exerce funcao dominante secundaria?", opcoes: ["V/V", "I", "IV", "VI"], resposta: 0 },
+
+  // HISTORIA DA MUSICA — FACIL
+  { nivel: "facil", topico: "historia-da-musica", pergunta: "A musica na Idade Media ficou conhecida por: [REVISAR]", opcoes: ["Desenvolvimento da polifonia", "Uso exclusivo de instrumentos eletricos", "Apenas canto solo", "Ausencia de organizacao musical"], resposta: 0 },
+  { nivel: "facil", topico: "historia-da-musica", pergunta: "Quem foi [REVISAR - inserir nome]? (Compositor da Idade Media ligado a polifonia)", opcoes: ["Compositor da Idade Media ligado a polifonia", "Compositor do periodo classico", "Musico do jazz moderno", "Cantor popular contemporaneo"], resposta: 0 },
+  { nivel: "facil", topico: "historia-da-musica", pergunta: "Quem foi [REVISAR - inserir nome]? (Compositor medieval que desenvolveu a polifonia)", opcoes: ["Compositor barroco", "Compositor medieval que desenvolveu a polifonia", "Compositor romantico", "Teorico moderno"], resposta: 1 },
+  { nivel: "facil", topico: "historia-da-musica", pergunta: "O que e organum?", opcoes: ["Forma inicial de polifonia", "Instrumento de corda", "Ritmo moderno", "Escala musical"], resposta: 0 },
+
+  // HISTORIA DA MUSICA — MEDIO
+  { nivel: "medio", topico: "historia-da-musica", pergunta: "Qual compositor esta associado a obra 'O Cravo Bem Temperado'?", opcoes: ["Mozart", "Bach", "Beethoven", "Chopin"], resposta: 1 },
+  { nivel: "medio", topico: "historia-da-musica", pergunta: "Quem compos a 9a Sinfonia?", opcoes: ["Bach", "Mozart", "Beethoven", "Debussy"], resposta: 2 },
+  { nivel: "medio", topico: "historia-da-musica", pergunta: "Qual compositor e conhecido pela opera 'A Flauta Magica'?", opcoes: ["Verdi", "Mozart", "Puccini", "Wagner"], resposta: 1 },
+  { nivel: "medio", topico: "historia-da-musica", pergunta: "Qual compositor e associado ao periodo Romantico?", opcoes: ["Bach", "Mozart", "Chopin", "Palestrina"], resposta: 2 },
+  { nivel: "medio", topico: "historia-da-musica", pergunta: "Qual compositor pertence ao Renascimento?", opcoes: ["Bach", "Palestrina", "Beethoven", "Debussy"], resposta: 1 },
+  { nivel: "medio", topico: "historia-da-musica", pergunta: "Qual forma musical era comum na Idade Media?", opcoes: ["Sinfonia", "Moteto", "Sonata", "Concerto"], resposta: 1 },
+
+  // HISTORIA DA MUSICA — DIFICIL
+  { nivel: "dificil", topico: "historia-da-musica", pergunta: "A Escola de Notre-Dame contribuiu principalmente para:", opcoes: ["Desenvolvimento da musica eletronica", "Evolucao da polifonia organizada", "Criacao da sinfonia", "Desenvolvimento do jazz"], resposta: 1 },
+  { nivel: "dificil", topico: "historia-da-musica", pergunta: "Qual inovacao esta ligada a [REVISAR - inserir nome]?", opcoes: ["Uso de acordes modernos", "Ampliacao da polifonia para multiplas vozes", "Criacao da tonalidade maior", "Uso de instrumentos eletricos"], resposta: 1 },
+  { nivel: "dificil", topico: "historia-da-musica", pergunta: "O moteto medieval se caracteriza por:", opcoes: ["Uso de uma unica voz", "Uso de varias vozes com textos diferentes", "Apenas instrumentos", "Ausencia de ritmo"], resposta: 1 },
+  { nivel: "dificil", topico: "historia-da-musica", pergunta: "Qual compositor esta associado ao impressionismo musical?", opcoes: ["Bach", "Beethoven", "Debussy", "Mozart"], resposta: 2 },
+  { nivel: "dificil", topico: "historia-da-musica", pergunta: "Qual caracteristica define o periodo Barroco?", opcoes: ["Uso de polifonia complexa e baixo continuo", "Ausencia de harmonia", "Uso apenas de voz solo", "Musica sem estrutura"], resposta: 0 },
+  { nivel: "dificil", topico: "historia-da-musica", pergunta: "Qual obra e um exemplo de fuga barroca?", opcoes: ["Sinfonia no 5", "O Cravo Bem Temperado", "Clair de Lune", "Ave Maria moderna"], resposta: 1 },
 ];
 
 module.exports = { perguntas, TOPICOS };
