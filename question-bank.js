@@ -62,6 +62,33 @@ const perguntas = [
   { nivel: "dificil", topico: "harmonia-funcional", pergunta: "Quantos semitons tem uma terca maior?", opcoes: ["2", "3", "4", "5"], resposta: 2 },
   { nivel: "dificil", topico: "harmonia-funcional", pergunta: "O que e enarmonia?", opcoes: ["Mesmo som, nomes diferentes", "Notas diferentes", "Intervalos iguais", "Acordes iguais"], resposta: 0 },
   { nivel: "dificil", topico: "harmonia-funcional", pergunta: "O que e modulacao?", opcoes: ["Mudanca de ritmo", "Mudanca de tonalidade", "Mudanca de intensidade", "Mudanca de timbre"], resposta: 1 },
+
+  // HARMONIA FUNCIONAL — FACIL
+  { nivel: "facil", topico: "harmonia-funcional", pergunta: "O que e funcao harmonica?", opcoes: ["Funcao que define a intensidade da musica", "Funcao que define o papel do acorde na tonalidade", "Funcao que define a velocidade", "Funcao que define o timbre"], resposta: 1 },
+  { nivel: "facil", topico: "harmonia-funcional", pergunta: "Qual acorde representa a funcao tonica?", opcoes: ["IV grau", "V grau", "I grau", "II grau"], resposta: 2 },
+  { nivel: "facil", topico: "harmonia-funcional", pergunta: "Qual acorde representa a funcao dominante?", opcoes: ["I grau", "III grau", "V grau", "VI grau"], resposta: 2 },
+  { nivel: "facil", topico: "harmonia-funcional", pergunta: "Qual acorde representa a funcao subdominante?", opcoes: ["IV grau", "I grau", "V grau", "VII grau"], resposta: 0 },
+  { nivel: "facil", topico: "harmonia-funcional", pergunta: "Qual funcao harmonica gera maior tensao?", opcoes: ["Subdominante", "Dominante", "Tonica", "Relativa"], resposta: 1 },
+  { nivel: "facil", topico: "harmonia-funcional", pergunta: "Na progressao C - F - G - C, qual acorde exerce funcao dominante?", opcoes: ["F", "Am", "G", "C"], resposta: 2 },
+  { nivel: "facil", topico: "harmonia-funcional", pergunta: "Na tonalidade de Do maior, qual e o acorde de tonica?", opcoes: ["F", "G", "C", "Dm"], resposta: 2 },
+  { nivel: "facil", topico: "harmonia-funcional", pergunta: "A progressao G - C representa:", opcoes: ["Subdominante para Dominante", "Dominante para Tonica", "Tonica para Dominante", "Tonica para Subdominante"], resposta: 1 },
+
+  // HARMONIA FUNCIONAL — MEDIO
+  { nivel: "medio", topico: "harmonia-funcional", pergunta: "Qual e a funcao do IV grau?", opcoes: ["Subdominante", "Tonica", "Dominante", "Sensivel"], resposta: 0 },
+  { nivel: "medio", topico: "harmonia-funcional", pergunta: "Qual e a funcao do V grau?", opcoes: ["Dominante", "Subdominante", "Tonica", "Relativa"], resposta: 0 },
+  { nivel: "medio", topico: "harmonia-funcional", pergunta: "Na progressao Dm - G - C, a sequencia funcional correta e:", opcoes: ["Tonica - Dominante - Tonica", "Subdominante - Dominante - Tonica", "Dominante - Tonica - Subdominante", "Tonica - Subdominante - Dominante"], resposta: 1 },
+  { nivel: "medio", topico: "harmonia-funcional", pergunta: "Na progressao C - Am - Dm - G, o acorde Am exerce:", opcoes: ["Dominante", "Subdominante", "Tonica relativa", "Sensivel"], resposta: 2 },
+  { nivel: "medio", topico: "harmonia-funcional", pergunta: "Qual cadencia esta presente em G - C?", opcoes: ["Plagal", "Perfeita", "Interrompida", "Modal"], resposta: 1 },
+  { nivel: "medio", topico: "harmonia-funcional", pergunta: "A progressao I - IV - V - I representa:", opcoes: ["Progressao cromatica", "Progressao funcional basica", "Escala menor", "Modulacao"], resposta: 1 },
+  { nivel: "medio", topico: "harmonia-funcional", pergunta: "Qual acorde cria expectativa de resolucao?", opcoes: ["I grau", "III grau", "IV grau", "V grau"], resposta: 3 },
+
+  // HARMONIA FUNCIONAL — DIFICIL
+  { nivel: "dificil", topico: "harmonia-funcional", pergunta: "Na progressao C - Am - Dm - G - C, qual e a sequencia funcional correta?", opcoes: ["T - Trel - SD - D - T", "T - SD - D - T - SD", "SD - D - T - SD - D", "T - D - SD - T - D"], resposta: 0 },
+  { nivel: "dificil", topico: "harmonia-funcional", pergunta: "Na progressao Dm - G - C - Am, o acorde Am funciona como:", opcoes: ["Dominante", "Tonica relativa", "Subdominante", "Sensivel"], resposta: 1 },
+  { nivel: "dificil", topico: "harmonia-funcional", pergunta: "Qual progressao representa uma cadencia plagal?", opcoes: ["G - C", "Dm - G", "F - C", "Am - Dm"], resposta: 2 },
+  { nivel: "dificil", topico: "harmonia-funcional", pergunta: "Na progressao G - Am, ocorre:", opcoes: ["Cadencia perfeita", "Resolucao plagal", "Cadencia deceptiva", "Modulacao direta"], resposta: 2 },
+  { nivel: "dificil", topico: "harmonia-funcional", pergunta: "Qual analise correta para Dm - G - C?", opcoes: ["I - IV - V", "II - V - I", "III - VI - II", "V - I - IV"], resposta: 1 },
+  { nivel: "dificil", topico: "harmonia-funcional", pergunta: "Qual grau geralmente exerce funcao dominante secundaria?", opcoes: ["V/V", "I", "IV", "VI"], resposta: 0 },
 ];
 
 module.exports = { perguntas, TOPICOS };
