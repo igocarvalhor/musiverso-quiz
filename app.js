@@ -22,6 +22,7 @@ const state = {
   },
   rankingScope: "overall",
   activeTopic: null,
+  currentQuestionExplicacoes: [],
 };
 
 const LEVEL_META = {
@@ -326,6 +327,7 @@ function renderLevelButtons() {
 function setFeedback(message, type = "") {
   el.feedbackText.textContent = message;
   el.feedbackText.className = `feedback ${type}`.trim();
+  el.feedbackText.style.whiteSpace = "pre-wrap";
 }
 
 function getSessionUser() {
@@ -424,6 +426,7 @@ function normalizeQuestion(question) {
           ? question.correct_option
           : question.resposta,
     explanation: question.explanation || "",
+    explicacoes: question.explicacoes || [],
   };
 }
 
@@ -470,6 +473,7 @@ function renderCurrentQuestion() {
   showStartCta(false);
   el.questionCounter.textContent = `Pergunta ${state.questionIndex + 1}/${state.questions.length}`;
   el.questionText.textContent = question.question;
+  state.currentQuestionExplicacoes = question.explicacoes || [];
   el.answersWrap.innerHTML = "";
 
   question.options.forEach((optionText, index) => {
@@ -511,13 +515,20 @@ function handleAnswer(selectedIndex) {
     state.streak += 1;
     state.roundBestStreak = Math.max(state.roundBestStreak, state.streak);
     buttons[selectedIndex].classList.add("correct");
-    setFeedback(`Acertou! +${gained} pontos`, "ok");
+    
+    // Usar explicação específica se disponível
+    const feedback = state.currentQuestionExplicacoes[selectedIndex] || `Acertou! +${gained} pontos`;
+    setFeedback(`${feedback} +${gained} pontos`, "ok");
   } else {
     state.streak = 0;
     buttons[selectedIndex].classList.add("wrong");
     buttons[question.correctOption].classList.add("correct");
-    const reason = question.explanation ? ` ${question.explanation}` : "";
-    setFeedback(`Ops! A resposta certa era destacada.${reason}`, "error");
+    
+    // Usar explicação específica se disponível
+    const userFeedback = state.currentQuestionExplicacoes[selectedIndex] || "Ops! A resposta certa era destacada.";
+    const correctFeedback = state.currentQuestionExplicacoes[question.correctOption] || "Esta era a resposta correta.";
+    const finalMessage = `${userFeedback}\n${correctFeedback}`;
+    setFeedback(finalMessage, "error");
   }
 
   updateUiStats();

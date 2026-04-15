@@ -94,10 +94,11 @@ function shuffleList(list) {
   return [...list].sort(() => Math.random() - 0.5);
 }
 
-function shuffleOptionsWithCorrectIndex(options, correctOption) {
+function shuffleOptionsWithCorrectIndex(options, correctOption, explicacoes = null) {
   const pairs = options.map((text, index) => ({
     text,
     isCorrect: index === correctOption,
+    explanation: explicacoes ? explicacoes[index] : null,
   }));
 
   const shuffledPairs = shuffleList(pairs);
@@ -106,6 +107,7 @@ function shuffleOptionsWithCorrectIndex(options, correctOption) {
   return {
     options: shuffledPairs.map((item) => item.text),
     correctOption: newCorrectOption,
+    explicacoes: explicacoes ? shuffledPairs.map((item) => item.explanation) : null,
   };
 }
 
@@ -432,7 +434,7 @@ app.get("/api/questions", async (req, res) => {
     const selectedQuestions = shuffleList(questionsFromLevel).slice(0, limit);
 
     const publicQuestions = selectedQuestions.map((item) => {
-      const shuffledQuestion = shuffleOptionsWithCorrectIndex(item.opcoes, item.resposta);
+      const shuffledQuestion = shuffleOptionsWithCorrectIndex(item.opcoes, item.resposta, item.explicacoes);
 
       return {
         id: item.id,
@@ -441,6 +443,7 @@ app.get("/api/questions", async (req, res) => {
         options: shuffledQuestion.options,
         correct_option: shuffledQuestion.correctOption,
         explanation: "",
+        explicacoes: shuffledQuestion.explicacoes || [],
       };
     });
 
