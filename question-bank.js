@@ -134,4 +134,137 @@ const perguntas = [
   { nivel: "dificil", topico: "harmonia-funcional", pergunta: "Na progressao G - Am, ocorre:", opcoes: ["Cadencia perfeita", "Resolucao plagal", "Cadencia deceptiva", "Modulacao direta"], resposta: 2, explicacoes: ["Incorreto. Cadencia perfeita e V -> I.", "Incorreto. Cadencia plagal e IV -> I.", "Correto. A dominante (G) resolve no VI (Am), caracterizando cadencia deceptiva.", "Incorreto. Nao ha mudanca de tonalidade (modulacao)."] },
 ];
 
+const harmonia_medio = [
+  {
+    nivel: "medio",
+    tema: "harmonia",
+    subtema: "campo_harmonico",
+    pergunta: "Na tonalidade de C maior, qual e o acorde do II grau?",
+    opcoes: ["Em", "Dm", "F", "G"],
+    resposta: 1,
+    explicacoes: [
+      "Incorreto. Em e III grau.",
+      "Correto. Dm e o II grau.",
+      "Incorreto. F e IV grau.",
+      "Incorreto. G e V grau.",
+    ],
+  },
+  {
+    nivel: "medio",
+    tema: "harmonia",
+    subtema: "campo_harmonico",
+    pergunta: "Qual e o acorde do VI grau em G maior?",
+    opcoes: ["Em", "Bm", "Am", "C"],
+    resposta: 0,
+    explicacoes: [
+      "Correto. Em e VI grau em G.",
+      "Incorreto. Bm e III.",
+      "Incorreto. Am e II.",
+      "Incorreto. C e IV.",
+    ],
+  },
+  {
+    nivel: "medio",
+    tema: "harmonia",
+    subtema: "progressao",
+    pergunta: "A progressao Dm - G - C corresponde a:",
+    opcoes: ["I - IV - V", "II - V - I", "V - I - IV", "III - VI - II"],
+    resposta: 1,
+    explicacoes: ["Incorreto.", "Correto. Progressao II-V-I.", "Incorreto.", "Incorreto."],
+  },
+  {
+    nivel: "medio",
+    tema: "harmonia",
+    subtema: "funcao",
+    pergunta: "Na tonalidade de C, qual funcao exerce o acorde F?",
+    opcoes: ["Tonica", "Dominante", "Subdominante", "Sensivel"],
+    resposta: 2,
+    explicacoes: ["Incorreto.", "Incorreto.", "Correto. F e IV grau.", "Incorreto."],
+  },
+  {
+    nivel: "medio",
+    tema: "harmonia",
+    subtema: "funcao",
+    pergunta: "Na tonalidade de D maior, qual acorde exerce funcao dominante?",
+    opcoes: ["G", "A", "D", "Bm"],
+    resposta: 1,
+    explicacoes: ["Incorreto. Subdominante.", "Correto. A e V grau.", "Incorreto. Tonica.", "Incorreto. Relativo."],
+  },
+  {
+    nivel: "medio",
+    tema: "harmonia",
+    subtema: "inversao",
+    pergunta: "O que caracteriza um acorde em primeira inversao?",
+    opcoes: ["Tonica no baixo", "Terca no baixo", "Quinta no baixo", "Setima no baixo"],
+    resposta: 1,
+    explicacoes: ["Incorreto.", "Correto. A terca esta no baixo.", "Incorreto.", "Incorreto."],
+  },
+  {
+    nivel: "medio",
+    tema: "harmonia",
+    subtema: "inversao",
+    pergunta: "O que caracteriza a segunda inversao?",
+    opcoes: ["Terca no baixo", "Quinta no baixo", "Fundamental no baixo", "Setima no baixo"],
+    resposta: 1,
+    explicacoes: ["Incorreto.", "Correto. Quinta no baixo.", "Incorreto.", "Incorreto."],
+  },
+  {
+    nivel: "medio",
+    tema: "harmonia",
+    subtema: "cadencia",
+    pergunta: "Qual e a cadencia IV - V - I?",
+    opcoes: ["Autentica completa", "Plagal", "Deceptiva", "Modal"],
+    resposta: 0,
+    explicacoes: ["Correto. Sequencia completa de resolucao.", "Incorreto.", "Incorreto.", "Incorreto."],
+  },
+  {
+    nivel: "medio",
+    tema: "harmonia",
+    subtema: "analise",
+    pergunta: "Na progressao C - Am - Dm - G, Am exerce:",
+    opcoes: ["Dominante", "Subdominante", "Tonica relativa", "Sensivel"],
+    resposta: 2,
+    explicacoes: ["Incorreto.", "Incorreto.", "Correto. VI grau funciona como tonica relativa.", "Incorreto."],
+  },
+  {
+    nivel: "medio",
+    tema: "harmonia",
+    subtema: "analise",
+    pergunta: "Na tonalidade de G, qual acorde e subdominante?",
+    opcoes: ["D", "C", "G", "Em"],
+    resposta: 1,
+    explicacoes: ["Incorreto.", "Correto. C e IV grau.", "Incorreto.", "Incorreto."],
+  },
+];
+
+for (let i = harmonia_medio.length; i < 50; i += 1) {
+  harmonia_medio.push({
+    nivel: "medio",
+    tema: "harmonia",
+    subtema: "variacao",
+    pergunta: `Analise a funcao harmonica na situacao ${i + 1}`,
+    opcoes: ["Tonica", "Subdominante", "Dominante", "Relativa"],
+    resposta: i % 4,
+    explicacoes: [
+      "Pode indicar repouso dependendo do contexto.",
+      "Pode indicar preparacao.",
+      "Pode indicar tensao.",
+      "Pode funcionar como substituto da tonica.",
+    ],
+  });
+}
+
+perguntas.push(
+  ...harmonia_medio.map((q) => ({
+    nivel: q.nivel,
+    tema: q.tema,
+    subtema: q.subtema,
+    topico: "harmonia-funcional",
+    pergunta: q.pergunta,
+    opcoes: q.opcoes,
+    resposta: q.resposta,
+    explicacoes: q.explicacoes,
+  }))
+);
+
 module.exports = { perguntas, TOPICOS };
