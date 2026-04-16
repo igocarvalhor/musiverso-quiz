@@ -38,7 +38,6 @@
             <button id="toggleHeaderBtn" class="header-toggle-btn" type="button" aria-expanded="true">
               Ocultar cabecalho
             </button>
-            <button id="iaOpenBtn" class="ia-open-btn" type="button" title="Gerar perguntas com IA">✨ IA</button>
           </div>
 
           <div id="quizHeader" class="quiz-header">
@@ -120,53 +119,6 @@
     <template id="answerButtonTemplate">
       <button class="answer-btn"></button>
     </template>
-
-    <!-- Modal: Gerador de Perguntas IA -->
-    <div id="iaModal" class="ia-modal-overlay" hidden>
-      <div class="ia-modal" role="dialog" aria-labelledby="iaModalTitle" aria-modal="true">
-        <div class="ia-modal-header">
-          <h2 id="iaModalTitle">✨ Gerar Perguntas com IA</h2>
-          <button id="iaModalClose" class="ia-modal-close" type="button" aria-label="Fechar">&times;</button>
-        </div>
-
-        <div class="ia-modal-body">
-          <div class="ia-form-row">
-            <label for="iaTopicSelect" class="ia-label">Tópico</label>
-            <select id="iaTopicSelect" class="ia-select">
-              <option value="harmonia-funcional">Harmonia Funcional</option>
-              <option value="teoria-musical">Teoria Musical</option>
-              <option value="historia-da-musica">História da Música</option>
-            </select>
-          </div>
-
-          <div class="ia-form-row">
-            <label for="iaLevelSelect" class="ia-label">Nível</label>
-            <select id="iaLevelSelect" class="ia-select">
-              <option value="facil">Fácil</option>
-              <option value="medio">Médio</option>
-              <option value="dificil">Difícil</option>
-            </select>
-          </div>
-
-          <div class="ia-form-row">
-            <label for="iaCountInput" class="ia-label">Quantidade</label>
-            <input id="iaCountInput" class="ia-input" type="number" min="1" max="10" value="3" />
-          </div>
-
-          <button id="iaGenerateBtn" class="ia-generate-btn" type="button">Gerar Perguntas</button>
-
-          <div id="iaStatus" class="ia-status" hidden></div>
-
-          <div id="iaPreviewWrap" class="ia-preview-wrap" hidden>
-            <div class="ia-preview-header">
-              <p id="iaPreviewCount" class="ia-preview-count"></p>
-              <button id="iaSaveBtn" class="ia-save-btn" type="button">Salvar no Banco</button>
-            </div>
-            <ul id="iaPreviewList" class="ia-preview-list"></ul>
-          </div>
-        </div>
-      </div>
-    </div>
 
     <script src="pwa.js"></script>
     <script src="app.js"></script>
