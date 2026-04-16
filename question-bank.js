@@ -463,4 +463,150 @@ perguntas.push(
   }))
 );
 
+const harmonia_facil = [
+  {
+    nivel: "facil",
+    tema: "harmonia",
+    subtema: "funcao",
+    pergunta: "Qual função harmônica representa estabilidade?",
+    opcoes: ["Dominante", "Subdominante", "Tônica", "Sensível"],
+    resposta: 2,
+    explicacoes: [
+      "Incorreto. Dominante gera tensão.",
+      "Incorreto. Subdominante prepara.",
+      "Correto. A tônica é o ponto de repouso.",
+      "Incorreto. Sensível cria expectativa.",
+    ],
+  },
+  {
+    nivel: "facil",
+    tema: "harmonia",
+    subtema: "dominante",
+    pergunta: "Qual função cria tensão que resolve na tônica?",
+    opcoes: ["Tônica", "Dominante", "Subdominante", "Relativa"],
+    resposta: 1,
+    explicacoes: [
+      "Incorreto. Representa repouso.",
+      "Correto. A dominante cria tensão e pede resolução.",
+      "Incorreto. Apenas prepara.",
+      "Incorreto. Não é função principal.",
+    ],
+  },
+  {
+    nivel: "facil",
+    tema: "harmonia",
+    subtema: "graus",
+    pergunta: "Qual grau representa a tônica?",
+    opcoes: ["V", "IV", "I", "II"],
+    resposta: 2,
+    explicacoes: [
+      "Incorreto. V é dominante.",
+      "Incorreto. IV é subdominante.",
+      "Correto. I é tônica.",
+      "Incorreto. II é preparação.",
+    ],
+  },
+  {
+    nivel: "facil",
+    tema: "harmonia",
+    subtema: "graus",
+    pergunta: "Qual grau representa a dominante?",
+    opcoes: ["I", "III", "V", "VI"],
+    resposta: 2,
+    explicacoes: [
+      "Incorreto. Tônica.",
+      "Incorreto. Não exerce função principal.",
+      "Correto. V é dominante.",
+      "Incorreto. Relativa.",
+    ],
+  },
+  {
+    nivel: "facil",
+    tema: "harmonia",
+    subtema: "subdominante",
+    pergunta: "Qual função prepara a dominante?",
+    opcoes: ["Tônica", "Dominante", "Subdominante", "Sensível"],
+    resposta: 2,
+    explicacoes: [
+      "Incorreto. Repouso.",
+      "Incorreto. Já é tensão.",
+      "Correto. Subdominante prepara a tensão.",
+      "Incorreto.",
+    ],
+  },
+  {
+    nivel: "facil",
+    tema: "harmonia",
+    subtema: "cadencia",
+    pergunta: "O que é cadência perfeita?",
+    opcoes: ["IV → I", "V → I", "V → VI", "I → IV"],
+    resposta: 1,
+    explicacoes: [
+      "Incorreto. Plagal.",
+      "Correto. Dominante resolve na tônica.",
+      "Incorreto. Deceptiva.",
+      "Incorreto.",
+    ],
+  },
+  {
+    nivel: "facil",
+    tema: "harmonia",
+    subtema: "cadencia",
+    pergunta: "O que é cadência plagal?",
+    opcoes: ["IV → I", "V → I", "V → VI", "II → V"],
+    resposta: 0,
+    explicacoes: [
+      "Correto. Subdominante para tônica.",
+      "Incorreto. Perfeita.",
+      "Incorreto.",
+      "Incorreto.",
+    ],
+  },
+  {
+    nivel: "facil",
+    tema: "harmonia",
+    subtema: "cadencia",
+    pergunta: "O que é cadência deceptiva?",
+    opcoes: ["V → I", "IV → I", "V → VI", "I → V"],
+    resposta: 2,
+    explicacoes: [
+      "Incorreto.",
+      "Incorreto.",
+      "Correto. Evita resolução esperada.",
+      "Incorreto.",
+    ],
+  },
+  {
+    nivel: "facil",
+    tema: "harmonia",
+    subtema: "campo_harmonico",
+    pergunta: "Quantos graus tem o campo harmônico maior?",
+    opcoes: ["5", "6", "7", "8"],
+    resposta: 2,
+    explicacoes: ["Incorreto.", "Incorreto.", "Correto. São 7 graus.", "Incorreto."],
+  },
+  {
+    nivel: "facil",
+    tema: "harmonia",
+    subtema: "relativa",
+    pergunta: "Qual é a relativa menor de C?",
+    opcoes: ["Em", "Dm", "Am", "G"],
+    resposta: 2,
+    explicacoes: ["Incorreto.", "Incorreto.", "Correto. Am é relativa.", "Incorreto."],
+  },
+];
+
+perguntas.push(
+  ...harmonia_facil.map((q) => ({
+    nivel: q.nivel,
+    tema: q.tema,
+    subtema: q.subtema,
+    topico: "harmonia-funcional",
+    pergunta: q.pergunta,
+    opcoes: q.opcoes,
+    resposta: q.resposta,
+    explicacoes: q.explicacoes,
+  }))
+);
+
 module.exports = { perguntas, TOPICOS };
