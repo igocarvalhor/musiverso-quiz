@@ -636,12 +636,11 @@ app.post("/api/generate-questions", async (req, res) => {
   }
 
   try {
-    const { topic, level, count = 3 } = req.body;
+    const { level, count = 3 } = req.body;
+    let { topic } = req.body;
 
-    if (!topic || !level) {
-      return res.status(400).json({
-        error: "topic e level sao obrigatorios",
-      });
+    if (!level) {
+      return res.status(400).json({ error: "level e obrigatorio" });
     }
 
     const TOPICS = {
@@ -650,10 +649,10 @@ app.post("/api/generate-questions", async (req, res) => {
       "historia-da-musica": "História da Música (Períodos, compositores, obras)",
     };
 
-    if (!TOPICS[topic]) {
-      return res.status(400).json({
-        error: `Tópico inválido. Use: ${Object.keys(TOPICS).join(", ")}`,
-      });
+    // Se não tiver tópico ou for inválido, escolhe aleatoriamente
+    if (!topic || !TOPICS[topic]) {
+      const topicKeys = Object.keys(TOPICS);
+      topic = topicKeys[Math.floor(Math.random() * topicKeys.length)];
     }
 
     if (!["facil", "medio", "dificil"].includes(level)) {

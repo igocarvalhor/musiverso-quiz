@@ -443,19 +443,37 @@ function normalizeQuestion(question) {
 }
 
 async function loadQuestions(level) {
+  const roundSize = LEVEL_META[level].roundSize;
+  const topic = state.activeTopic || null;
+
+  // Tentar gerar com IA
+  try {
+    const data = await apiFetch("/api/generate-questions", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ topic: topic || "teoria-musical", level, count: roundSize }),
+    });
+
+    if (Array.isArray(data.questions) && data.questions.length) {
+      return data.questions.map(normalizeQuestion);
+    }
+  } catch (_iaError) {
+    // IA indisponível — usa banco estático como fallback
+  }
+
+  // Fallback: banco estático
   try {
     const seenIds = Array.from(getSeenSet(level)).join(",");
-    const topicParam = state.activeTopic ? `&topic=${encodeURIComponent(state.activeTopic)}` : "";
+    const topicParam = topic ? `&topic=${encodeURIComponent(topic)}` : "";
     const data = await apiFetch(
-      `/api/questions?level=${level}&limit=${LEVEL_META[level].roundSize}&excludeIds=${encodeURIComponent(seenIds)}${topicParam}`
+      `/api/questions?level=${level}&limit=${roundSize}&excludeIds=${encodeURIComponent(seenIds)}${topicParam}`
     );
 
     if (!Array.isArray(data.questions) || !data.questions.length) {
-      // Quando o pool esgota, reinicia as vistas desse nivel+topico.
       getSeenSet(level).clear();
       clearSeenIds(level);
       const retryData = await apiFetch(
-        `/api/questions?level=${level}&limit=${LEVEL_META[level].roundSize}${topicParam}`
+        `/api/questions?level=${level}&limit=${roundSize}${topicParam}`
       );
 
       if (!Array.isArray(retryData.questions) || !retryData.questions.length) {
@@ -468,8 +486,7 @@ async function loadQuestions(level) {
     return data.questions.map(normalizeQuestion);
   } catch (_error) {
     const fallback = fallbackQuestions[level] || fallbackQuestions.facil;
-    const copied = fallback.map((q) => normalizeQuestion(q));
-    return copied.sort(() => Math.random() - 0.5);
+    return fallback.map((q) => normalizeQuestion(q)).sort(() => Math.random() - 0.5);
   }
 }
 
@@ -601,7 +618,7 @@ async function startRound() {
     return;
   }
 
-  setFeedback("Carregando perguntas...");
+  setFeedback("✨ Gerando perguntas com IA...", "ok");
   state.isRoundStarted = true;
 
   state.questions = await loadQuestions(state.activeLevel);
