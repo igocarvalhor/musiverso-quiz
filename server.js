@@ -626,14 +626,30 @@ app.post("/api/save-questions", (req, res) => {
   }
 });
 
+function buildLocalGeneratedQuestions(level, topic, count) {
+  const safeCount = Math.min(Math.max(Number(count) || 3, 1), 10);
+  const byLevel = perguntas.filter((item) => item.nivel === level);
+  const byTopic = byLevel.filter((item) => item.topico === topic);
+  const pool = byTopic.length ? byTopic : byLevel;
+
+  return shuffleList(pool)
+    .slice(0, safeCount)
+    .map((q) => ({
+      nivel: level,
+      topico: q.topico || topic,
+      pergunta: q.pergunta,
+      opcoes: Array.isArray(q.opcoes) ? q.opcoes.slice(0, 4) : [],
+      resposta: Number.isInteger(q.resposta) ? q.resposta : 0,
+      explicacoes: Array.isArray(q.explicacoes) ? q.explicacoes : [],
+      ia_generated: false,
+      source: "local_fallback",
+      created_at: new Date().toISOString(),
+    }));
+}
+
 // Endpoint para gerar perguntas com IA (OpenAI)
 app.post("/api/generate-questions", async (req, res) => {
   const apiKey = process.env.OPENAI_API_KEY;
-  if (!apiKey) {
-    return res.status(400).json({
-      error: "OPENAI_API_KEY nao configurada no servidor",
-    });
-  }
 
   try {
     const { level, count = 3 } = req.body;
@@ -661,6 +677,7 @@ app.post("/api/generate-questions", async (req, res) => {
       });
     }
 
+    const safeCount = Math.min(Math.max(Number(count) || 3, 1), 10);
     const topicDesc = TOPICS[topic];
     const levelDesc =
       level === "facil"
@@ -669,7 +686,18 @@ app.post("/api/generate-questions", async (req, res) => {
           ? "intermediários (conhecimento moderado, alguns termos técnicos)"
           : "avançados (conceitos complexos, análise detalhada)";
 
-    const prompt = `Você é um professor de música especializado. Gere exatamente ${Math.min(count || 3, 10)} perguntas de múltipla escolha sobre "${topicDesc}" para alunos ${levelDesc}.
+    if (!apiKey) {
+      const fallbackQuestions = buildLocalGeneratedQuestions(level, topic, safeCount);
+      return res.status(200).json({
+        success: true,
+        count: fallbackQuestions.length,
+        questions: fallbackQuestions,
+        source: "local_fallback",
+        message: "OPENAI_API_KEY ausente. Perguntas locais usadas como fallback.",
+      });
+    }
+
+    const prompt = `Você é um professor de música especializado. Gere exatamente ${safeCount} perguntas de múltipla escolha sobre "${topicDesc}" para alunos ${levelDesc}.
 
 IMPORTANTE: Responda APENAS com um JSON válido, sem texto adicional. Use exatamente este formato:
 
@@ -736,12 +764,21 @@ Requisitos:
       success: true,
       count: enrichedQuestions.length,
       questions: enrichedQuestions,
+      source: "openai",
       message: "Perguntas geradas com sucesso. Revise e execute 'git add question-bank.js' para salvar.",
     });
   } catch (error) {
     console.error("Erro ao gerar perguntas:", error);
-    return res.status(500).json({
-      error: "Falha ao gerar perguntas",
+    const { level = "facil", topic = "teoria-musical", count = 3 } = req.body || {};
+    const safeLevel = ["facil", "medio", "dificil"].includes(level) ? level : "facil";
+    const fallbackQuestions = buildLocalGeneratedQuestions(safeLevel, topic, count);
+
+    return res.status(200).json({
+      success: true,
+      count: fallbackQuestions.length,
+      questions: fallbackQuestions,
+      source: "local_fallback",
+      warning: "IA indisponivel no momento. Perguntas locais usadas.",
       details: error.message,
     });
   }
