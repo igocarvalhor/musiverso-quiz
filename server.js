@@ -6,6 +6,7 @@ const path = require("path");
 const bcrypt = require("bcryptjs");
 const { createClient } = require("@supabase/supabase-js");
 const { perguntas, TOPICOS } = require("./question-bank");
+const OpenAI = require("openai");
 
 const app = express();
 const PORT = Number(process.env.PORT) || 3000;
@@ -570,6 +571,128 @@ app.post("/api/submit-score", async (req, res) => {
   } catch (error) {
     return res.status(500).json({
       error: "Falha ao salvar pontuacao",
+      details: error.message,
+    });
+  }
+});
+
+// Endpoint para gerar perguntas com IA (OpenAI)
+app.post("/api/generate-questions", async (req, res) => {
+  const apiKey = process.env.OPENAI_API_KEY;
+  if (!apiKey) {
+    return res.status(400).json({
+      error: "OPENAI_API_KEY nao configurada no servidor",
+    });
+  }
+
+  try {
+    const { topic, level, count = 3 } = req.body;
+
+    if (!topic || !level) {
+      return res.status(400).json({
+        error: "topic e level sao obrigatorios",
+      });
+    }
+
+    const TOPICS = {
+      "harmonia-funcional": "Harmonia Funcional (Funções harmônicas, acordes, progressões)",
+      "teoria-musical": "Teoria Musical (Escalas, intervalos, ritmo, notação)",
+      "historia-da-musica": "História da Música (Períodos, compositores, obras)",
+    };
+
+    if (!TOPICS[topic]) {
+      return res.status(400).json({
+        error: `Tópico inválido. Use: ${Object.keys(TOPICS).join(", ")}`,
+      });
+    }
+
+    if (!["facil", "medio", "dificil"].includes(level)) {
+      return res.status(400).json({
+        error: "Nível inválido. Use: facil, medio ou dificil",
+      });
+    }
+
+    const topicDesc = TOPICS[topic];
+    const levelDesc =
+      level === "facil"
+        ? "iniciantes (conceitos básicos, sem termos muito complexos)"
+        : level === "medio"
+          ? "intermediários (conhecimento moderado, alguns termos técnicos)"
+          : "avançados (conceitos complexos, análise detalhada)";
+
+    const prompt = `Você é um professor de música especializado. Gere exatamente ${Math.min(count || 3, 10)} perguntas de múltipla escolha sobre "${topicDesc}" para alunos ${levelDesc}.
+
+IMPORTANTE: Responda APENAS com um JSON válido, sem texto adicional. Use exatamente este formato:
+
+\`\`\`json
+{
+  "questions": [
+    {
+      "pergunta": "Pergunta em português",
+      "opcoes": ["Opção A", "Opção B", "Opção C", "Opção D"],
+      "resposta": 0,
+      "explicacoes": ["Explicação A", "Explicação B", "Explicação C", "Explicação D"]
+    }
+  ]
+}
+\`\`\`
+
+Requisitos:
+- Sempre 4 opções por pergunta
+- Resposta é índice (0-3) da opção correta
+- Explicações educacionais em português (uma por opção)`;
+
+    const client = new OpenAI({ apiKey });
+    const response = await client.chat.completions.create({
+      model: "gpt-4o-mini",
+      max_tokens: 4000,
+      temperature: 0.7,
+      messages: [
+        {
+          role: "user",
+          content: prompt,
+        },
+      ],
+    });
+
+    const content = response.choices[0].message.content;
+    const jsonMatch = content.match(/\{[\s\S]*\}/);
+
+    if (!jsonMatch) {
+      return res.status(500).json({
+        error: "Não foi possível extrair JSON da resposta da IA",
+      });
+    }
+
+    const data = JSON.parse(jsonMatch[0]);
+
+    if (!data.questions || !Array.isArray(data.questions)) {
+      return res.status(500).json({
+        error: "Resposta inválida: 'questions' não é um array",
+      });
+    }
+
+    const enrichedQuestions = data.questions.map((q) => ({
+      nivel: level,
+      topico: topic,
+      pergunta: q.pergunta,
+      opcoes: q.opcoes,
+      resposta: q.resposta,
+      explicacoes: q.explicacoes,
+      ia_generated: true,
+      created_at: new Date().toISOString(),
+    }));
+
+    return res.status(200).json({
+      success: true,
+      count: enrichedQuestions.length,
+      questions: enrichedQuestions,
+      message: "Perguntas geradas com sucesso. Revise e execute 'git add question-bank.js' para salvar.",
+    });
+  } catch (error) {
+    console.error("Erro ao gerar perguntas:", error);
+    return res.status(500).json({
+      error: "Falha ao gerar perguntas",
       details: error.message,
     });
   }
