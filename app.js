@@ -122,6 +122,18 @@ const el = {
   quizStartCta: document.getElementById("quizStartCta"),
   quizHeader: document.getElementById("quizHeader"),
   toggleHeaderBtn: document.getElementById("toggleHeaderBtn"),
+  iaOpenBtn: document.getElementById("iaOpenBtn"),
+  iaModal: document.getElementById("iaModal"),
+  iaModalClose: document.getElementById("iaModalClose"),
+  iaTopicSelect: document.getElementById("iaTopicSelect"),
+  iaLevelSelect: document.getElementById("iaLevelSelect"),
+  iaCountInput: document.getElementById("iaCountInput"),
+  iaGenerateBtn: document.getElementById("iaGenerateBtn"),
+  iaStatus: document.getElementById("iaStatus"),
+  iaPreviewWrap: document.getElementById("iaPreviewWrap"),
+  iaPreviewCount: document.getElementById("iaPreviewCount"),
+  iaPreviewList: document.getElementById("iaPreviewList"),
+  iaSaveBtn: document.getElementById("iaSaveBtn"),
 };
 
 function setHeaderCollapsed(collapsed) {
@@ -722,6 +734,15 @@ function wireEvents() {
 
   el.nextBtn.addEventListener("click", nextQuestion);
 
+  // Modal IA
+  el.iaOpenBtn.addEventListener("click", openIaModal);
+  el.iaModalClose.addEventListener("click", closeIaModal);
+  el.iaModal.addEventListener("click", (e) => {
+    if (e.target === el.iaModal) closeIaModal();
+  });
+  el.iaGenerateBtn.addEventListener("click", generateIaQuestions);
+  el.iaSaveBtn.addEventListener("click", saveIaQuestions);
+
   el.overallBtn.addEventListener("click", async () => {
     state.rankingScope = "overall";
     el.overallBtn.classList.add("active");
@@ -737,8 +758,115 @@ function wireEvents() {
   });
 }
 
+// =====================================
+// GERADOR DE PERGUNTAS IA
+// =====================================
+
+let iaGeneratedQuestions = [];
+
+function openIaModal() {
+  el.iaModal.hidden = false;
+  document.body.style.overflow = "hidden";
+  resetIaModal();
+}
+
+function closeIaModal() {
+  el.iaModal.hidden = true;
+  document.body.style.overflow = "";
+}
+
+function resetIaModal() {
+  iaGeneratedQuestions = [];
+  el.iaStatus.hidden = true;
+  el.iaStatus.className = "ia-status";
+  el.iaStatus.textContent = "";
+  el.iaPreviewWrap.hidden = true;
+  el.iaPreviewList.innerHTML = "";
+  el.iaGenerateBtn.disabled = false;
+  el.iaSaveBtn.disabled = false;
+}
+
+function setIaStatus(message, type) {
+  el.iaStatus.hidden = false;
+  el.iaStatus.className = `ia-status ${type}`;
+  el.iaStatus.textContent = message;
+}
+
+function renderIaPreview(questions) {
+  el.iaPreviewList.innerHTML = "";
+  el.iaPreviewCount.textContent = `${questions.length} pergunta${questions.length !== 1 ? "s" : ""} gerada${questions.length !== 1 ? "s" : ""}`;
+
+  questions.forEach((q) => {
+    const li = document.createElement("li");
+    li.className = "ia-preview-item";
+
+    const optionsHtml = q.opcoes
+      .map((opt, i) => {
+        const isCorrect = i === q.resposta;
+        return `<li class="ia-q-option${isCorrect ? " correct" : ""}">${isCorrect ? "✓" : "○"} ${opt}</li>`;
+      })
+      .join("");
+
+    li.innerHTML = `
+      <p class="ia-q-text">${q.pergunta}</p>
+      <ul class="ia-q-options">${optionsHtml}</ul>
+    `;
+    el.iaPreviewList.appendChild(li);
+  });
+
+  el.iaPreviewWrap.hidden = false;
+}
+
+async function generateIaQuestions() {
+  const topic = el.iaTopicSelect.value;
+  const level = el.iaLevelSelect.value;
+  const count = Math.min(Math.max(parseInt(el.iaCountInput.value) || 3, 1), 10);
+
+  el.iaGenerateBtn.disabled = true;
+  el.iaPreviewWrap.hidden = true;
+  setIaStatus("⏳ Gerando perguntas com IA...", "loading");
+  iaGeneratedQuestions = [];
+
+  try {
+    const data = await apiFetch("/api/generate-questions", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ topic, level, count }),
+    });
+
+    iaGeneratedQuestions = data.questions || [];
+    setIaStatus(`✨ ${iaGeneratedQuestions.length} perguntas geradas! Revise abaixo.`, "success");
+    renderIaPreview(iaGeneratedQuestions);
+  } catch (err) {
+    setIaStatus(`❌ ${err.message}`, "error");
+  } finally {
+    el.iaGenerateBtn.disabled = false;
+  }
+}
+
+async function saveIaQuestions() {
+  if (!iaGeneratedQuestions.length) return;
+
+  el.iaSaveBtn.disabled = true;
+  setIaStatus("💾 Salvando no banco de perguntas...", "loading");
+
+  try {
+    const data = await apiFetch("/api/save-questions", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ questions: iaGeneratedQuestions }),
+    });
+
+    setIaStatus(`✅ ${data.saved} pergunta${data.saved !== 1 ? "s" : ""} salva${data.saved !== 1 ? "s" : ""} com sucesso!`, "success");
+    el.iaSaveBtn.disabled = true;
+    iaGeneratedQuestions = [];
+  } catch (err) {
+    setIaStatus(`❌ Erro ao salvar: ${err.message}`, "error");
+    el.iaSaveBtn.disabled = false;
+  }
+}
+
 async function bootstrap() {
-  const sessionUser = getSessionUser();
 
   if (!sessionUser?.nickname) {
     window.location.href = "/auth.html";

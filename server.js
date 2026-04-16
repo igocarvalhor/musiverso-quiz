@@ -3,6 +3,7 @@ require("dotenv").config();
 const express = require("express");
 const cors = require("cors");
 const path = require("path");
+const fs = require("fs");
 const bcrypt = require("bcryptjs");
 const { createClient } = require("@supabase/supabase-js");
 const { perguntas, TOPICOS } = require("./question-bank");
@@ -571,6 +572,55 @@ app.post("/api/submit-score", async (req, res) => {
   } catch (error) {
     return res.status(500).json({
       error: "Falha ao salvar pontuacao",
+      details: error.message,
+    });
+  }
+});
+
+// Endpoint para salvar perguntas geradas pela IA no question-bank.js
+app.post("/api/save-questions", (req, res) => {
+  try {
+    const { questions } = req.body;
+
+    if (!questions || !Array.isArray(questions) || questions.length === 0) {
+      return res.status(400).json({ error: "questions deve ser um array não vazio" });
+    }
+
+    const bankPath = path.join(__dirname, "question-bank.js");
+    let content = fs.readFileSync(bankPath, "utf-8");
+
+    const insertPoint = content.lastIndexOf("module.exports");
+    if (insertPoint === -1) {
+      return res.status(500).json({ error: "Não foi possível localizar module.exports em question-bank.js" });
+    }
+
+    const questionsCode = questions
+      .map((q) => {
+        const opcoes = JSON.stringify(q.opcoes || []);
+        const explicacoes = q.explicacoes ? `, explicacoes: ${JSON.stringify(q.explicacoes)}` : "";
+        const pergunta = (q.pergunta || "").replace(/\\/g, "\\\\").replace(/"/g, '\\"');
+        return `  { nivel: "${q.nivel}", topico: "${q.topico}", pergunta: "${pergunta}", opcoes: ${opcoes}, resposta: ${q.resposta}${explicacoes} }`;
+      })
+      .join(",\n");
+
+    const newContent =
+      content.substring(0, insertPoint) +
+      "  // PERGUNTAS GERADAS POR IA (" + new Date().toLocaleDateString("pt-BR") + ")\n" +
+      questionsCode +
+      ",\n\n" +
+      content.substring(insertPoint);
+
+    fs.writeFileSync(bankPath, newContent, "utf-8");
+
+    return res.status(200).json({
+      success: true,
+      saved: questions.length,
+      message: "Perguntas salvas com sucesso em question-bank.js",
+    });
+  } catch (error) {
+    console.error("Erro ao salvar perguntas:", error);
+    return res.status(500).json({
+      error: "Falha ao salvar perguntas",
       details: error.message,
     });
   }
