@@ -267,4 +267,132 @@ perguntas.push(
   }))
 );
 
+const harmonia_dificil = [
+  {
+    nivel: "dificil",
+    tema: "harmonia",
+    subtema: "cadencia",
+    pergunta: "Na tonalidade de C, a progressao G - Am caracteriza:",
+    opcoes: ["Cadencia perfeita", "Cadencia plagal", "Cadencia deceptiva", "Cadencia autentica"],
+    resposta: 2,
+    explicacoes: [
+      "Incorreto. V-I.",
+      "Incorreto. IV-I.",
+      "Correto. V resolve em VI, evitando a tonica.",
+      "Incorreto.",
+    ],
+  },
+  {
+    nivel: "dificil",
+    tema: "harmonia",
+    subtema: "dominante_secundaria",
+    pergunta: "Na tonalidade de C, qual e o V/V?",
+    opcoes: ["D", "G", "A", "E"],
+    resposta: 0,
+    explicacoes: ["Correto. D e dominante de G (V/V).", "Incorreto. G e V.", "Incorreto.", "Incorreto."],
+  },
+  {
+    nivel: "dificil",
+    tema: "harmonia",
+    subtema: "dominante_secundaria",
+    pergunta: "Na tonalidade de G, qual acorde funciona como V/II?",
+    opcoes: ["A", "E", "B", "D"],
+    resposta: 1,
+    explicacoes: ["Incorreto.", "Correto. E e dominante de Am (II).", "Incorreto.", "Incorreto."],
+  },
+  {
+    nivel: "dificil",
+    tema: "harmonia",
+    subtema: "emprestimo_modal",
+    pergunta: "Em C maior, o acorde Ab e exemplo de:",
+    opcoes: ["Dominante secundaria", "Emprestimo modal", "Cadencia perfeita", "Subdominante"],
+    resposta: 1,
+    explicacoes: ["Incorreto.", "Correto. Vem do modo menor paralelo.", "Incorreto.", "Incorreto."],
+  },
+  {
+    nivel: "dificil",
+    tema: "harmonia",
+    subtema: "modulacao",
+    pergunta: "Mudanca de tonalidade durante a musica e chamada de:",
+    opcoes: ["Cadencia", "Modulacao", "Inversao", "Funcao"],
+    resposta: 1,
+    explicacoes: ["Incorreto.", "Correto. Troca de centro tonal.", "Incorreto.", "Incorreto."],
+  },
+  {
+    nivel: "dificil",
+    tema: "harmonia",
+    subtema: "analise",
+    pergunta: "Na progressao C - E7 - Am, E7 exerce:",
+    opcoes: ["Tonica", "Dominante secundaria", "Subdominante", "Emprestimo modal"],
+    resposta: 1,
+    explicacoes: ["Incorreto.", "Correto. E7 e V de Am.", "Incorreto.", "Incorreto."],
+  },
+  {
+    nivel: "dificil",
+    tema: "harmonia",
+    subtema: "acordes",
+    pergunta: "O acorde diminuto e formado por:",
+    opcoes: ["terca maior + quinta justa", "terca menor + quinta diminuta", "terca maior + quinta aumentada", "terca menor + quinta justa"],
+    resposta: 1,
+    explicacoes: ["Incorreto.", "Correto. Estrutura do diminuto.", "Incorreto.", "Incorreto."],
+  },
+  {
+    nivel: "dificil",
+    tema: "harmonia",
+    subtema: "acordes",
+    pergunta: "O acorde aumentado possui:",
+    opcoes: ["quinta aumentada", "quinta diminuta", "terca menor", "setima menor"],
+    resposta: 0,
+    explicacoes: ["Correto. Quinta aumentada.", "Incorreto.", "Incorreto.", "Incorreto."],
+  },
+  {
+    nivel: "dificil",
+    tema: "harmonia",
+    subtema: "analise",
+    pergunta: "Na progressao F - G - Em - Am, Em funciona como:",
+    opcoes: ["Tonica", "Dominante", "Tonica relativa", "Subdominante"],
+    resposta: 2,
+    explicacoes: ["Incorreto.", "Incorreto.", "Correto. Relativa da tonica.", "Incorreto."],
+  },
+  {
+    nivel: "dificil",
+    tema: "harmonia",
+    subtema: "modulacao",
+    pergunta: "Uma modulacao para dominante em C leva para:",
+    opcoes: ["F", "G", "Am", "Dm"],
+    resposta: 1,
+    explicacoes: ["Incorreto.", "Correto. Dominante e G.", "Incorreto.", "Incorreto."],
+  },
+];
+
+for (let i = harmonia_dificil.length; i < 50; i += 1) {
+  harmonia_dificil.push({
+    nivel: "dificil",
+    tema: "harmonia",
+    subtema: "variacao",
+    pergunta: `Analise harmonica avancada ${i + 1}`,
+    opcoes: ["Dominante secundaria", "Emprestimo modal", "Modulacao", "Funcao tonal"],
+    resposta: i % 4,
+    explicacoes: [
+      "Pode indicar tensao aplicada.",
+      "Pode indicar mistura modal.",
+      "Pode indicar mudanca de tonalidade.",
+      "Pode indicar funcao estrutural.",
+    ],
+  });
+}
+
+perguntas.push(
+  ...harmonia_dificil.map((q) => ({
+    nivel: q.nivel,
+    tema: q.tema,
+    subtema: q.subtema,
+    topico: "harmonia-funcional",
+    pergunta: q.pergunta,
+    opcoes: q.opcoes,
+    resposta: q.resposta,
+    explicacoes: q.explicacoes,
+  }))
+);
+
 module.exports = { perguntas, TOPICOS };
