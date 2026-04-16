@@ -432,19 +432,18 @@ function normalizeQuestion(question) {
 
 async function loadQuestions(level) {
   try {
-    const roundSize = LEVEL_META[level].roundSize;
-    const topic = state.activeTopic || null;
     const seenIds = Array.from(getSeenSet(level)).join(",");
-    const topicParam = topic ? `&topic=${encodeURIComponent(topic)}` : "";
+    const topicParam = state.activeTopic ? `&topic=${encodeURIComponent(state.activeTopic)}` : "";
     const data = await apiFetch(
-      `/api/questions?level=${level}&limit=${roundSize}&excludeIds=${encodeURIComponent(seenIds)}${topicParam}`
+      `/api/questions?level=${level}&limit=${LEVEL_META[level].roundSize}&excludeIds=${encodeURIComponent(seenIds)}${topicParam}`
     );
 
     if (!Array.isArray(data.questions) || !data.questions.length) {
+      // Quando o pool esgota, reinicia as vistas desse nivel+topico.
       getSeenSet(level).clear();
       clearSeenIds(level);
       const retryData = await apiFetch(
-        `/api/questions?level=${level}&limit=${roundSize}${topicParam}`
+        `/api/questions?level=${level}&limit=${LEVEL_META[level].roundSize}${topicParam}`
       );
 
       if (!Array.isArray(retryData.questions) || !retryData.questions.length) {
@@ -457,7 +456,8 @@ async function loadQuestions(level) {
     return data.questions.map(normalizeQuestion);
   } catch (_error) {
     const fallback = fallbackQuestions[level] || fallbackQuestions.facil;
-    return fallback.map((q) => normalizeQuestion(q)).sort(() => Math.random() - 0.5);
+    const copied = fallback.map((q) => normalizeQuestion(q));
+    return copied.sort(() => Math.random() - 0.5);
   }
 }
 
@@ -738,6 +738,7 @@ function wireEvents() {
 }
 
 async function bootstrap() {
+  const sessionUser = getSessionUser();
 
   if (!sessionUser?.nickname) {
     window.location.href = "/auth.html";

@@ -906,12 +906,3 @@ button:hover {
     justify-content: center;
   }
 }
-
-/* ===========================
-   Header tools
-=========================== */
-.mobile-header-tools {
-  display: flex;
-  align-items: center;
-  justify-content: flex-start;
-}
