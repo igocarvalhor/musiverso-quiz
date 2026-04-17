@@ -569,6 +569,10 @@ app.get("/api/questions", async (req, res) => {
       return {
         id: item.id,
         level: variedItem.nivel,
+        nivel: variedItem.nivel,
+        tema: variedItem.tema || null,
+        subtema: variedItem.subtema || null,
+        topico: variedItem.topico || null,
         question: variedItem.pergunta,
         options: shuffledQuestion.options,
         correct_option: shuffledQuestion.correctOption,

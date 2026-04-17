@@ -417,6 +417,10 @@ function getSeenSet(level) {
 function normalizeQuestion(question) {
   return {
     id: question.id || Math.random().toString(36).slice(2),
+    level: question.level || question.nivel,
+    tema: question.tema || null,
+    subtema: question.subtema || null,
+    topico: question.topico || null,
     question: question.question || question.question_text || question.pergunta,
     options: question.options || question.opcoes,
     correctOption:
@@ -428,6 +432,34 @@ function normalizeQuestion(question) {
     explanation: question.explanation || "",
     explicacoes: question.explicacoes || [],
   };
+}
+
+async function getAutoCorrectionFeedback(question, selectedIndex) {
+  const respostaUsuario = question?.options?.[selectedIndex];
+  const respostaCorreta = question?.options?.[question.correctOption];
+
+  if (!respostaUsuario || !respostaCorreta) {
+    return null;
+  }
+
+  const payload = {
+    pergunta: question.question,
+    resposta_correta: respostaCorreta,
+    resposta_usuario: respostaUsuario,
+    nivel: question.level || state.activeLevel,
+    tema: question.tema || (question.topico && question.topico.includes("harmonia") ? "harmonia" : null),
+    subtema: question.subtema || null,
+  };
+
+  try {
+    return await apiFetch("/api/v1/corrigir-resposta", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(payload),
+    });
+  } catch (_error) {
+    return null;
+  }
 }
 
 async function loadQuestions(level) {
@@ -487,7 +519,7 @@ function renderCurrentQuestion() {
   startQuestionTimer();
 }
 
-function handleAnswer(selectedIndex) {
+async function handleAnswer(selectedIndex) {
   const question = state.questions[state.questionIndex];
   if (!question || state.hasAnsweredCurrent) {
     return;
@@ -506,6 +538,7 @@ function handleAnswer(selectedIndex) {
 
   const isCorrect = selectedIndex === question.correctOption;
   const bonus = Math.min(state.streak * 2, 10);
+  const aiFeedback = await getAutoCorrectionFeedback(question, selectedIndex);
 
   if (isCorrect) {
     const gained = LEVEL_META[state.activeLevel].basePoints + bonus;
@@ -515,19 +548,19 @@ function handleAnswer(selectedIndex) {
     state.streak += 1;
     state.roundBestStreak = Math.max(state.roundBestStreak, state.streak);
     buttons[selectedIndex].classList.add("correct");
-    
-    // Usar explicação específica se disponível
-    const feedback = state.currentQuestionExplicacoes[selectedIndex] || `Acertou! +${gained} pontos`;
+
+    const feedback = aiFeedback?.explicacao
+      || state.currentQuestionExplicacoes[selectedIndex]
+      || "Acertou!";
     setFeedback(`${feedback} +${gained} pontos`, "ok");
   } else {
     state.streak = 0;
     buttons[selectedIndex].classList.add("wrong");
     buttons[question.correctOption].classList.add("correct");
-    
-    // Usar explicação específica se disponível
+
     const userFeedback = state.currentQuestionExplicacoes[selectedIndex] || "Ops! A resposta certa era destacada.";
     const correctFeedback = state.currentQuestionExplicacoes[question.correctOption] || "Esta era a resposta correta.";
-    const finalMessage = `${userFeedback}\n${correctFeedback}`;
+    const finalMessage = aiFeedback?.explicacao || `${userFeedback}\n${correctFeedback}`;
     setFeedback(finalMessage, "error");
   }
 
