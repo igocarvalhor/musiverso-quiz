@@ -7,6 +7,10 @@ const bcrypt = require("bcryptjs");
 const { createClient } = require("@supabase/supabase-js");
 const { perguntas, TOPICOS } = require("./question-bank");
 
+// ─── Rotas /api/v1 ───────────────────────────────────────────────────────────
+const analisarRoute = require("./routes/analisar");
+const quizRoute = require("./routes/quiz");
+
 const app = express();
 const PORT = Number(process.env.PORT) || 3000;
 
@@ -574,6 +578,53 @@ app.post("/api/submit-score", async (req, res) => {
     });
   }
 });
+
+// ─── /api/v1 ─────────────────────────────────────────────────────────────────
+const apiV1 = express.Router();
+apiV1.use("/analisar", analisarRoute);
+apiV1.use("/", quizRoute); // gerar-questao + detectar-tonalidade
+apiV1.get("/ranking", async (req, res) => {
+  if (!supabase) {
+    return res.status(503).json({ error: "Supabase nao configurado" });
+  }
+  try {
+    const requestedLimit = Math.min(Math.max(Number(req.query.limit) || 10, 1), 30);
+    const { data, error } = await supabase
+      .from("leaderboard_overall")
+      .select("player_name,total_score")
+      .order("total_score", { ascending: false })
+      .limit(requestedLimit);
+    if (error) throw error;
+    return res.json((data || []).map((r) => ({ nome: r.player_name, pontuacao: r.total_score })));
+  } catch (err) {
+    return res.status(500).json({ error: "Falha ao carregar ranking", details: err.message });
+  }
+});
+apiV1.post("/resultado", async (req, res) => {
+  if (!supabase) {
+    return res.status(503).json({ error: "Supabase nao configurado" });
+  }
+  try {
+    const { user_id, pontuacao, nivel } = req.body || {};
+    if (!user_id) return res.status(400).json({ error: "user_id obrigatório" });
+    const safeScore = Math.max(Number(pontuacao) || 0, 0);
+    const safeLevel = resolveLevel(nivel || "facil");
+    const { error } = await supabase.from("game_sessions").insert({
+      player_id: user_id,
+      score: safeScore,
+      level: toDbLevel(safeLevel),
+      total_questions: 0,
+      correct_answers: 0,
+      best_streak: 0,
+    });
+    if (error) throw error;
+    const progress = await upsertProgress(user_id, safeScore);
+    return res.status(201).json({ ok: true, progress });
+  } catch (err) {
+    return res.status(500).json({ error: "Falha ao salvar resultado", details: err.message });
+  }
+});
+app.use("/api/v1", apiV1);
 
 app.get("*", (_req, res) => {
   res.sendFile(path.join(__dirname, "index.html"));
