@@ -98,6 +98,92 @@ function shuffleList(list) {
   return [...list].sort(() => Math.random() - 0.5);
 }
 
+const NOTE_SCALE_SHARP = ["C", "C#", "D", "D#", "E", "F", "F#", "G", "G#", "A", "A#", "B"];
+const NOTE_FLAT_TO_SHARP = {
+  Cb: "B",
+  Db: "C#",
+  Eb: "D#",
+  Fb: "E",
+  Gb: "F#",
+  Ab: "G#",
+  Bb: "A#",
+};
+const TONAL_CENTER_POOL = ["C", "C#", "D", "D#", "E", "F", "F#", "G", "G#", "A", "A#", "B"];
+
+function normalizeNoteName(note) {
+  const safe = String(note || "").trim();
+  return NOTE_FLAT_TO_SHARP[safe] || safe;
+}
+
+function noteIndex(note) {
+  return NOTE_SCALE_SHARP.indexOf(normalizeNoteName(note));
+}
+
+function transposeNote(note, semitoneShift) {
+  const sourceIndex = noteIndex(note);
+  if (sourceIndex === -1) {
+    return note;
+  }
+
+  const next = (sourceIndex + semitoneShift + 12) % 12;
+  return NOTE_SCALE_SHARP[next];
+}
+
+function transposeMusicText(value, semitoneShift) {
+  if (typeof value !== "string" || !value) {
+    return value;
+  }
+
+  return value.replace(/\b([A-G](?:#|b)?)(m)?\b/g, (_match, noteName, minorMarker = "") => {
+    const transposed = transposeNote(noteName, semitoneShift);
+    return `${transposed}${minorMarker}`;
+  });
+}
+
+function extractQuestionTonic(questionText) {
+  if (typeof questionText !== "string") {
+    return null;
+  }
+
+  const match = questionText.match(/tonalidade\s+de\s+([A-G](?:#|b)?)/i);
+  return match ? normalizeNoteName(match[1]) : null;
+}
+
+function applyTonalVariation(questionItem, preferredTargetTonic = null) {
+  const sourceTonic = extractQuestionTonic(questionItem?.pergunta);
+  if (!sourceTonic) {
+    return questionItem;
+  }
+
+  const sourceIndex = noteIndex(sourceTonic);
+  if (sourceIndex === -1) {
+    return questionItem;
+  }
+
+  let targetTonic = preferredTargetTonic;
+  if (!targetTonic || targetTonic === sourceTonic) {
+    const candidates = TONAL_CENTER_POOL.filter((item) => item !== sourceTonic);
+    targetTonic = candidates[Math.floor(Math.random() * candidates.length)] || sourceTonic;
+  }
+
+  const shift = (noteIndex(targetTonic) - sourceIndex + 12) % 12;
+
+  if (shift === 0) {
+    return questionItem;
+  }
+
+  return {
+    ...questionItem,
+    pergunta: transposeMusicText(questionItem.pergunta, shift),
+    opcoes: Array.isArray(questionItem.opcoes)
+      ? questionItem.opcoes.map((opt) => transposeMusicText(opt, shift))
+      : questionItem.opcoes,
+    explicacoes: Array.isArray(questionItem.explicacoes)
+      ? questionItem.explicacoes.map((line) => transposeMusicText(line, shift))
+      : questionItem.explicacoes,
+  };
+}
+
 function normalizeQuestionKey(text) {
   return String(text || "")
     .normalize("NFD")
@@ -467,13 +553,23 @@ app.get("/api/questions", async (req, res) => {
 
     const selectedQuestions = pickUniqueQuestionsByText(questionsFromLevel, limit);
 
+    const shuffledTonalPool = shuffleList(TONAL_CENTER_POOL);
+    let tonalPoolIndex = 0;
+
     const publicQuestions = selectedQuestions.map((item) => {
-      const shuffledQuestion = shuffleOptionsWithCorrectIndex(item.opcoes, item.resposta, item.explicacoes);
+      const shouldVaryTone = item.topico === "harmonia-funcional" && typeof item.pergunta === "string";
+      const preferredTone = shouldVaryTone ? shuffledTonalPool[tonalPoolIndex % shuffledTonalPool.length] : null;
+      if (shouldVaryTone) {
+        tonalPoolIndex += 1;
+      }
+
+      const variedItem = shouldVaryTone ? applyTonalVariation(item, preferredTone) : item;
+      const shuffledQuestion = shuffleOptionsWithCorrectIndex(variedItem.opcoes, variedItem.resposta, variedItem.explicacoes);
 
       return {
         id: item.id,
-        level: item.nivel,
-        question: item.pergunta,
+        level: variedItem.nivel,
+        question: variedItem.pergunta,
         options: shuffledQuestion.options,
         correct_option: shuffledQuestion.correctOption,
         explanation: "",
