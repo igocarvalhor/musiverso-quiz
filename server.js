@@ -98,6 +98,36 @@ function shuffleList(list) {
   return [...list].sort(() => Math.random() - 0.5);
 }
 
+function normalizeQuestionKey(text) {
+  return String(text || "")
+    .normalize("NFD")
+    .replace(/[\u0300-\u036f]/g, "")
+    .replace(/\s+/g, " ")
+    .trim()
+    .toLowerCase();
+}
+
+function pickUniqueQuestionsByText(list, limit) {
+  const picked = [];
+  const seenQuestionKeys = new Set();
+
+  for (const item of shuffleList(list)) {
+    const key = normalizeQuestionKey(item.pergunta);
+    if (!key || seenQuestionKeys.has(key)) {
+      continue;
+    }
+
+    seenQuestionKeys.add(key);
+    picked.push(item);
+
+    if (picked.length >= limit) {
+      break;
+    }
+  }
+
+  return picked;
+}
+
 function shuffleOptionsWithCorrectIndex(options, correctOption, explicacoes = null) {
   const pairs = options.map((text, index) => ({
     text,
@@ -435,7 +465,7 @@ app.get("/api/questions", async (req, res) => {
       .filter((item) => !topicFilter || item.topico === topicFilter)
       .filter((item) => !excludeSet.has(String(item.id)));
 
-    const selectedQuestions = shuffleList(questionsFromLevel).slice(0, limit);
+    const selectedQuestions = pickUniqueQuestionsByText(questionsFromLevel, limit);
 
     const publicQuestions = selectedQuestions.map((item) => {
       const shuffledQuestion = shuffleOptionsWithCorrectIndex(item.opcoes, item.resposta, item.explicacoes);
