@@ -91,9 +91,9 @@ const perguntas = [
   { nivel: "dificil", topico: "harmonia-funcional", pergunta: "Qual grau geralmente exerce funcao dominante secundaria?", opcoes: ["V/V", "I", "IV", "VI"], resposta: 0, explicacoes: ["Correto. V/V e o dominante da dominante.", "Incorreto. I nao cria tensao.", "Incorreto. IV e subdominante.", "Incorreto. VI e relativa."] },
 
   // HISTORIA DA MUSICA — FACIL
-  { nivel: "facil", topico: "historia-da-musica", pergunta: "A musica na Idade Media ficou conhecida por: [REVISAR]", opcoes: ["Desenvolvimento da polifonia", "Uso exclusivo de instrumentos eletricos", "Apenas canto solo", "Ausencia de organizacao musical"], resposta: 0 },
+  { nivel: "facil", topico: "historia-da-musica", pergunta: "A musica na Idade Media ficou conhecida principalmente por:", opcoes: ["Desenvolvimento da polifonia", "Uso exclusivo de instrumentos eletricos", "Apenas canto solo", "Ausencia de organizacao musical"], resposta: 0 },
   { nivel: "facil", topico: "historia-da-musica", pergunta: "Quem foi Perotin (Perotinus)?", opcoes: ["Compositor da Idade Media ligado a polifonia de Notre-Dame", "Compositor do periodo classico", "Musico do jazz moderno", "Cantor popular contemporaneo"], resposta: 0 },
-  { nivel: "facil", topico: "historia-da-musica", pergunta: "Quem foi [REVISAR - inserir nome]? (Compositor medieval que desenvolveu a polifonia)", opcoes: ["Compositor barroco", "Compositor medieval que desenvolveu a polifonia", "Compositor romantico", "Teorico moderno"], resposta: 1 },
+  { nivel: "facil", topico: "historia-da-musica", pergunta: "Quem foi Leonin (Leoninus)?", opcoes: ["Compositor barroco", "Compositor medieval associado ao desenvolvimento inicial da polifonia na Escola de Notre-Dame", "Compositor romantico", "Teorico moderno"], resposta: 1 },
   { nivel: "facil", topico: "historia-da-musica", pergunta: "O que e organum?", opcoes: ["Forma inicial de polifonia", "Instrumento de corda", "Ritmo moderno", "Escala musical"], resposta: 0 },
 
   // HISTORIA DA MUSICA — MEDIO
@@ -104,7 +104,7 @@ const perguntas = [
 
   // HISTORIA DA MUSICA — DIFICIL
   { nivel: "dificil", topico: "historia-da-musica", pergunta: "A Escola de Notre-Dame contribuiu principalmente para:", opcoes: ["Desenvolvimento da musica eletronica", "Evolucao da polifonia organizada", "Criacao da sinfonia", "Desenvolvimento do jazz"], resposta: 1 },
-  { nivel: "dificil", topico: "historia-da-musica", pergunta: "Qual inovacao esta ligada a [REVISAR - inserir nome]?", opcoes: ["Uso de acordes modernos", "Ampliacao da polifonia para multiplas vozes", "Criacao da tonalidade maior", "Uso de instrumentos eletricos"], resposta: 1 },
+  { nivel: "dificil", topico: "historia-da-musica", pergunta: "Qual inovacao esta ligada a Perotin (Perotinus)?", opcoes: ["Uso de acordes modernos", "Ampliacao da polifonia para multiplas vozes na Escola de Notre-Dame", "Criacao da tonalidade maior", "Uso de instrumentos eletricos"], resposta: 1 },
   { nivel: "dificil", topico: "historia-da-musica", pergunta: "O moteto medieval se caracteriza por:", opcoes: ["Uso de uma unica voz", "Uso de varias vozes com textos diferentes", "Apenas instrumentos", "Ausencia de ritmo"], resposta: 1 },
   { nivel: "dificil", topico: "historia-da-musica", pergunta: "Qual compositor esta associado ao impressionismo musical?", opcoes: ["Bach", "Beethoven", "Debussy", "Mozart"], resposta: 2 },
   { nivel: "dificil", topico: "historia-da-musica", pergunta: "Qual caracteristica define o periodo Barroco?", opcoes: ["Uso de polifonia complexa e baixo continuo", "Ausencia de harmonia", "Uso apenas de voz solo", "Musica sem estrutura"], resposta: 0 },
