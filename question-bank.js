@@ -98,10 +98,8 @@ const perguntas = [
 
   // HISTORIA DA MUSICA — MEDIO
   { nivel: "medio", topico: "historia-da-musica", pergunta: "Qual compositor esta associado a obra 'O Cravo Bem Temperado'?", opcoes: ["Mozart", "Bach", "Beethoven", "Chopin"], resposta: 1 },
-  { nivel: "medio", topico: "historia-da-musica", pergunta: "Quem compos a 9a Sinfonia?", opcoes: ["Bach", "Mozart", "Beethoven", "Debussy"], resposta: 2 },
   { nivel: "medio", topico: "historia-da-musica", pergunta: "Qual compositor e conhecido pela opera 'A Flauta Magica'?", opcoes: ["Verdi", "Mozart", "Puccini", "Wagner"], resposta: 1 },
   { nivel: "medio", topico: "historia-da-musica", pergunta: "Qual compositor e associado ao periodo Romantico?", opcoes: ["Bach", "Mozart", "Chopin", "Palestrina"], resposta: 2 },
-  { nivel: "medio", topico: "historia-da-musica", pergunta: "Qual compositor pertence ao Renascimento?", opcoes: ["Bach", "Palestrina", "Beethoven", "Debussy"], resposta: 1 },
   { nivel: "medio", topico: "historia-da-musica", pergunta: "Qual forma musical era comum na Idade Media?", opcoes: ["Sinfonia", "Moteto", "Sonata", "Concerto"], resposta: 1 },
 
   // HISTORIA DA MUSICA — DIFICIL
@@ -112,26 +110,12 @@ const perguntas = [
   { nivel: "dificil", topico: "historia-da-musica", pergunta: "Qual caracteristica define o periodo Barroco?", opcoes: ["Uso de polifonia complexa e baixo continuo", "Ausencia de harmonia", "Uso apenas de voz solo", "Musica sem estrutura"], resposta: 0 },
   { nivel: "dificil", topico: "historia-da-musica", pergunta: "Qual obra e um exemplo de fuga barroca?", opcoes: ["Sinfonia no 5", "O Cravo Bem Temperado", "Clair de Lune", "Ave Maria moderna"], resposta: 1 },
 
-  // HARMONIA FUNCIONAL COM EXPLICACOES (FEEDBACK DETALHADO)
-  { nivel: "facil", topico: "harmonia-funcional", pergunta: "O que e funcao harmonica?", opcoes: ["Funcao que define a intensidade da musica", "Funcao que define o papel do acorde na tonalidade", "Funcao que define a velocidade", "Funcao que define o timbre"], resposta: 1, explicacoes: ["Incorreto. Intensidade e dinamica.", "Correto. Define o papel do acorde na tonalidade (T, SD, D).", "Incorreto. Velocidade e andamento.", "Incorreto. Timbre e cor sonora."] },
-  { nivel: "facil", topico: "harmonia-funcional", pergunta: "Na progressao C - F - G - C, qual acorde exerce funcao dominante?", opcoes: ["F", "Am", "G", "C"], resposta: 2, explicacoes: ["Incorreto. F e subdominante.", "Incorreto. Am nem aparece.", "Correto. G e V grau e cria tensao antes da resolucao.", "Incorreto. C e tonica."] },
-  { nivel: "medio", topico: "harmonia-funcional", pergunta: "Na progressao Dm - G - C, a sequencia funcional correta e:", opcoes: ["Tonica - Dominante - Tonica", "Subdominante - Dominante - Tonica", "Dominante - Tonica - Subdominante", "Tonica - Subdominante - Dominante"], resposta: 1, explicacoes: ["Incorreto. Dm nao e tonica.", "Correto. II (SD) -> V (D) -> I (T), progressao classica.", "Incorreto. Ordem funcional errada.", "Incorreto. Nao resolve corretamente."] },
-  { nivel: "medio", topico: "harmonia-funcional", pergunta: "Na progressao C - Am - Dm - G, o acorde Am exerce:", opcoes: ["Dominante", "Subdominante", "Tonica relativa", "Sensivel"], resposta: 2, explicacoes: ["Incorreto. Nao cria tensao.", "Incorreto. Nao e preparacao direta.", "Correto. VI grau funciona como tonica relativa.", "Incorreto. Sensivel e VII."] },
-  { nivel: "dificil", topico: "harmonia-funcional", pergunta: "Na progressao G - Am, ocorre:", opcoes: ["Cadencia perfeita", "Resolucao plagal", "Cadencia deceptiva", "Modulacao direta"], resposta: 2, explicacoes: ["Incorreto. Nao resolve na tonica.", "Incorreto. Nao e IV-I.", "Correto. V resolve no VI, caracterizando cadencia deceptiva.", "Incorreto. Nao ha modulacao."] },
-
   // HISTORIA DA MUSICA COM EXPLICACOES (FEEDBACK DETALHADO)
   { nivel: "facil", topico: "historia-da-musica", pergunta: "Em qual periodo surgiu o canto gregoriano?", opcoes: ["Renascimento", "Idade Media", "Barroco", "Classico"], resposta: 1, explicacoes: ["Incorreto. Veio depois.", "Correto. Musica medieval religiosa.", "Incorreto. Posterior.", "Incorreto. Posterior."] },
   { nivel: "facil", topico: "historia-da-musica", pergunta: "A musica na Catedral de Notre-Dame ficou conhecida por:", opcoes: ["Polifonia", "Musica eletronica", "Monodia moderna", "Ausencia de estrutura"], resposta: 0, explicacoes: ["Correto. Desenvolvimento da polifonia.", "Incorreto. Seculo XX.", "Incorreto. Nao corresponde.", "Incorreto. Musica organizada."] },
   { nivel: "medio", topico: "historia-da-musica", pergunta: "Quem compos a 9a Sinfonia?", opcoes: ["Bach", "Mozart", "Beethoven", "Debussy"], resposta: 2, explicacoes: ["Incorreto. Barroco.", "Incorreto. Nao foi ele.", "Correto. Beethoven.", "Incorreto. Impressionismo."] },
   { nivel: "medio", topico: "historia-da-musica", pergunta: "Qual compositor pertence ao Renascimento?", opcoes: ["Bach", "Palestrina", "Beethoven", "Debussy"], resposta: 1, explicacoes: ["Incorreto. Barroco.", "Correto. Renascimento.", "Incorreto. Classico/Romantico.", "Incorreto. Moderno."] },
   { nivel: "dificil", topico: "historia-da-musica", pergunta: "A Escola de Notre-Dame contribuiu para:", opcoes: ["Musica eletronica", "Evolucao da polifonia", "Sinfonia", "Jazz"], resposta: 1, explicacoes: ["Incorreto. Seculo XX.", "Correto. Polifonia organizada.", "Incorreto. Periodo classico.", "Incorreto. Seculo XX."] },
-
-  // HARMONIA FUNCIONAL COM EXPLICACOES DETALHADAS (NOVO PADRÃO)
-  { nivel: "facil", topico: "harmonia-funcional", pergunta: "O que e funcao harmonica?", opcoes: ["Funcao que define a intensidade da musica", "Funcao que define o papel do acorde na tonalidade", "Funcao que define a velocidade", "Funcao que define o timbre"], resposta: 1, explicacoes: ["Incorreto. Intensidade e dinamica.", "Correto. Define o papel do acorde na tonalidade (T, SD, D).", "Incorreto. Velocidade e andamento.", "Incorreto. Timbre e cor sonora."] },
-  { nivel: "facil", topico: "harmonia-funcional", pergunta: "Na progressao C - F - G - C, qual acorde exerce funcao dominante?", opcoes: ["F", "Am", "G", "C"], resposta: 2, explicacoes: ["Incorreto. F e subdominante.", "Incorreto. Am nem aparece.", "Correto. G e V grau e cria tensao antes da resolucao.", "Incorreto. C e tonica."] },
-  { nivel: "medio", topico: "harmonia-funcional", pergunta: "Na progressao Dm - G - C, a sequencia funcional correta e:", opcoes: ["Tonica - Dominante - Tonica", "Subdominante - Dominante - Tonica", "Dominante - Tonica - Subdominante", "Tonica - Subdominante - Dominante"], resposta: 1, explicacoes: ["Incorreto. Dm nao e tonica.", "Correto. II (SD) -> V (D) -> I (T), progressao classica.", "Incorreto. Ordem funcional errada.", "Incorreto. Nao resolve corretamente."] },
-  { nivel: "medio", topico: "harmonia-funcional", pergunta: "Na progressao C - Am - Dm - G, o acorde Am exerce:", opcoes: ["Dominante", "Subdominante", "Tonica relativa", "Sensivel"], resposta: 2, explicacoes: ["Incorreto. Nao cria tensao.", "Incorreto. Nao e preparacao direta.", "Correto. VI grau funciona como tonica relativa.", "Incorreto. Sensivel e VII."] },
-  { nivel: "dificil", topico: "harmonia-funcional", pergunta: "Na progressao G - Am, ocorre:", opcoes: ["Cadencia perfeita", "Resolucao plagal", "Cadencia deceptiva", "Modulacao direta"], resposta: 2, explicacoes: ["Incorreto. Nao resolve na tonica.", "Incorreto. Nao e IV-I.", "Correto. V resolve no VI, caracterizando cadencia deceptiva.", "Incorreto. Nao ha modulacao."] },
 ];
 
 const harmonia_medio = [
