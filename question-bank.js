@@ -92,7 +92,7 @@ const perguntas = [
 
   // HISTORIA DA MUSICA — FACIL
   { nivel: "facil", topico: "historia-da-musica", pergunta: "A musica na Idade Media ficou conhecida por: [REVISAR]", opcoes: ["Desenvolvimento da polifonia", "Uso exclusivo de instrumentos eletricos", "Apenas canto solo", "Ausencia de organizacao musical"], resposta: 0 },
-  { nivel: "facil", topico: "historia-da-musica", pergunta: "Quem foi [REVISAR - inserir nome]? (Compositor da Idade Media ligado a polifonia)", opcoes: ["Compositor da Idade Media ligado a polifonia", "Compositor do periodo classico", "Musico do jazz moderno", "Cantor popular contemporaneo"], resposta: 0 },
+  { nivel: "facil", topico: "historia-da-musica", pergunta: "Quem foi Perotin (Perotinus)?", opcoes: ["Compositor da Idade Media ligado a polifonia de Notre-Dame", "Compositor do periodo classico", "Musico do jazz moderno", "Cantor popular contemporaneo"], resposta: 0 },
   { nivel: "facil", topico: "historia-da-musica", pergunta: "Quem foi [REVISAR - inserir nome]? (Compositor medieval que desenvolveu a polifonia)", opcoes: ["Compositor barroco", "Compositor medieval que desenvolveu a polifonia", "Compositor romantico", "Teorico moderno"], resposta: 1 },
   { nivel: "facil", topico: "historia-da-musica", pergunta: "O que e organum?", opcoes: ["Forma inicial de polifonia", "Instrumento de corda", "Ritmo moderno", "Escala musical"], resposta: 0 },
 
