@@ -443,9 +443,13 @@ async function getAutoCorrectionFeedback(question, selectedIndex) {
   }
 
   const payload = {
+    question_id: question.id,
     pergunta: question.question,
     resposta_correta: respostaCorreta,
     resposta_usuario: respostaUsuario,
+    indice_usuario: selectedIndex,
+    indice_correto: question.correctOption,
+    explicacoes: Array.isArray(question.explicacoes) ? question.explicacoes : [],
     nivel: question.level || state.activeLevel,
     tema: question.tema || (question.topico && question.topico.includes("harmonia") ? "harmonia" : null),
     subtema: question.subtema || null,
@@ -549,7 +553,7 @@ async function handleAnswer(selectedIndex) {
     state.roundBestStreak = Math.max(state.roundBestStreak, state.streak);
     buttons[selectedIndex].classList.add("correct");
 
-    const feedback = aiFeedback?.explicacao
+    const feedback = (aiFeedback?.fonte === "banco" ? aiFeedback.explicacao : null)
       || state.currentQuestionExplicacoes[selectedIndex]
       || "Acertou!";
     setFeedback(`${feedback} +${gained} pontos`, "ok");
@@ -560,7 +564,8 @@ async function handleAnswer(selectedIndex) {
 
     const userFeedback = state.currentQuestionExplicacoes[selectedIndex] || "Ops! A resposta certa era destacada.";
     const correctFeedback = state.currentQuestionExplicacoes[question.correctOption] || "Esta era a resposta correta.";
-    const finalMessage = aiFeedback?.explicacao || `${userFeedback}\n${correctFeedback}`;
+    const finalMessage = (aiFeedback?.fonte === "banco" ? aiFeedback.explicacao : null)
+      || `${userFeedback}\n${correctFeedback}`;
     setFeedback(finalMessage, "error");
   }
 

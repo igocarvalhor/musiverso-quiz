@@ -200,6 +200,10 @@ router.post("/corrigir-resposta", (req, res) => {
   const resposta_correta = String(payload.resposta_correta || "").trim();
   const resposta_usuario = String(payload.resposta_usuario || "").trim();
   const perguntaTexto = String(payload.pergunta || "").trim();
+  const questionId = Number(payload.question_id);
+  const indiceUsuario = Number(payload.indice_usuario);
+  const indiceCorreto = Number(payload.indice_correto);
+  const explicacoesPayload = Array.isArray(payload.explicacoes) ? payload.explicacoes : null;
 
   if (!resposta_correta || !resposta_usuario) {
     return res.status(400).json({
@@ -210,6 +214,73 @@ router.post("/corrigir-resposta", (req, res) => {
   const tipoErro = classificarErro(payload);
   const acertou = tipoErro === "acerto";
   const nivel = normalizarTexto(payload.nivel || "medio");
+
+  // Caminho prioritario: usar indices e explicacoes da questao exibida no frontend.
+  // Isso evita conflitos por perguntas duplicadas, transposicao tonal e match por texto.
+  if (
+    explicacoesPayload &&
+    Number.isInteger(indiceUsuario) &&
+    Number.isInteger(indiceCorreto) &&
+    indiceUsuario >= 0 &&
+    indiceCorreto >= 0 &&
+    indiceUsuario < explicacoesPayload.length &&
+    indiceCorreto < explicacoesPayload.length
+  ) {
+    const explicacaoUsuario = explicacoesPayload[indiceUsuario];
+    const explicacaoCorreta = explicacoesPayload[indiceCorreto];
+
+    if (!acertou && explicacaoUsuario && explicacaoCorreta) {
+      return res.json({
+        acertou,
+        tipo_erro: tipoErro,
+        explicacao: `${explicacaoUsuario}\n\n✓ Correto: ${explicacaoCorreta}`,
+        fonte: "banco",
+      });
+    }
+
+    if (acertou && explicacaoCorreta) {
+      return res.json({
+        acertou,
+        tipo_erro: tipoErro,
+        explicacao: explicacaoCorreta,
+        fonte: "banco",
+      });
+    }
+  }
+
+  // Fallback 1: localizar por ID estavel da questao no banco (id = index + 1 em /api/questions).
+  if (Number.isInteger(questionId) && questionId > 0) {
+    const questaoPorId = perguntas[questionId - 1];
+    if (questaoPorId && Array.isArray(questaoPorId.explicacoes) && questaoPorId.explicacoes.length > 0) {
+      const indexUsuario = questaoPorId.opcoes ? questaoPorId.opcoes.findIndex(
+        (op) => normalizarTexto(op) === normalizarTexto(resposta_usuario)
+      ) : -1;
+      const indexCorreto = questaoPorId.opcoes ? questaoPorId.opcoes.findIndex(
+        (op) => normalizarTexto(op) === normalizarTexto(resposta_correta)
+      ) : -1;
+
+      const explicacaoUsuario = indexUsuario >= 0 ? questaoPorId.explicacoes[indexUsuario] : null;
+      const explicacaoCorreta = indexCorreto >= 0 ? questaoPorId.explicacoes[indexCorreto] : null;
+
+      if (!acertou && explicacaoUsuario && explicacaoCorreta) {
+        return res.json({
+          acertou,
+          tipo_erro: tipoErro,
+          explicacao: `${explicacaoUsuario}\n\n✓ Correto: ${explicacaoCorreta}`,
+          fonte: "banco",
+        });
+      }
+
+      if (acertou && explicacaoCorreta) {
+        return res.json({
+          acertou,
+          tipo_erro: tipoErro,
+          explicacao: explicacaoCorreta,
+          fonte: "banco",
+        });
+      }
+    }
+  }
 
   // Tentar encontrar a pergunta no banco para usar explicacoes especificas
   if (perguntaTexto) {
