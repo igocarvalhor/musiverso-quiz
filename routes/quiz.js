@@ -132,35 +132,22 @@ function gerarExplicacao(resposta) {
   ].join("\n");
 }
 
-function adaptarExplicacao(texto, nivel, padraoErro = null) {
+function adaptarExplicacao(texto, nivel) {
   const safeNivel = normalizarTexto(nivel);
-  
-  let textoAdaptado = texto;
-
-  if (safeNivel === "facil") {
-    // Remover jargao tecnico e simplificar
-    textoAdaptado = texto
-      .replace(/funcao tonal especifica/gi, "papel na musica")
-      .replace(/campo harmonico/gi, "grupo de acordes")
-      .replace(/triton/gi, "intervalo especial")
-      .replace(/hierarquia/gi, "ordem")
-      .replace(/modal/gi, "de escala")
-      .replace(/subdominante/gi, "que prepara")
-      .replace(/dominante/gi, "que cria tensao");
-  }
 
   if (safeNivel === "dificil") {
-    // Adicionar contexto teorico avancado
+    // Adicionar contexto teorico avancado sem destruir o conteudo
     const finais = [
       "\n\nDetalhes avancados:",
       "- Analises funcionais dependem da hierarquia tonal (tonica → subdominante → dominante)",
       "- A conducao de vozes e a inversao do acorde tambem influenciam a percepcao funcional",
       "- Compare a sua resposta com a teoria de Riemann e Schoenberg",
     ];
-    textoAdaptado = texto + "\n" + finais.join("\n");
+    return texto + "\n" + finais.join("\n");
   }
 
-  return textoAdaptado;
+  // Para nivel facil e medio, retorna o texto como eh (ja foi adaptado no objeto errosComuns)
+  return texto;
 }
 
 // POST /api/v1/gerar-questao
@@ -212,6 +199,7 @@ router.post("/corrigir-resposta", (req, res) => {
   const payload = req.body || {};
   const resposta_correta = String(payload.resposta_correta || "").trim();
   const resposta_usuario = String(payload.resposta_usuario || "").trim();
+  const perguntaTexto = String(payload.pergunta || "").trim();
 
   if (!resposta_correta || !resposta_usuario) {
     return res.status(400).json({
@@ -221,12 +209,41 @@ router.post("/corrigir-resposta", (req, res) => {
 
   const tipoErro = classificarErro(payload);
   const acertou = tipoErro === "acerto";
-  const padraoErro = acertou ? null : detectarPadraoErro(resposta_usuario, resposta_correta);
   const nivel = normalizarTexto(payload.nivel || "medio");
 
+  // Tentar encontrar a pergunta no banco para usar explicacoes especificas
+  if (perguntaTexto) {
+    const questao = perguntas.find((q) => normalizarTexto(q.pergunta) === normalizarTexto(perguntaTexto));
+    if (questao && Array.isArray(questao.explicacoes) && questao.explicacoes.length > 0) {
+      const indexUsuario = questao.opcoes ? questao.opcoes.findIndex(
+        (op) => normalizarTexto(op) === normalizarTexto(resposta_usuario)
+      ) : -1;
+      const indexCorreto = questao.opcoes ? questao.opcoes.findIndex(
+        (op) => normalizarTexto(op) === normalizarTexto(resposta_correta)
+      ) : -1;
+
+      const explicacaoUsuario = indexUsuario >= 0 ? questao.explicacoes[indexUsuario] : null;
+      const explicacaoCorreta = indexCorreto >= 0 ? questao.explicacoes[indexCorreto] : null;
+
+      let explicacao = "";
+      if (!acertou && explicacaoUsuario && explicacaoCorreta) {
+        explicacao = `${explicacaoUsuario}\n\n✓ Correto: ${explicacaoCorreta}`;
+      } else if (acertou && explicacaoCorreta) {
+        explicacao = explicacaoCorreta;
+      } else if (explicacaoUsuario) {
+        explicacao = explicacaoUsuario;
+      }
+
+      if (explicacao) {
+        return res.json({ acertou, tipo_erro: tipoErro, explicacao, fonte: "banco" });
+      }
+    }
+  }
+
+  // Fallback: usar padroes comuns ou explicacao generica
+  const padraoErro = acertou ? null : detectarPadraoErro(resposta_usuario, resposta_correta);
   let explicacaoBase = gerarExplicacao(payload);
-  
-  // Se detectou um padrao comum, usar explicacao especializada
+
   if (padraoErro && errosComuns[padraoErro]) {
     const explicacaoEspecializada = errosComuns[padraoErro][nivel] || errosComuns[padraoErro]["medio"];
     explicacaoBase = [
@@ -238,13 +255,14 @@ router.post("/corrigir-resposta", (req, res) => {
     ].join("\n");
   }
 
-  const explicacao = adaptarExplicacao(explicacaoBase, nivel, padraoErro);
+  const explicacao = adaptarExplicacao(explicacaoBase, nivel);
 
   return res.json({
     acertou,
     tipo_erro: tipoErro,
     explicacao,
-    padrao: padraoErro, // Debug: mostrar qual padrao foi detectado
+    padrao: padraoErro,
+    fonte: "ia",
   });
 });
 
