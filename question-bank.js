@@ -1863,4 +1863,1390 @@ const historia_unidades_2 = [
 perguntas.push(...harmonia_extra_2);
 perguntas.push(...historia_unidades_2);
 
+
+const historia_balanceamento = [
+  {
+    "nivel": "facil",
+    "tema": "historia",
+    "subtema": "unidade1",
+    "topico": "historia-da-musica",
+    "pergunta": "Em qual periodo se situa a maior parte do repertorio de canto gregoriano?",
+    "opcoes": [
+      "Renascimento",
+      "Idade Media",
+      "Classico",
+      "Romantico"
+    ],
+    "resposta": 1,
+    "explicacoes": [
+      "Incorreto. Renascimento nao representa a melhor resposta historico-estilistica para este enunciado.",
+      "Correto. Idade Media.",
+      "Incorreto. Classico nao representa a melhor resposta historico-estilistica para este enunciado.",
+      "Incorreto. Romantico nao representa a melhor resposta historico-estilistica para este enunciado."
+    ]
+  },
+  {
+    "nivel": "facil",
+    "tema": "historia",
+    "subtema": "unidade1",
+    "topico": "historia-da-musica",
+    "pergunta": "A Escola de Notre-Dame pertence principalmente a qual contexto historico?",
+    "opcoes": [
+      "Idade Media",
+      "Barroco",
+      "Classico",
+      "Seculo XX"
+    ],
+    "resposta": 0,
+    "explicacoes": [
+      "Correto. Idade Media.",
+      "Incorreto. Barroco nao representa a melhor resposta historico-estilistica para este enunciado.",
+      "Incorreto. Classico nao representa a melhor resposta historico-estilistica para este enunciado.",
+      "Incorreto. Seculo XX nao representa a melhor resposta historico-estilistica para este enunciado."
+    ]
+  },
+  {
+    "nivel": "facil",
+    "tema": "historia",
+    "subtema": "unidade1",
+    "topico": "historia-da-musica",
+    "pergunta": "Qual pratica foi essencial para o surgimento da polifonia medieval?",
+    "opcoes": [
+      "Organum",
+      "Serialismo",
+      "Jazz modal",
+      "Musica concreta"
+    ],
+    "resposta": 0,
+    "explicacoes": [
+      "Correto. Organum.",
+      "Incorreto. Serialismo nao representa a melhor resposta historico-estilistica para este enunciado.",
+      "Incorreto. Jazz modal nao representa a melhor resposta historico-estilistica para este enunciado.",
+      "Incorreto. Musica concreta nao representa a melhor resposta historico-estilistica para este enunciado."
+    ]
+  },
+  {
+    "nivel": "facil",
+    "tema": "historia",
+    "subtema": "unidade1",
+    "topico": "historia-da-musica",
+    "pergunta": "No estudo historico, o moteto medieval e associado principalmente a:",
+    "opcoes": [
+      "Textura monodica simples",
+      "Polifonia vocal",
+      "Opera romantica",
+      "Sinfonia classica"
+    ],
+    "resposta": 1,
+    "explicacoes": [
+      "Incorreto. Textura monodica simples nao representa a melhor resposta historico-estilistica para este enunciado.",
+      "Correto. Polifonia vocal.",
+      "Incorreto. Opera romantica nao representa a melhor resposta historico-estilistica para este enunciado.",
+      "Incorreto. Sinfonia classica nao representa a melhor resposta historico-estilistica para este enunciado."
+    ]
+  },
+  {
+    "nivel": "facil",
+    "tema": "historia",
+    "subtema": "unidade1",
+    "topico": "historia-da-musica",
+    "pergunta": "Qual lingua era central na liturgia musical medieval ocidental?",
+    "opcoes": [
+      "Latim",
+      "Italiano",
+      "Alemao",
+      "Ingles"
+    ],
+    "resposta": 0,
+    "explicacoes": [
+      "Correto. Latim.",
+      "Incorreto. Italiano nao representa a melhor resposta historico-estilistica para este enunciado.",
+      "Incorreto. Alemao nao representa a melhor resposta historico-estilistica para este enunciado.",
+      "Incorreto. Ingles nao representa a melhor resposta historico-estilistica para este enunciado."
+    ]
+  },
+  {
+    "nivel": "facil",
+    "tema": "historia",
+    "subtema": "unidade1",
+    "topico": "historia-da-musica",
+    "pergunta": "No Renascimento, Palestrina e geralmente lembrado por:",
+    "opcoes": [
+      "Opera buffa",
+      "Polifonia sacra",
+      "Poema sinfonico",
+      "Serialismo"
+    ],
+    "resposta": 1,
+    "explicacoes": [
+      "Incorreto. Opera buffa nao representa a melhor resposta historico-estilistica para este enunciado.",
+      "Correto. Polifonia sacra.",
+      "Incorreto. Poema sinfonico nao representa a melhor resposta historico-estilistica para este enunciado.",
+      "Incorreto. Serialismo nao representa a melhor resposta historico-estilistica para este enunciado."
+    ]
+  },
+  {
+    "nivel": "facil",
+    "tema": "historia",
+    "subtema": "unidade1",
+    "topico": "historia-da-musica",
+    "pergunta": "A frase 'baixo continuo' remete principalmente ao periodo:",
+    "opcoes": [
+      "Barroco",
+      "Idade Media",
+      "Classico",
+      "Impressionista"
+    ],
+    "resposta": 0,
+    "explicacoes": [
+      "Correto. Barroco.",
+      "Incorreto. Idade Media nao representa a melhor resposta historico-estilistica para este enunciado.",
+      "Incorreto. Classico nao representa a melhor resposta historico-estilistica para este enunciado.",
+      "Incorreto. Impressionista nao representa a melhor resposta historico-estilistica para este enunciado."
+    ]
+  },
+  {
+    "nivel": "facil",
+    "tema": "historia",
+    "subtema": "unidade1",
+    "topico": "historia-da-musica",
+    "pergunta": "Qual compositor se destaca como referencia do Barroco tardio?",
+    "opcoes": [
+      "Debussy",
+      "Bach",
+      "Mahler",
+      "Ravel"
+    ],
+    "resposta": 1,
+    "explicacoes": [
+      "Incorreto. Debussy nao representa a melhor resposta historico-estilistica para este enunciado.",
+      "Correto. Bach.",
+      "Incorreto. Mahler nao representa a melhor resposta historico-estilistica para este enunciado.",
+      "Incorreto. Ravel nao representa a melhor resposta historico-estilistica para este enunciado."
+    ]
+  },
+  {
+    "nivel": "facil",
+    "tema": "historia",
+    "subtema": "unidade1",
+    "topico": "historia-da-musica",
+    "pergunta": "A obra 'O Cravo Bem Temperado' e associada a:",
+    "opcoes": [
+      "Mozart",
+      "Bach",
+      "Beethoven",
+      "Chopin"
+    ],
+    "resposta": 1,
+    "explicacoes": [
+      "Incorreto. Mozart nao representa a melhor resposta historico-estilistica para este enunciado.",
+      "Correto. Bach.",
+      "Incorreto. Beethoven nao representa a melhor resposta historico-estilistica para este enunciado.",
+      "Incorreto. Chopin nao representa a melhor resposta historico-estilistica para este enunciado."
+    ]
+  },
+  {
+    "nivel": "facil",
+    "tema": "historia",
+    "subtema": "unidade1",
+    "topico": "historia-da-musica",
+    "pergunta": "No Classicismo, uma caracteristica marcante e:",
+    "opcoes": [
+      "Clareza formal",
+      "Atonalidade integral",
+      "Improviso livre sem forma",
+      "Ausencia de periodicidade"
+    ],
+    "resposta": 0,
+    "explicacoes": [
+      "Correto. Clareza formal.",
+      "Incorreto. Atonalidade integral nao representa a melhor resposta historico-estilistica para este enunciado.",
+      "Incorreto. Improviso livre sem forma nao representa a melhor resposta historico-estilistica para este enunciado.",
+      "Incorreto. Ausencia de periodicidade nao representa a melhor resposta historico-estilistica para este enunciado."
+    ]
+  },
+  {
+    "nivel": "facil",
+    "tema": "historia",
+    "subtema": "unidade1",
+    "topico": "historia-da-musica",
+    "pergunta": "Mozart e historicamente vinculado sobretudo ao periodo:",
+    "opcoes": [
+      "Classico",
+      "Barroco",
+      "Romantico",
+      "Medieval"
+    ],
+    "resposta": 0,
+    "explicacoes": [
+      "Correto. Classico.",
+      "Incorreto. Barroco nao representa a melhor resposta historico-estilistica para este enunciado.",
+      "Incorreto. Romantico nao representa a melhor resposta historico-estilistica para este enunciado.",
+      "Incorreto. Medieval nao representa a melhor resposta historico-estilistica para este enunciado."
+    ]
+  },
+  {
+    "nivel": "facil",
+    "tema": "historia",
+    "subtema": "unidade1",
+    "topico": "historia-da-musica",
+    "pergunta": "No Romantismo, cresce a valorizacao de:",
+    "opcoes": [
+      "Expressividade subjetiva",
+      "Monodia liturgica",
+      "Estilo estritamente contrapontistico barroco",
+      "Neutralidade timbrica"
+    ],
+    "resposta": 0,
+    "explicacoes": [
+      "Correto. Expressividade subjetiva.",
+      "Incorreto. Monodia liturgica nao representa a melhor resposta historico-estilistica para este enunciado.",
+      "Incorreto. Estilo estritamente contrapontistico barroco nao representa a melhor resposta historico-estilistica para este enunciado.",
+      "Incorreto. Neutralidade timbrica nao representa a melhor resposta historico-estilistica para este enunciado."
+    ]
+  },
+  {
+    "nivel": "facil",
+    "tema": "historia",
+    "subtema": "unidade1",
+    "topico": "historia-da-musica",
+    "pergunta": "Chopin e lembrado principalmente por seu repertorio para:",
+    "opcoes": [
+      "Piano",
+      "Orgao liturgico medieval",
+      "Quarteto de cordas barroco",
+      "Musica eletronica"
+    ],
+    "resposta": 0,
+    "explicacoes": [
+      "Correto. Piano.",
+      "Incorreto. Orgao liturgico medieval nao representa a melhor resposta historico-estilistica para este enunciado.",
+      "Incorreto. Quarteto de cordas barroco nao representa a melhor resposta historico-estilistica para este enunciado.",
+      "Incorreto. Musica eletronica nao representa a melhor resposta historico-estilistica para este enunciado."
+    ]
+  },
+  {
+    "nivel": "facil",
+    "tema": "historia",
+    "subtema": "unidade1",
+    "topico": "historia-da-musica",
+    "pergunta": "Debussy costuma ser associado a:",
+    "opcoes": [
+      "Impressionismo",
+      "Dodecafonismo inicial",
+      "Ars Nova medieval",
+      "Classicismo vienense"
+    ],
+    "resposta": 0,
+    "explicacoes": [
+      "Correto. Impressionismo.",
+      "Incorreto. Dodecafonismo inicial nao representa a melhor resposta historico-estilistica para este enunciado.",
+      "Incorreto. Ars Nova medieval nao representa a melhor resposta historico-estilistica para este enunciado.",
+      "Incorreto. Classicismo vienense nao representa a melhor resposta historico-estilistica para este enunciado."
+    ]
+  },
+  {
+    "nivel": "facil",
+    "tema": "historia",
+    "subtema": "unidade1",
+    "topico": "historia-da-musica",
+    "pergunta": "No seculo XX, o conceito de material musical foi:",
+    "opcoes": [
+      "Ampliado",
+      "Reduzido a escalas maiores",
+      "Limitado a coro a cappella",
+      "Fixado apenas no tonalismo"
+    ],
+    "resposta": 0,
+    "explicacoes": [
+      "Correto. Ampliado.",
+      "Incorreto. Reduzido a escalas maiores nao representa a melhor resposta historico-estilistica para este enunciado.",
+      "Incorreto. Limitado a coro a cappella nao representa a melhor resposta historico-estilistica para este enunciado.",
+      "Incorreto. Fixado apenas no tonalismo nao representa a melhor resposta historico-estilistica para este enunciado."
+    ]
+  },
+  {
+    "nivel": "facil",
+    "tema": "historia",
+    "subtema": "unidade1",
+    "topico": "historia-da-musica",
+    "pergunta": "A expressao 'cadencia amen' historicamente lembra:",
+    "opcoes": [
+      "Cadencia plagal em repertorio liturgico",
+      "Cadencia perfeita classica obrigatoria",
+      "Final jazzistico moderno",
+      "Formula serial"
+    ],
+    "resposta": 0,
+    "explicacoes": [
+      "Correto. Cadencia plagal em repertorio liturgico.",
+      "Incorreto. Cadencia perfeita classica obrigatoria nao representa a melhor resposta historico-estilistica para este enunciado.",
+      "Incorreto. Final jazzistico moderno nao representa a melhor resposta historico-estilistica para este enunciado.",
+      "Incorreto. Formula serial nao representa a melhor resposta historico-estilistica para este enunciado."
+    ]
+  },
+  {
+    "nivel": "facil",
+    "tema": "historia",
+    "subtema": "unidade1",
+    "topico": "historia-da-musica",
+    "pergunta": "Qual periodo vem historicamente antes do Barroco?",
+    "opcoes": [
+      "Renascimento",
+      "Romantico",
+      "Classico",
+      "Impressionismo"
+    ],
+    "resposta": 0,
+    "explicacoes": [
+      "Correto. Renascimento.",
+      "Incorreto. Romantico nao representa a melhor resposta historico-estilistica para este enunciado.",
+      "Incorreto. Classico nao representa a melhor resposta historico-estilistica para este enunciado.",
+      "Incorreto. Impressionismo nao representa a melhor resposta historico-estilistica para este enunciado."
+    ]
+  },
+  {
+    "nivel": "facil",
+    "tema": "historia",
+    "subtema": "unidade1",
+    "topico": "historia-da-musica",
+    "pergunta": "Beethoven e geralmente situado entre:",
+    "opcoes": [
+      "Classico e Romantico",
+      "Medieval e Renascimento",
+      "Barroco e Medieval",
+      "Impressionismo e Modernismo"
+    ],
+    "resposta": 0,
+    "explicacoes": [
+      "Correto. Classico e Romantico.",
+      "Incorreto. Medieval e Renascimento nao representa a melhor resposta historico-estilistica para este enunciado.",
+      "Incorreto. Barroco e Medieval nao representa a melhor resposta historico-estilistica para este enunciado.",
+      "Incorreto. Impressionismo e Modernismo nao representa a melhor resposta historico-estilistica para este enunciado."
+    ]
+  },
+  {
+    "nivel": "facil",
+    "tema": "historia",
+    "subtema": "unidade1",
+    "topico": "historia-da-musica",
+    "pergunta": "O desenvolvimento da notacao musical medieval foi importante porque:",
+    "opcoes": [
+      "Permitiu maior preservacao e transmissao do repertorio",
+      "Substituiu totalmente a memoria musical",
+      "Eliminou a pratica vocal",
+      "Impediu novas composicoes"
+    ],
+    "resposta": 0,
+    "explicacoes": [
+      "Correto. Permitiu maior preservacao e transmissao do repertorio.",
+      "Incorreto. Substituiu totalmente a memoria musical nao representa a melhor resposta historico-estilistica para este enunciado.",
+      "Incorreto. Eliminou a pratica vocal nao representa a melhor resposta historico-estilistica para este enunciado.",
+      "Incorreto. Impediu novas composicoes nao representa a melhor resposta historico-estilistica para este enunciado."
+    ]
+  },
+  {
+    "nivel": "facil",
+    "tema": "historia",
+    "subtema": "unidade1",
+    "topico": "historia-da-musica",
+    "pergunta": "Qual ambiente foi decisivo para a producao musical medieval sacra?",
+    "opcoes": [
+      "Mosteiros e catedrais",
+      "Estudios de cinema",
+      "Teatros de opera modernos",
+      "Clubes de jazz"
+    ],
+    "resposta": 0,
+    "explicacoes": [
+      "Correto. Mosteiros e catedrais.",
+      "Incorreto. Estudios de cinema nao representa a melhor resposta historico-estilistica para este enunciado.",
+      "Incorreto. Teatros de opera modernos nao representa a melhor resposta historico-estilistica para este enunciado.",
+      "Incorreto. Clubes de jazz nao representa a melhor resposta historico-estilistica para este enunciado."
+    ]
+  },
+  {
+    "nivel": "facil",
+    "tema": "historia",
+    "subtema": "unidade1",
+    "topico": "historia-da-musica",
+    "pergunta": "No estudo de historia da musica, periodos como 'Barroco' e 'Classico' sao:",
+    "opcoes": [
+      "Ferramentas de periodizacao",
+      "Nomes de instrumentos",
+      "Titulos de obras",
+      "Categorias apenas geograficas"
+    ],
+    "resposta": 0,
+    "explicacoes": [
+      "Correto. Ferramentas de periodizacao.",
+      "Incorreto. Nomes de instrumentos nao representa a melhor resposta historico-estilistica para este enunciado.",
+      "Incorreto. Titulos de obras nao representa a melhor resposta historico-estilistica para este enunciado.",
+      "Incorreto. Categorias apenas geograficas nao representa a melhor resposta historico-estilistica para este enunciado."
+    ]
+  },
+  {
+    "nivel": "facil",
+    "tema": "historia",
+    "subtema": "unidade1",
+    "topico": "historia-da-musica",
+    "pergunta": "A transicao da monodia para a polifonia indica:",
+    "opcoes": [
+      "Maior complexidade textual-musical",
+      "Fim da musica religiosa",
+      "Desaparecimento da melodia",
+      "Substituicao da voz por eletronica"
+    ],
+    "resposta": 0,
+    "explicacoes": [
+      "Correto. Maior complexidade textual-musical.",
+      "Incorreto. Fim da musica religiosa nao representa a melhor resposta historico-estilistica para este enunciado.",
+      "Incorreto. Desaparecimento da melodia nao representa a melhor resposta historico-estilistica para este enunciado.",
+      "Incorreto. Substituicao da voz por eletronica nao representa a melhor resposta historico-estilistica para este enunciado."
+    ]
+  },
+  {
+    "nivel": "facil",
+    "tema": "historia",
+    "subtema": "unidade1",
+    "topico": "historia-da-musica",
+    "pergunta": "A Escola de Notre-Dame e frequentemente ligada aos nomes:",
+    "opcoes": [
+      "Leonin e Perotin",
+      "Haydn e Mozart",
+      "Debussy e Ravel",
+      "Brahms e Mahler"
+    ],
+    "resposta": 0,
+    "explicacoes": [
+      "Correto. Leonin e Perotin.",
+      "Incorreto. Haydn e Mozart nao representa a melhor resposta historico-estilistica para este enunciado.",
+      "Incorreto. Debussy e Ravel nao representa a melhor resposta historico-estilistica para este enunciado.",
+      "Incorreto. Brahms e Mahler nao representa a melhor resposta historico-estilistica para este enunciado."
+    ]
+  },
+  {
+    "nivel": "medio",
+    "tema": "historia",
+    "subtema": "unidade2",
+    "topico": "historia-da-musica",
+    "pergunta": "Qual alternativa descreve melhor a funcao do baixo continuo no Barroco?",
+    "opcoes": [
+      "Base harmonica e sustentacao do discurso",
+      "Eliminacao da harmonia",
+      "Substituicao da melodia",
+      "Uso exclusivo em musica eletrica"
+    ],
+    "resposta": 0,
+    "explicacoes": [
+      "Correto. Base harmonica e sustentacao do discurso.",
+      "Incorreto. Eliminacao da harmonia nao representa a melhor resposta historico-estilistica para este enunciado.",
+      "Incorreto. Substituicao da melodia nao representa a melhor resposta historico-estilistica para este enunciado.",
+      "Incorreto. Uso exclusivo em musica eletrica nao representa a melhor resposta historico-estilistica para este enunciado."
+    ]
+  },
+  {
+    "nivel": "medio",
+    "tema": "historia",
+    "subtema": "unidade2",
+    "topico": "historia-da-musica",
+    "pergunta": "A oposicao entre musica absoluta e programatica no seculo XIX envolve sobretudo:",
+    "opcoes": [
+      "Debate estetico sobre significado musical",
+      "Afinacao do temperamento",
+      "Proibicao de repertorio instrumental",
+      "Uso de latim na liturgia"
+    ],
+    "resposta": 0,
+    "explicacoes": [
+      "Correto. Debate estetico sobre significado musical.",
+      "Incorreto. Afinacao do temperamento nao representa a melhor resposta historico-estilistica para este enunciado.",
+      "Incorreto. Proibicao de repertorio instrumental nao representa a melhor resposta historico-estilistica para este enunciado.",
+      "Incorreto. Uso de latim na liturgia nao representa a melhor resposta historico-estilistica para este enunciado."
+    ]
+  },
+  {
+    "nivel": "medio",
+    "tema": "historia",
+    "subtema": "unidade2",
+    "topico": "historia-da-musica",
+    "pergunta": "No Renascimento, a polifonia imitativa e relevante por:",
+    "opcoes": [
+      "Articular vozes em equilibrio estrutural",
+      "Abandonar o contraponto",
+      "Negar escrita vocal",
+      "Eliminar texto"
+    ],
+    "resposta": 0,
+    "explicacoes": [
+      "Correto. Articular vozes em equilibrio estrutural.",
+      "Incorreto. Abandonar o contraponto nao representa a melhor resposta historico-estilistica para este enunciado.",
+      "Incorreto. Negar escrita vocal nao representa a melhor resposta historico-estilistica para este enunciado.",
+      "Incorreto. Eliminar texto nao representa a melhor resposta historico-estilistica para este enunciado."
+    ]
+  },
+  {
+    "nivel": "medio",
+    "tema": "historia",
+    "subtema": "unidade2",
+    "topico": "historia-da-musica",
+    "pergunta": "No Classicismo, a expansao da sinfonia relaciona-se a:",
+    "opcoes": [
+      "Consolidacao formal e orquestral",
+      "Desaparecimento da orquestra",
+      "Retorno obrigatorio ao cantochao",
+      "Atonalidade sistematica"
+    ],
+    "resposta": 0,
+    "explicacoes": [
+      "Correto. Consolidacao formal e orquestral.",
+      "Incorreto. Desaparecimento da orquestra nao representa a melhor resposta historico-estilistica para este enunciado.",
+      "Incorreto. Retorno obrigatorio ao cantochao nao representa a melhor resposta historico-estilistica para este enunciado.",
+      "Incorreto. Atonalidade sistematica nao representa a melhor resposta historico-estilistica para este enunciado."
+    ]
+  },
+  {
+    "nivel": "medio",
+    "tema": "historia",
+    "subtema": "unidade2",
+    "topico": "historia-da-musica",
+    "pergunta": "No Romantismo tardio, qual tendencia aparece com frequencia?",
+    "opcoes": [
+      "Maior cromatismo e expansao expressiva",
+      "Restricao tonal severa medieval",
+      "Rejeicao da dinamica",
+      "Fim da forma"
+    ],
+    "resposta": 0,
+    "explicacoes": [
+      "Correto. Maior cromatismo e expansao expressiva.",
+      "Incorreto. Restricao tonal severa medieval nao representa a melhor resposta historico-estilistica para este enunciado.",
+      "Incorreto. Rejeicao da dinamica nao representa a melhor resposta historico-estilistica para este enunciado.",
+      "Incorreto. Fim da forma nao representa a melhor resposta historico-estilistica para este enunciado."
+    ]
+  },
+  {
+    "nivel": "medio",
+    "tema": "historia",
+    "subtema": "unidade2",
+    "topico": "historia-da-musica",
+    "pergunta": "Qual leitura historica e mais adequada para Debussy?",
+    "opcoes": [
+      "Exploracao timbrica e ambiguidade tonal",
+      "Contraponto barroco estrito como eixo unico",
+      "Monodia liturgica",
+      "Opera verista italiana"
+    ],
+    "resposta": 0,
+    "explicacoes": [
+      "Correto. Exploracao timbrica e ambiguidade tonal.",
+      "Incorreto. Contraponto barroco estrito como eixo unico nao representa a melhor resposta historico-estilistica para este enunciado.",
+      "Incorreto. Monodia liturgica nao representa a melhor resposta historico-estilistica para este enunciado.",
+      "Incorreto. Opera verista italiana nao representa a melhor resposta historico-estilistica para este enunciado."
+    ]
+  },
+  {
+    "nivel": "medio",
+    "tema": "historia",
+    "subtema": "unidade2",
+    "topico": "historia-da-musica",
+    "pergunta": "Em historiografia musical, periodizacoes sao uteis porque:",
+    "opcoes": [
+      "Organizam processos historicos complexos",
+      "Substituem analise musical",
+      "Eliminam excecoes",
+      "Dispensam contexto"
+    ],
+    "resposta": 0,
+    "explicacoes": [
+      "Correto. Organizam processos historicos complexos.",
+      "Incorreto. Substituem analise musical nao representa a melhor resposta historico-estilistica para este enunciado.",
+      "Incorreto. Eliminam excecoes nao representa a melhor resposta historico-estilistica para este enunciado.",
+      "Incorreto. Dispensam contexto nao representa a melhor resposta historico-estilistica para este enunciado."
+    ]
+  },
+  {
+    "nivel": "medio",
+    "tema": "historia",
+    "subtema": "unidade2",
+    "topico": "historia-da-musica",
+    "pergunta": "A musica da Escola de Notre-Dame antecipa debates sobre:",
+    "opcoes": [
+      "Organizacao da polifonia e notacao",
+      "Sistemas eletricos de som",
+      "Serialismo integral",
+      "Forma-sonata romantica"
+    ],
+    "resposta": 0,
+    "explicacoes": [
+      "Correto. Organizacao da polifonia e notacao.",
+      "Incorreto. Sistemas eletricos de som nao representa a melhor resposta historico-estilistica para este enunciado.",
+      "Incorreto. Serialismo integral nao representa a melhor resposta historico-estilistica para este enunciado.",
+      "Incorreto. Forma-sonata romantica nao representa a melhor resposta historico-estilistica para este enunciado."
+    ]
+  },
+  {
+    "nivel": "medio",
+    "tema": "historia",
+    "subtema": "unidade2",
+    "topico": "historia-da-musica",
+    "pergunta": "No Barroco, fuga pode ser entendida como:",
+    "opcoes": [
+      "Procedimento contrapontistico estruturado",
+      "Genero operistico com recitativo",
+      "Danca renascentista",
+      "Tecnica exclusiva do sec XX"
+    ],
+    "resposta": 0,
+    "explicacoes": [
+      "Correto. Procedimento contrapontistico estruturado.",
+      "Incorreto. Genero operistico com recitativo nao representa a melhor resposta historico-estilistica para este enunciado.",
+      "Incorreto. Danca renascentista nao representa a melhor resposta historico-estilistica para este enunciado.",
+      "Incorreto. Tecnica exclusiva do sec XX nao representa a melhor resposta historico-estilistica para este enunciado."
+    ]
+  },
+  {
+    "nivel": "medio",
+    "tema": "historia",
+    "subtema": "unidade2",
+    "topico": "historia-da-musica",
+    "pergunta": "No seculo XIX, a ampliacao da orquestra esta ligada a:",
+    "opcoes": [
+      "Novas demandas de cor e expressividade",
+      "Desinteresse por timbre",
+      "Abandono da escrita sinfonica",
+      "Retorno a conjuntos medievais"
+    ],
+    "resposta": 0,
+    "explicacoes": [
+      "Correto. Novas demandas de cor e expressividade.",
+      "Incorreto. Desinteresse por timbre nao representa a melhor resposta historico-estilistica para este enunciado.",
+      "Incorreto. Abandono da escrita sinfonica nao representa a melhor resposta historico-estilistica para este enunciado.",
+      "Incorreto. Retorno a conjuntos medievais nao representa a melhor resposta historico-estilistica para este enunciado."
+    ]
+  },
+  {
+    "nivel": "medio",
+    "tema": "historia",
+    "subtema": "unidade2",
+    "topico": "historia-da-musica",
+    "pergunta": "A recepcao de Bach no romantismo contribuiu para:",
+    "opcoes": [
+      "Revalorizacao do contraponto historico",
+      "Extincao da musica coral",
+      "Fim do repertorio de teclado",
+      "Substituicao da polifonia por monodia"
+    ],
+    "resposta": 0,
+    "explicacoes": [
+      "Correto. Revalorizacao do contraponto historico.",
+      "Incorreto. Extincao da musica coral nao representa a melhor resposta historico-estilistica para este enunciado.",
+      "Incorreto. Fim do repertorio de teclado nao representa a melhor resposta historico-estilistica para este enunciado.",
+      "Incorreto. Substituicao da polifonia por monodia nao representa a melhor resposta historico-estilistica para este enunciado."
+    ]
+  },
+  {
+    "nivel": "medio",
+    "tema": "historia",
+    "subtema": "unidade2",
+    "topico": "historia-da-musica",
+    "pergunta": "No estudo conservatorial, comparar Palestrina e Bach exige:",
+    "opcoes": [
+      "Contextualizar epocas, funcoes e linguagens",
+      "Aplicar os mesmos criterios sem contexto",
+      "Ignorar diferencas historicas",
+      "Usar apenas dados biograficos"
+    ],
+    "resposta": 0,
+    "explicacoes": [
+      "Correto. Contextualizar epocas, funcoes e linguagens.",
+      "Incorreto. Aplicar os mesmos criterios sem contexto nao representa a melhor resposta historico-estilistica para este enunciado.",
+      "Incorreto. Ignorar diferencas historicas nao representa a melhor resposta historico-estilistica para este enunciado.",
+      "Incorreto. Usar apenas dados biograficos nao representa a melhor resposta historico-estilistica para este enunciado."
+    ]
+  },
+  {
+    "nivel": "medio",
+    "tema": "historia",
+    "subtema": "unidade2",
+    "topico": "historia-da-musica",
+    "pergunta": "Qual par melhor representa contraste de periodos?",
+    "opcoes": [
+      "Palestrina (Renascimento) e Chopin (Romantismo)",
+      "Bach (Medieval) e Debussy (Barroco)",
+      "Mozart (Sec XX) e Perotin (Classico)",
+      "Ravel (Medieval) e Leonin (Romantico)"
+    ],
+    "resposta": 0,
+    "explicacoes": [
+      "Correto. Palestrina (Renascimento) e Chopin (Romantismo).",
+      "Incorreto. Bach (Medieval) e Debussy (Barroco) nao representa a melhor resposta historico-estilistica para este enunciado.",
+      "Incorreto. Mozart (Sec XX) e Perotin (Classico) nao representa a melhor resposta historico-estilistica para este enunciado.",
+      "Incorreto. Ravel (Medieval) e Leonin (Romantico) nao representa a melhor resposta historico-estilistica para este enunciado."
+    ]
+  },
+  {
+    "nivel": "medio",
+    "tema": "historia",
+    "subtema": "unidade2",
+    "topico": "historia-da-musica",
+    "pergunta": "A expressao 'ars nova' historicamente se conecta a:",
+    "opcoes": [
+      "Transformacoes da notacao e da escrita no fim medieval",
+      "Opera italiana do sec XIX",
+      "Samba urbano do sec XX",
+      "Musica concreta"
+    ],
+    "resposta": 0,
+    "explicacoes": [
+      "Correto. Transformacoes da notacao e da escrita no fim medieval.",
+      "Incorreto. Opera italiana do sec XIX nao representa a melhor resposta historico-estilistica para este enunciado.",
+      "Incorreto. Samba urbano do sec XX nao representa a melhor resposta historico-estilistica para este enunciado.",
+      "Incorreto. Musica concreta nao representa a melhor resposta historico-estilistica para este enunciado."
+    ]
+  },
+  {
+    "nivel": "medio",
+    "tema": "historia",
+    "subtema": "unidade2",
+    "topico": "historia-da-musica",
+    "pergunta": "No barroco, relacao entre retorica e musica indica:",
+    "opcoes": [
+      "Uso de recursos para afetos e persuasao expressiva",
+      "Negacao da expressividade",
+      "Padrao unico sem contraste",
+      "Ausencia de gestualidade musical"
+    ],
+    "resposta": 0,
+    "explicacoes": [
+      "Correto. Uso de recursos para afetos e persuasao expressiva.",
+      "Incorreto. Negacao da expressividade nao representa a melhor resposta historico-estilistica para este enunciado.",
+      "Incorreto. Padrao unico sem contraste nao representa a melhor resposta historico-estilistica para este enunciado.",
+      "Incorreto. Ausencia de gestualidade musical nao representa a melhor resposta historico-estilistica para este enunciado."
+    ]
+  },
+  {
+    "nivel": "medio",
+    "tema": "historia",
+    "subtema": "unidade2",
+    "topico": "historia-da-musica",
+    "pergunta": "No Classicismo, a fraseologia periodica e relevante porque:",
+    "opcoes": [
+      "Favorece clareza formal",
+      "Impede modulacoes",
+      "Elimina contraste",
+      "Substitui harmonia"
+    ],
+    "resposta": 0,
+    "explicacoes": [
+      "Correto. Favorece clareza formal.",
+      "Incorreto. Impede modulacoes nao representa a melhor resposta historico-estilistica para este enunciado.",
+      "Incorreto. Elimina contraste nao representa a melhor resposta historico-estilistica para este enunciado.",
+      "Incorreto. Substitui harmonia nao representa a melhor resposta historico-estilistica para este enunciado."
+    ]
+  },
+  {
+    "nivel": "medio",
+    "tema": "historia",
+    "subtema": "unidade2",
+    "topico": "historia-da-musica",
+    "pergunta": "No romantismo pianistico, miniaturas como noturnos e preludios mostram:",
+    "opcoes": [
+      "Concentracao poetica em pequena forma",
+      "Obrigacao de grande forma sinfonica",
+      "Recusa de lirismo",
+      "Padrao liturgico medieval"
+    ],
+    "resposta": 0,
+    "explicacoes": [
+      "Correto. Concentracao poetica em pequena forma.",
+      "Incorreto. Obrigacao de grande forma sinfonica nao representa a melhor resposta historico-estilistica para este enunciado.",
+      "Incorreto. Recusa de lirismo nao representa a melhor resposta historico-estilistica para este enunciado.",
+      "Incorreto. Padrao liturgico medieval nao representa a melhor resposta historico-estilistica para este enunciado."
+    ]
+  },
+  {
+    "nivel": "medio",
+    "tema": "historia",
+    "subtema": "unidade2",
+    "topico": "historia-da-musica",
+    "pergunta": "A modernidade do sec XX nao pode ser resumida a um unico estilo porque:",
+    "opcoes": [
+      "Ha pluralidade de linguagens",
+      "Todos os compositores usam a mesma tecnica",
+      "Nao existe mudanca historica",
+      "Tudo retorna ao barroco"
+    ],
+    "resposta": 0,
+    "explicacoes": [
+      "Correto. Ha pluralidade de linguagens.",
+      "Incorreto. Todos os compositores usam a mesma tecnica nao representa a melhor resposta historico-estilistica para este enunciado.",
+      "Incorreto. Nao existe mudanca historica nao representa a melhor resposta historico-estilistica para este enunciado.",
+      "Incorreto. Tudo retorna ao barroco nao representa a melhor resposta historico-estilistica para este enunciado."
+    ]
+  },
+  {
+    "nivel": "medio",
+    "tema": "historia",
+    "subtema": "unidade2",
+    "topico": "historia-da-musica",
+    "pergunta": "Quando se diz que uma obra e 'anacronica', em historia da musica geralmente significa:",
+    "opcoes": [
+      "Leitura fora de seu contexto historico",
+      "Obra sem melodia",
+      "Obra sem autor",
+      "Obra sem data"
+    ],
+    "resposta": 0,
+    "explicacoes": [
+      "Correto. Leitura fora de seu contexto historico.",
+      "Incorreto. Obra sem melodia nao representa a melhor resposta historico-estilistica para este enunciado.",
+      "Incorreto. Obra sem autor nao representa a melhor resposta historico-estilistica para este enunciado.",
+      "Incorreto. Obra sem data nao representa a melhor resposta historico-estilistica para este enunciado."
+    ]
+  },
+  {
+    "nivel": "medio",
+    "tema": "historia",
+    "subtema": "unidade2",
+    "topico": "historia-da-musica",
+    "pergunta": "A obra 'A Flauta Magica' ajuda a compreender:",
+    "opcoes": [
+      "Teatro musical classico tardio e suas sinteses",
+      "Ars antiqua medieval",
+      "Fuga barroca estrita",
+      "Musica eletrica"
+    ],
+    "resposta": 0,
+    "explicacoes": [
+      "Correto. Teatro musical classico tardio e suas sinteses.",
+      "Incorreto. Ars antiqua medieval nao representa a melhor resposta historico-estilistica para este enunciado.",
+      "Incorreto. Fuga barroca estrita nao representa a melhor resposta historico-estilistica para este enunciado.",
+      "Incorreto. Musica eletrica nao representa a melhor resposta historico-estilistica para este enunciado."
+    ]
+  },
+  {
+    "nivel": "medio",
+    "tema": "historia",
+    "subtema": "unidade2",
+    "topico": "historia-da-musica",
+    "pergunta": "No estudo de repertorio, 'estilo' envolve:",
+    "opcoes": [
+      "Conjunto de procedimentos recorrentes",
+      "Apenas nacionalidade",
+      "Somente instrumentacao",
+      "Somente data"
+    ],
+    "resposta": 0,
+    "explicacoes": [
+      "Correto. Conjunto de procedimentos recorrentes.",
+      "Incorreto. Apenas nacionalidade nao representa a melhor resposta historico-estilistica para este enunciado.",
+      "Incorreto. Somente instrumentacao nao representa a melhor resposta historico-estilistica para este enunciado.",
+      "Incorreto. Somente data nao representa a melhor resposta historico-estilistica para este enunciado."
+    ]
+  },
+  {
+    "nivel": "medio",
+    "tema": "historia",
+    "subtema": "unidade2",
+    "topico": "historia-da-musica",
+    "pergunta": "Qual criterio evita simplificacoes em prova de historia da musica?",
+    "opcoes": [
+      "Relacionar obra, contexto e linguagem",
+      "Memorizar datas isoladas",
+      "Ignorar formas musicais",
+      "Evitar comparar periodos"
+    ],
+    "resposta": 0,
+    "explicacoes": [
+      "Correto. Relacionar obra, contexto e linguagem.",
+      "Incorreto. Memorizar datas isoladas nao representa a melhor resposta historico-estilistica para este enunciado.",
+      "Incorreto. Ignorar formas musicais nao representa a melhor resposta historico-estilistica para este enunciado.",
+      "Incorreto. Evitar comparar periodos nao representa a melhor resposta historico-estilistica para este enunciado."
+    ]
+  },
+  {
+    "nivel": "medio",
+    "tema": "historia",
+    "subtema": "unidade2",
+    "topico": "historia-da-musica",
+    "pergunta": "A relacao entre historia e analise musical e melhor descrita como:",
+    "opcoes": [
+      "Complementar",
+      "Excludente",
+      "Irrelevante",
+      "Aleatoria"
+    ],
+    "resposta": 0,
+    "explicacoes": [
+      "Correto. Complementar.",
+      "Incorreto. Excludente nao representa a melhor resposta historico-estilistica para este enunciado.",
+      "Incorreto. Irrelevante nao representa a melhor resposta historico-estilistica para este enunciado.",
+      "Incorreto. Aleatoria nao representa a melhor resposta historico-estilistica para este enunciado."
+    ]
+  },
+  {
+    "nivel": "dificil",
+    "tema": "historia",
+    "subtema": "unidade3",
+    "topico": "historia-da-musica",
+    "pergunta": "Do ponto de vista historiografico, a ideia de 'ruptura' modernista deve ser lida junto com:",
+    "opcoes": [
+      "Processos de continuidade historica",
+      "Negacao total do passado",
+      "Ausencia de dialogo estilistico",
+      "Fim da analise formal"
+    ],
+    "resposta": 0,
+    "explicacoes": [
+      "Correto. Processos de continuidade historica.",
+      "Incorreto. Negacao total do passado nao representa a melhor resposta historico-estilistica para este enunciado.",
+      "Incorreto. Ausencia de dialogo estilistico nao representa a melhor resposta historico-estilistica para este enunciado.",
+      "Incorreto. Fim da analise formal nao representa a melhor resposta historico-estilistica para este enunciado."
+    ]
+  },
+  {
+    "nivel": "dificil",
+    "tema": "historia",
+    "subtema": "unidade3",
+    "topico": "historia-da-musica",
+    "pergunta": "Em leitura conservatorial, periodos historicos funcionam como:",
+    "opcoes": [
+      "Modelos analiticos porosos",
+      "Categorias absolutas sem excecao",
+      "Etiquetas puramente comerciais",
+      "Substitutos da escuta"
+    ],
+    "resposta": 0,
+    "explicacoes": [
+      "Correto. Modelos analiticos porosos.",
+      "Incorreto. Categorias absolutas sem excecao nao representa a melhor resposta historico-estilistica para este enunciado.",
+      "Incorreto. Etiquetas puramente comerciais nao representa a melhor resposta historico-estilistica para este enunciado.",
+      "Incorreto. Substitutos da escuta nao representa a melhor resposta historico-estilistica para este enunciado."
+    ]
+  },
+  {
+    "nivel": "dificil",
+    "tema": "historia",
+    "subtema": "unidade3",
+    "topico": "historia-da-musica",
+    "pergunta": "A consolidacao tonal entre barroco e classico pode ser entendida como:",
+    "opcoes": [
+      "Processo historico gradual",
+      "Evento instantaneo e isolado",
+      "Fenomeno exclusivo da opera",
+      "Consequencia da musica eletronica"
+    ],
+    "resposta": 0,
+    "explicacoes": [
+      "Correto. Processo historico gradual.",
+      "Incorreto. Evento instantaneo e isolado nao representa a melhor resposta historico-estilistica para este enunciado.",
+      "Incorreto. Fenomeno exclusivo da opera nao representa a melhor resposta historico-estilistica para este enunciado.",
+      "Incorreto. Consequencia da musica eletronica nao representa a melhor resposta historico-estilistica para este enunciado."
+    ]
+  },
+  {
+    "nivel": "dificil",
+    "tema": "historia",
+    "subtema": "unidade3",
+    "topico": "historia-da-musica",
+    "pergunta": "No debate oitocentista, musica programatica e absoluta diferem sobretudo quanto:",
+    "opcoes": [
+      "A relacao com referencia extramusical",
+      "Uso de metrico fixo",
+      "Numero de instrumentos",
+      "Idioma do libreto"
+    ],
+    "resposta": 0,
+    "explicacoes": [
+      "Correto. A relacao com referencia extramusical.",
+      "Incorreto. Uso de metrico fixo nao representa a melhor resposta historico-estilistica para este enunciado.",
+      "Incorreto. Numero de instrumentos nao representa a melhor resposta historico-estilistica para este enunciado.",
+      "Incorreto. Idioma do libreto nao representa a melhor resposta historico-estilistica para este enunciado."
+    ]
+  },
+  {
+    "nivel": "dificil",
+    "tema": "historia",
+    "subtema": "unidade3",
+    "topico": "historia-da-musica",
+    "pergunta": "Em analise historica, chamar Debussy de 'anti-tonal' sem nuances e problematico porque:",
+    "opcoes": [
+      "Sua escrita frequentemente trabalha ambiguidade, nao simples negacao binaria",
+      "Ele nao compunha para piano",
+      "Nao ha harmonia em suas obras",
+      "Ele pertence ao barroco"
+    ],
+    "resposta": 0,
+    "explicacoes": [
+      "Correto. Sua escrita frequentemente trabalha ambiguidade, nao simples negacao binaria.",
+      "Incorreto. Ele nao compunha para piano nao representa a melhor resposta historico-estilistica para este enunciado.",
+      "Incorreto. Nao ha harmonia em suas obras nao representa a melhor resposta historico-estilistica para este enunciado.",
+      "Incorreto. Ele pertence ao barroco nao representa a melhor resposta historico-estilistica para este enunciado."
+    ]
+  },
+  {
+    "nivel": "dificil",
+    "tema": "historia",
+    "subtema": "unidade3",
+    "topico": "historia-da-musica",
+    "pergunta": "A nocao de estilo nacional no sec XIX deve ser tratada com cautela porque:",
+    "opcoes": [
+      "Convivem trocas transnacionais intensas",
+      "Nao havia circulacao de repertorio",
+      "Todos os compositores eram isolados",
+      "Nao existiam editoras"
+    ],
+    "resposta": 0,
+    "explicacoes": [
+      "Correto. Convivem trocas transnacionais intensas.",
+      "Incorreto. Nao havia circulacao de repertorio nao representa a melhor resposta historico-estilistica para este enunciado.",
+      "Incorreto. Todos os compositores eram isolados nao representa a melhor resposta historico-estilistica para este enunciado.",
+      "Incorreto. Nao existiam editoras nao representa a melhor resposta historico-estilistica para este enunciado."
+    ]
+  },
+  {
+    "nivel": "dificil",
+    "tema": "historia",
+    "subtema": "unidade3",
+    "topico": "historia-da-musica",
+    "pergunta": "No campo da performance historicamente informada, uma premissa central e:",
+    "opcoes": [
+      "Dialogar com fontes e praticas de epoca",
+      "Aplicar sempre tecnica contemporanea sem ajuste",
+      "Ignorar organologia",
+      "Recusar qualquer pesquisa"
+    ],
+    "resposta": 0,
+    "explicacoes": [
+      "Correto. Dialogar com fontes e praticas de epoca.",
+      "Incorreto. Aplicar sempre tecnica contemporanea sem ajuste nao representa a melhor resposta historico-estilistica para este enunciado.",
+      "Incorreto. Ignorar organologia nao representa a melhor resposta historico-estilistica para este enunciado.",
+      "Incorreto. Recusar qualquer pesquisa nao representa a melhor resposta historico-estilistica para este enunciado."
+    ]
+  },
+  {
+    "nivel": "dificil",
+    "tema": "historia",
+    "subtema": "unidade3",
+    "topico": "historia-da-musica",
+    "pergunta": "A classificacao 'Renascimento' em musica e mais util quando:",
+    "opcoes": [
+      "Relacionada a tecnicas, instituicoes e repertorios concretos",
+      "Usada como rotulo sem analise",
+      "Aplicada a qualquer obra antiga",
+      "Restrita a biografias"
+    ],
+    "resposta": 0,
+    "explicacoes": [
+      "Correto. Relacionada a tecnicas, instituicoes e repertorios concretos.",
+      "Incorreto. Usada como rotulo sem analise nao representa a melhor resposta historico-estilistica para este enunciado.",
+      "Incorreto. Aplicada a qualquer obra antiga nao representa a melhor resposta historico-estilistica para este enunciado.",
+      "Incorreto. Restrita a biografias nao representa a melhor resposta historico-estilistica para este enunciado."
+    ]
+  },
+  {
+    "nivel": "dificil",
+    "tema": "historia",
+    "subtema": "unidade3",
+    "topico": "historia-da-musica",
+    "pergunta": "No estudo comparativo entre Bach e Mozart, e metodologicamente correto:",
+    "opcoes": [
+      "Comparar processos formais respeitando contextos distintos",
+      "Assumir identidade estilistica total",
+      "Ignorar diferencas de genero",
+      "Eliminar dados historicos"
+    ],
+    "resposta": 0,
+    "explicacoes": [
+      "Correto. Comparar processos formais respeitando contextos distintos.",
+      "Incorreto. Assumir identidade estilistica total nao representa a melhor resposta historico-estilistica para este enunciado.",
+      "Incorreto. Ignorar diferencas de genero nao representa a melhor resposta historico-estilistica para este enunciado.",
+      "Incorreto. Eliminar dados historicos nao representa a melhor resposta historico-estilistica para este enunciado."
+    ]
+  },
+  {
+    "nivel": "dificil",
+    "tema": "historia",
+    "subtema": "unidade3",
+    "topico": "historia-da-musica",
+    "pergunta": "A ideia de canon musical ocidental pode ser criticada por:",
+    "opcoes": [
+      "Excluir repertorios e perspectivas historicas diversas",
+      "Ser totalmente neutra",
+      "Nao influenciar curriculos",
+      "Dispensar revisoes"
+    ],
+    "resposta": 0,
+    "explicacoes": [
+      "Correto. Excluir repertorios e perspectivas historicas diversas.",
+      "Incorreto. Ser totalmente neutra nao representa a melhor resposta historico-estilistica para este enunciado.",
+      "Incorreto. Nao influenciar curriculos nao representa a melhor resposta historico-estilistica para este enunciado.",
+      "Incorreto. Dispensar revisoes nao representa a melhor resposta historico-estilistica para este enunciado."
+    ]
+  },
+  {
+    "nivel": "dificil",
+    "tema": "historia",
+    "subtema": "unidade3",
+    "topico": "historia-da-musica",
+    "pergunta": "No sec XX, ampliacao do material sonoro inclui ruido e timbre como:",
+    "opcoes": [
+      "Elementos composicionais estruturantes",
+      "Acidentes sem funcao",
+      "Erros de execucao obrigatorios",
+      "Residuos nao musicais"
+    ],
+    "resposta": 0,
+    "explicacoes": [
+      "Correto. Elementos composicionais estruturantes.",
+      "Incorreto. Acidentes sem funcao nao representa a melhor resposta historico-estilistica para este enunciado.",
+      "Incorreto. Erros de execucao obrigatorios nao representa a melhor resposta historico-estilistica para este enunciado.",
+      "Incorreto. Residuos nao musicais nao representa a melhor resposta historico-estilistica para este enunciado."
+    ]
+  },
+  {
+    "nivel": "dificil",
+    "tema": "historia",
+    "subtema": "unidade3",
+    "topico": "historia-da-musica",
+    "pergunta": "A leitura de periodos como 'barroco' e 'classico' ganha rigor quando:",
+    "opcoes": [
+      "Combina escuta analitica e documentacao historica",
+      "Depende apenas de opiniao pessoal",
+      "Evita confronto com fontes",
+      "Se baseia so em cronologia"
+    ],
+    "resposta": 0,
+    "explicacoes": [
+      "Correto. Combina escuta analitica e documentacao historica.",
+      "Incorreto. Depende apenas de opiniao pessoal nao representa a melhor resposta historico-estilistica para este enunciado.",
+      "Incorreto. Evita confronto com fontes nao representa a melhor resposta historico-estilistica para este enunciado.",
+      "Incorreto. Se baseia so em cronologia nao representa a melhor resposta historico-estilistica para este enunciado."
+    ]
+  },
+  {
+    "nivel": "dificil",
+    "tema": "historia",
+    "subtema": "unidade3",
+    "topico": "historia-da-musica",
+    "pergunta": "Em provas de conservatorio, diferenciar contexto liturgico e cortesao e importante porque:",
+    "opcoes": [
+      "Afeta funcao, genero e linguagem",
+      "Nao altera nada na musica",
+      "So muda o idioma",
+      "Vale apenas para opera"
+    ],
+    "resposta": 0,
+    "explicacoes": [
+      "Correto. Afeta funcao, genero e linguagem.",
+      "Incorreto. Nao altera nada na musica nao representa a melhor resposta historico-estilistica para este enunciado.",
+      "Incorreto. So muda o idioma nao representa a melhor resposta historico-estilistica para este enunciado.",
+      "Incorreto. Vale apenas para opera nao representa a melhor resposta historico-estilistica para este enunciado."
+    ]
+  },
+  {
+    "nivel": "dificil",
+    "tema": "historia",
+    "subtema": "unidade3",
+    "topico": "historia-da-musica",
+    "pergunta": "O conceito de 'obra' no sec XIX difere de praticas anteriores, entre outros motivos, pela:",
+    "opcoes": [
+      "Fixacao editorial e valorizacao autoral",
+      "Ausencia de partitura",
+      "Eliminacao do publico",
+      "Fim da interpretacao"
+    ],
+    "resposta": 0,
+    "explicacoes": [
+      "Correto. Fixacao editorial e valorizacao autoral.",
+      "Incorreto. Ausencia de partitura nao representa a melhor resposta historico-estilistica para este enunciado.",
+      "Incorreto. Eliminacao do publico nao representa a melhor resposta historico-estilistica para este enunciado.",
+      "Incorreto. Fim da interpretacao nao representa a melhor resposta historico-estilistica para este enunciado."
+    ]
+  },
+  {
+    "nivel": "dificil",
+    "tema": "historia",
+    "subtema": "unidade3",
+    "topico": "historia-da-musica",
+    "pergunta": "Uma armadilha anacronica comum ao estudar idade media e:",
+    "opcoes": [
+      "Aplicar criterios tonais do sec XIX sem media??o",
+      "Reconhecer diferencas modais",
+      "Investigar notacao neumatica",
+      "Comparar fontes"
+    ],
+    "resposta": 0,
+    "explicacoes": [
+      "Correto. Aplicar criterios tonais do sec XIX sem media??o.",
+      "Incorreto. Reconhecer diferencas modais nao representa a melhor resposta historico-estilistica para este enunciado.",
+      "Incorreto. Investigar notacao neumatica nao representa a melhor resposta historico-estilistica para este enunciado.",
+      "Incorreto. Comparar fontes nao representa a melhor resposta historico-estilistica para este enunciado."
+    ]
+  },
+  {
+    "nivel": "dificil",
+    "tema": "historia",
+    "subtema": "unidade3",
+    "topico": "historia-da-musica",
+    "pergunta": "Ao tratar impressionismo, reduzir tudo a 'falta de forma' e inadequado porque:",
+    "opcoes": [
+      "Ha organizacoes formais proprias e sofisticadas",
+      "Nao existe estrutura alguma",
+      "So ha improviso",
+      "Nao ha planejamento timbrico"
+    ],
+    "resposta": 0,
+    "explicacoes": [
+      "Correto. Ha organizacoes formais proprias e sofisticadas.",
+      "Incorreto. Nao existe estrutura alguma nao representa a melhor resposta historico-estilistica para este enunciado.",
+      "Incorreto. So ha improviso nao representa a melhor resposta historico-estilistica para este enunciado.",
+      "Incorreto. Nao ha planejamento timbrico nao representa a melhor resposta historico-estilistica para este enunciado."
+    ]
+  },
+  {
+    "nivel": "dificil",
+    "tema": "historia",
+    "subtema": "unidade3",
+    "topico": "historia-da-musica",
+    "pergunta": "No romantismo, a expansao harmonica nao implica necessariamente:",
+    "opcoes": [
+      "Desaparecimento imediato da tonalidade",
+      "Aumento de cromatismo",
+      "Maior tensao funcional",
+      "Novas trajetorias modulantes"
+    ],
+    "resposta": 0,
+    "explicacoes": [
+      "Correto. Desaparecimento imediato da tonalidade.",
+      "Incorreto. Aumento de cromatismo nao representa a melhor resposta historico-estilistica para este enunciado.",
+      "Incorreto. Maior tensao funcional nao representa a melhor resposta historico-estilistica para este enunciado.",
+      "Incorreto. Novas trajetorias modulantes nao representa a melhor resposta historico-estilistica para este enunciado."
+    ]
+  },
+  {
+    "nivel": "dificil",
+    "tema": "historia",
+    "subtema": "unidade3",
+    "topico": "historia-da-musica",
+    "pergunta": "A relacao entre historia social e historia da musica e relevante pois:",
+    "opcoes": [
+      "Instituicoes, publico e mercado influenciam repertorios",
+      "Musica evolui isolada da sociedade",
+      "Contexto economico e irrelevante",
+      "Politica nao afeta circulacao"
+    ],
+    "resposta": 0,
+    "explicacoes": [
+      "Correto. Instituicoes, publico e mercado influenciam repertorios.",
+      "Incorreto. Musica evolui isolada da sociedade nao representa a melhor resposta historico-estilistica para este enunciado.",
+      "Incorreto. Contexto economico e irrelevante nao representa a melhor resposta historico-estilistica para este enunciado.",
+      "Incorreto. Politica nao afeta circulacao nao representa a melhor resposta historico-estilistica para este enunciado."
+    ]
+  },
+  {
+    "nivel": "dificil",
+    "tema": "historia",
+    "subtema": "unidade3",
+    "topico": "historia-da-musica",
+    "pergunta": "Em historiografia critica, 'grandes compositores' devem ser estudados com:",
+    "opcoes": [
+      "Contextualizacao, fontes e debate interpretativo",
+      "Hagiografia sem questionamento",
+      "Exclusao de repertorios perifericos",
+      "Analise apenas biografica"
+    ],
+    "resposta": 0,
+    "explicacoes": [
+      "Correto. Contextualizacao, fontes e debate interpretativo.",
+      "Incorreto. Hagiografia sem questionamento nao representa a melhor resposta historico-estilistica para este enunciado.",
+      "Incorreto. Exclusao de repertorios perifericos nao representa a melhor resposta historico-estilistica para este enunciado.",
+      "Incorreto. Analise apenas biografica nao representa a melhor resposta historico-estilistica para este enunciado."
+    ]
+  },
+  {
+    "nivel": "dificil",
+    "tema": "historia",
+    "subtema": "unidade3",
+    "topico": "historia-da-musica",
+    "pergunta": "A no??o de progresso linear na historia da musica e limitada porque:",
+    "opcoes": [
+      "Processos historicos incluem descontinuidades e coexistencias",
+      "Todo periodo supera totalmente o anterior",
+      "Nao ha repeticoes historicas",
+      "Tecnica cresce sempre no mesmo sentido"
+    ],
+    "resposta": 0,
+    "explicacoes": [
+      "Correto. Processos historicos incluem descontinuidades e coexistencias.",
+      "Incorreto. Todo periodo supera totalmente o anterior nao representa a melhor resposta historico-estilistica para este enunciado.",
+      "Incorreto. Nao ha repeticoes historicas nao representa a melhor resposta historico-estilistica para este enunciado.",
+      "Incorreto. Tecnica cresce sempre no mesmo sentido nao representa a melhor resposta historico-estilistica para este enunciado."
+    ]
+  },
+  {
+    "nivel": "dificil",
+    "tema": "historia",
+    "subtema": "unidade3",
+    "topico": "historia-da-musica",
+    "pergunta": "No ensino avancado, comparar fontes primarias e secundarias ajuda a:",
+    "opcoes": [
+      "Refinar interpretacoes historicas",
+      "Eliminar necessidade de analise",
+      "Substituir escuta",
+      "Confirmar preconceitos"
+    ],
+    "resposta": 0,
+    "explicacoes": [
+      "Correto. Refinar interpretacoes historicas.",
+      "Incorreto. Eliminar necessidade de analise nao representa a melhor resposta historico-estilistica para este enunciado.",
+      "Incorreto. Substituir escuta nao representa a melhor resposta historico-estilistica para este enunciado.",
+      "Incorreto. Confirmar preconceitos nao representa a melhor resposta historico-estilistica para este enunciado."
+    ]
+  },
+  {
+    "nivel": "dificil",
+    "tema": "historia",
+    "subtema": "unidade3",
+    "topico": "historia-da-musica",
+    "pergunta": "A categoria 'musica erudita ocidental' pode ser problematizada por:",
+    "opcoes": [
+      "Naturalizar hierarquias e exclusoes",
+      "Ser completamente neutra",
+      "Impedir qualquer analise",
+      "Nao ter historia"
+    ],
+    "resposta": 0,
+    "explicacoes": [
+      "Correto. Naturalizar hierarquias e exclusoes.",
+      "Incorreto. Ser completamente neutra nao representa a melhor resposta historico-estilistica para este enunciado.",
+      "Incorreto. Impedir qualquer analise nao representa a melhor resposta historico-estilistica para este enunciado.",
+      "Incorreto. Nao ter historia nao representa a melhor resposta historico-estilistica para este enunciado."
+    ]
+  },
+  {
+    "nivel": "dificil",
+    "tema": "historia",
+    "subtema": "unidade3",
+    "topico": "historia-da-musica",
+    "pergunta": "Uma boa resposta de vestibular/conservatorio em historia da musica deve:",
+    "opcoes": [
+      "Articular conceito, contexto e exemplo musical",
+      "Listar datas sem argumento",
+      "Evitar qualquer comparacao",
+      "Ignorar terminologia"
+    ],
+    "resposta": 0,
+    "explicacoes": [
+      "Correto. Articular conceito, contexto e exemplo musical.",
+      "Incorreto. Listar datas sem argumento nao representa a melhor resposta historico-estilistica para este enunciado.",
+      "Incorreto. Evitar qualquer comparacao nao representa a melhor resposta historico-estilistica para este enunciado.",
+      "Incorreto. Ignorar terminologia nao representa a melhor resposta historico-estilistica para este enunciado."
+    ]
+  }
+];
+
+perguntas.push(...historia_balanceamento);
+
 module.exports = { perguntas, TOPICOS };
