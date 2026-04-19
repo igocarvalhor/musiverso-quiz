@@ -384,6 +384,17 @@ async function syncSessionWithServer() {
     state.totalScore = Number(payload.progress?.totalScore) || 0;
     state.activeLevel = payload.progress?.currentLevel || state.activeLevel;
 
+    // Sync profile photo from server if available
+    if (payload.profilePhoto) {
+      try {
+        localStorage.setItem(getProfilePhotoStorageKey(), payload.profilePhoto);
+        setProfileImage(payload.profilePhoto);
+      } catch (_e) {
+        // Foto grande demais para localStorage, usa so na sessao
+        setProfileImage(payload.profilePhoto);
+      }
+    }
+
     localStorage.setItem("playerId", state.playerId || "");
     saveSessionUser();
   } catch (_error) {
@@ -410,6 +421,17 @@ function loadProfileImage() {
 }
 
 function saveProfileImage(dataUrl) {
+  // Upload to server so it syncs across Web/PWA
+  if (state.playerId) {
+    apiFetch("/api/player/photo", {
+      method: "PATCH",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ playerId: state.playerId, photoDataUrl: dataUrl }),
+    }).catch(() => {
+      // silently ignore upload failures
+    });
+  }
+
   try {
     localStorage.setItem(getProfilePhotoStorageKey(), dataUrl);
     setProfileImage(dataUrl);

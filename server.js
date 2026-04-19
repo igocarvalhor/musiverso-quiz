@@ -1200,7 +1200,7 @@ app.get("/api/player/sync", async (req, res) => {
       return res.status(400).json({ error: "Informe playerId ou nickname." });
     }
 
-    let playerQuery = supabase.from("players").select("id,name");
+    let playerQuery = supabase.from("players").select("id,name,profile_photo");
     if (playerId) {
       playerQuery = playerQuery.eq("id", playerId);
     } else {
@@ -1238,6 +1238,7 @@ app.get("/api/player/sync", async (req, res) => {
         currentLevel: toAppLevel(progressRow?.current_level),
         highestTitle: progressRow?.highest_title || calculateTitle(totalScore),
       },
+      profilePhoto: player.profile_photo || null,
     });
   } catch (error) {
     return res.status(500).json({
@@ -1247,7 +1248,38 @@ app.get("/api/player/sync", async (req, res) => {
   }
 });
 
-app.post("/api/submit-score", async (req, res) => {
+app.patch("/api/player/photo", async (req, res) => {
+  if (!supabase) {
+    return res.status(503).json({ error: "Supabase nao configurado" });
+  }
+
+  try {
+    const { playerId, photoDataUrl } = req.body || {};
+    if (!playerId || typeof photoDataUrl !== "string") {
+      return res.status(400).json({ error: "playerId e photoDataUrl sao obrigatorios." });
+    }
+
+    // Limit size: ~500KB base64 max
+    if (photoDataUrl.length > 700000) {
+      return res.status(413).json({ error: "Imagem muito grande. Tente uma menor." });
+    }
+
+    const { error } = await supabase
+      .from("players")
+      .update({ profile_photo: photoDataUrl })
+      .eq("id", playerId);
+
+    if (error) {
+      throw error;
+    }
+
+    return res.status(200).json({ ok: true });
+  } catch (error) {
+    return res.status(500).json({ error: "Falha ao salvar foto", details: error.message });
+  }
+});
+
+
   if (!supabase) {
     return res.status(503).json({
       error: "Supabase nao configurado",
