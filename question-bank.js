@@ -1674,4 +1674,193 @@ const historia_unidades = [
 
 perguntas.push(...historia_unidades);
 
+const harmonia_extra_2 = [
+  {
+    nivel: "facil",
+    tema: "harmonia",
+    subtema: "funcao",
+    topico: "harmonia-funcional",
+    pergunta: "Em uma progressao tonal simples, qual funcao tende a encerrar com sensacao de repouso?",
+    opcoes: ["Dominante", "Subdominante", "Tonica", "Sensivel"],
+    resposta: 2,
+    explicacoes: [
+      "Incorreto. Dominante cria tensao e expectativa.",
+      "Incorreto. Subdominante prepara o movimento para a dominante.",
+      "Correto. A tonica e o principal polo de repouso tonal.",
+      "Incorreto. Sensivel aponta para a tonica, mas nao encerra por si so.",
+    ],
+  },
+  {
+    nivel: "facil",
+    tema: "harmonia",
+    subtema: "graus",
+    topico: "harmonia-funcional",
+    pergunta: "Na tonalidade de G maior, qual acorde representa a tonica?",
+    opcoes: ["C", "D", "G", "Em"],
+    resposta: 2,
+    explicacoes: [
+      "Incorreto. C e IV grau em G maior.",
+      "Incorreto. D e V grau.",
+      "Correto. G e o I grau (tonica).",
+      "Incorreto. Em e VI grau.",
+    ],
+  },
+  {
+    nivel: "medio",
+    tema: "harmonia",
+    subtema: "analise",
+    topico: "harmonia-funcional",
+    pergunta: "Na progressao C - F - Dm - G - C, qual funcao exerce o acorde Dm?",
+    opcoes: ["Dominante", "Tonica relativa", "Subdominante", "Sensivel"],
+    resposta: 2,
+    explicacoes: [
+      "Incorreto. Dm nao tem funcao dominante principal em C maior.",
+      "Incorreto. Dm e II grau, nao tonica relativa.",
+      "Correto. II grau atua como predominante/subdominante.",
+      "Incorreto. Sensivel e associada ao VII grau.",
+    ],
+  },
+  {
+    nivel: "medio",
+    tema: "harmonia",
+    subtema: "cadencia",
+    topico: "harmonia-funcional",
+    pergunta: "Em D maior, qual sequencia representa uma cadencia perfeita?",
+    opcoes: ["G - D", "A - D", "A - Bm", "Em - A"],
+    resposta: 1,
+    explicacoes: [
+      "Incorreto. G-D e plagal (IV-I).",
+      "Correto. A-D corresponde a V-I em D maior.",
+      "Incorreto. A-Bm tende a leitura deceptiva (V-VI).",
+      "Incorreto. Em-A e preparacao (II-V), sem resolucao final.",
+    ],
+  },
+  {
+    nivel: "dificil",
+    tema: "harmonia",
+    subtema: "dominante_secundaria",
+    topico: "harmonia-funcional",
+    pergunta: "Na tonalidade de C maior, qual acorde pode ser analisado como V/III?",
+    opcoes: ["B", "E", "F#", "C#"],
+    resposta: 0,
+    explicacoes: [
+      "Correto. III grau em C maior e Em; o dominante de Em e B (ou B7).",
+      "Incorreto. E e V/VI (de Am).",
+      "Incorreto. F# nao exerce V/III nesse contexto diatonico funcional.",
+      "Incorreto. C# tambem nao corresponde a V/III aqui.",
+    ],
+  },
+  {
+    nivel: "dificil",
+    tema: "harmonia",
+    subtema: "modulacao",
+    topico: "harmonia-funcional",
+    pergunta: "Qual sinal sugere mais fortemente uma modulacao para a dominante na tonalidade maior?",
+    opcoes: ["Aparecimento de IV-I", "Uso insistente de V/V seguido de V-I na nova regiao", "Repeticao da tonica inicial", "Presenca de acorde diminuto isolado"],
+    resposta: 1,
+    explicacoes: [
+      "Incorreto. IV-I sozinho nao comprova mudanca de centro tonal.",
+      "Correto. Encadeamentos dominantes confirmando novo polo fortalecem leitura modulante.",
+      "Incorreto. Isso tende a manter o centro original.",
+      "Incorreto. Um acorde isolado pode ser apenas coloracao local.",
+    ],
+  },
+];
+
+const historia_unidades_2 = [
+  {
+    nivel: "facil",
+    tema: "historia",
+    subtema: "unidade1",
+    topico: "historia-da-musica",
+    pergunta: "Qual ambiente institucional foi central para a musica liturgica medieval ocidental?",
+    opcoes: ["Catedral e mosteiro", "Teatro de opera moderno", "Estudio eletronico", "Clube de jazz"],
+    resposta: 0,
+    explicacoes: [
+      "Correto. A producao liturgica medieval esteve fortemente ligada a instituicoes religiosas.",
+      "Incorreto. Opera moderna pertence a outro contexto historico.",
+      "Incorreto. Estudio eletronico e seculo XX em diante.",
+      "Incorreto. Jazz e modernidade.",
+    ],
+  },
+  {
+    nivel: "facil",
+    tema: "historia",
+    subtema: "unidade1",
+    topico: "historia-da-musica",
+    pergunta: "No repertorio medieval inicial, a textura mais comum era:",
+    opcoes: ["Monodica", "Politonal", "Dodecafonica", "Minimalista"],
+    resposta: 0,
+    explicacoes: [
+      "Correto. A monodia foi predominante antes da consolidacao da polifonia.",
+      "Incorreto. Politonalidade e conceito posterior.",
+      "Incorreto. Dodecafonismo e seculo XX.",
+      "Incorreto. Minimalismo e contemporaneo.",
+    ],
+  },
+  {
+    nivel: "medio",
+    tema: "historia",
+    subtema: "unidade2",
+    topico: "historia-da-musica",
+    pergunta: "No periodo classico, a sinfonia se consolida principalmente por meio de:",
+    opcoes: ["Textura monodica liturgica", "Desenvolvimento formal e expansao da linguagem orquestral", "Rejeicao da tonalidade", "Uso exclusivo de coro"],
+    resposta: 1,
+    explicacoes: [
+      "Incorreto. Essa descricao nao corresponde ao genero sinfonico classico.",
+      "Correto. O classicismo consolida modelos formais e pratica orquestral.",
+      "Incorreto. A tonalidade segue central no periodo.",
+      "Incorreto. Sinfonia classica e majoritariamente instrumental.",
+    ],
+  },
+  {
+    nivel: "medio",
+    tema: "historia",
+    subtema: "unidade2",
+    topico: "historia-da-musica",
+    pergunta: "Qual afirmacao sobre o romantismo musical e mais adequada?",
+    opcoes: ["Busca expressiva individual e ampliacao de recursos harmonicos", "Retorno estrito ao estilo medieval", "Neutralidade expressiva como ideal", "Uniformidade absoluta de formas"],
+    resposta: 0,
+    explicacoes: [
+      "Correto. O romantismo valoriza subjetividade e expansao da linguagem.",
+      "Incorreto. Nao define o nucleo do romantismo.",
+      "Incorreto. O periodo tende a forte contraste expressivo.",
+      "Incorreto. Ha variedade e flexibilidade formal significativa.",
+    ],
+  },
+  {
+    nivel: "dificil",
+    tema: "historia",
+    subtema: "unidade3",
+    topico: "historia-da-musica",
+    pergunta: "Na historiografia musical, o termo 'modernismo' e melhor entendido como:",
+    opcoes: ["Um estilo unico e homogeneo", "Conjunto plural de propostas de ruptura e reinvencao", "Sinonomo de musica barroca", "Categoria restrita a musica eletronica"],
+    resposta: 1,
+    explicacoes: [
+      "Incorreto. O modernismo inclui correntes diversas.",
+      "Correto. Ha varios modernismos com estrategias esteticas distintas.",
+      "Incorreto. Nao corresponde ao periodo barroco.",
+      "Incorreto. Vai alem da eletronica.",
+    ],
+  },
+  {
+    nivel: "dificil",
+    tema: "historia",
+    subtema: "unidade3",
+    topico: "historia-da-musica",
+    pergunta: "Uma leitura conservatorial de obra historica evita anacronismo quando: ",
+    opcoes: ["Julga repertorio antigo com criterios unicos atuais", "Considera tecnicas, contexto, escuta e convencoes do periodo", "Ignora fontes historicas", "Substitui analise por opiniao pessoal"],
+    resposta: 1,
+    explicacoes: [
+      "Incorreto. Isso pode gerar distorcoes interpretativas.",
+      "Correto. Contextualizar historicamente reduz anacronismos.",
+      "Incorreto. Fontes sao essenciais para analise historica.",
+      "Incorreto. Opiniao sem metodo nao sustenta leitura academica.",
+    ],
+  },
+];
+
+perguntas.push(...harmonia_extra_2);
+perguntas.push(...historia_unidades_2);
+
 module.exports = { perguntas, TOPICOS };
