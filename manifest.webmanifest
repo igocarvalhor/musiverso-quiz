@@ -11,10 +11,16 @@
   "orientation": "portrait-primary",
   "icons": [
     {
-      "src": "/img/musicasa%20(14).png",
+      "src": "/favicon.png?v=2",
       "sizes": "512x512",
       "type": "image/png",
       "purpose": "any maskable"
+    },
+    {
+      "src": "/apple-touch-icon.png?v=2",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
     }
   ]
 }
