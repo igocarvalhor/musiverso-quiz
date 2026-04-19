@@ -1,5 +1,6 @@
 const state = {
   authenticated: false,
+  playerId: "",
   playerName: "",
   activeLevel: "facil",
   unlockedLevels: ["facil"],
@@ -350,12 +351,44 @@ function saveSessionUser() {
   localStorage.setItem(
     "musiversoUser",
     JSON.stringify({
+      id: state.playerId,
       nickname: state.playerName,
       totalScore: state.totalScore,
       currentLevel: state.activeLevel,
       profilePhoto: el.profileImage.src || "",
     })
   );
+}
+
+async function syncSessionWithServer() {
+  if (!state.playerName && !state.playerId) {
+    return;
+  }
+
+  try {
+    const params = new URLSearchParams();
+    if (state.playerId) {
+      params.set("playerId", state.playerId);
+    }
+    if (state.playerName) {
+      params.set("nickname", state.playerName);
+    }
+
+    const payload = await apiFetch(`/api/player/sync?${params.toString()}`);
+    if (!payload?.ok) {
+      return;
+    }
+
+    state.playerId = payload.player?.id || state.playerId;
+    state.playerName = payload.player?.nickname || state.playerName;
+    state.totalScore = Number(payload.progress?.totalScore) || 0;
+    state.activeLevel = payload.progress?.currentLevel || state.activeLevel;
+
+    localStorage.setItem("playerId", state.playerId || "");
+    saveSessionUser();
+  } catch (_error) {
+    // Mantem funcionamento offline/local se a sincronizacao falhar.
+  }
 }
 
 function getProfilePhotoStorageKey() {
@@ -865,6 +898,7 @@ function wireEvents() {
 
   el.logoutBtn.addEventListener("click", () => {
     localStorage.removeItem("musiversoUser");
+    localStorage.removeItem("playerId");
     window.location.href = "/auth.html";
   });
 
@@ -914,9 +948,12 @@ async function bootstrap() {
   }
 
   state.authenticated = true;
+  state.playerId = sessionUser.id || localStorage.getItem("playerId") || "";
   state.playerName = sessionUser.nickname;
   state.totalScore = Number(sessionUser.totalScore) || 0;
   state.activeLevel = sessionUser.currentLevel || "facil";
+
+  await syncSessionWithServer();
 
   // Restaurar IDs de perguntas ja vistas de sessoes anteriores
   for (const level of Object.keys(LEVEL_META)) {

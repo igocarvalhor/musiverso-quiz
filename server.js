@@ -1185,6 +1185,68 @@ app.get("/api/ranking", async (req, res) => {
   }
 });
 
+app.get("/api/player/sync", async (req, res) => {
+  if (!supabase) {
+    return res.status(503).json({
+      error: "Supabase nao configurado",
+    });
+  }
+
+  try {
+    const playerId = String(req.query.playerId || "").trim();
+    const nickname = normalizeNickname(req.query.nickname || "");
+
+    if (!playerId && !nickname) {
+      return res.status(400).json({ error: "Informe playerId ou nickname." });
+    }
+
+    let playerQuery = supabase.from("players").select("id,name");
+    if (playerId) {
+      playerQuery = playerQuery.eq("id", playerId);
+    } else {
+      playerQuery = playerQuery.eq("name", nickname);
+    }
+
+    const { data: player, error: playerError } = await playerQuery.maybeSingle();
+    if (playerError) {
+      throw playerError;
+    }
+
+    if (!player) {
+      return res.status(404).json({ error: "Jogador nao encontrado." });
+    }
+
+    const { data: progressRow, error: progressError } = await supabase
+      .from("player_progress")
+      .select("total_score,current_level,highest_title")
+      .eq("player_id", player.id)
+      .maybeSingle();
+
+    if (progressError) {
+      throw progressError;
+    }
+
+    const totalScore = Number(progressRow?.total_score) || 0;
+    return res.status(200).json({
+      ok: true,
+      player: {
+        id: player.id,
+        nickname: player.name,
+      },
+      progress: {
+        totalScore,
+        currentLevel: toAppLevel(progressRow?.current_level),
+        highestTitle: progressRow?.highest_title || calculateTitle(totalScore),
+      },
+    });
+  } catch (error) {
+    return res.status(500).json({
+      error: "Falha ao sincronizar jogador",
+      details: error.message,
+    });
+  }
+});
+
 app.post("/api/submit-score", async (req, res) => {
   if (!supabase) {
     return res.status(503).json({
