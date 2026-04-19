@@ -12,18 +12,28 @@ class MusiversoApp {
     this.worlds = [];
     this.lessons = [];
     this.playerData = null;
+    this.quizState = null;
+    console.log("[MusiversoApp] Inicializando... playerId:", this.playerId);
     this.init();
   }
 
   async init() {
     if (!this.playerId) {
+      console.warn("[MusiversoApp] Nenhum jogador logado, redirecionando para auth.html");
       window.location.href = "/auth.html";
       return;
     }
 
-    await this.loadPlayerData();
-    await this.loadWorlds();
-    this.renderWorldsView();
+    try {
+      console.log("[MusiversoApp] Carregando dados do jogador...");
+      await this.loadPlayerData();
+      await this.loadWorlds();
+      this.renderWorldsView();
+      console.log("[MusiversoApp] Inicialização concluída!");
+    } catch (error) {
+      console.error("[MusiversoApp] Erro durante inicialização:", error);
+      alert("Erro ao carregar a plataforma: " + error.message);
+    }
   }
 
   /**
@@ -32,11 +42,18 @@ class MusiversoApp {
   async loadPlayerData() {
     try {
       const response = await fetch(`/api/musiverso/player/${this.playerId}/progress`);
+      if (!response.ok) {
+        console.warn(`[MusiversoApp] Status ${response.status} ao carregar progresso do jogador`);
+        // Se jogador é novo, deixar vazio
+        this.playerData = { player: {}, world_progress: [], achievements: [] };
+        return;
+      }
       const data = await response.json();
       this.playerData = data;
-      this.updateHeader();
+      console.log("[MusiversoApp] Progresso do jogador carregado:", data.player);
     } catch (error) {
       console.error("Erro ao carregar dados do jogador:", error);
+      this.playerData = { player: {}, world_progress: [], achievements: [] };
     }
   }
 
@@ -46,9 +63,14 @@ class MusiversoApp {
   async loadWorlds() {
     try {
       const response = await fetch(`/api/musiverso/worlds?player_id=${this.playerId}`);
+      if (!response.ok) {
+        throw new Error(`Erro ${response.status} ao carregar mundos`);
+      }
       this.worlds = await response.json();
+      console.log("[MusiversoApp] Mundos carregados:", this.worlds.length);
     } catch (error) {
       console.error("Erro ao carregar mundos:", error);
+      this.worlds = [];
     }
   }
 
@@ -71,43 +93,52 @@ class MusiversoApp {
    */
   renderWorldsView() {
     const container = document.getElementById("gamePanel");
-    if (!container) return;
+    if (!container) {
+      console.error("[MusiversoApp] #gamePanel não encontrado no DOM");
+      return;
+    }
+
+    console.log("[MusiversoApp] Renderizando visão de mundos...");
 
     let html = '<div class="worlds-grid">';
 
-    this.worlds.forEach((world) => {
-      const locked = !world.unlocked;
-      const progress = this.playerData?.world_progress?.find(
-        (w) => w.world_id === world.id
-      );
+    if (!this.worlds || this.worlds.length === 0) {
+      html += '<p style="grid-column: 1 / -1; text-align: center; padding: 40px;">Carregando mundos...</p>';
+    } else {
+      this.worlds.forEach((world) => {
+        const locked = !world.unlocked;
+        const progress = this.playerData?.world_progress?.find(
+          (w) => w.world_id === world.id
+        );
 
-      html += `
-        <div class="world-card ${locked ? "locked" : "unlocked"}">
-          <div class="world-icon">${world.icon}</div>
-          <h3>${world.name}</h3>
-          <p class="world-description">${world.description}</p>
-          
-          ${locked ? 
-            `<div class="lock-info">🔒 Desbloqueado com ${world.xp_to_unlock} XP</div>` :
-            `
-              <div class="progress-info">
-                <div class="progress-bar">
-                  <div class="progress-fill" style="width: ${
-                    progress ? (progress.lessons_completed / progress.total_lessons) * 100 : 0
-                  }%"></div>
+        html += `
+          <div class="world-card ${locked ? "locked" : "unlocked"}">
+            <div class="world-icon">${world.icon || "🎵"}</div>
+            <h3>${world.name}</h3>
+            <p class="world-description">${world.description || "Descrição indisponível"}</p>
+            
+            ${locked ? 
+              `<div class="lock-info">🔒 Desbloqueado com ${world.xp_to_unlock} XP</div>` :
+              `
+                <div class="progress-info">
+                  <div class="progress-bar">
+                    <div class="progress-fill" style="width: ${
+                      progress ? (progress.lessons_completed / progress.total_lessons) * 100 : 0
+                    }%"></div>
+                  </div>
+                  <span class="progress-text">
+                    ${progress?.lessons_completed || 0}/${progress?.total_lessons || 0}
+                  </span>
                 </div>
-                <span class="progress-text">
-                  ${progress?.lessons_completed || 0}/${progress?.total_lessons || 0}
-                </span>
-              </div>
-              <button class="btn-enter-world" data-world-id="${world.id}">
-                Entrar 🎯
-              </button>
-            `
-          }
-        </div>
-      `;
-    });
+                <button class="btn-enter-world" data-world-id="${world.id}">
+                  Entrar 🎯
+                </button>
+              `
+            }
+          </div>
+        `;
+      });
+    }
 
     html += "</div>";
     container.innerHTML = html;
@@ -412,8 +443,10 @@ class MusiversoApp {
 // Inicializar app quando o DOM estiver pronto
 if (document.readyState === "loading") {
   document.addEventListener("DOMContentLoaded", () => {
+    console.log("[MusiversoApp] DOM carregado, inicializando...");
     window.musiversoApp = new MusiversoApp();
   });
 } else {
+  console.log("[MusiversoApp] DOM já carregado, inicializando imediatamente...");
   window.musiversoApp = new MusiversoApp();
 }
