@@ -255,6 +255,11 @@ button:hover {
   display: none;
 }
 
+/* Ensure interactive elements have min touch target on all screens */
+button, [role="button"] {
+  touch-action: manipulation;
+}
+
 .quiz-header {
   display: grid;
   gap: 6px;
@@ -888,17 +893,84 @@ button:hover {
     font-size: 1.05rem;
   }
 
+  /* Answer buttons: bigger tap area */
   .answer-btn {
-    font-size: 0.95rem;
-    padding: 11px;
+    min-height: 52px;
+    font-size: 1rem;
+    padding: 13px 12px;
   }
 
-  .action-row,
+  /* Action row: Próxima button full width */
+  .action-row {
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .action-row > * {
+    width: 100%;
+  }
+
+  /* Ranking and auth actions: keep as row so buttons remain recognizable */
   .ranking-actions,
   .auth-actions {
-    display: grid;
-    grid-template-columns: 1fr;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
     gap: 8px;
+  }
+
+  /* Score strip: keep 3 columns but smaller font */
+  .score-strip {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  .score-strip p {
+    font-size: 0.72rem;
+    padding: 5px 3px;
+  }
+
+  /* Topic select: "Todos" spans full row, rest in 2 columns */
+  .topic-select {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 8px;
+  }
+
+  .topic-btn:first-child {
+    grid-column: 1 / -1;
+  }
+
+  /* Level buttons: 3 equal columns */
+  .level-select {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 8px;
+  }
+
+  .pill-btn {
+    text-align: center;
+    width: 100%;
+  }
+
+  /* Profile smaller */
+  .profile-frame {
+    width: 68px;
+    height: 68px;
+    border-radius: 16px;
+  }
+
+  /* game-top: keep row layout on mobile */
+  .game-top {
+    flex-direction: row;
+    align-items: flex-start;
+    gap: 8px;
+  }
+
+  /* Safe area for notch/home indicator */
+  .app-shell {
+    padding-bottom: env(safe-area-inset-bottom, 0px);
+    padding-left: env(safe-area-inset-left, 0px);
+    padding-right: env(safe-area-inset-right, 0px);
   }
 
   .auth-shell {
