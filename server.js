@@ -26,9 +26,9 @@ const SUPABASE_KEY = process.env.SUPABASE_SERVICE_ROLE_KEY || process.env.SUPABA
 const hasSupabaseConfig = Boolean(SUPABASE_URL && SUPABASE_KEY);
 const supabase = hasSupabaseConfig ? createClient(SUPABASE_URL, SUPABASE_KEY) : null;
 const ADMIN_USERNAME = String(process.env.ADMIN_USERNAME || "admin").trim();
-const ADMIN_PASSWORD = String(process.env.ADMIN_PASSWORD || "");
-const ADMIN_PASSWORD_HASH = String(process.env.ADMIN_PASSWORD_HASH || "");
-const ADMIN_TOKEN_SECRET = String(process.env.ADMIN_TOKEN_SECRET || "");
+const ADMIN_PASSWORD = String(process.env.ADMIN_PASSWORD || "").trim();
+const ADMIN_PASSWORD_HASH = String(process.env.ADMIN_PASSWORD_HASH || "").trim();
+const ADMIN_TOKEN_SECRET = String(process.env.ADMIN_TOKEN_SECRET || "").trim();
 const ADMIN_TOKEN_TTL_MS = 1000 * 60 * 60 * 8;
 
 const LEVELS = {
