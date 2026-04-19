@@ -4974,6 +4974,612 @@ const teoria_balanceamento = [
 
 perguntas.push(...teoria_balanceamento);
 
+
+const teoria_escalas_modos = [
+  {
+    "nivel": "facil",
+    "tema": "teoria",
+    "subtema": "escalas_e_modos_gregos",
+    "topico": "teoria-musical",
+    "pergunta": "Qual e a estrutura intervalar da escala maior (modo ionio)?",
+    "opcoes": [
+      "T T ST T T T ST",
+      "T ST T T ST T T",
+      "ST T T T ST T T",
+      "T T T ST T ST T"
+    ],
+    "resposta": 0,
+    "explicacoes": [
+      "Correto. T T ST T T T ST. Estrutura: Ionio: T T ST T T T ST.",
+      "Incorreto. T ST T T ST T T. A referencia correta aqui e: Ionio: T T ST T T T ST.",
+      "Incorreto. ST T T T ST T T. A referencia correta aqui e: Ionio: T T ST T T T ST.",
+      "Incorreto. T T T ST T ST T. A referencia correta aqui e: Ionio: T T ST T T T ST."
+    ]
+  },
+  {
+    "nivel": "facil",
+    "tema": "teoria",
+    "subtema": "escalas_e_modos_gregos",
+    "topico": "teoria-musical",
+    "pergunta": "Qual modo grego corresponde a escala maior natural?",
+    "opcoes": [
+      "Ionio",
+      "Dorico",
+      "Frigio",
+      "Locrio"
+    ],
+    "resposta": 0,
+    "explicacoes": [
+      "Correto. Ionio. Estrutura: Ionio: T T ST T T T ST.",
+      "Incorreto. Dorico. A referencia correta aqui e: Ionio: T T ST T T T ST.",
+      "Incorreto. Frigio. A referencia correta aqui e: Ionio: T T ST T T T ST.",
+      "Incorreto. Locrio. A referencia correta aqui e: Ionio: T T ST T T T ST."
+    ]
+  },
+  {
+    "nivel": "facil",
+    "tema": "teoria",
+    "subtema": "escalas_e_modos_gregos",
+    "topico": "teoria-musical",
+    "pergunta": "Qual e a estrutura intervalar do modo dorico?",
+    "opcoes": [
+      "T ST T T T ST T",
+      "T T ST T T T ST",
+      "ST T T T ST T T",
+      "T T T ST T ST T"
+    ],
+    "resposta": 0,
+    "explicacoes": [
+      "Correto. T ST T T T ST T. Estrutura: Dorico: T ST T T T ST T.",
+      "Incorreto. T T ST T T T ST. A referencia correta aqui e: Dorico: T ST T T T ST T.",
+      "Incorreto. ST T T T ST T T. A referencia correta aqui e: Dorico: T ST T T T ST T.",
+      "Incorreto. T T T ST T ST T. A referencia correta aqui e: Dorico: T ST T T T ST T."
+    ]
+  },
+  {
+    "nivel": "facil",
+    "tema": "teoria",
+    "subtema": "escalas_e_modos_gregos",
+    "topico": "teoria-musical",
+    "pergunta": "Qual e a estrutura intervalar do modo frigio?",
+    "opcoes": [
+      "ST T T T ST T T",
+      "T ST T T T ST T",
+      "T T T ST T T ST",
+      "T T ST T T ST T"
+    ],
+    "resposta": 0,
+    "explicacoes": [
+      "Correto. ST T T T ST T T. Estrutura: Frigio: ST T T T ST T T.",
+      "Incorreto. T ST T T T ST T. A referencia correta aqui e: Frigio: ST T T T ST T T.",
+      "Incorreto. T T T ST T T ST. A referencia correta aqui e: Frigio: ST T T T ST T T.",
+      "Incorreto. T T ST T T ST T. A referencia correta aqui e: Frigio: ST T T T ST T T."
+    ]
+  },
+  {
+    "nivel": "facil",
+    "tema": "teoria",
+    "subtema": "escalas_e_modos_gregos",
+    "topico": "teoria-musical",
+    "pergunta": "Qual modo grego tem quarta aumentada como caracteristica?",
+    "opcoes": [
+      "Lidio",
+      "Mixolidio",
+      "Eolio",
+      "Dorico"
+    ],
+    "resposta": 0,
+    "explicacoes": [
+      "Correto. Lidio. Estrutura: Lidio: T T T ST T T ST.",
+      "Incorreto. Mixolidio. A referencia correta aqui e: Lidio: T T T ST T T ST.",
+      "Incorreto. Eolio. A referencia correta aqui e: Lidio: T T T ST T T ST.",
+      "Incorreto. Dorico. A referencia correta aqui e: Lidio: T T T ST T T ST."
+    ]
+  },
+  {
+    "nivel": "facil",
+    "tema": "teoria",
+    "subtema": "escalas_e_modos_gregos",
+    "topico": "teoria-musical",
+    "pergunta": "Qual modo grego tem setima menor e carater de dominante?",
+    "opcoes": [
+      "Mixolidio",
+      "Ionio",
+      "Lidio",
+      "Locrio"
+    ],
+    "resposta": 0,
+    "explicacoes": [
+      "Correto. Mixolidio. Estrutura: Mixolidio: T T ST T T ST T.",
+      "Incorreto. Ionio. A referencia correta aqui e: Mixolidio: T T ST T T ST T.",
+      "Incorreto. Lidio. A referencia correta aqui e: Mixolidio: T T ST T T ST T.",
+      "Incorreto. Locrio. A referencia correta aqui e: Mixolidio: T T ST T T ST T."
+    ]
+  },
+  {
+    "nivel": "facil",
+    "tema": "teoria",
+    "subtema": "escalas_e_modos_gregos",
+    "topico": "teoria-musical",
+    "pergunta": "Qual modo grego corresponde ao modo menor natural?",
+    "opcoes": [
+      "Eolio",
+      "Ionio",
+      "Lidio",
+      "Mixolidio"
+    ],
+    "resposta": 0,
+    "explicacoes": [
+      "Correto. Eolio. Estrutura: Eolio: T ST T T ST T T.",
+      "Incorreto. Ionio. A referencia correta aqui e: Eolio: T ST T T ST T T.",
+      "Incorreto. Lidio. A referencia correta aqui e: Eolio: T ST T T ST T T.",
+      "Incorreto. Mixolidio. A referencia correta aqui e: Eolio: T ST T T ST T T."
+    ]
+  },
+  {
+    "nivel": "facil",
+    "tema": "teoria",
+    "subtema": "escalas_e_modos_gregos",
+    "topico": "teoria-musical",
+    "pergunta": "Qual modo grego possui quinta diminuta na formacao diatonica?",
+    "opcoes": [
+      "Locrio",
+      "Dorico",
+      "Frigio",
+      "Ionio"
+    ],
+    "resposta": 0,
+    "explicacoes": [
+      "Correto. Locrio. Estrutura: Locrio: ST T T ST T T T.",
+      "Incorreto. Dorico. A referencia correta aqui e: Locrio: ST T T ST T T T.",
+      "Incorreto. Frigio. A referencia correta aqui e: Locrio: ST T T ST T T T.",
+      "Incorreto. Ionio. A referencia correta aqui e: Locrio: ST T T ST T T T."
+    ]
+  },
+  {
+    "nivel": "facil",
+    "tema": "teoria",
+    "subtema": "escalas_e_modos_gregos",
+    "topico": "teoria-musical",
+    "pergunta": "No campo modal de C maior, qual e o modo sobre D?",
+    "opcoes": [
+      "Dorico",
+      "Frigio",
+      "Lidio",
+      "Mixolidio"
+    ],
+    "resposta": 0,
+    "explicacoes": [
+      "Correto. Dorico. Estrutura: D Dorico: T ST T T T ST T.",
+      "Incorreto. Frigio. A referencia correta aqui e: D Dorico: T ST T T T ST T.",
+      "Incorreto. Lidio. A referencia correta aqui e: D Dorico: T ST T T T ST T.",
+      "Incorreto. Mixolidio. A referencia correta aqui e: D Dorico: T ST T T T ST T."
+    ]
+  },
+  {
+    "nivel": "facil",
+    "tema": "teoria",
+    "subtema": "escalas_e_modos_gregos",
+    "topico": "teoria-musical",
+    "pergunta": "No campo modal de C maior, qual e o modo sobre B?",
+    "opcoes": [
+      "Locrio",
+      "Eolio",
+      "Frigio",
+      "Ionio"
+    ],
+    "resposta": 0,
+    "explicacoes": [
+      "Correto. Locrio. Estrutura: B Locrio: ST T T ST T T T.",
+      "Incorreto. Eolio. A referencia correta aqui e: B Locrio: ST T T ST T T T.",
+      "Incorreto. Frigio. A referencia correta aqui e: B Locrio: ST T T ST T T T.",
+      "Incorreto. Ionio. A referencia correta aqui e: B Locrio: ST T T ST T T T."
+    ]
+  },
+  {
+    "nivel": "medio",
+    "tema": "teoria",
+    "subtema": "escalas_e_modos_gregos",
+    "topico": "teoria-musical",
+    "pergunta": "Qual alternativa traz corretamente os 7 modos gregos em ordem?",
+    "opcoes": [
+      "Ionio, Dorico, Frigio, Lidio, Mixolidio, Eolio, Locrio",
+      "Ionio, Frigio, Dorico, Lidio, Eolio, Mixolidio, Locrio",
+      "Dorico, Ionio, Frigio, Mixolidio, Lidio, Eolio, Locrio",
+      "Ionio, Dorico, Lidio, Frigio, Mixolidio, Locrio, Eolio"
+    ],
+    "resposta": 0,
+    "explicacoes": [
+      "Correto. Ionio, Dorico, Frigio, Lidio, Mixolidio, Eolio, Locrio. Estrutura: Ordem modal padrao: I II III IV V VI VII.",
+      "Incorreto. Ionio, Frigio, Dorico, Lidio, Eolio, Mixolidio, Locrio. A referencia correta aqui e: Ordem modal padrao: I II III IV V VI VII.",
+      "Incorreto. Dorico, Ionio, Frigio, Mixolidio, Lidio, Eolio, Locrio. A referencia correta aqui e: Ordem modal padrao: I II III IV V VI VII.",
+      "Incorreto. Ionio, Dorico, Lidio, Frigio, Mixolidio, Locrio, Eolio. A referencia correta aqui e: Ordem modal padrao: I II III IV V VI VII."
+    ]
+  },
+  {
+    "nivel": "medio",
+    "tema": "teoria",
+    "subtema": "escalas_e_modos_gregos",
+    "topico": "teoria-musical",
+    "pergunta": "Qual e a diferenca principal entre ionio e mixolidio?",
+    "opcoes": [
+      "A setima no mixolidio e menor",
+      "A terca no mixolidio e menor",
+      "A quarta no mixolidio e aumentada",
+      "A segunda no mixolidio e menor"
+    ],
+    "resposta": 0,
+    "explicacoes": [
+      "Correto. A setima no mixolidio e menor. Estrutura: Ionio: T T ST T T T ST / Mixolidio: T T ST T T ST T.",
+      "Incorreto. A terca no mixolidio e menor. A referencia correta aqui e: Ionio: T T ST T T T ST / Mixolidio: T T ST T T ST T.",
+      "Incorreto. A quarta no mixolidio e aumentada. A referencia correta aqui e: Ionio: T T ST T T T ST / Mixolidio: T T ST T T ST T.",
+      "Incorreto. A segunda no mixolidio e menor. A referencia correta aqui e: Ionio: T T ST T T T ST / Mixolidio: T T ST T T ST T."
+    ]
+  },
+  {
+    "nivel": "medio",
+    "tema": "teoria",
+    "subtema": "escalas_e_modos_gregos",
+    "topico": "teoria-musical",
+    "pergunta": "Qual e a diferenca principal entre ionio e lidio?",
+    "opcoes": [
+      "A quarta no lidio e aumentada",
+      "A setima no lidio e menor",
+      "A terca no lidio e menor",
+      "A sexta no lidio e menor"
+    ],
+    "resposta": 0,
+    "explicacoes": [
+      "Correto. A quarta no lidio e aumentada. Estrutura: Ionio vs Lidio: alteracao no IV grau (justa -> aumentada).",
+      "Incorreto. A setima no lidio e menor. A referencia correta aqui e: Ionio vs Lidio: alteracao no IV grau (justa -> aumentada).",
+      "Incorreto. A terca no lidio e menor. A referencia correta aqui e: Ionio vs Lidio: alteracao no IV grau (justa -> aumentada).",
+      "Incorreto. A sexta no lidio e menor. A referencia correta aqui e: Ionio vs Lidio: alteracao no IV grau (justa -> aumentada)."
+    ]
+  },
+  {
+    "nivel": "medio",
+    "tema": "teoria",
+    "subtema": "escalas_e_modos_gregos",
+    "topico": "teoria-musical",
+    "pergunta": "Qual e a diferenca principal entre eolio e dorico?",
+    "opcoes": [
+      "A sexta no dorico e maior",
+      "A segunda no dorico e menor",
+      "A quinta no dorico e diminuta",
+      "A terca no dorico e maior"
+    ],
+    "resposta": 0,
+    "explicacoes": [
+      "Correto. A sexta no dorico e maior. Estrutura: Eolio: T ST T T ST T T / Dorico: T ST T T T ST T.",
+      "Incorreto. A segunda no dorico e menor. A referencia correta aqui e: Eolio: T ST T T ST T T / Dorico: T ST T T T ST T.",
+      "Incorreto. A quinta no dorico e diminuta. A referencia correta aqui e: Eolio: T ST T T ST T T / Dorico: T ST T T T ST T.",
+      "Incorreto. A terca no dorico e maior. A referencia correta aqui e: Eolio: T ST T T ST T T / Dorico: T ST T T T ST T."
+    ]
+  },
+  {
+    "nivel": "medio",
+    "tema": "teoria",
+    "subtema": "escalas_e_modos_gregos",
+    "topico": "teoria-musical",
+    "pergunta": "Qual e a diferenca principal entre eolio e frigio?",
+    "opcoes": [
+      "A segunda no frigio e menor",
+      "A sexta no frigio e maior",
+      "A setima no frigio e maior",
+      "A quarta no frigio e aumentada"
+    ],
+    "resposta": 0,
+    "explicacoes": [
+      "Correto. A segunda no frigio e menor. Estrutura: Frigio inicia com ST, o eolio inicia com T.",
+      "Incorreto. A sexta no frigio e maior. A referencia correta aqui e: Frigio inicia com ST, o eolio inicia com T.",
+      "Incorreto. A setima no frigio e maior. A referencia correta aqui e: Frigio inicia com ST, o eolio inicia com T.",
+      "Incorreto. A quarta no frigio e aumentada. A referencia correta aqui e: Frigio inicia com ST, o eolio inicia com T."
+    ]
+  },
+  {
+    "nivel": "medio",
+    "tema": "teoria",
+    "subtema": "escalas_e_modos_gregos",
+    "topico": "teoria-musical",
+    "pergunta": "Em C ionio, qual e o modo relativo modal sobre A?",
+    "opcoes": [
+      "A eolio",
+      "A dorico",
+      "A frigio",
+      "A locrio"
+    ],
+    "resposta": 0,
+    "explicacoes": [
+      "Correto. A eolio. Estrutura: A eolio compartilha notas de C maior.",
+      "Incorreto. A dorico. A referencia correta aqui e: A eolio compartilha notas de C maior.",
+      "Incorreto. A frigio. A referencia correta aqui e: A eolio compartilha notas de C maior.",
+      "Incorreto. A locrio. A referencia correta aqui e: A eolio compartilha notas de C maior."
+    ]
+  },
+  {
+    "nivel": "medio",
+    "tema": "teoria",
+    "subtema": "escalas_e_modos_gregos",
+    "topico": "teoria-musical",
+    "pergunta": "Qual e a estrutura da escala menor harmonica?",
+    "opcoes": [
+      "T ST T T ST T+ST ST",
+      "T ST T T ST T T",
+      "T T ST T T T ST",
+      "ST T T T ST T T"
+    ],
+    "resposta": 0,
+    "explicacoes": [
+      "Correto. T ST T T ST T+ST ST. Estrutura: Menor harmonica: 1 2 b3 4 5 b6 7 (intervalo aumentado entre b6 e 7).",
+      "Incorreto. T ST T T ST T T. A referencia correta aqui e: Menor harmonica: 1 2 b3 4 5 b6 7 (intervalo aumentado entre b6 e 7).",
+      "Incorreto. T T ST T T T ST. A referencia correta aqui e: Menor harmonica: 1 2 b3 4 5 b6 7 (intervalo aumentado entre b6 e 7).",
+      "Incorreto. ST T T T ST T T. A referencia correta aqui e: Menor harmonica: 1 2 b3 4 5 b6 7 (intervalo aumentado entre b6 e 7)."
+    ]
+  },
+  {
+    "nivel": "medio",
+    "tema": "teoria",
+    "subtema": "escalas_e_modos_gregos",
+    "topico": "teoria-musical",
+    "pergunta": "Qual e a estrutura da escala menor melodica ascendente?",
+    "opcoes": [
+      "T ST T T T T ST",
+      "T ST T T ST T T",
+      "T T ST T T ST T",
+      "ST T T T ST T T"
+    ],
+    "resposta": 0,
+    "explicacoes": [
+      "Correto. T ST T T T T ST. Estrutura: Menor melodica ascendente: 1 2 b3 4 5 6 7.",
+      "Incorreto. T ST T T ST T T. A referencia correta aqui e: Menor melodica ascendente: 1 2 b3 4 5 6 7.",
+      "Incorreto. T T ST T T ST T. A referencia correta aqui e: Menor melodica ascendente: 1 2 b3 4 5 6 7.",
+      "Incorreto. ST T T T ST T T. A referencia correta aqui e: Menor melodica ascendente: 1 2 b3 4 5 6 7."
+    ]
+  },
+  {
+    "nivel": "medio",
+    "tema": "teoria",
+    "subtema": "escalas_e_modos_gregos",
+    "topico": "teoria-musical",
+    "pergunta": "Qual modo e comum sobre acorde m7 com sonoridade modal jazzistica?",
+    "opcoes": [
+      "Dorico",
+      "Locrio",
+      "Lidio",
+      "Ionio"
+    ],
+    "resposta": 0,
+    "explicacoes": [
+      "Correto. Dorico. Estrutura: Dorico destaca 6 maior sobre acorde menor.",
+      "Incorreto. Locrio. A referencia correta aqui e: Dorico destaca 6 maior sobre acorde menor.",
+      "Incorreto. Lidio. A referencia correta aqui e: Dorico destaca 6 maior sobre acorde menor.",
+      "Incorreto. Ionio. A referencia correta aqui e: Dorico destaca 6 maior sobre acorde menor."
+    ]
+  },
+  {
+    "nivel": "medio",
+    "tema": "teoria",
+    "subtema": "escalas_e_modos_gregos",
+    "topico": "teoria-musical",
+    "pergunta": "Qual modo e comum sobre acorde dominante 7 sem alteracoes?",
+    "opcoes": [
+      "Mixolidio",
+      "Lidio",
+      "Eolio",
+      "Frigio"
+    ],
+    "resposta": 0,
+    "explicacoes": [
+      "Correto. Mixolidio. Estrutura: Mixolidio: 1 2 3 4 5 6 b7.",
+      "Incorreto. Lidio. A referencia correta aqui e: Mixolidio: 1 2 3 4 5 6 b7.",
+      "Incorreto. Eolio. A referencia correta aqui e: Mixolidio: 1 2 3 4 5 6 b7.",
+      "Incorreto. Frigio. A referencia correta aqui e: Mixolidio: 1 2 3 4 5 6 b7."
+    ]
+  },
+  {
+    "nivel": "dificil",
+    "tema": "teoria",
+    "subtema": "escalas_e_modos_gregos",
+    "topico": "teoria-musical",
+    "pergunta": "Qual formula de graus descreve corretamente o modo dorico?",
+    "opcoes": [
+      "1 2 b3 4 5 6 b7",
+      "1 b2 b3 4 5 b6 b7",
+      "1 2 3 #4 5 6 7",
+      "1 2 3 4 5 6 b7"
+    ],
+    "resposta": 0,
+    "explicacoes": [
+      "Correto. 1 2 b3 4 5 6 b7. Estrutura: Dorico = menor com sexta maior.",
+      "Incorreto. 1 b2 b3 4 5 b6 b7. A referencia correta aqui e: Dorico = menor com sexta maior.",
+      "Incorreto. 1 2 3 #4 5 6 7. A referencia correta aqui e: Dorico = menor com sexta maior.",
+      "Incorreto. 1 2 3 4 5 6 b7. A referencia correta aqui e: Dorico = menor com sexta maior."
+    ]
+  },
+  {
+    "nivel": "dificil",
+    "tema": "teoria",
+    "subtema": "escalas_e_modos_gregos",
+    "topico": "teoria-musical",
+    "pergunta": "Qual formula de graus descreve corretamente o modo frigio?",
+    "opcoes": [
+      "1 b2 b3 4 5 b6 b7",
+      "1 2 b3 4 5 6 b7",
+      "1 2 3 #4 5 6 7",
+      "1 2 3 4 5 6 b7"
+    ],
+    "resposta": 0,
+    "explicacoes": [
+      "Correto. 1 b2 b3 4 5 b6 b7. Estrutura: Frigio = menor com segunda menor.",
+      "Incorreto. 1 2 b3 4 5 6 b7. A referencia correta aqui e: Frigio = menor com segunda menor.",
+      "Incorreto. 1 2 3 #4 5 6 7. A referencia correta aqui e: Frigio = menor com segunda menor.",
+      "Incorreto. 1 2 3 4 5 6 b7. A referencia correta aqui e: Frigio = menor com segunda menor."
+    ]
+  },
+  {
+    "nivel": "dificil",
+    "tema": "teoria",
+    "subtema": "escalas_e_modos_gregos",
+    "topico": "teoria-musical",
+    "pergunta": "Qual formula de graus descreve corretamente o modo lidio?",
+    "opcoes": [
+      "1 2 3 #4 5 6 7",
+      "1 2 3 4 5 6 b7",
+      "1 2 b3 4 5 6 b7",
+      "1 b2 b3 4 b5 b6 b7"
+    ],
+    "resposta": 0,
+    "explicacoes": [
+      "Correto. 1 2 3 #4 5 6 7. Estrutura: Lidio = maior com quarta aumentada.",
+      "Incorreto. 1 2 3 4 5 6 b7. A referencia correta aqui e: Lidio = maior com quarta aumentada.",
+      "Incorreto. 1 2 b3 4 5 6 b7. A referencia correta aqui e: Lidio = maior com quarta aumentada.",
+      "Incorreto. 1 b2 b3 4 b5 b6 b7. A referencia correta aqui e: Lidio = maior com quarta aumentada."
+    ]
+  },
+  {
+    "nivel": "dificil",
+    "tema": "teoria",
+    "subtema": "escalas_e_modos_gregos",
+    "topico": "teoria-musical",
+    "pergunta": "Qual formula de graus descreve corretamente o modo mixolidio?",
+    "opcoes": [
+      "1 2 3 4 5 6 b7",
+      "1 2 3 #4 5 6 7",
+      "1 2 b3 4 5 6 b7",
+      "1 b2 b3 4 5 b6 b7"
+    ],
+    "resposta": 0,
+    "explicacoes": [
+      "Correto. 1 2 3 4 5 6 b7. Estrutura: Mixolidio = maior com setima menor.",
+      "Incorreto. 1 2 3 #4 5 6 7. A referencia correta aqui e: Mixolidio = maior com setima menor.",
+      "Incorreto. 1 2 b3 4 5 6 b7. A referencia correta aqui e: Mixolidio = maior com setima menor.",
+      "Incorreto. 1 b2 b3 4 5 b6 b7. A referencia correta aqui e: Mixolidio = maior com setima menor."
+    ]
+  },
+  {
+    "nivel": "dificil",
+    "tema": "teoria",
+    "subtema": "escalas_e_modos_gregos",
+    "topico": "teoria-musical",
+    "pergunta": "Qual formula de graus descreve corretamente o modo locrio?",
+    "opcoes": [
+      "1 b2 b3 4 b5 b6 b7",
+      "1 2 b3 4 5 b6 b7",
+      "1 2 3 4 5 6 b7",
+      "1 2 3 #4 5 6 7"
+    ],
+    "resposta": 0,
+    "explicacoes": [
+      "Correto. 1 b2 b3 4 b5 b6 b7. Estrutura: Locrio = menor com segunda menor e quinta diminuta.",
+      "Incorreto. 1 2 b3 4 5 b6 b7. A referencia correta aqui e: Locrio = menor com segunda menor e quinta diminuta.",
+      "Incorreto. 1 2 3 4 5 6 b7. A referencia correta aqui e: Locrio = menor com segunda menor e quinta diminuta.",
+      "Incorreto. 1 2 3 #4 5 6 7. A referencia correta aqui e: Locrio = menor com segunda menor e quinta diminuta."
+    ]
+  },
+  {
+    "nivel": "dificil",
+    "tema": "teoria",
+    "subtema": "escalas_e_modos_gregos",
+    "topico": "teoria-musical",
+    "pergunta": "Comparando dorico e eolio, qual grau muda?",
+    "opcoes": [
+      "VI grau",
+      "II grau",
+      "IV grau",
+      "VII grau"
+    ],
+    "resposta": 0,
+    "explicacoes": [
+      "Correto. VI grau. Estrutura: Dorico tem 6 maior; eolio tem b6.",
+      "Incorreto. II grau. A referencia correta aqui e: Dorico tem 6 maior; eolio tem b6.",
+      "Incorreto. IV grau. A referencia correta aqui e: Dorico tem 6 maior; eolio tem b6.",
+      "Incorreto. VII grau. A referencia correta aqui e: Dorico tem 6 maior; eolio tem b6."
+    ]
+  },
+  {
+    "nivel": "dificil",
+    "tema": "teoria",
+    "subtema": "escalas_e_modos_gregos",
+    "topico": "teoria-musical",
+    "pergunta": "Comparando mixolidio e ionio, qual grau muda?",
+    "opcoes": [
+      "VII grau",
+      "IV grau",
+      "III grau",
+      "II grau"
+    ],
+    "resposta": 0,
+    "explicacoes": [
+      "Correto. VII grau. Estrutura: Mixolidio tem b7; ionio tem 7.",
+      "Incorreto. IV grau. A referencia correta aqui e: Mixolidio tem b7; ionio tem 7.",
+      "Incorreto. III grau. A referencia correta aqui e: Mixolidio tem b7; ionio tem 7.",
+      "Incorreto. II grau. A referencia correta aqui e: Mixolidio tem b7; ionio tem 7."
+    ]
+  },
+  {
+    "nivel": "dificil",
+    "tema": "teoria",
+    "subtema": "escalas_e_modos_gregos",
+    "topico": "teoria-musical",
+    "pergunta": "Comparando lidio e ionio, qual grau muda?",
+    "opcoes": [
+      "IV grau",
+      "VI grau",
+      "II grau",
+      "VII grau"
+    ],
+    "resposta": 0,
+    "explicacoes": [
+      "Correto. IV grau. Estrutura: Lidio tem #4; ionio tem 4.",
+      "Incorreto. VI grau. A referencia correta aqui e: Lidio tem #4; ionio tem 4.",
+      "Incorreto. II grau. A referencia correta aqui e: Lidio tem #4; ionio tem 4.",
+      "Incorreto. VII grau. A referencia correta aqui e: Lidio tem #4; ionio tem 4."
+    ]
+  },
+  {
+    "nivel": "dificil",
+    "tema": "teoria",
+    "subtema": "escalas_e_modos_gregos",
+    "topico": "teoria-musical",
+    "pergunta": "Qual modo e mais instavel por conter quinta diminuta na estrutura?",
+    "opcoes": [
+      "Locrio",
+      "Ionio",
+      "Lidio",
+      "Mixolidio"
+    ],
+    "resposta": 0,
+    "explicacoes": [
+      "Correto. Locrio. Estrutura: Locrio: 1 b2 b3 4 b5 b6 b7.",
+      "Incorreto. Ionio. A referencia correta aqui e: Locrio: 1 b2 b3 4 b5 b6 b7.",
+      "Incorreto. Lidio. A referencia correta aqui e: Locrio: 1 b2 b3 4 b5 b6 b7.",
+      "Incorreto. Mixolidio. A referencia correta aqui e: Locrio: 1 b2 b3 4 b5 b6 b7."
+    ]
+  },
+  {
+    "nivel": "dificil",
+    "tema": "teoria",
+    "subtema": "escalas_e_modos_gregos",
+    "topico": "teoria-musical",
+    "pergunta": "Qual descricao esta correta para usar modos na improvisacao tonal?",
+    "opcoes": [
+      "Escolher o modo pelo tipo de acorde e pelos graus caracteristicos",
+      "Usar qualquer modo sem relacao com o acorde",
+      "Evitar graus caracteristicos para nao colorir",
+      "Trocar modo apenas pelo ritmo, sem harmonia"
+    ],
+    "resposta": 0,
+    "explicacoes": [
+      "Correto. Escolher o modo pelo tipo de acorde e pelos graus caracteristicos. Estrutura: Ex.: m7 -> dorico; 7 -> mixolidio; maj7(#11) -> lidio.",
+      "Incorreto. Usar qualquer modo sem relacao com o acorde. A referencia correta aqui e: Ex.: m7 -> dorico; 7 -> mixolidio; maj7(#11) -> lidio.",
+      "Incorreto. Evitar graus caracteristicos para nao colorir. A referencia correta aqui e: Ex.: m7 -> dorico; 7 -> mixolidio; maj7(#11) -> lidio.",
+      "Incorreto. Trocar modo apenas pelo ritmo, sem harmonia. A referencia correta aqui e: Ex.: m7 -> dorico; 7 -> mixolidio; maj7(#11) -> lidio."
+    ]
+  }
+];
+
+perguntas.push(...teoria_escalas_modos);
+
 for (const q of perguntas) {
   if (q.topico === "teoria-musical" && (!Array.isArray(q.explicacoes) || q.explicacoes.length !== q.opcoes.length)) {
     q.explicacoes = q.opcoes.map((op, i) => i === q.resposta
