@@ -335,9 +335,10 @@ button, [role="button"] {
   width: calc(100% - 8px);
   height: calc(100% - 8px);
   border-radius: 20px;
-  object-fit: contain;
+  object-fit: cover;
   object-position: center;
   display: none;
+  vertical-align: middle;
   background: #f5fbff;
 }
 

@@ -353,6 +353,7 @@ function saveSessionUser() {
       nickname: state.playerName,
       totalScore: state.totalScore,
       currentLevel: state.activeLevel,
+      profilePhoto: el.profileImage.src || "",
     })
   );
 }
@@ -369,13 +370,71 @@ function setProfileImage(src = "") {
 }
 
 function loadProfileImage() {
-  const stored = localStorage.getItem(getProfilePhotoStorageKey()) || "";
+  const sessionUser = getSessionUser();
+  const fromSession = sessionUser?.profilePhoto || "";
+  const stored = localStorage.getItem(getProfilePhotoStorageKey()) || fromSession;
   setProfileImage(stored);
 }
 
 function saveProfileImage(dataUrl) {
-  localStorage.setItem(getProfilePhotoStorageKey(), dataUrl);
-  setProfileImage(dataUrl);
+  try {
+    localStorage.setItem(getProfilePhotoStorageKey(), dataUrl);
+    setProfileImage(dataUrl);
+    saveSessionUser();
+    return true;
+  } catch (_error) {
+    setFeedback("Imagem muito grande para salvar. Tente outra foto.", "error");
+    return false;
+  }
+}
+
+function processProfileImage(file) {
+  return new Promise((resolve, reject) => {
+    const reader = new FileReader();
+    reader.onload = () => {
+      const source = typeof reader.result === "string" ? reader.result : "";
+      if (!source) {
+        reject(new Error("Nao foi possivel carregar a imagem."));
+        return;
+      }
+
+      const image = new Image();
+      image.onload = () => {
+        try {
+          const side = 256;
+          const canvas = document.createElement("canvas");
+          canvas.width = side;
+          canvas.height = side;
+
+          const ctx = canvas.getContext("2d");
+          if (!ctx) {
+            reject(new Error("Nao foi possivel processar a imagem."));
+            return;
+          }
+
+          const srcW = image.naturalWidth || image.width;
+          const srcH = image.naturalHeight || image.height;
+          const crop = Math.min(srcW, srcH);
+          const sx = Math.floor((srcW - crop) / 2);
+          const sy = Math.floor((srcH - crop) / 2);
+
+          // Crop central quadrado para manter enquadramento consistente em web e PWA.
+          ctx.drawImage(image, sx, sy, crop, crop, 0, 0, side, side);
+
+          const compressed = canvas.toDataURL("image/jpeg", 0.82);
+          resolve(compressed);
+        } catch (_error) {
+          reject(new Error("Falha ao processar a imagem."));
+        }
+      };
+
+      image.onerror = () => reject(new Error("Arquivo de imagem invalido."));
+      image.src = source;
+    };
+
+    reader.onerror = () => reject(new Error("Falha ao ler a imagem."));
+    reader.readAsDataURL(file);
+  });
 }
 
 function getSeenStorageKey(level) {
@@ -815,23 +874,17 @@ function wireEvents() {
       return;
     }
 
-    const reader = new FileReader();
-    reader.onload = () => {
-      const result = typeof reader.result === "string" ? reader.result : "";
-      if (!result) {
-        setFeedback("Nao foi possivel carregar a imagem.", "error");
-        return;
-      }
+    processProfileImage(file)
+      .then((result) => {
+        const saved = saveProfileImage(result);
+        if (saved) {
+          setFeedback("Foto de perfil atualizada!", "ok");
+        }
+      })
+      .catch((error) => {
+        setFeedback(error.message || "Falha ao atualizar a foto.", "error");
+      });
 
-      saveProfileImage(result);
-      setFeedback("Foto de perfil atualizada!", "ok");
-    };
-
-    reader.onerror = () => {
-      setFeedback("Falha ao ler a imagem.", "error");
-    };
-
-    reader.readAsDataURL(file);
     event.target.value = "";
   });
 
