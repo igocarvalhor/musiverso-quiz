@@ -419,6 +419,80 @@ button, [role="button"] {
   line-height: 1;
 }
 
+@media (min-width: 781px) {
+  .quiz-header {
+    gap: 10px;
+  }
+
+  .game-top {
+    display: grid;
+    grid-template-columns: minmax(320px, 1fr) auto;
+    gap: 12px;
+    align-items: stretch;
+  }
+
+  .game-top > div:first-child {
+    display: grid;
+    grid-template-columns: 100px 1fr;
+    grid-template-areas:
+      "avatar label"
+      "avatar name";
+    align-items: center;
+    column-gap: 12px;
+    row-gap: 2px;
+    padding: 8px 10px;
+    border-radius: 14px;
+    border: 1px solid rgba(144, 212, 255, 0.55);
+    background: linear-gradient(180deg, rgba(236, 248, 255, 0.95), rgba(247, 252, 255, 0.9));
+  }
+
+  .game-top > div:first-child .mini-label {
+    grid-area: label;
+    font-size: 0.74rem;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    opacity: 0.72;
+  }
+
+  .game-top > div:first-child h2 {
+    grid-area: name;
+    margin: 0;
+    font-size: 1.34rem;
+    line-height: 1.1;
+  }
+
+  .game-top > div:first-child .profile-box {
+    grid-area: avatar;
+    margin-top: 0;
+    justify-self: start;
+  }
+
+  .profile-frame {
+    width: 92px;
+    height: 92px;
+    border-radius: 18px;
+  }
+
+  .profile-image,
+  .profile-placeholder {
+    border-radius: 14px;
+  }
+
+  .status-chips {
+    justify-content: space-between;
+    align-items: flex-end;
+    min-width: 150px;
+    padding: 8px 10px;
+    border-radius: 14px;
+    border: 1px solid rgba(255, 221, 139, 0.55);
+    background: linear-gradient(180deg, rgba(255, 248, 220, 0.9), rgba(255, 255, 255, 0.88));
+  }
+
+  .score-strip {
+    gap: 8px;
+  }
+}
+
 .score-strip {
   margin-top: 8px;
   display: grid;
