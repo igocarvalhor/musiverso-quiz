@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Musiverso Admin</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <main class="admin-shell">
+      <section class="panel admin-panel" id="adminLoginPanel">
+        <h1>Painel Admin</h1>
+        <p class="hint">Acesso restrito para acompanhamento dos dados de uso.</p>
+
+        <div class="input-row admin-input-row">
+          <input id="adminUsername" type="text" autocomplete="username" placeholder="Usuario admin" />
+          <input id="adminPassword" type="password" autocomplete="current-password" placeholder="Senha admin" />
+        </div>
+
+        <div class="auth-actions">
+          <button id="adminLoginBtn" class="primary-btn">Entrar</button>
+          <button id="adminBackBtn" class="secondary-btn" type="button">Voltar para quiz</button>
+        </div>
+
+        <p id="adminStatus" class="feedback"></p>
+      </section>
+
+      <section class="panel admin-panel" id="adminDashboard" hidden>
+        <div class="admin-head-row">
+          <h2>Visao geral</h2>
+          <div class="auth-actions">
+            <button id="adminRefreshBtn" class="secondary-btn" type="button">Atualizar</button>
+            <button id="adminLogoutBtn" class="secondary-btn" type="button">Sair</button>
+          </div>
+        </div>
+
+        <div class="admin-kpis">
+          <article class="admin-kpi-card">
+            <h3>Usuarios</h3>
+            <p id="kpiUsers">0</p>
+          </article>
+          <article class="admin-kpi-card">
+            <h3>Sessoes</h3>
+            <p id="kpiSessions">0</p>
+          </article>
+          <article class="admin-kpi-card">
+            <h3>Ativos 7d</h3>
+            <p id="kpiActive7d">0</p>
+          </article>
+          <article class="admin-kpi-card">
+            <h3>Media sessao</h3>
+            <p id="kpiAvg">0</p>
+          </article>
+        </div>
+
+        <div class="admin-table-wrap">
+          <table class="admin-table">
+            <thead>
+              <tr>
+                <th>Nickname</th>
+                <th>Total</th>
+                <th>Nivel</th>
+                <th>Sessoes</th>
+                <th>Melhor</th>
+                <th>Ultimo acesso</th>
+              </tr>
+            </thead>
+            <tbody id="adminUsersBody"></tbody>
+          </table>
+        </div>
+      </section>
+    </main>
+
+    <script src="admin.js"></script>
+  </body>
+</html>

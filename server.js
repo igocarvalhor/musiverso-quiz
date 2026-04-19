@@ -3,6 +3,7 @@ require("dotenv").config();
 const express = require("express");
 const cors = require("cors");
 const path = require("path");
+const crypto = require("crypto");
 const bcrypt = require("bcryptjs");
 const { createClient } = require("@supabase/supabase-js");
 const { perguntas, TOPICOS } = require("./question-bank");
@@ -24,6 +25,11 @@ const SUPABASE_KEY = process.env.SUPABASE_SERVICE_ROLE_KEY || process.env.SUPABA
 
 const hasSupabaseConfig = Boolean(SUPABASE_URL && SUPABASE_KEY);
 const supabase = hasSupabaseConfig ? createClient(SUPABASE_URL, SUPABASE_KEY) : null;
+const ADMIN_USERNAME = String(process.env.ADMIN_USERNAME || "admin").trim();
+const ADMIN_PASSWORD = String(process.env.ADMIN_PASSWORD || "");
+const ADMIN_PASSWORD_HASH = String(process.env.ADMIN_PASSWORD_HASH || "");
+const ADMIN_TOKEN_SECRET = String(process.env.ADMIN_TOKEN_SECRET || "");
+const ADMIN_TOKEN_TTL_MS = 1000 * 60 * 60 * 8;
 
 const LEVELS = {
   facil: {
@@ -254,6 +260,127 @@ function isValidNickname(nickname) {
 
 function isValidPassword(password) {
   return typeof password === "string" && password.length >= 6 && password.length <= 72;
+}
+
+function getAdminSecret() {
+  if (ADMIN_TOKEN_SECRET) {
+    return ADMIN_TOKEN_SECRET;
+  }
+
+  const fallback = `${SUPABASE_KEY}|${PORT}|musiverso-admin`;
+  return fallback;
+}
+
+function toBase64Url(value) {
+  return Buffer.from(value)
+    .toString("base64")
+    .replace(/=/g, "")
+    .replace(/\+/g, "-")
+    .replace(/\//g, "_");
+}
+
+function fromBase64Url(value) {
+  const normalized = String(value || "")
+    .replace(/-/g, "+")
+    .replace(/_/g, "/");
+  const pad = normalized.length % 4;
+  const withPad = pad ? normalized + "=".repeat(4 - pad) : normalized;
+  return Buffer.from(withPad, "base64").toString("utf8");
+}
+
+function signAdminToken(headerB64, payloadB64) {
+  return crypto
+    .createHmac("sha256", getAdminSecret())
+    .update(`${headerB64}.${payloadB64}`)
+    .digest("base64")
+    .replace(/=/g, "")
+    .replace(/\+/g, "-")
+    .replace(/\//g, "_");
+}
+
+function createAdminToken(username) {
+  const headerB64 = toBase64Url(JSON.stringify({ alg: "HS256", typ: "JWT" }));
+  const payloadB64 = toBase64Url(
+    JSON.stringify({
+      sub: username,
+      role: "admin",
+      exp: Date.now() + ADMIN_TOKEN_TTL_MS,
+    })
+  );
+  const signatureB64 = signAdminToken(headerB64, payloadB64);
+  return `${headerB64}.${payloadB64}.${signatureB64}`;
+}
+
+function verifyAdminToken(token) {
+  const parts = String(token || "").split(".");
+  if (parts.length !== 3) {
+    return null;
+  }
+
+  const [headerB64, payloadB64, signatureB64] = parts;
+  const expectedSignature = signAdminToken(headerB64, payloadB64);
+
+  const expectedBuffer = Buffer.from(expectedSignature);
+  const providedBuffer = Buffer.from(signatureB64 || "");
+
+  if (expectedBuffer.length !== providedBuffer.length) {
+    return null;
+  }
+
+  if (!crypto.timingSafeEqual(expectedBuffer, providedBuffer)) {
+    return null;
+  }
+
+  try {
+    const payload = JSON.parse(fromBase64Url(payloadB64));
+    if (!payload || payload.role !== "admin") {
+      return null;
+    }
+    if (!payload.exp || Date.now() > Number(payload.exp)) {
+      return null;
+    }
+    return payload;
+  } catch (_error) {
+    return null;
+  }
+}
+
+async function isAdminCredentialsValid(username, password) {
+  if (!ADMIN_USERNAME || username !== ADMIN_USERNAME) {
+    return false;
+  }
+
+  if (ADMIN_PASSWORD_HASH) {
+    return bcrypt.compare(password || "", ADMIN_PASSWORD_HASH);
+  }
+
+  if (!ADMIN_PASSWORD) {
+    return false;
+  }
+
+  const left = Buffer.from(String(password || ""));
+  const right = Buffer.from(ADMIN_PASSWORD);
+  if (left.length !== right.length) {
+    return false;
+  }
+
+  return crypto.timingSafeEqual(left, right);
+}
+
+function requireAdmin(req, res, next) {
+  const authHeader = String(req.headers.authorization || "");
+  const token = authHeader.startsWith("Bearer ") ? authHeader.slice(7) : "";
+  const payload = verifyAdminToken(token);
+
+  if (!payload) {
+    return res.status(401).json({ error: "Nao autorizado" });
+  }
+
+  req.admin = {
+    username: payload.sub,
+  };
+
+  return next();
 }
 
 async function findPlayerByNickname(nickname) {
@@ -516,6 +643,132 @@ app.post("/api/auth/login", async (req, res) => {
   } catch (error) {
     return res.status(500).json({
       error: "Falha ao autenticar",
+      details: error.message,
+    });
+  }
+});
+
+app.post("/api/admin/login", async (req, res) => {
+  try {
+    const username = String(req.body?.username || "").trim();
+    const password = String(req.body?.password || "");
+
+    const isValid = await isAdminCredentialsValid(username, password);
+    if (!isValid) {
+      return res.status(401).json({ error: "Credenciais de admin invalidas" });
+    }
+
+    const token = createAdminToken(username);
+    return res.status(200).json({
+      ok: true,
+      token,
+      expiresInMs: ADMIN_TOKEN_TTL_MS,
+      admin: { username },
+    });
+  } catch (error) {
+    return res.status(500).json({
+      error: "Falha no login admin",
+      details: error.message,
+    });
+  }
+});
+
+app.get("/api/admin/overview", requireAdmin, async (_req, res) => {
+  if (!supabase) {
+    return res.status(503).json({ error: "Supabase nao configurado" });
+  }
+
+  try {
+    const [{ data: players, error: playersError }, { data: progressRows, error: progressError }, { data: sessions, error: sessionsError }] = await Promise.all([
+      supabase.from("players").select("id,name,created_at"),
+      supabase.from("player_progress").select("player_id,total_score,current_level,highest_title,updated_at"),
+      supabase.from("game_sessions").select("player_id,score,created_at"),
+    ]);
+
+    if (playersError) {
+      throw playersError;
+    }
+    if (progressError) {
+      throw progressError;
+    }
+    if (sessionsError) {
+      throw sessionsError;
+    }
+
+    const progressByPlayer = new Map((progressRows || []).map((item) => [item.player_id, item]));
+    const sessionsByPlayer = new Map();
+
+    let totalSessions = 0;
+    let totalScores = 0;
+    const activeSince = Date.now() - 1000 * 60 * 60 * 24 * 7;
+
+    for (const session of sessions || []) {
+      totalSessions += 1;
+      totalScores += Number(session.score) || 0;
+
+      const key = session.player_id;
+      const prev = sessionsByPlayer.get(key) || {
+        sessions: 0,
+        bestScore: 0,
+        lastPlayedAt: null,
+      };
+
+      const nextDate = session.created_at ? new Date(session.created_at) : null;
+      const prevDate = prev.lastPlayedAt ? new Date(prev.lastPlayedAt) : null;
+
+      sessionsByPlayer.set(key, {
+        sessions: prev.sessions + 1,
+        bestScore: Math.max(prev.bestScore, Number(session.score) || 0),
+        lastPlayedAt:
+          !prevDate || (nextDate && nextDate > prevDate)
+            ? session.created_at || prev.lastPlayedAt
+            : prev.lastPlayedAt,
+      });
+    }
+
+    const users = (players || []).map((player) => {
+      const progress = progressByPlayer.get(player.id);
+      const sessionInfo = sessionsByPlayer.get(player.id) || {
+        sessions: 0,
+        bestScore: 0,
+        lastPlayedAt: null,
+      };
+
+      return {
+        playerId: player.id,
+        nickname: player.name,
+        totalScore: Number(progress?.total_score) || 0,
+        currentLevel: toAppLevel(progress?.current_level),
+        highestTitle: progress?.highest_title || calculateTitle(Number(progress?.total_score) || 0),
+        sessions: sessionInfo.sessions,
+        bestScore: sessionInfo.bestScore,
+        lastPlayedAt: sessionInfo.lastPlayedAt,
+        createdAt: player.created_at || null,
+        updatedAt: progress?.updated_at || null,
+      };
+    });
+
+    users.sort((a, b) => b.totalScore - a.totalScore || b.bestScore - a.bestScore);
+
+    const activeUsersLast7Days = users.filter((user) => {
+      if (!user.lastPlayedAt) {
+        return false;
+      }
+      return new Date(user.lastPlayedAt).getTime() >= activeSince;
+    }).length;
+
+    return res.status(200).json({
+      summary: {
+        totalUsers: users.length,
+        totalSessions,
+        activeUsersLast7Days,
+        averageSessionScore: totalSessions ? Number((totalScores / totalSessions).toFixed(2)) : 0,
+      },
+      users,
+    });
+  } catch (error) {
+    return res.status(500).json({
+      error: "Falha ao carregar dados admin",
       details: error.message,
     });
   }
