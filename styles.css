@@ -251,6 +251,12 @@ button:hover {
   background: linear-gradient(180deg, rgba(255, 255, 255, 0.96), rgba(246, 253, 255, 0.96));
 }
 
+.ranking-panel {
+  display: flex;
+  flex-direction: column;
+  max-height: min(78vh, 720px);
+}
+
 .mobile-header-tools {
   display: none;
 }
@@ -665,6 +671,25 @@ button, [role="button"] {
   padding: 0;
   display: grid;
   gap: 8px;
+  overflow-y: auto;
+  padding-right: 6px;
+  flex: 1 1 auto;
+  min-height: 0;
+}
+
+.ranking-list::-webkit-scrollbar {
+  width: 10px;
+}
+
+.ranking-list::-webkit-scrollbar-track {
+  background: #eaf5ff;
+  border-radius: 999px;
+}
+
+.ranking-list::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, #8bd2ff, #4da9ff);
+  border-radius: 999px;
+  border: 2px solid #eaf5ff;
 }
 
 .ranking-list li {
@@ -789,12 +814,20 @@ button, [role="button"] {
     flex-wrap: wrap;
     justify-content: flex-end;
   }
+
+  .ranking-panel {
+    max-height: 48vh;
+  }
 }
 
 @media (max-width: 640px) {
   .app-shell {
     width: 96vw;
     margin: 4px auto 12px;
+  }
+
+  .ranking-panel {
+    max-height: 42vh;
   }
 
   .hero {
@@ -823,14 +856,38 @@ button, [role="button"] {
   }
 
   .header-toggle-btn {
-    min-height: 30px;
-    padding: 6px 10px;
-    font-size: 0.74rem;
+    min-height: 38px;
+    padding: 8px 14px;
+    font-size: 0.78rem;
+    font-weight: 800;
+    letter-spacing: 0.02em;
     border-radius: 999px;
-    border: 1px solid #bcdfff;
-    background: #f2f9ff;
-    color: #21456a;
-    box-shadow: 0 4px 10px rgba(98, 163, 216, 0.2);
+    border: 1px solid rgba(86, 177, 255, 0.42);
+    background: linear-gradient(145deg, #ffffff, #dff3ff);
+    color: #174364;
+    box-shadow: 0 10px 20px rgba(77, 146, 214, 0.22);
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .header-toggle-btn::before {
+    content: "◉";
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background: linear-gradient(145deg, #66d8ff, #4da9ff);
+    color: #ffffff;
+    font-size: 0.65rem;
+    box-shadow: inset 0 -2px 0 rgba(0, 0, 0, 0.12);
+  }
+
+  .header-toggle-btn:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 12px 22px rgba(77, 146, 214, 0.28);
   }
 
   .game-top {

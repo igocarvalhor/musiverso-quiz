@@ -128,8 +128,9 @@ const el = {
 
 function setHeaderCollapsed(collapsed) {
   el.quizHeader.classList.toggle("collapsed", collapsed);
-  el.toggleHeaderBtn.textContent = collapsed ? "Mostrar cabecalho" : "Ocultar cabecalho";
+  el.toggleHeaderBtn.textContent = collapsed ? "Perfil" : "Fechar perfil";
   el.toggleHeaderBtn.setAttribute("aria-expanded", String(!collapsed));
+  el.toggleHeaderBtn.setAttribute("aria-label", collapsed ? "Abrir perfil" : "Fechar perfil");
 }
 
 function apiFetch(path, options = {}) {

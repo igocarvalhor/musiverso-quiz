@@ -1,4 +1,4 @@
-const CACHE_NAME = "musiverso-v2";
+const CACHE_NAME = "musiverso-v3";
 const APP_ASSETS = [
   "/",
   "/index.html",
@@ -33,6 +33,21 @@ self.addEventListener("fetch", (event) => {
 
   const requestUrl = new URL(event.request.url);
   if (requestUrl.pathname.startsWith("/api/")) {
+    return;
+  }
+
+  const isAppShellRequest = ["document", "style", "script"].includes(event.request.destination);
+
+  if (isAppShellRequest) {
+    event.respondWith(
+      fetch(event.request)
+        .then((response) => {
+          const responseClone = response.clone();
+          caches.open(CACHE_NAME).then((cache) => cache.put(event.request, responseClone));
+          return response;
+        })
+        .catch(() => caches.match(event.request).then((cached) => cached || caches.match("/index.html")))
+    );
     return;
   }
 
