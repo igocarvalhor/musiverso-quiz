@@ -1,10 +1,10 @@
-const CACHE_NAME = "musiverso-v8";
+const CACHE_NAME = "musiverso-v9";
 const APP_ASSETS = [
   "/",
   "/index.html",
   "/auth.html",
   "/styles.css",
-  "/app.js",
+  "/musiverso-app.js",
   "/auth.js",
   "/manifest.webmanifest",
   "/favicon.ico",
@@ -46,7 +46,10 @@ self.addEventListener("fetch", (event) => {
       fetch(event.request)
         .then((response) => {
           const responseClone = response.clone();
-          caches.open(CACHE_NAME).then((cache) => cache.put(event.request, responseClone));
+          const url = new URL(event.request.url);
+          if (url.protocol === 'http:' || url.protocol === 'https:') {
+            caches.open(CACHE_NAME).then((cache) => cache.put(event.request, responseClone));
+          }
           return response;
         })
         .catch(() => caches.match(event.request).then((cached) => cached || caches.match("/index.html")))
@@ -63,7 +66,10 @@ self.addEventListener("fetch", (event) => {
       return fetch(event.request)
         .then((response) => {
           const responseClone = response.clone();
-          caches.open(CACHE_NAME).then((cache) => cache.put(event.request, responseClone));
+          const url = new URL(event.request.url);
+          if (url.protocol === 'http:' || url.protocol === 'https:') {
+            caches.open(CACHE_NAME).then((cache) => cache.put(event.request, responseClone));
+          }
           return response;
         })
         .catch(() => caches.match("/auth.html"));
