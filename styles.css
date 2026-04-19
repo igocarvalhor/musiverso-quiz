@@ -1639,6 +1639,26 @@ button, [role="button"] {
   font-weight: 800;
 }
 
+.admin-section {
+  margin-bottom: 14px;
+  padding: 14px;
+  border: 1px solid rgba(77, 169, 255, 0.18);
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.55);
+}
+
+.admin-section-head {
+  margin-bottom: 10px;
+}
+
+.admin-section-head h3 {
+  margin: 0 0 4px;
+}
+
+.admin-create-row {
+  grid-template-columns: repeat(3, minmax(180px, 1fr));
+}
+
 .admin-table-wrap {
   overflow: auto;
 }
@@ -1664,8 +1684,37 @@ button, [role="button"] {
   opacity: 0.75;
 }
 
+.admin-user-actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 6px;
+}
+
+.admin-delta-input {
+  width: 78px;
+  min-height: 40px;
+  border-radius: 10px;
+  border: 1px solid rgba(77, 169, 255, 0.26);
+  padding: 8px 10px;
+}
+
+.admin-action-btn {
+  min-height: 40px;
+}
+
+.admin-action-btn.danger {
+  background: #ffe6e6;
+  border-color: #ffb5b5;
+  color: #8b1f1f;
+}
+
 @media (max-width: 780px) {
   .admin-input-row {
+    grid-template-columns: 1fr;
+  }
+
+  .admin-create-row {
     grid-template-columns: 1fr;
   }
 

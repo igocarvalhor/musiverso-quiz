@@ -262,6 +262,20 @@ function isValidPassword(password) {
   return typeof password === "string" && password.length >= 6 && password.length <= 72;
 }
 
+function getLevelByTotalScore(totalScore) {
+  const safeScore = Math.max(Number(totalScore) || 0, 0);
+
+  if (safeScore >= LEVELS.dificil.unlockScore) {
+    return "dificil";
+  }
+
+  if (safeScore >= LEVELS.medio.unlockScore) {
+    return "medio";
+  }
+
+  return "facil";
+}
+
 function getAdminSecret() {
   if (ADMIN_TOKEN_SECRET) {
     return ADMIN_TOKEN_SECRET;
@@ -443,15 +457,8 @@ async function upsertProgress(playerId, sessionScore) {
   }
 
   const previousScore = progressRow?.total_score || 0;
-  const newTotalScore = previousScore + sessionScore;
-
-  let currentLevel = "facil";
-  if (newTotalScore >= LEVELS.dificil.unlockScore) {
-    currentLevel = "dificil";
-  } else if (newTotalScore >= LEVELS.medio.unlockScore) {
-    currentLevel = "medio";
-  }
-
+  const newTotalScore = Math.max(previousScore + sessionScore, 0);
+  const currentLevel = getLevelByTotalScore(newTotalScore);
   const highestTitle = calculateTitle(newTotalScore);
 
   const { error: upsertError } = await supabase.from("player_progress").upsert(
@@ -476,6 +483,49 @@ async function upsertProgress(playerId, sessionScore) {
     currentLevel,
     highestTitle,
   };
+}
+
+async function setProgressTotalScore(playerId, totalScore) {
+  const safeTotalScore = Math.max(Number(totalScore) || 0, 0);
+  const currentLevel = getLevelByTotalScore(safeTotalScore);
+  const highestTitle = calculateTitle(safeTotalScore);
+
+  const { error: upsertError } = await supabase.from("player_progress").upsert(
+    {
+      player_id: playerId,
+      total_score: safeTotalScore,
+      current_level: toDbLevel(currentLevel),
+      highest_title: highestTitle,
+      updated_at: new Date().toISOString(),
+    },
+    {
+      onConflict: "player_id",
+    }
+  );
+
+  if (upsertError) {
+    throw upsertError;
+  }
+
+  return {
+    totalScore: safeTotalScore,
+    currentLevel,
+    highestTitle,
+  };
+}
+
+async function findPlayerById(playerId) {
+  const { data, error } = await supabase
+    .from("players")
+    .select("id,name,created_at")
+    .eq("id", playerId)
+    .maybeSingle();
+
+  if (error) {
+    throw error;
+  }
+
+  return data;
 }
 
 app.get("/api/health", (_req, res) => {
@@ -589,6 +639,19 @@ app.post("/api/auth/login", async (req, res) => {
       });
     }
 
+    const isAdmin = await isAdminCredentialsValid(nickname, password);
+    if (isAdmin) {
+      const token = createAdminToken(nickname);
+      return res.status(200).json({
+        ok: true,
+        role: "admin",
+        token,
+        admin: {
+          username: nickname,
+        },
+      });
+    }
+
     const player = await findPlayerByNickname(nickname);
 
     if (!player) {
@@ -633,6 +696,7 @@ app.post("/api/auth/login", async (req, res) => {
 
     return res.status(200).json({
       ok: true,
+      role: "player",
       user: {
         id: player.id,
         nickname: player.name,
@@ -769,6 +833,165 @@ app.get("/api/admin/overview", requireAdmin, async (_req, res) => {
   } catch (error) {
     return res.status(500).json({
       error: "Falha ao carregar dados admin",
+      details: error.message,
+    });
+  }
+});
+
+app.post("/api/admin/users", requireAdmin, async (req, res) => {
+  if (!supabase) {
+    return res.status(503).json({ error: "Supabase nao configurado" });
+  }
+
+  try {
+    const nickname = normalizeNickname(req.body?.nickname);
+    const password = req.body?.password;
+    const initialScore = Math.max(Number(req.body?.initialScore) || 0, 0);
+
+    if (!isValidNickname(nickname)) {
+      return res.status(400).json({
+        error: "Nickname invalido. Use 3-20 caracteres (letras, numeros e underscore).",
+      });
+    }
+
+    if (!isValidPassword(password)) {
+      return res.status(400).json({
+        error: "Senha invalida. Use de 6 a 72 caracteres.",
+      });
+    }
+
+    const existingPlayer = await findPlayerByNickname(nickname);
+    if (existingPlayer) {
+      return res.status(409).json({ error: "Usuario ja existe." });
+    }
+
+    const { data: player, error: playerError } = await supabase
+      .from("players")
+      .insert({ name: nickname })
+      .select("id,name,created_at")
+      .single();
+
+    if (playerError) {
+      throw playerError;
+    }
+
+    const passwordHash = await bcrypt.hash(password, 10);
+    const { error: authError } = await supabase.from("player_auth").insert({
+      player_id: player.id,
+      password_hash: passwordHash,
+    });
+
+    if (authError) {
+      throw authError;
+    }
+
+    const progress = await setProgressTotalScore(player.id, initialScore);
+
+    return res.status(201).json({
+      ok: true,
+      user: {
+        playerId: player.id,
+        nickname: player.name,
+        totalScore: progress.totalScore,
+        currentLevel: progress.currentLevel,
+        highestTitle: progress.highestTitle,
+        createdAt: player.created_at || null,
+      },
+    });
+  } catch (error) {
+    return res.status(500).json({
+      error: "Falha ao criar usuario",
+      details: error.message,
+    });
+  }
+});
+
+app.delete("/api/admin/users/:playerId", requireAdmin, async (req, res) => {
+  if (!supabase) {
+    return res.status(503).json({ error: "Supabase nao configurado" });
+  }
+
+  try {
+    const playerId = String(req.params.playerId || "").trim();
+    const player = await findPlayerById(playerId);
+
+    if (!player) {
+      return res.status(404).json({ error: "Usuario nao encontrado." });
+    }
+
+    const deletions = [
+      supabase.from("game_sessions").delete().eq("player_id", playerId),
+      supabase.from("player_progress").delete().eq("player_id", playerId),
+      supabase.from("player_auth").delete().eq("player_id", playerId),
+      supabase.from("players").delete().eq("id", playerId),
+    ];
+
+    const results = await Promise.all(deletions);
+    const failed = results.find((result) => result.error);
+    if (failed?.error) {
+      throw failed.error;
+    }
+
+    return res.status(200).json({
+      ok: true,
+      removed: {
+        playerId,
+        nickname: player.name,
+      },
+    });
+  } catch (error) {
+    return res.status(500).json({
+      error: "Falha ao remover usuario",
+      details: error.message,
+    });
+  }
+});
+
+app.patch("/api/admin/users/:playerId/score", requireAdmin, async (req, res) => {
+  if (!supabase) {
+    return res.status(503).json({ error: "Supabase nao configurado" });
+  }
+
+  try {
+    const playerId = String(req.params.playerId || "").trim();
+    const delta = Number(req.body?.delta);
+
+    if (!Number.isFinite(delta) || delta === 0) {
+      return res.status(400).json({ error: "Informe um delta valido diferente de zero." });
+    }
+
+    const player = await findPlayerById(playerId);
+    if (!player) {
+      return res.status(404).json({ error: "Usuario nao encontrado." });
+    }
+
+    const { data: progressRow, error: progressError } = await supabase
+      .from("player_progress")
+      .select("total_score")
+      .eq("player_id", playerId)
+      .maybeSingle();
+
+    if (progressError) {
+      throw progressError;
+    }
+
+    const currentScore = Number(progressRow?.total_score) || 0;
+    const nextScore = Math.max(currentScore + delta, 0);
+    const progress = await setProgressTotalScore(playerId, nextScore);
+
+    return res.status(200).json({
+      ok: true,
+      user: {
+        playerId,
+        nickname: player.name,
+        totalScore: progress.totalScore,
+        currentLevel: progress.currentLevel,
+        highestTitle: progress.highestTitle,
+      },
+    });
+  } catch (error) {
+    return res.status(500).json({
+      error: "Falha ao atualizar pontuacao",
       details: error.message,
     });
   }

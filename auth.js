@@ -6,6 +6,8 @@ const el = {
   authStatus: document.getElementById("authStatus"),
 };
 
+const ADMIN_TOKEN_KEY = "musiversoAdminToken";
+
 function apiFetch(path, options = {}) {
   return fetch(path, options).then((res) => {
     if (!res.ok) {
@@ -35,6 +37,20 @@ function saveSession(user) {
   if (user.id) {
     localStorage.setItem("playerId", user.id);
   }
+}
+
+function clearPlayerSession() {
+  localStorage.removeItem("musiversoUser");
+  localStorage.removeItem("playerId");
+}
+
+function setAdminToken(token) {
+  if (!token) {
+    localStorage.removeItem(ADMIN_TOKEN_KEY);
+    return;
+  }
+
+  localStorage.setItem(ADMIN_TOKEN_KEY, token);
 }
 
 function getSession() {
@@ -69,7 +85,17 @@ async function handleAuth(mode) {
       body: JSON.stringify({ nickname, password }),
     });
 
+    if (mode === "login" && response.role === "admin") {
+      clearPlayerSession();
+      setAdminToken(response.token || "");
+      window.location.href = "/admin.html";
+      return;
+    }
+
+    setAdminToken("");
+
     saveSession({
+      id: response.user.id,
       nickname: response.user.nickname,
       totalScore: response.user.totalScore || 0,
       currentLevel: response.user.currentLevel || "facil",

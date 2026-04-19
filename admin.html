@@ -53,6 +53,23 @@
           </article>
         </div>
 
+        <section class="admin-section">
+          <div class="admin-section-head">
+            <h3>Adicionar usuario</h3>
+            <p class="hint">Crie contas manualmente e defina pontuacao inicial.</p>
+          </div>
+
+          <div class="input-row admin-input-row admin-create-row">
+            <input id="createNickname" type="text" maxlength="20" placeholder="Novo nickname" />
+            <input id="createPassword" type="password" maxlength="72" placeholder="Senha do usuario" />
+            <input id="createScore" type="number" min="0" step="1" placeholder="Pontuacao inicial" />
+          </div>
+
+          <div class="auth-actions">
+            <button id="createUserBtn" class="primary-btn" type="button">Adicionar usuario</button>
+          </div>
+        </section>
+
         <div class="admin-table-wrap">
           <table class="admin-table">
             <thead>
@@ -63,6 +80,7 @@
                 <th>Sessoes</th>
                 <th>Melhor</th>
                 <th>Ultimo acesso</th>
+                <th>Acoes</th>
               </tr>
             </thead>
             <tbody id="adminUsersBody"></tbody>

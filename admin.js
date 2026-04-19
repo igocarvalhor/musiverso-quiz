@@ -13,6 +13,10 @@ const adminEl = {
   kpiSessions: document.getElementById("kpiSessions"),
   kpiActive7d: document.getElementById("kpiActive7d"),
   kpiAvg: document.getElementById("kpiAvg"),
+  createNickname: document.getElementById("createNickname"),
+  createPassword: document.getElementById("createPassword"),
+  createScore: document.getElementById("createScore"),
+  createUserBtn: document.getElementById("createUserBtn"),
 };
 
 const ADMIN_TOKEN_KEY = "musiversoAdminToken";
@@ -87,7 +91,7 @@ function renderUsers(users) {
   adminEl.usersBody.innerHTML = "";
 
   if (!Array.isArray(users) || !users.length) {
-    adminEl.usersBody.innerHTML = '<tr><td colspan="6">Sem dados de usuarios.</td></tr>';
+    adminEl.usersBody.innerHTML = '<tr><td colspan="7">Sem dados de usuarios.</td></tr>';
     return;
   }
 
@@ -100,6 +104,20 @@ function renderUsers(users) {
       <td>${Number(user.sessions || 0)}</td>
       <td>${Number(user.bestScore || 0)}</td>
       <td>${formatDate(user.lastPlayedAt)}</td>
+      <td>
+        <div class="admin-user-actions" data-player-id="${user.playerId}">
+          <input
+            class="admin-delta-input"
+            type="number"
+            step="1"
+            value="50"
+            aria-label="Ajuste de pontos para ${user.nickname || "usuario"}"
+          />
+          <button class="secondary-btn admin-action-btn" data-action="add" type="button">+ pontos</button>
+          <button class="secondary-btn admin-action-btn" data-action="remove" type="button">- pontos</button>
+          <button class="secondary-btn admin-action-btn danger" data-action="delete" type="button">Excluir</button>
+        </div>
+      </td>
     `;
     adminEl.usersBody.appendChild(row);
   }
@@ -151,6 +169,49 @@ async function doLogin() {
   await loadOverview();
 }
 
+async function createUser() {
+  const nickname = adminEl.createNickname.value.trim();
+  const password = adminEl.createPassword.value;
+  const initialScore = Number(adminEl.createScore.value || 0);
+
+  if (!nickname || !password) {
+    setStatus("Informe nickname e senha para criar o usuario.", "error");
+    return;
+  }
+
+  await adminFetch("/api/admin/users", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ nickname, password, initialScore }),
+  });
+
+  adminEl.createNickname.value = "";
+  adminEl.createPassword.value = "";
+  adminEl.createScore.value = "";
+  setStatus("Usuario criado com sucesso.", "ok");
+  await loadOverview();
+}
+
+async function adjustUserScore(playerId, delta) {
+  await adminFetch(`/api/admin/users/${playerId}/score`, {
+    method: "PATCH",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ delta }),
+  });
+
+  setStatus(`Pontuacao atualizada em ${delta > 0 ? "+" : ""}${delta}.`, "ok");
+  await loadOverview();
+}
+
+async function removeUser(playerId) {
+  await adminFetch(`/api/admin/users/${playerId}`, {
+    method: "DELETE",
+  });
+
+  setStatus("Usuario removido com sucesso.", "ok");
+  await loadOverview();
+}
+
 function wireAdminEvents() {
   adminEl.loginBtn.addEventListener("click", async () => {
     try {
@@ -176,6 +237,48 @@ function wireAdminEvents() {
     setToken("");
     showDashboard(false);
     setStatus("Sessao encerrada.", "ok");
+  });
+
+  adminEl.createUserBtn.addEventListener("click", async () => {
+    try {
+      await createUser();
+    } catch (error) {
+      setStatus(error.message || "Erro ao criar usuario", "error");
+    }
+  });
+
+  adminEl.usersBody.addEventListener("click", async (event) => {
+    const actionButton = event.target.closest("button[data-action]");
+    if (!actionButton) {
+      return;
+    }
+
+    const wrapper = actionButton.closest("[data-player-id]");
+    const playerId = wrapper?.getAttribute("data-player-id") || "";
+    const input = wrapper?.querySelector(".admin-delta-input");
+    const baseValue = Math.abs(Number(input?.value || 0));
+
+    try {
+      if (actionButton.dataset.action === "delete") {
+        const confirmed = window.confirm("Excluir este usuario e seus dados? Esta acao nao pode ser desfeita.");
+        if (!confirmed) {
+          return;
+        }
+
+        await removeUser(playerId);
+        return;
+      }
+
+      if (!baseValue) {
+        setStatus("Informe um valor de pontos maior que zero.", "error");
+        return;
+      }
+
+      const delta = actionButton.dataset.action === "remove" ? -baseValue : baseValue;
+      await adjustUserScore(playerId, delta);
+    } catch (error) {
+      setStatus(error.message || "Erro ao executar acao", "error");
+    }
   });
 }
 
