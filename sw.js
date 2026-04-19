@@ -1,4 +1,4 @@
-const CACHE_NAME = "musiverso-v7";
+const CACHE_NAME = "musiverso-v8";
 const APP_ASSETS = [
   "/",
   "/index.html",
@@ -6,7 +6,7 @@ const APP_ASSETS = [
   "/styles.css",
   "/app.js",
   "/auth.js",
-  "/manifest.webmanifest?v=3",
+  "/manifest.webmanifest",
   "/favicon.ico",
   "/favicon-v3.png",
   "/apple-touch-icon-v3.png",
