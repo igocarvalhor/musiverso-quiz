@@ -32,6 +32,9 @@ function setAuthEnabled(enabled) {
 
 function saveSession(user) {
   localStorage.setItem("musiversoUser", JSON.stringify(user));
+  if (user.id) {
+    localStorage.setItem("playerId", user.id);
+  }
 }
 
 function getSession() {

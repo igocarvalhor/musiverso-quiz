@@ -431,6 +431,7 @@ app.post("/api/auth/register", async (req, res) => {
     return res.status(201).json({
       ok: true,
       user: {
+        id: player.id,
         nickname: player.name,
         totalScore: progress.totalScore,
         currentLevel: progress.currentLevel,
@@ -506,6 +507,7 @@ app.post("/api/auth/login", async (req, res) => {
     return res.status(200).json({
       ok: true,
       user: {
+        id: player.id,
         nickname: player.name,
         totalScore: progressRow?.total_score || 0,
         currentLevel: toAppLevel(progressRow?.current_level),
