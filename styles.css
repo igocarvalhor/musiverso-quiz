@@ -98,6 +98,14 @@ body::before {
   animation: float-in 0.7s ease-out both;
 }
 
+.hero-logo {
+  display: block;
+  width: min(200px, 42vw);
+  height: auto;
+  margin: 0 auto 8px;
+  filter: drop-shadow(0 16px 28px rgba(24, 57, 97, 0.18));
+}
+
 .badge {
   margin: 0 auto 8px;
   width: fit-content;
@@ -836,6 +844,11 @@ button, [role="button"] {
 
   .badge {
     font-size: 0.82rem;
+  }
+
+  .hero-logo {
+    width: min(154px, 44vw);
+    margin-bottom: 6px;
   }
 
   .hero h1 {
