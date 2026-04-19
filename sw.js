@@ -1,4 +1,4 @@
-const CACHE_NAME = "musiverso-v6";
+const CACHE_NAME = "musiverso-v7";
 const APP_ASSETS = [
   "/",
   "/index.html",
@@ -6,10 +6,11 @@ const APP_ASSETS = [
   "/styles.css",
   "/app.js",
   "/auth.js",
-  "/manifest.webmanifest",
-  "/favicon.png?v=2",
-  "/apple-touch-icon.png?v=2",
-  "/img/logo-original.png?v=2"
+  "/manifest.webmanifest?v=3",
+  "/favicon.ico",
+  "/favicon-v3.png",
+  "/apple-touch-icon-v3.png",
+  "/img/logo-original-v3.png"
 ];
 
 self.addEventListener("install", (event) => {

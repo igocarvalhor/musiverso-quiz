@@ -26,6 +26,22 @@
       "use": "@vercel/static"
     },
     {
+      "src": "favicon.ico",
+      "use": "@vercel/static"
+    },
+    {
+      "src": "favicon-v3.png",
+      "use": "@vercel/static"
+    },
+    {
+      "src": "apple-touch-icon-v3.png",
+      "use": "@vercel/static"
+    },
+    {
+      "src": "img/logo-original-v3.png",
+      "use": "@vercel/static"
+    },
+    {
       "src": "favicon.png",
       "use": "@vercel/static"
     },
@@ -58,10 +74,6 @@
     {
       "src": "/api/(.*)",
       "dest": "/server.js"
-    },
-    {
-      "src": "/favicon.ico",
-      "dest": "/favicon.png"
     },
     {
       "handle": "filesystem"
