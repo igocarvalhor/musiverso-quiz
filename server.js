@@ -10,6 +10,7 @@ const { perguntas, TOPICOS } = require("./question-bank");
 // ─── Rotas /api/v1 ───────────────────────────────────────────────────────────
 const analisarRoute = require("./routes/analisar");
 const quizRoute = require("./routes/quiz");
+const musiversoRoute = require("./routes/musiverso");
 
 const app = express();
 const PORT = Number(process.env.PORT) || 3000;
@@ -754,6 +755,9 @@ apiV1.post("/resultado", async (req, res) => {
     return res.status(500).json({ error: "Falha ao salvar resultado", details: err.message });
   }
 });
+
+// ─── Rotas Musiverso (Nova Plataforma) ───────────────────────────────────────
+app.use("/api/musiverso", musiversoRoute);
 app.use("/api/v1", apiV1);
 
 app.get("*", (_req, res) => {
