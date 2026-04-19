@@ -1,10 +1,10 @@
-const CACHE_NAME = "musiverso-v9";
+const CACHE_NAME = "musiverso-v10";
 const APP_ASSETS = [
   "/",
   "/index.html",
   "/auth.html",
   "/styles.css",
-  "/musiverso-app.js",
+  "/app-legacy.js",
   "/auth.js",
   "/manifest.webmanifest",
   "/favicon.ico",
