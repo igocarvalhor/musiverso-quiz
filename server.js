@@ -997,6 +997,56 @@ app.patch("/api/admin/users/:playerId/score", requireAdmin, async (req, res) => 
   }
 });
 
+app.patch("/api/admin/users/:playerId/password", requireAdmin, async (req, res) => {
+  if (!supabase) {
+    return res.status(503).json({ error: "Supabase nao configurado" });
+  }
+
+  try {
+    const playerId = String(req.params.playerId || "").trim();
+    const newPassword = String(req.body?.password || "");
+
+    if (!isValidPassword(newPassword)) {
+      return res.status(400).json({
+        error: "Senha invalida. Use de 6 a 72 caracteres.",
+      });
+    }
+
+    const player = await findPlayerById(playerId);
+    if (!player) {
+      return res.status(404).json({ error: "Usuario nao encontrado." });
+    }
+
+    const passwordHash = await bcrypt.hash(newPassword, 10);
+    const { error: authUpdateError } = await supabase.from("player_auth").upsert(
+      {
+        player_id: playerId,
+        password_hash: passwordHash,
+      },
+      {
+        onConflict: "player_id",
+      }
+    );
+
+    if (authUpdateError) {
+      throw authUpdateError;
+    }
+
+    return res.status(200).json({
+      ok: true,
+      user: {
+        playerId,
+        nickname: player.name,
+      },
+    });
+  } catch (error) {
+    return res.status(500).json({
+      error: "Falha ao redefinir senha",
+      details: error.message,
+    });
+  }
+});
+
 app.get("/api/levels", (_req, res) => {
   res.status(200).json({
     levels: LEVELS,

@@ -115,6 +115,7 @@ function renderUsers(users) {
           />
           <button class="secondary-btn admin-action-btn" data-action="add" type="button">+ pontos</button>
           <button class="secondary-btn admin-action-btn" data-action="remove" type="button">- pontos</button>
+          <button class="secondary-btn admin-action-btn" data-action="reset-password" type="button">Resetar senha</button>
           <button class="secondary-btn admin-action-btn danger" data-action="delete" type="button">Excluir</button>
         </div>
       </td>
@@ -212,6 +213,16 @@ async function removeUser(playerId) {
   await loadOverview();
 }
 
+async function resetUserPassword(playerId, password) {
+  await adminFetch(`/api/admin/users/${playerId}/password`, {
+    method: "PATCH",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ password }),
+  });
+
+  setStatus("Senha redefinida com sucesso.", "ok");
+}
+
 function wireAdminEvents() {
   adminEl.loginBtn.addEventListener("click", async () => {
     try {
@@ -266,6 +277,16 @@ function wireAdminEvents() {
         }
 
         await removeUser(playerId);
+        return;
+      }
+
+      if (actionButton.dataset.action === "reset-password") {
+        const newPassword = window.prompt("Digite a nova senha (6 a 72 caracteres):", "");
+        if (!newPassword) {
+          return;
+        }
+
+        await resetUserPassword(playerId, newPassword);
         return;
       }
 
