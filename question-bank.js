@@ -5590,13 +5590,14 @@ function classificarTrilhaDidaticaTeoria(pergunta) {
     /menor harmonica|menor melodica|modos|ionio|dorico|frigio|lidio|mixolidio|eolio|locrio/,
     /modulacao|dominante secundaria|v\/v|acorde pivo|tons vizinhos/,
     /analise funcional|identificacao de graus|interpretacao de cadencias|progressao harmonica/,
+    /diminuto de vii grau|acorde diminuto de vii/,
   ];
 
   const medio = [
     /intervalo|segunda|terca|quarta|quinta|sexta|setima|oitava/,
     /tons e semitons|semitons|formula da escala maior|escala menor natural|campo harmonico maior/,
     /formacao de triades|triade|campo harmonico/,
-    /tonica|subdominante|dominante/,
+    /tonica|subdominante|dominante|iv grau e chamado|vi grau e chamado|ii grau e chamado/,
     /compasso composto|sincope|contratempo/,
     /duas claves|clave de sol e fa|armadura de clave|sustenidos|bemois|bemol/,
   ];
@@ -5606,7 +5607,7 @@ function classificarTrilhaDidaticaTeoria(pergunta) {
     /altura|grave|agudo|intensidade|forte|fraco|duracao|curto|longo|timbre/,
     /pentagrama|linhas e espacos|clave|nome das notas|nota musical/,
     /figuras musicais|semibreve|minima|seminima|pausa|compasso|pulsacao/,
-    /escala maior|graus da escala|i a vii|i grau|ii grau|iii grau|iv grau|v grau|vi grau|vii grau/,
+    /escala maior|graus da escala|i a vii/,
     /o que e acorde|o que e triade|acorde basico|maior e menor/,
   ];
 
