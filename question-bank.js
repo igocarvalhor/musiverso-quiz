@@ -5580,7 +5580,59 @@ const teoria_escalas_modos = [
 
 perguntas.push(...teoria_escalas_modos);
 
+function classificarTrilhaDidaticaTeoria(pergunta) {
+  const p = String(pergunta || "").toLowerCase();
+
+  const dificil = [
+    /harmonia funcional|funcao harmonica completa|tonica relativa|sensivel/,
+    /ii.?v.?i|i.?iv.?v.?i|ciclo de quintas/,
+    /cadencia|plagal|deceptiva|imperfeita|perfeita/,
+    /menor harmonica|menor melodica|modos|ionio|dorico|frigio|lidio|mixolidio|eolio|locrio/,
+    /modulacao|dominante secundaria|v\/v|acorde pivo|tons vizinhos/,
+    /analise funcional|identificacao de graus|interpretacao de cadencias|progressao harmonica/,
+  ];
+
+  const medio = [
+    /intervalo|segunda|terca|quarta|quinta|sexta|setima|oitava/,
+    /tons e semitons|semitons|formula da escala maior|escala menor natural|campo harmonico maior/,
+    /formacao de triades|triade|campo harmonico/,
+    /tonica|subdominante|dominante/,
+    /compasso composto|sincope|contratempo/,
+    /duas claves|clave de sol e fa|armadura de clave|sustenidos|bemois|bemol/,
+  ];
+
+  const facil = [
+    /o que e musica|som x ruido|som e ruido/,
+    /altura|grave|agudo|intensidade|forte|fraco|duracao|curto|longo|timbre/,
+    /pentagrama|linhas e espacos|clave|nome das notas|nota musical/,
+    /figuras musicais|semibreve|minima|seminima|pausa|compasso|pulsacao/,
+    /escala maior|graus da escala|i a vii|i grau|ii grau|iii grau|iv grau|v grau|vi grau|vii grau/,
+    /o que e acorde|o que e triade|acorde basico|maior e menor/,
+  ];
+
+  if (dificil.some((rx) => rx.test(p))) {
+    return { nivel: "dificil", subtema: "analise_funcional_e_harmonia" };
+  }
+
+  if (medio.some((rx) => rx.test(p))) {
+    return { nivel: "medio", subtema: "estrutura_musical" };
+  }
+
+  if (facil.some((rx) => rx.test(p))) {
+    return { nivel: "facil", subtema: "fundamentos_percepcao_e_leitura" };
+  }
+
+  return { nivel: "medio", subtema: "estrutura_musical" };
+}
+
 for (const q of perguntas) {
+  if (q.topico === "teoria-musical") {
+    const trilha = classificarTrilhaDidaticaTeoria(q.pergunta);
+    q.nivel = trilha.nivel;
+    q.tema = "teoria";
+    q.subtema = trilha.subtema;
+  }
+
   if (q.topico === "teoria-musical" && (!Array.isArray(q.explicacoes) || q.explicacoes.length !== q.opcoes.length)) {
     q.explicacoes = q.opcoes.map((op, i) => i === q.resposta
       ? `Correto. ${op}.`
