@@ -31,6 +31,8 @@ const LEVEL_META = {
   dificil: { label: "Dificil", basePoints: 20, unlockScore: 1000, roundSize: 10, timeLimit: 20 },
 };
 
+const RECENT_COOLDOWN_ROUNDS = 3;
+
 const TOPICS = [
   { id: "teoria-musical",     label: "Teoria Musical" },
   { id: "harmonia-funcional", label: "Harmonia Funcional" },
@@ -226,8 +228,7 @@ function handleTimeOut() {
   state.hasAnsweredCurrent = true;
   clearQuestionTimer();
 
-  getSeenSet(state.activeLevel).add(String(question.id));
-  saveSeenIds(state.activeLevel);
+  recordSeenQuestion(state.activeLevel, question.id);
 
   const buttons = Array.from(el.answersWrap.querySelectorAll(".answer-btn"));
   buttons.forEach((btn) => {
@@ -381,6 +382,11 @@ function getSeenStorageKey(level) {
   return `musiversoSeen_${safeName}_${level}`;
 }
 
+function getRecentStorageKey(level) {
+  const safeName = (state.playerName || "anon").toLowerCase();
+  return `musiversoRecent_${safeName}_${level}`;
+}
+
 function loadSeenIds(level) {
   try {
     const raw = localStorage.getItem(getSeenStorageKey(level));
@@ -404,6 +410,64 @@ function clearSeenIds(level) {
   try {
     localStorage.removeItem(getSeenStorageKey(level));
   } catch (_e) {}
+}
+
+function loadRecentIds(level) {
+  try {
+    const raw = localStorage.getItem(getRecentStorageKey(level));
+    if (!raw) return [];
+
+    const parsed = JSON.parse(raw);
+    return Array.isArray(parsed) ? parsed.map((item) => String(item)) : [];
+  } catch (_e) {
+    return [];
+  }
+}
+
+function saveRecentIds(level) {
+  try {
+    const recent = Array.from(state.recentQuestionIdsByLevel?.[level] || []);
+    localStorage.setItem(getRecentStorageKey(level), JSON.stringify(recent));
+  } catch (_e) {}
+}
+
+function getRecentQueue(level) {
+  if (!state.recentQuestionIdsByLevel) {
+    state.recentQuestionIdsByLevel = {};
+  }
+
+  if (!Array.isArray(state.recentQuestionIdsByLevel[level])) {
+    state.recentQuestionIdsByLevel[level] = [];
+  }
+
+  return state.recentQuestionIdsByLevel[level];
+}
+
+function recordSeenQuestion(level, questionId) {
+  const safeId = String(questionId || "").trim();
+  if (!safeId) {
+    return;
+  }
+
+  const seenSet = getSeenSet(level);
+  const queue = getRecentQueue(level);
+
+  seenSet.add(safeId);
+
+  const existingIndex = queue.indexOf(safeId);
+  if (existingIndex >= 0) {
+    queue.splice(existingIndex, 1);
+  }
+
+  queue.push(safeId);
+
+  const cooldownSize = Math.max(LEVEL_META[level]?.roundSize || 10, (LEVEL_META[level]?.roundSize || 10) * RECENT_COOLDOWN_ROUNDS);
+  while (queue.length > cooldownSize) {
+    queue.shift();
+  }
+
+  saveSeenIds(level);
+  saveRecentIds(level);
 }
 
 function getSeenSet(level) {
@@ -475,11 +539,24 @@ async function loadQuestions(level) {
     );
 
     if (!Array.isArray(data.questions) || !data.questions.length) {
-      // Quando o pool esgota, reinicia as vistas desse nivel+topico.
-      getSeenSet(level).clear();
-      clearSeenIds(level);
+      // Quando o pool esgota, preserva um cooldown de perguntas recentes
+      // para evitar repeticao imediata entre rodadas.
+      const recent = getRecentQueue(level);
+      const seenSet = getSeenSet(level);
+      seenSet.clear();
+
+      for (const id of recent) {
+        seenSet.add(String(id));
+      }
+
+      if (!recent.length) {
+        clearSeenIds(level);
+      } else {
+        saveSeenIds(level);
+      }
+
       const retryData = await apiFetch(
-        `/api/questions?level=${level}&limit=${LEVEL_META[level].roundSize}${topicParam}`
+        `/api/questions?level=${level}&limit=${LEVEL_META[level].roundSize}&excludeIds=${encodeURIComponent(Array.from(seenSet).join(","))}${topicParam}`
       );
 
       if (!Array.isArray(retryData.questions) || !retryData.questions.length) {
@@ -532,8 +609,7 @@ async function handleAnswer(selectedIndex) {
   state.hasAnsweredCurrent = true;
   clearQuestionTimer();
 
-  getSeenSet(state.activeLevel).add(String(question.id));
-  saveSeenIds(state.activeLevel);
+  recordSeenQuestion(state.activeLevel, question.id);
 
   const buttons = Array.from(el.answersWrap.querySelectorAll(".answer-btn"));
   buttons.forEach((btn) => {
@@ -791,6 +867,10 @@ async function bootstrap() {
   // Restaurar IDs de perguntas ja vistas de sessoes anteriores
   for (const level of Object.keys(LEVEL_META)) {
     state.seenQuestionIdsByLevel[level] = loadSeenIds(level);
+    if (!state.recentQuestionIdsByLevel) {
+      state.recentQuestionIdsByLevel = {};
+    }
+    state.recentQuestionIdsByLevel[level] = loadRecentIds(level);
   }
 
   const startCollapsed = window.matchMedia("(max-width: 640px)").matches;

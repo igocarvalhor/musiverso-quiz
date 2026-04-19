@@ -3249,4 +3249,1738 @@ const historia_balanceamento = [
 
 perguntas.push(...historia_balanceamento);
 
+const teoria_balanceamento = [
+  {
+    "nivel": "facil",
+    "tema": "teoria",
+    "subtema": "fundamentos",
+    "topico": "teoria-musical",
+    "pergunta": "Qual figura vale 4 tempos no compasso 4/4?",
+    "opcoes": [
+      "Semibreve",
+      "Minima",
+      "Seminima",
+      "Colcheia"
+    ],
+    "resposta": 0,
+    "explicacoes": [
+      "Correto. Semibreve.",
+      "Incorreto. Minima nao corresponde ao conceito teorico pedido no enunciado.",
+      "Incorreto. Seminima nao corresponde ao conceito teorico pedido no enunciado.",
+      "Incorreto. Colcheia nao corresponde ao conceito teorico pedido no enunciado."
+    ]
+  },
+  {
+    "nivel": "facil",
+    "tema": "teoria",
+    "subtema": "fundamentos",
+    "topico": "teoria-musical",
+    "pergunta": "Qual figura vale 2 tempos no compasso 4/4?",
+    "opcoes": [
+      "Semibreve",
+      "Minima",
+      "Seminima",
+      "Semicolcheia"
+    ],
+    "resposta": 1,
+    "explicacoes": [
+      "Incorreto. Semibreve nao corresponde ao conceito teorico pedido no enunciado.",
+      "Correto. Minima.",
+      "Incorreto. Seminima nao corresponde ao conceito teorico pedido no enunciado.",
+      "Incorreto. Semicolcheia nao corresponde ao conceito teorico pedido no enunciado."
+    ]
+  },
+  {
+    "nivel": "facil",
+    "tema": "teoria",
+    "subtema": "fundamentos",
+    "topico": "teoria-musical",
+    "pergunta": "Duas minimas equivalem a:",
+    "opcoes": [
+      "Uma semibreve",
+      "Duas colcheias",
+      "Quatro semicolcheias",
+      "Uma seminima"
+    ],
+    "resposta": 0,
+    "explicacoes": [
+      "Correto. Uma semibreve.",
+      "Incorreto. Duas colcheias nao corresponde ao conceito teorico pedido no enunciado.",
+      "Incorreto. Quatro semicolcheias nao corresponde ao conceito teorico pedido no enunciado.",
+      "Incorreto. Uma seminima nao corresponde ao conceito teorico pedido no enunciado."
+    ]
+  },
+  {
+    "nivel": "facil",
+    "tema": "teoria",
+    "subtema": "fundamentos",
+    "topico": "teoria-musical",
+    "pergunta": "Quatro colcheias equivalem a:",
+    "opcoes": [
+      "Uma semibreve",
+      "Uma minima",
+      "Duas semibreves",
+      "Oito semicolcheias"
+    ],
+    "resposta": 1,
+    "explicacoes": [
+      "Incorreto. Uma semibreve nao corresponde ao conceito teorico pedido no enunciado.",
+      "Correto. Uma minima.",
+      "Incorreto. Duas semibreves nao corresponde ao conceito teorico pedido no enunciado.",
+      "Incorreto. Oito semicolcheias nao corresponde ao conceito teorico pedido no enunciado."
+    ]
+  },
+  {
+    "nivel": "facil",
+    "tema": "teoria",
+    "subtema": "fundamentos",
+    "topico": "teoria-musical",
+    "pergunta": "Qual sinal aumenta a nota em meio tom?",
+    "opcoes": [
+      "Bemol",
+      "Sustenido",
+      "Bequadro",
+      "Pausa"
+    ],
+    "resposta": 1,
+    "explicacoes": [
+      "Incorreto. Bemol nao corresponde ao conceito teorico pedido no enunciado.",
+      "Correto. Sustenido.",
+      "Incorreto. Bequadro nao corresponde ao conceito teorico pedido no enunciado.",
+      "Incorreto. Pausa nao corresponde ao conceito teorico pedido no enunciado."
+    ]
+  },
+  {
+    "nivel": "facil",
+    "tema": "teoria",
+    "subtema": "fundamentos",
+    "topico": "teoria-musical",
+    "pergunta": "Qual sinal abaixa a nota em meio tom?",
+    "opcoes": [
+      "Sustenido",
+      "Bemol",
+      "Fermata",
+      "Ponto de aumento"
+    ],
+    "resposta": 1,
+    "explicacoes": [
+      "Incorreto. Sustenido nao corresponde ao conceito teorico pedido no enunciado.",
+      "Correto. Bemol.",
+      "Incorreto. Fermata nao corresponde ao conceito teorico pedido no enunciado.",
+      "Incorreto. Ponto de aumento nao corresponde ao conceito teorico pedido no enunciado."
+    ]
+  },
+  {
+    "nivel": "facil",
+    "tema": "teoria",
+    "subtema": "fundamentos",
+    "topico": "teoria-musical",
+    "pergunta": "Qual nome recebe o silencio musical?",
+    "opcoes": [
+      "Acorde",
+      "Pausa",
+      "Clave",
+      "Compasso"
+    ],
+    "resposta": 1,
+    "explicacoes": [
+      "Incorreto. Acorde nao corresponde ao conceito teorico pedido no enunciado.",
+      "Correto. Pausa.",
+      "Incorreto. Clave nao corresponde ao conceito teorico pedido no enunciado.",
+      "Incorreto. Compasso nao corresponde ao conceito teorico pedido no enunciado."
+    ]
+  },
+  {
+    "nivel": "facil",
+    "tema": "teoria",
+    "subtema": "fundamentos",
+    "topico": "teoria-musical",
+    "pergunta": "No compasso 2/4, o numero de cima indica:",
+    "opcoes": [
+      "Quantidade de tempos",
+      "Figura que vale um tempo",
+      "Tom da musica",
+      "Tipo de clave"
+    ],
+    "resposta": 0,
+    "explicacoes": [
+      "Correto. Quantidade de tempos.",
+      "Incorreto. Figura que vale um tempo nao corresponde ao conceito teorico pedido no enunciado.",
+      "Incorreto. Tom da musica nao corresponde ao conceito teorico pedido no enunciado.",
+      "Incorreto. Tipo de clave nao corresponde ao conceito teorico pedido no enunciado."
+    ]
+  },
+  {
+    "nivel": "facil",
+    "tema": "teoria",
+    "subtema": "fundamentos",
+    "topico": "teoria-musical",
+    "pergunta": "No compasso 6/8, a unidade de tempo mais comum e:",
+    "opcoes": [
+      "Semibreve",
+      "Colcheia",
+      "Minima",
+      "Seminima"
+    ],
+    "resposta": 1,
+    "explicacoes": [
+      "Incorreto. Semibreve nao corresponde ao conceito teorico pedido no enunciado.",
+      "Correto. Colcheia.",
+      "Incorreto. Minima nao corresponde ao conceito teorico pedido no enunciado.",
+      "Incorreto. Seminima nao corresponde ao conceito teorico pedido no enunciado."
+    ]
+  },
+  {
+    "nivel": "facil",
+    "tema": "teoria",
+    "subtema": "fundamentos",
+    "topico": "teoria-musical",
+    "pergunta": "A nota escrita na segunda linha da clave de Sol e:",
+    "opcoes": [
+      "Do",
+      "Re",
+      "Sol",
+      "La"
+    ],
+    "resposta": 2,
+    "explicacoes": [
+      "Incorreto. Do nao corresponde ao conceito teorico pedido no enunciado.",
+      "Incorreto. Re nao corresponde ao conceito teorico pedido no enunciado.",
+      "Correto. Sol.",
+      "Incorreto. La nao corresponde ao conceito teorico pedido no enunciado."
+    ]
+  },
+  {
+    "nivel": "facil",
+    "tema": "teoria",
+    "subtema": "fundamentos",
+    "topico": "teoria-musical",
+    "pergunta": "A clave de Fa na quarta linha fixa qual nota na linha?",
+    "opcoes": [
+      "Do",
+      "Fa",
+      "Sol",
+      "Mi"
+    ],
+    "resposta": 1,
+    "explicacoes": [
+      "Incorreto. Do nao corresponde ao conceito teorico pedido no enunciado.",
+      "Correto. Fa.",
+      "Incorreto. Sol nao corresponde ao conceito teorico pedido no enunciado.",
+      "Incorreto. Mi nao corresponde ao conceito teorico pedido no enunciado."
+    ]
+  },
+  {
+    "nivel": "facil",
+    "tema": "teoria",
+    "subtema": "fundamentos",
+    "topico": "teoria-musical",
+    "pergunta": "O que e unissono?",
+    "opcoes": [
+      "Duas notas diferentes",
+      "Duas notas com mesma altura",
+      "Acorde de tres sons",
+      "Silencio prolongado"
+    ],
+    "resposta": 1,
+    "explicacoes": [
+      "Incorreto. Duas notas diferentes nao corresponde ao conceito teorico pedido no enunciado.",
+      "Correto. Duas notas com mesma altura.",
+      "Incorreto. Acorde de tres sons nao corresponde ao conceito teorico pedido no enunciado.",
+      "Incorreto. Silencio prolongado nao corresponde ao conceito teorico pedido no enunciado."
+    ]
+  },
+  {
+    "nivel": "facil",
+    "tema": "teoria",
+    "subtema": "fundamentos",
+    "topico": "teoria-musical",
+    "pergunta": "O que e oitava?",
+    "opcoes": [
+      "Intervalo de 8 graus",
+      "Intervalo de 6 graus",
+      "Compasso composto",
+      "Pausa de 8 tempos"
+    ],
+    "resposta": 0,
+    "explicacoes": [
+      "Correto. Intervalo de 8 graus.",
+      "Incorreto. Intervalo de 6 graus nao corresponde ao conceito teorico pedido no enunciado.",
+      "Incorreto. Compasso composto nao corresponde ao conceito teorico pedido no enunciado.",
+      "Incorreto. Pausa de 8 tempos nao corresponde ao conceito teorico pedido no enunciado."
+    ]
+  },
+  {
+    "nivel": "facil",
+    "tema": "teoria",
+    "subtema": "fundamentos",
+    "topico": "teoria-musical",
+    "pergunta": "A escala de Do maior possui acidentes na armadura?",
+    "opcoes": [
+      "Sim, dois sustenidos",
+      "Sim, um bemol",
+      "Nao possui",
+      "Sim, tres bemois"
+    ],
+    "resposta": 2,
+    "explicacoes": [
+      "Incorreto. Sim, dois sustenidos nao corresponde ao conceito teorico pedido no enunciado.",
+      "Incorreto. Sim, um bemol nao corresponde ao conceito teorico pedido no enunciado.",
+      "Correto. Nao possui.",
+      "Incorreto. Sim, tres bemois nao corresponde ao conceito teorico pedido no enunciado."
+    ]
+  },
+  {
+    "nivel": "facil",
+    "tema": "teoria",
+    "subtema": "fundamentos",
+    "topico": "teoria-musical",
+    "pergunta": "Em qual ordem aparecem sustenidos na armadura?",
+    "opcoes": [
+      "Fa Do Sol Re La Mi Si",
+      "Si Mi La Re Sol Do Fa",
+      "Do Re Mi Fa Sol La Si",
+      "La Sol Fa Mi Re Do Si"
+    ],
+    "resposta": 0,
+    "explicacoes": [
+      "Correto. Fa Do Sol Re La Mi Si.",
+      "Incorreto. Si Mi La Re Sol Do Fa nao corresponde ao conceito teorico pedido no enunciado.",
+      "Incorreto. Do Re Mi Fa Sol La Si nao corresponde ao conceito teorico pedido no enunciado.",
+      "Incorreto. La Sol Fa Mi Re Do Si nao corresponde ao conceito teorico pedido no enunciado."
+    ]
+  },
+  {
+    "nivel": "facil",
+    "tema": "teoria",
+    "subtema": "fundamentos",
+    "topico": "teoria-musical",
+    "pergunta": "Em qual ordem aparecem bemois na armadura?",
+    "opcoes": [
+      "Fa Do Sol Re La Mi Si",
+      "Si Mi La Re Sol Do Fa",
+      "Do Si La Sol Fa Mi Re",
+      "Re Mi Fa Sol La Si Do"
+    ],
+    "resposta": 1,
+    "explicacoes": [
+      "Incorreto. Fa Do Sol Re La Mi Si nao corresponde ao conceito teorico pedido no enunciado.",
+      "Correto. Si Mi La Re Sol Do Fa.",
+      "Incorreto. Do Si La Sol Fa Mi Re nao corresponde ao conceito teorico pedido no enunciado.",
+      "Incorreto. Re Mi Fa Sol La Si Do nao corresponde ao conceito teorico pedido no enunciado."
+    ]
+  },
+  {
+    "nivel": "facil",
+    "tema": "teoria",
+    "subtema": "fundamentos",
+    "topico": "teoria-musical",
+    "pergunta": "Qual intervalo de Do para Fa?",
+    "opcoes": [
+      "Terca",
+      "Quarta",
+      "Quinta",
+      "Sexta"
+    ],
+    "resposta": 1,
+    "explicacoes": [
+      "Incorreto. Terca nao corresponde ao conceito teorico pedido no enunciado.",
+      "Correto. Quarta.",
+      "Incorreto. Quinta nao corresponde ao conceito teorico pedido no enunciado.",
+      "Incorreto. Sexta nao corresponde ao conceito teorico pedido no enunciado."
+    ]
+  },
+  {
+    "nivel": "facil",
+    "tema": "teoria",
+    "subtema": "fundamentos",
+    "topico": "teoria-musical",
+    "pergunta": "Qual intervalo de Do para La?",
+    "opcoes": [
+      "Sexta",
+      "Quinta",
+      "Quarta",
+      "Setima"
+    ],
+    "resposta": 0,
+    "explicacoes": [
+      "Correto. Sexta.",
+      "Incorreto. Quinta nao corresponde ao conceito teorico pedido no enunciado.",
+      "Incorreto. Quarta nao corresponde ao conceito teorico pedido no enunciado.",
+      "Incorreto. Setima nao corresponde ao conceito teorico pedido no enunciado."
+    ]
+  },
+  {
+    "nivel": "facil",
+    "tema": "teoria",
+    "subtema": "fundamentos",
+    "topico": "teoria-musical",
+    "pergunta": "A dinamica forte e representada por:",
+    "opcoes": [
+      "p",
+      "mf",
+      "f",
+      "pp"
+    ],
+    "resposta": 2,
+    "explicacoes": [
+      "Incorreto. p nao corresponde ao conceito teorico pedido no enunciado.",
+      "Incorreto. mf nao corresponde ao conceito teorico pedido no enunciado.",
+      "Correto. f.",
+      "Incorreto. pp nao corresponde ao conceito teorico pedido no enunciado."
+    ]
+  },
+  {
+    "nivel": "facil",
+    "tema": "teoria",
+    "subtema": "fundamentos",
+    "topico": "teoria-musical",
+    "pergunta": "A dinamica piano e representada por:",
+    "opcoes": [
+      "f",
+      "ff",
+      "p",
+      "sfz"
+    ],
+    "resposta": 2,
+    "explicacoes": [
+      "Incorreto. f nao corresponde ao conceito teorico pedido no enunciado.",
+      "Incorreto. ff nao corresponde ao conceito teorico pedido no enunciado.",
+      "Correto. p.",
+      "Incorreto. sfz nao corresponde ao conceito teorico pedido no enunciado."
+    ]
+  },
+  {
+    "nivel": "facil",
+    "tema": "teoria",
+    "subtema": "fundamentos",
+    "topico": "teoria-musical",
+    "pergunta": "Crescendo indica:",
+    "opcoes": [
+      "Diminuir gradualmente",
+      "Aumentar gradualmente",
+      "Manter volume",
+      "Acelerar o tempo"
+    ],
+    "resposta": 1,
+    "explicacoes": [
+      "Incorreto. Diminuir gradualmente nao corresponde ao conceito teorico pedido no enunciado.",
+      "Correto. Aumentar gradualmente.",
+      "Incorreto. Manter volume nao corresponde ao conceito teorico pedido no enunciado.",
+      "Incorreto. Acelerar o tempo nao corresponde ao conceito teorico pedido no enunciado."
+    ]
+  },
+  {
+    "nivel": "facil",
+    "tema": "teoria",
+    "subtema": "fundamentos",
+    "topico": "teoria-musical",
+    "pergunta": "Ritardando indica:",
+    "opcoes": [
+      "Acelerar",
+      "Desacelerar",
+      "Aumentar volume",
+      "Mudar tonalidade"
+    ],
+    "resposta": 1,
+    "explicacoes": [
+      "Incorreto. Acelerar nao corresponde ao conceito teorico pedido no enunciado.",
+      "Correto. Desacelerar.",
+      "Incorreto. Aumentar volume nao corresponde ao conceito teorico pedido no enunciado.",
+      "Incorreto. Mudar tonalidade nao corresponde ao conceito teorico pedido no enunciado."
+    ]
+  },
+  {
+    "nivel": "facil",
+    "tema": "teoria",
+    "subtema": "fundamentos",
+    "topico": "teoria-musical",
+    "pergunta": "Andante indica andamento:",
+    "opcoes": [
+      "Muito rapido",
+      "Moderado caminhando",
+      "Extremamente lento",
+      "Sem pulso"
+    ],
+    "resposta": 1,
+    "explicacoes": [
+      "Incorreto. Muito rapido nao corresponde ao conceito teorico pedido no enunciado.",
+      "Correto. Moderado caminhando.",
+      "Incorreto. Extremamente lento nao corresponde ao conceito teorico pedido no enunciado.",
+      "Incorreto. Sem pulso nao corresponde ao conceito teorico pedido no enunciado."
+    ]
+  },
+  {
+    "nivel": "facil",
+    "tema": "teoria",
+    "subtema": "fundamentos",
+    "topico": "teoria-musical",
+    "pergunta": "Allegro indica andamento:",
+    "opcoes": [
+      "Rapido",
+      "Lento",
+      "Muito lento",
+      "Rubato"
+    ],
+    "resposta": 0,
+    "explicacoes": [
+      "Correto. Rapido.",
+      "Incorreto. Lento nao corresponde ao conceito teorico pedido no enunciado.",
+      "Incorreto. Muito lento nao corresponde ao conceito teorico pedido no enunciado.",
+      "Incorreto. Rubato nao corresponde ao conceito teorico pedido no enunciado."
+    ]
+  },
+  {
+    "nivel": "facil",
+    "tema": "teoria",
+    "subtema": "fundamentos",
+    "topico": "teoria-musical",
+    "pergunta": "Qual compasso e simples?",
+    "opcoes": [
+      "3/4",
+      "6/8",
+      "9/8",
+      "12/8"
+    ],
+    "resposta": 0,
+    "explicacoes": [
+      "Correto. 3/4.",
+      "Incorreto. 6/8 nao corresponde ao conceito teorico pedido no enunciado.",
+      "Incorreto. 9/8 nao corresponde ao conceito teorico pedido no enunciado.",
+      "Incorreto. 12/8 nao corresponde ao conceito teorico pedido no enunciado."
+    ]
+  },
+  {
+    "nivel": "facil",
+    "tema": "teoria",
+    "subtema": "fundamentos",
+    "topico": "teoria-musical",
+    "pergunta": "Qual compasso e composto?",
+    "opcoes": [
+      "2/4",
+      "3/4",
+      "4/4",
+      "6/8"
+    ],
+    "resposta": 3,
+    "explicacoes": [
+      "Incorreto. 2/4 nao corresponde ao conceito teorico pedido no enunciado.",
+      "Incorreto. 3/4 nao corresponde ao conceito teorico pedido no enunciado.",
+      "Incorreto. 4/4 nao corresponde ao conceito teorico pedido no enunciado.",
+      "Correto. 6/8."
+    ]
+  },
+  {
+    "nivel": "facil",
+    "tema": "teoria",
+    "subtema": "fundamentos",
+    "topico": "teoria-musical",
+    "pergunta": "Uma ligadura de valor serve para:",
+    "opcoes": [
+      "Unir notas da mesma altura somando duracoes",
+      "Separar frases",
+      "Alterar timbre",
+      "Trocar clave"
+    ],
+    "resposta": 0,
+    "explicacoes": [
+      "Correto. Unir notas da mesma altura somando duracoes.",
+      "Incorreto. Separar frases nao corresponde ao conceito teorico pedido no enunciado.",
+      "Incorreto. Alterar timbre nao corresponde ao conceito teorico pedido no enunciado.",
+      "Incorreto. Trocar clave nao corresponde ao conceito teorico pedido no enunciado."
+    ]
+  },
+  {
+    "nivel": "facil",
+    "tema": "teoria",
+    "subtema": "fundamentos",
+    "topico": "teoria-musical",
+    "pergunta": "Staccato indica execucao:",
+    "opcoes": [
+      "Ligada",
+      "Destacada e curta",
+      "Sempre forte",
+      "Sempre lenta"
+    ],
+    "resposta": 1,
+    "explicacoes": [
+      "Incorreto. Ligada nao corresponde ao conceito teorico pedido no enunciado.",
+      "Correto. Destacada e curta.",
+      "Incorreto. Sempre forte nao corresponde ao conceito teorico pedido no enunciado.",
+      "Incorreto. Sempre lenta nao corresponde ao conceito teorico pedido no enunciado."
+    ]
+  },
+  {
+    "nivel": "facil",
+    "tema": "teoria",
+    "subtema": "fundamentos",
+    "topico": "teoria-musical",
+    "pergunta": "Legato indica execucao:",
+    "opcoes": [
+      "Destacada",
+      "Ligada",
+      "Acentuada",
+      "Sincopada"
+    ],
+    "resposta": 1,
+    "explicacoes": [
+      "Incorreto. Destacada nao corresponde ao conceito teorico pedido no enunciado.",
+      "Correto. Ligada.",
+      "Incorreto. Acentuada nao corresponde ao conceito teorico pedido no enunciado.",
+      "Incorreto. Sincopada nao corresponde ao conceito teorico pedido no enunciado."
+    ]
+  },
+  {
+    "nivel": "facil",
+    "tema": "teoria",
+    "subtema": "fundamentos",
+    "topico": "teoria-musical",
+    "pergunta": "Qual e o nome da repeticao de um trecho com sinais de barra dupla?",
+    "opcoes": [
+      "Coda",
+      "Ritornello",
+      "Fermata",
+      "Rubato"
+    ],
+    "resposta": 1,
+    "explicacoes": [
+      "Incorreto. Coda nao corresponde ao conceito teorico pedido no enunciado.",
+      "Correto. Ritornello.",
+      "Incorreto. Fermata nao corresponde ao conceito teorico pedido no enunciado.",
+      "Incorreto. Rubato nao corresponde ao conceito teorico pedido no enunciado."
+    ]
+  },
+  {
+    "nivel": "medio",
+    "tema": "teoria",
+    "subtema": "leitura_e_intervalos",
+    "topico": "teoria-musical",
+    "pergunta": "Qual intervalo de Do para Mi bemol?",
+    "opcoes": [
+      "Terca menor",
+      "Terca maior",
+      "Quarta justa",
+      "Segunda maior"
+    ],
+    "resposta": 0,
+    "explicacoes": [
+      "Correto. Terca menor.",
+      "Incorreto. Terca maior nao corresponde ao conceito teorico pedido no enunciado.",
+      "Incorreto. Quarta justa nao corresponde ao conceito teorico pedido no enunciado.",
+      "Incorreto. Segunda maior nao corresponde ao conceito teorico pedido no enunciado."
+    ]
+  },
+  {
+    "nivel": "medio",
+    "tema": "teoria",
+    "subtema": "leitura_e_intervalos",
+    "topico": "teoria-musical",
+    "pergunta": "Qual intervalo de Do para Fa sustenido?",
+    "opcoes": [
+      "Quarta aumentada",
+      "Quarta justa",
+      "Quinta justa",
+      "Tritono inexistente"
+    ],
+    "resposta": 0,
+    "explicacoes": [
+      "Correto. Quarta aumentada.",
+      "Incorreto. Quarta justa nao corresponde ao conceito teorico pedido no enunciado.",
+      "Incorreto. Quinta justa nao corresponde ao conceito teorico pedido no enunciado.",
+      "Incorreto. Tritono inexistente nao corresponde ao conceito teorico pedido no enunciado."
+    ]
+  },
+  {
+    "nivel": "medio",
+    "tema": "teoria",
+    "subtema": "leitura_e_intervalos",
+    "topico": "teoria-musical",
+    "pergunta": "A inversao de uma terca gera:",
+    "opcoes": [
+      "Sexta",
+      "Quinta",
+      "Segunda",
+      "Setima"
+    ],
+    "resposta": 0,
+    "explicacoes": [
+      "Correto. Sexta.",
+      "Incorreto. Quinta nao corresponde ao conceito teorico pedido no enunciado.",
+      "Incorreto. Segunda nao corresponde ao conceito teorico pedido no enunciado.",
+      "Incorreto. Setima nao corresponde ao conceito teorico pedido no enunciado."
+    ]
+  },
+  {
+    "nivel": "medio",
+    "tema": "teoria",
+    "subtema": "leitura_e_intervalos",
+    "topico": "teoria-musical",
+    "pergunta": "A inversao de uma quarta gera:",
+    "opcoes": [
+      "Quinta",
+      "Sexta",
+      "Terca",
+      "Setima"
+    ],
+    "resposta": 0,
+    "explicacoes": [
+      "Correto. Quinta.",
+      "Incorreto. Sexta nao corresponde ao conceito teorico pedido no enunciado.",
+      "Incorreto. Terca nao corresponde ao conceito teorico pedido no enunciado.",
+      "Incorreto. Setima nao corresponde ao conceito teorico pedido no enunciado."
+    ]
+  },
+  {
+    "nivel": "medio",
+    "tema": "teoria",
+    "subtema": "leitura_e_intervalos",
+    "topico": "teoria-musical",
+    "pergunta": "Na escala maior, o VII grau e chamado de:",
+    "opcoes": [
+      "Subdominante",
+      "Dominante",
+      "Sensivel",
+      "Supertonica"
+    ],
+    "resposta": 2,
+    "explicacoes": [
+      "Incorreto. Subdominante nao corresponde ao conceito teorico pedido no enunciado.",
+      "Incorreto. Dominante nao corresponde ao conceito teorico pedido no enunciado.",
+      "Correto. Sensivel.",
+      "Incorreto. Supertonica nao corresponde ao conceito teorico pedido no enunciado."
+    ]
+  },
+  {
+    "nivel": "medio",
+    "tema": "teoria",
+    "subtema": "leitura_e_intervalos",
+    "topico": "teoria-musical",
+    "pergunta": "Na escala maior, o IV grau e chamado de:",
+    "opcoes": [
+      "Mediante",
+      "Subdominante",
+      "Sensivel",
+      "Submediante"
+    ],
+    "resposta": 1,
+    "explicacoes": [
+      "Incorreto. Mediante nao corresponde ao conceito teorico pedido no enunciado.",
+      "Correto. Subdominante.",
+      "Incorreto. Sensivel nao corresponde ao conceito teorico pedido no enunciado.",
+      "Incorreto. Submediante nao corresponde ao conceito teorico pedido no enunciado."
+    ]
+  },
+  {
+    "nivel": "medio",
+    "tema": "teoria",
+    "subtema": "leitura_e_intervalos",
+    "topico": "teoria-musical",
+    "pergunta": "O modo relativo menor de Do maior e:",
+    "opcoes": [
+      "La menor",
+      "Mi menor",
+      "Re menor",
+      "Sol menor"
+    ],
+    "resposta": 0,
+    "explicacoes": [
+      "Correto. La menor.",
+      "Incorreto. Mi menor nao corresponde ao conceito teorico pedido no enunciado.",
+      "Incorreto. Re menor nao corresponde ao conceito teorico pedido no enunciado.",
+      "Incorreto. Sol menor nao corresponde ao conceito teorico pedido no enunciado."
+    ]
+  },
+  {
+    "nivel": "medio",
+    "tema": "teoria",
+    "subtema": "leitura_e_intervalos",
+    "topico": "teoria-musical",
+    "pergunta": "O relativo maior de La menor e:",
+    "opcoes": [
+      "Do maior",
+      "Sol maior",
+      "Fa maior",
+      "Re maior"
+    ],
+    "resposta": 0,
+    "explicacoes": [
+      "Correto. Do maior.",
+      "Incorreto. Sol maior nao corresponde ao conceito teorico pedido no enunciado.",
+      "Incorreto. Fa maior nao corresponde ao conceito teorico pedido no enunciado.",
+      "Incorreto. Re maior nao corresponde ao conceito teorico pedido no enunciado."
+    ]
+  },
+  {
+    "nivel": "medio",
+    "tema": "teoria",
+    "subtema": "leitura_e_intervalos",
+    "topico": "teoria-musical",
+    "pergunta": "Na armadura com 1 sustenido, a tonalidade maior mais comum e:",
+    "opcoes": [
+      "Do maior",
+      "Sol maior",
+      "Re maior",
+      "Fa maior"
+    ],
+    "resposta": 1,
+    "explicacoes": [
+      "Incorreto. Do maior nao corresponde ao conceito teorico pedido no enunciado.",
+      "Correto. Sol maior.",
+      "Incorreto. Re maior nao corresponde ao conceito teorico pedido no enunciado.",
+      "Incorreto. Fa maior nao corresponde ao conceito teorico pedido no enunciado."
+    ]
+  },
+  {
+    "nivel": "medio",
+    "tema": "teoria",
+    "subtema": "leitura_e_intervalos",
+    "topico": "teoria-musical",
+    "pergunta": "Na armadura com 2 bemois, a tonalidade maior e:",
+    "opcoes": [
+      "Si bemol maior",
+      "Mi bemol maior",
+      "Fa maior",
+      "Re maior"
+    ],
+    "resposta": 0,
+    "explicacoes": [
+      "Correto. Si bemol maior.",
+      "Incorreto. Mi bemol maior nao corresponde ao conceito teorico pedido no enunciado.",
+      "Incorreto. Fa maior nao corresponde ao conceito teorico pedido no enunciado.",
+      "Incorreto. Re maior nao corresponde ao conceito teorico pedido no enunciado."
+    ]
+  },
+  {
+    "nivel": "medio",
+    "tema": "teoria",
+    "subtema": "leitura_e_intervalos",
+    "topico": "teoria-musical",
+    "pergunta": "Em 6/8, a divisao interna mais comum e:",
+    "opcoes": [
+      "2 grupos de 3 colcheias",
+      "3 grupos de 2 colcheias",
+      "6 grupos de 1 colcheia sem acento",
+      "4 grupos de 2 colcheias"
+    ],
+    "resposta": 0,
+    "explicacoes": [
+      "Correto. 2 grupos de 3 colcheias.",
+      "Incorreto. 3 grupos de 2 colcheias nao corresponde ao conceito teorico pedido no enunciado.",
+      "Incorreto. 6 grupos de 1 colcheia sem acento nao corresponde ao conceito teorico pedido no enunciado.",
+      "Incorreto. 4 grupos de 2 colcheias nao corresponde ao conceito teorico pedido no enunciado."
+    ]
+  },
+  {
+    "nivel": "medio",
+    "tema": "teoria",
+    "subtema": "leitura_e_intervalos",
+    "topico": "teoria-musical",
+    "pergunta": "Sincopa ocorre quando:",
+    "opcoes": [
+      "Acento cai em tempo fraco ou contratempo",
+      "Todas as notas estao no tempo forte",
+      "Nao existe pulso",
+      "Apenas ha pausas"
+    ],
+    "resposta": 0,
+    "explicacoes": [
+      "Correto. Acento cai em tempo fraco ou contratempo.",
+      "Incorreto. Todas as notas estao no tempo forte nao corresponde ao conceito teorico pedido no enunciado.",
+      "Incorreto. Nao existe pulso nao corresponde ao conceito teorico pedido no enunciado.",
+      "Incorreto. Apenas ha pausas nao corresponde ao conceito teorico pedido no enunciado."
+    ]
+  },
+  {
+    "nivel": "medio",
+    "tema": "teoria",
+    "subtema": "leitura_e_intervalos",
+    "topico": "teoria-musical",
+    "pergunta": "Anacruse e:",
+    "opcoes": [
+      "Inicio em tempo incompleto",
+      "Final em tempo incompleto",
+      "Mudanca de clave",
+      "Alteracao de andamento"
+    ],
+    "resposta": 0,
+    "explicacoes": [
+      "Correto. Inicio em tempo incompleto.",
+      "Incorreto. Final em tempo incompleto nao corresponde ao conceito teorico pedido no enunciado.",
+      "Incorreto. Mudanca de clave nao corresponde ao conceito teorico pedido no enunciado.",
+      "Incorreto. Alteracao de andamento nao corresponde ao conceito teorico pedido no enunciado."
+    ]
+  },
+  {
+    "nivel": "medio",
+    "tema": "teoria",
+    "subtema": "leitura_e_intervalos",
+    "topico": "teoria-musical",
+    "pergunta": "Ponto de aumento acrescenta:",
+    "opcoes": [
+      "Metade do valor da figura",
+      "Valor inteiro da figura",
+      "Um quarto do valor",
+      "Dois tempos fixos"
+    ],
+    "resposta": 0,
+    "explicacoes": [
+      "Correto. Metade do valor da figura.",
+      "Incorreto. Valor inteiro da figura nao corresponde ao conceito teorico pedido no enunciado.",
+      "Incorreto. Um quarto do valor nao corresponde ao conceito teorico pedido no enunciado.",
+      "Incorreto. Dois tempos fixos nao corresponde ao conceito teorico pedido no enunciado."
+    ]
+  },
+  {
+    "nivel": "medio",
+    "tema": "teoria",
+    "subtema": "leitura_e_intervalos",
+    "topico": "teoria-musical",
+    "pergunta": "Dois pontos de aumento acrescentam:",
+    "opcoes": [
+      "Metade + um quarto do valor",
+      "Somente metade",
+      "Somente um quarto",
+      "Valor dobrado"
+    ],
+    "resposta": 0,
+    "explicacoes": [
+      "Correto. Metade + um quarto do valor.",
+      "Incorreto. Somente metade nao corresponde ao conceito teorico pedido no enunciado.",
+      "Incorreto. Somente um quarto nao corresponde ao conceito teorico pedido no enunciado.",
+      "Incorreto. Valor dobrado nao corresponde ao conceito teorico pedido no enunciado."
+    ]
+  },
+  {
+    "nivel": "medio",
+    "tema": "teoria",
+    "subtema": "leitura_e_intervalos",
+    "topico": "teoria-musical",
+    "pergunta": "Bequadro serve para:",
+    "opcoes": [
+      "Anular alteracao anterior",
+      "Dobrar sustenido",
+      "Dobrar bemol",
+      "Aumentar duracao"
+    ],
+    "resposta": 0,
+    "explicacoes": [
+      "Correto. Anular alteracao anterior.",
+      "Incorreto. Dobrar sustenido nao corresponde ao conceito teorico pedido no enunciado.",
+      "Incorreto. Dobrar bemol nao corresponde ao conceito teorico pedido no enunciado.",
+      "Incorreto. Aumentar duracao nao corresponde ao conceito teorico pedido no enunciado."
+    ]
+  },
+  {
+    "nivel": "medio",
+    "tema": "teoria",
+    "subtema": "leitura_e_intervalos",
+    "topico": "teoria-musical",
+    "pergunta": "A escala cromatica possui:",
+    "opcoes": [
+      "12 semitons na oitava",
+      "7 notas fixas sem alteracao",
+      "5 graus",
+      "9 semitons"
+    ],
+    "resposta": 0,
+    "explicacoes": [
+      "Correto. 12 semitons na oitava.",
+      "Incorreto. 7 notas fixas sem alteracao nao corresponde ao conceito teorico pedido no enunciado.",
+      "Incorreto. 5 graus nao corresponde ao conceito teorico pedido no enunciado.",
+      "Incorreto. 9 semitons nao corresponde ao conceito teorico pedido no enunciado."
+    ]
+  },
+  {
+    "nivel": "medio",
+    "tema": "teoria",
+    "subtema": "leitura_e_intervalos",
+    "topico": "teoria-musical",
+    "pergunta": "A escala pentatonica maior possui:",
+    "opcoes": [
+      "5 notas",
+      "6 notas",
+      "7 notas",
+      "8 notas"
+    ],
+    "resposta": 0,
+    "explicacoes": [
+      "Correto. 5 notas.",
+      "Incorreto. 6 notas nao corresponde ao conceito teorico pedido no enunciado.",
+      "Incorreto. 7 notas nao corresponde ao conceito teorico pedido no enunciado.",
+      "Incorreto. 8 notas nao corresponde ao conceito teorico pedido no enunciado."
+    ]
+  },
+  {
+    "nivel": "medio",
+    "tema": "teoria",
+    "subtema": "leitura_e_intervalos",
+    "topico": "teoria-musical",
+    "pergunta": "Intervalo de 6 semitons pode ser chamado de:",
+    "opcoes": [
+      "Quinta justa",
+      "Quarta justa",
+      "Tritono",
+      "Sexta maior"
+    ],
+    "resposta": 2,
+    "explicacoes": [
+      "Incorreto. Quinta justa nao corresponde ao conceito teorico pedido no enunciado.",
+      "Incorreto. Quarta justa nao corresponde ao conceito teorico pedido no enunciado.",
+      "Correto. Tritono.",
+      "Incorreto. Sexta maior nao corresponde ao conceito teorico pedido no enunciado."
+    ]
+  },
+  {
+    "nivel": "medio",
+    "tema": "teoria",
+    "subtema": "leitura_e_intervalos",
+    "topico": "teoria-musical",
+    "pergunta": "Intervalo de 7 semitons e:",
+    "opcoes": [
+      "Quinta justa",
+      "Quarta aumentada",
+      "Sexta menor",
+      "Terca maior"
+    ],
+    "resposta": 0,
+    "explicacoes": [
+      "Correto. Quinta justa.",
+      "Incorreto. Quarta aumentada nao corresponde ao conceito teorico pedido no enunciado.",
+      "Incorreto. Sexta menor nao corresponde ao conceito teorico pedido no enunciado.",
+      "Incorreto. Terca maior nao corresponde ao conceito teorico pedido no enunciado."
+    ]
+  },
+  {
+    "nivel": "medio",
+    "tema": "teoria",
+    "subtema": "leitura_e_intervalos",
+    "topico": "teoria-musical",
+    "pergunta": "O termo adagio normalmente indica:",
+    "opcoes": [
+      "Andamento lento",
+      "Andamento rapido",
+      "Mudanca de tom",
+      "Aumento de volume"
+    ],
+    "resposta": 0,
+    "explicacoes": [
+      "Correto. Andamento lento.",
+      "Incorreto. Andamento rapido nao corresponde ao conceito teorico pedido no enunciado.",
+      "Incorreto. Mudanca de tom nao corresponde ao conceito teorico pedido no enunciado.",
+      "Incorreto. Aumento de volume nao corresponde ao conceito teorico pedido no enunciado."
+    ]
+  },
+  {
+    "nivel": "medio",
+    "tema": "teoria",
+    "subtema": "leitura_e_intervalos",
+    "topico": "teoria-musical",
+    "pergunta": "O termo presto normalmente indica:",
+    "opcoes": [
+      "Muito rapido",
+      "Muito lento",
+      "Moderado",
+      "Sem tempo"
+    ],
+    "resposta": 0,
+    "explicacoes": [
+      "Correto. Muito rapido.",
+      "Incorreto. Muito lento nao corresponde ao conceito teorico pedido no enunciado.",
+      "Incorreto. Moderado nao corresponde ao conceito teorico pedido no enunciado.",
+      "Incorreto. Sem tempo nao corresponde ao conceito teorico pedido no enunciado."
+    ]
+  },
+  {
+    "nivel": "medio",
+    "tema": "teoria",
+    "subtema": "leitura_e_intervalos",
+    "topico": "teoria-musical",
+    "pergunta": "A armadura de clave e colocada:",
+    "opcoes": [
+      "Apos a clave e antes da indicacao de compasso",
+      "Depois do compasso",
+      "No final da pauta",
+      "Somente na primeira linha da obra"
+    ],
+    "resposta": 0,
+    "explicacoes": [
+      "Correto. Apos a clave e antes da indicacao de compasso.",
+      "Incorreto. Depois do compasso nao corresponde ao conceito teorico pedido no enunciado.",
+      "Incorreto. No final da pauta nao corresponde ao conceito teorico pedido no enunciado.",
+      "Incorreto. Somente na primeira linha da obra nao corresponde ao conceito teorico pedido no enunciado."
+    ]
+  },
+  {
+    "nivel": "medio",
+    "tema": "teoria",
+    "subtema": "leitura_e_intervalos",
+    "topico": "teoria-musical",
+    "pergunta": "Intervalo de Do para Si natural e:",
+    "opcoes": [
+      "Setima maior",
+      "Setima menor",
+      "Sexta maior",
+      "Oitava"
+    ],
+    "resposta": 0,
+    "explicacoes": [
+      "Correto. Setima maior.",
+      "Incorreto. Setima menor nao corresponde ao conceito teorico pedido no enunciado.",
+      "Incorreto. Sexta maior nao corresponde ao conceito teorico pedido no enunciado.",
+      "Incorreto. Oitava nao corresponde ao conceito teorico pedido no enunciado."
+    ]
+  },
+  {
+    "nivel": "medio",
+    "tema": "teoria",
+    "subtema": "leitura_e_intervalos",
+    "topico": "teoria-musical",
+    "pergunta": "Intervalo de Do para Si bemol e:",
+    "opcoes": [
+      "Setima maior",
+      "Setima menor",
+      "Sexta menor",
+      "Nona"
+    ],
+    "resposta": 1,
+    "explicacoes": [
+      "Incorreto. Setima maior nao corresponde ao conceito teorico pedido no enunciado.",
+      "Correto. Setima menor.",
+      "Incorreto. Sexta menor nao corresponde ao conceito teorico pedido no enunciado.",
+      "Incorreto. Nona nao corresponde ao conceito teorico pedido no enunciado."
+    ]
+  },
+  {
+    "nivel": "medio",
+    "tema": "teoria",
+    "subtema": "leitura_e_intervalos",
+    "topico": "teoria-musical",
+    "pergunta": "Em 3/8, cada tempo principal e associado a:",
+    "opcoes": [
+      "Colcheia",
+      "Seminima",
+      "Minima",
+      "Semibreve"
+    ],
+    "resposta": 0,
+    "explicacoes": [
+      "Correto. Colcheia.",
+      "Incorreto. Seminima nao corresponde ao conceito teorico pedido no enunciado.",
+      "Incorreto. Minima nao corresponde ao conceito teorico pedido no enunciado.",
+      "Incorreto. Semibreve nao corresponde ao conceito teorico pedido no enunciado."
+    ]
+  },
+  {
+    "nivel": "medio",
+    "tema": "teoria",
+    "subtema": "leitura_e_intervalos",
+    "topico": "teoria-musical",
+    "pergunta": "Qui?ltera significa:",
+    "opcoes": [
+      "Divisao irregular do tempo",
+      "Mudanca de tonalidade",
+      "Troca de compasso",
+      "Aumento de volume"
+    ],
+    "resposta": 0,
+    "explicacoes": [
+      "Correto. Divisao irregular do tempo.",
+      "Incorreto. Mudanca de tonalidade nao corresponde ao conceito teorico pedido no enunciado.",
+      "Incorreto. Troca de compasso nao corresponde ao conceito teorico pedido no enunciado.",
+      "Incorreto. Aumento de volume nao corresponde ao conceito teorico pedido no enunciado."
+    ]
+  },
+  {
+    "nivel": "medio",
+    "tema": "teoria",
+    "subtema": "leitura_e_intervalos",
+    "topico": "teoria-musical",
+    "pergunta": "A fermata indica:",
+    "opcoes": [
+      "Prolongar nota ou pausa alem do valor escrito",
+      "Tocar staccato",
+      "Acelerar imediatamente",
+      "Repetir o compasso anterior"
+    ],
+    "resposta": 0,
+    "explicacoes": [
+      "Correto. Prolongar nota ou pausa alem do valor escrito.",
+      "Incorreto. Tocar staccato nao corresponde ao conceito teorico pedido no enunciado.",
+      "Incorreto. Acelerar imediatamente nao corresponde ao conceito teorico pedido no enunciado.",
+      "Incorreto. Repetir o compasso anterior nao corresponde ao conceito teorico pedido no enunciado."
+    ]
+  },
+  {
+    "nivel": "dificil",
+    "tema": "teoria",
+    "subtema": "analise_e_aplicacao",
+    "topico": "teoria-musical",
+    "pergunta": "Qual intervalo entre Mi e Do?",
+    "opcoes": [
+      "Sexta menor",
+      "Sexta maior",
+      "Quinta justa",
+      "Setima menor"
+    ],
+    "resposta": 0,
+    "explicacoes": [
+      "Correto. Sexta menor.",
+      "Incorreto. Sexta maior nao corresponde ao conceito teorico pedido no enunciado.",
+      "Incorreto. Quinta justa nao corresponde ao conceito teorico pedido no enunciado.",
+      "Incorreto. Setima menor nao corresponde ao conceito teorico pedido no enunciado."
+    ]
+  },
+  {
+    "nivel": "dificil",
+    "tema": "teoria",
+    "subtema": "analise_e_aplicacao",
+    "topico": "teoria-musical",
+    "pergunta": "Qual intervalo entre Si e Fa?",
+    "opcoes": [
+      "Quinta diminuta",
+      "Quarta justa",
+      "Quinta justa",
+      "Sexta menor"
+    ],
+    "resposta": 0,
+    "explicacoes": [
+      "Correto. Quinta diminuta.",
+      "Incorreto. Quarta justa nao corresponde ao conceito teorico pedido no enunciado.",
+      "Incorreto. Quinta justa nao corresponde ao conceito teorico pedido no enunciado.",
+      "Incorreto. Sexta menor nao corresponde ao conceito teorico pedido no enunciado."
+    ]
+  },
+  {
+    "nivel": "dificil",
+    "tema": "teoria",
+    "subtema": "analise_e_aplicacao",
+    "topico": "teoria-musical",
+    "pergunta": "Na escala menor harmonica, o VII grau e:",
+    "opcoes": [
+      "Elevado em relacao a menor natural",
+      "Rebaixado em relacao a menor natural",
+      "Igual ao modo maior em tudo",
+      "Inexistente"
+    ],
+    "resposta": 0,
+    "explicacoes": [
+      "Correto. Elevado em relacao a menor natural.",
+      "Incorreto. Rebaixado em relacao a menor natural nao corresponde ao conceito teorico pedido no enunciado.",
+      "Incorreto. Igual ao modo maior em tudo nao corresponde ao conceito teorico pedido no enunciado.",
+      "Incorreto. Inexistente nao corresponde ao conceito teorico pedido no enunciado."
+    ]
+  },
+  {
+    "nivel": "dificil",
+    "tema": "teoria",
+    "subtema": "analise_e_aplicacao",
+    "topico": "teoria-musical",
+    "pergunta": "Na escala menor melodica ascendente, quais graus se alteram?",
+    "opcoes": [
+      "VI e VII sobem",
+      "III e IV sobem",
+      "II e V sobem",
+      "Somente VII sobe"
+    ],
+    "resposta": 0,
+    "explicacoes": [
+      "Correto. VI e VII sobem.",
+      "Incorreto. III e IV sobem nao corresponde ao conceito teorico pedido no enunciado.",
+      "Incorreto. II e V sobem nao corresponde ao conceito teorico pedido no enunciado.",
+      "Incorreto. Somente VII sobe nao corresponde ao conceito teorico pedido no enunciado."
+    ]
+  },
+  {
+    "nivel": "dificil",
+    "tema": "teoria",
+    "subtema": "analise_e_aplicacao",
+    "topico": "teoria-musical",
+    "pergunta": "Compasso 12/8 geralmente organiza-se em:",
+    "opcoes": [
+      "4 tempos compostos",
+      "3 tempos simples",
+      "2 tempos simples",
+      "12 tempos fortes iguais"
+    ],
+    "resposta": 0,
+    "explicacoes": [
+      "Correto. 4 tempos compostos.",
+      "Incorreto. 3 tempos simples nao corresponde ao conceito teorico pedido no enunciado.",
+      "Incorreto. 2 tempos simples nao corresponde ao conceito teorico pedido no enunciado.",
+      "Incorreto. 12 tempos fortes iguais nao corresponde ao conceito teorico pedido no enunciado."
+    ]
+  },
+  {
+    "nivel": "dificil",
+    "tema": "teoria",
+    "subtema": "analise_e_aplicacao",
+    "topico": "teoria-musical",
+    "pergunta": "Mudanca de compasso dentro da peca chama-se:",
+    "opcoes": [
+      "Metric modulation/alternancia metrica",
+      "Enarmonia",
+      "Cadencia plagal",
+      "Transposicao timbrica"
+    ],
+    "resposta": 0,
+    "explicacoes": [
+      "Correto. Metric modulation/alternancia metrica.",
+      "Incorreto. Enarmonia nao corresponde ao conceito teorico pedido no enunciado.",
+      "Incorreto. Cadencia plagal nao corresponde ao conceito teorico pedido no enunciado.",
+      "Incorreto. Transposicao timbrica nao corresponde ao conceito teorico pedido no enunciado."
+    ]
+  },
+  {
+    "nivel": "dificil",
+    "tema": "teoria",
+    "subtema": "analise_e_aplicacao",
+    "topico": "teoria-musical",
+    "pergunta": "Aposicao de acentos contra o pulso regular caracteriza:",
+    "opcoes": [
+      "Polirritmia/sincope avancada",
+      "Monodia",
+      "Unissono puro",
+      "Escala cromatica"
+    ],
+    "resposta": 0,
+    "explicacoes": [
+      "Correto. Polirritmia/sincope avancada.",
+      "Incorreto. Monodia nao corresponde ao conceito teorico pedido no enunciado.",
+      "Incorreto. Unissono puro nao corresponde ao conceito teorico pedido no enunciado.",
+      "Incorreto. Escala cromatica nao corresponde ao conceito teorico pedido no enunciado."
+    ]
+  },
+  {
+    "nivel": "dificil",
+    "tema": "teoria",
+    "subtema": "analise_e_aplicacao",
+    "topico": "teoria-musical",
+    "pergunta": "No solfejo ritmico, subdividir o tempo ajuda a:",
+    "opcoes": [
+      "Precisao de leitura",
+      "Mudar tonalidade",
+      "Criar armadura",
+      "Definir timbre"
+    ],
+    "resposta": 0,
+    "explicacoes": [
+      "Correto. Precisao de leitura.",
+      "Incorreto. Mudar tonalidade nao corresponde ao conceito teorico pedido no enunciado.",
+      "Incorreto. Criar armadura nao corresponde ao conceito teorico pedido no enunciado.",
+      "Incorreto. Definir timbre nao corresponde ao conceito teorico pedido no enunciado."
+    ]
+  },
+  {
+    "nivel": "dificil",
+    "tema": "teoria",
+    "subtema": "analise_e_aplicacao",
+    "topico": "teoria-musical",
+    "pergunta": "Transposicao diatonica preserva principalmente:",
+    "opcoes": [
+      "Relacoes intervalares de graus",
+      "Timbre original",
+      "Andamento",
+      "Dinamica absoluta"
+    ],
+    "resposta": 0,
+    "explicacoes": [
+      "Correto. Relacoes intervalares de graus.",
+      "Incorreto. Timbre original nao corresponde ao conceito teorico pedido no enunciado.",
+      "Incorreto. Andamento nao corresponde ao conceito teorico pedido no enunciado.",
+      "Incorreto. Dinamica absoluta nao corresponde ao conceito teorico pedido no enunciado."
+    ]
+  },
+  {
+    "nivel": "dificil",
+    "tema": "teoria",
+    "subtema": "analise_e_aplicacao",
+    "topico": "teoria-musical",
+    "pergunta": "Transposicao cromatica preserva:",
+    "opcoes": [
+      "Distancias absolutas em semitons",
+      "Nome das notas",
+      "Compasso",
+      "Articulacao"
+    ],
+    "resposta": 0,
+    "explicacoes": [
+      "Correto. Distancias absolutas em semitons.",
+      "Incorreto. Nome das notas nao corresponde ao conceito teorico pedido no enunciado.",
+      "Incorreto. Compasso nao corresponde ao conceito teorico pedido no enunciado.",
+      "Incorreto. Articulacao nao corresponde ao conceito teorico pedido no enunciado."
+    ]
+  },
+  {
+    "nivel": "dificil",
+    "tema": "teoria",
+    "subtema": "analise_e_aplicacao",
+    "topico": "teoria-musical",
+    "pergunta": "A enarmonia entre Sol sustenido e La bemol significa:",
+    "opcoes": [
+      "Mesmo som com grafias diferentes",
+      "Sons diferentes sempre",
+      "Intervalo de terca",
+      "Mudanca de andamento"
+    ],
+    "resposta": 0,
+    "explicacoes": [
+      "Correto. Mesmo som com grafias diferentes.",
+      "Incorreto. Sons diferentes sempre nao corresponde ao conceito teorico pedido no enunciado.",
+      "Incorreto. Intervalo de terca nao corresponde ao conceito teorico pedido no enunciado.",
+      "Incorreto. Mudanca de andamento nao corresponde ao conceito teorico pedido no enunciado."
+    ]
+  },
+  {
+    "nivel": "dificil",
+    "tema": "teoria",
+    "subtema": "analise_e_aplicacao",
+    "topico": "teoria-musical",
+    "pergunta": "No sistema tonal, sensivel tende a resolver para:",
+    "opcoes": [
+      "Tonica",
+      "Subdominante",
+      "Mediante",
+      "Submediante"
+    ],
+    "resposta": 0,
+    "explicacoes": [
+      "Correto. Tonica.",
+      "Incorreto. Subdominante nao corresponde ao conceito teorico pedido no enunciado.",
+      "Incorreto. Mediante nao corresponde ao conceito teorico pedido no enunciado.",
+      "Incorreto. Submediante nao corresponde ao conceito teorico pedido no enunciado."
+    ]
+  },
+  {
+    "nivel": "dificil",
+    "tema": "teoria",
+    "subtema": "analise_e_aplicacao",
+    "topico": "teoria-musical",
+    "pergunta": "A nota de passagem e tipicamente:",
+    "opcoes": [
+      "Nao acorde em tempo fraco ligando notas de acorde",
+      "Sempre nota de acorde",
+      "Sempre em tempo forte",
+      "Sempre cromatica"
+    ],
+    "resposta": 0,
+    "explicacoes": [
+      "Correto. Nao acorde em tempo fraco ligando notas de acorde.",
+      "Incorreto. Sempre nota de acorde nao corresponde ao conceito teorico pedido no enunciado.",
+      "Incorreto. Sempre em tempo forte nao corresponde ao conceito teorico pedido no enunciado.",
+      "Incorreto. Sempre cromatica nao corresponde ao conceito teorico pedido no enunciado."
+    ]
+  },
+  {
+    "nivel": "dificil",
+    "tema": "teoria",
+    "subtema": "analise_e_aplicacao",
+    "topico": "teoria-musical",
+    "pergunta": "Apojatura costuma criar:",
+    "opcoes": [
+      "Tensao resolvida por grau conjunto",
+      "Repouso final",
+      "Silencio estrutural",
+      "Mudanca de clave"
+    ],
+    "resposta": 0,
+    "explicacoes": [
+      "Correto. Tensao resolvida por grau conjunto.",
+      "Incorreto. Repouso final nao corresponde ao conceito teorico pedido no enunciado.",
+      "Incorreto. Silencio estrutural nao corresponde ao conceito teorico pedido no enunciado.",
+      "Incorreto. Mudanca de clave nao corresponde ao conceito teorico pedido no enunciado."
+    ]
+  },
+  {
+    "nivel": "dificil",
+    "tema": "teoria",
+    "subtema": "analise_e_aplicacao",
+    "topico": "teoria-musical",
+    "pergunta": "Suspensao 4-3 implica:",
+    "opcoes": [
+      "Manter nota e resolver descendo para terca",
+      "Subir para quinta",
+      "Resolver para sexta",
+      "Trocar de tonalidade"
+    ],
+    "resposta": 0,
+    "explicacoes": [
+      "Correto. Manter nota e resolver descendo para terca.",
+      "Incorreto. Subir para quinta nao corresponde ao conceito teorico pedido no enunciado.",
+      "Incorreto. Resolver para sexta nao corresponde ao conceito teorico pedido no enunciado.",
+      "Incorreto. Trocar de tonalidade nao corresponde ao conceito teorico pedido no enunciado."
+    ]
+  },
+  {
+    "nivel": "dificil",
+    "tema": "teoria",
+    "subtema": "analise_e_aplicacao",
+    "topico": "teoria-musical",
+    "pergunta": "Cadencia autentica perfeita requer, entre outros fatores:",
+    "opcoes": [
+      "V para I com tonica na soprano e ambos em posicao fundamental",
+      "IV para I",
+      "V para VI",
+      "II para V"
+    ],
+    "resposta": 0,
+    "explicacoes": [
+      "Correto. V para I com tonica na soprano e ambos em posicao fundamental.",
+      "Incorreto. IV para I nao corresponde ao conceito teorico pedido no enunciado.",
+      "Incorreto. V para VI nao corresponde ao conceito teorico pedido no enunciado.",
+      "Incorreto. II para V nao corresponde ao conceito teorico pedido no enunciado."
+    ]
+  },
+  {
+    "nivel": "dificil",
+    "tema": "teoria",
+    "subtema": "analise_e_aplicacao",
+    "topico": "teoria-musical",
+    "pergunta": "Cadencia plagal classica corresponde a:",
+    "opcoes": [
+      "IV para I",
+      "V para I",
+      "V para VI",
+      "I para V"
+    ],
+    "resposta": 0,
+    "explicacoes": [
+      "Correto. IV para I.",
+      "Incorreto. V para I nao corresponde ao conceito teorico pedido no enunciado.",
+      "Incorreto. V para VI nao corresponde ao conceito teorico pedido no enunciado.",
+      "Incorreto. I para V nao corresponde ao conceito teorico pedido no enunciado."
+    ]
+  },
+  {
+    "nivel": "dificil",
+    "tema": "teoria",
+    "subtema": "analise_e_aplicacao",
+    "topico": "teoria-musical",
+    "pergunta": "Cadencia interrompida corresponde a:",
+    "opcoes": [
+      "V para VI",
+      "IV para I",
+      "II para V",
+      "I para IV"
+    ],
+    "resposta": 0,
+    "explicacoes": [
+      "Correto. V para VI.",
+      "Incorreto. IV para I nao corresponde ao conceito teorico pedido no enunciado.",
+      "Incorreto. II para V nao corresponde ao conceito teorico pedido no enunciado.",
+      "Incorreto. I para IV nao corresponde ao conceito teorico pedido no enunciado."
+    ]
+  },
+  {
+    "nivel": "dificil",
+    "tema": "teoria",
+    "subtema": "analise_e_aplicacao",
+    "topico": "teoria-musical",
+    "pergunta": "Modo dorico sobre Re possui sexta:",
+    "opcoes": [
+      "Maior",
+      "Menor",
+      "Aumentada",
+      "Diminuta"
+    ],
+    "resposta": 0,
+    "explicacoes": [
+      "Correto. Maior.",
+      "Incorreto. Menor nao corresponde ao conceito teorico pedido no enunciado.",
+      "Incorreto. Aumentada nao corresponde ao conceito teorico pedido no enunciado.",
+      "Incorreto. Diminuta nao corresponde ao conceito teorico pedido no enunciado."
+    ]
+  },
+  {
+    "nivel": "dificil",
+    "tema": "teoria",
+    "subtema": "analise_e_aplicacao",
+    "topico": "teoria-musical",
+    "pergunta": "Modo frigio possui segunda:",
+    "opcoes": [
+      "Menor",
+      "Maior",
+      "Aumentada",
+      "Justa"
+    ],
+    "resposta": 0,
+    "explicacoes": [
+      "Correto. Menor.",
+      "Incorreto. Maior nao corresponde ao conceito teorico pedido no enunciado.",
+      "Incorreto. Aumentada nao corresponde ao conceito teorico pedido no enunciado.",
+      "Incorreto. Justa nao corresponde ao conceito teorico pedido no enunciado."
+    ]
+  },
+  {
+    "nivel": "dificil",
+    "tema": "teoria",
+    "subtema": "analise_e_aplicacao",
+    "topico": "teoria-musical",
+    "pergunta": "Modo lidio destaca-se pela quarta:",
+    "opcoes": [
+      "Aumentada",
+      "Justa",
+      "Diminuta",
+      "Menor"
+    ],
+    "resposta": 0,
+    "explicacoes": [
+      "Correto. Aumentada.",
+      "Incorreto. Justa nao corresponde ao conceito teorico pedido no enunciado.",
+      "Incorreto. Diminuta nao corresponde ao conceito teorico pedido no enunciado.",
+      "Incorreto. Menor nao corresponde ao conceito teorico pedido no enunciado."
+    ]
+  },
+  {
+    "nivel": "dificil",
+    "tema": "teoria",
+    "subtema": "analise_e_aplicacao",
+    "topico": "teoria-musical",
+    "pergunta": "Modo mixolidio possui setima:",
+    "opcoes": [
+      "Menor",
+      "Maior",
+      "Diminuta",
+      "Aumentada"
+    ],
+    "resposta": 0,
+    "explicacoes": [
+      "Correto. Menor.",
+      "Incorreto. Maior nao corresponde ao conceito teorico pedido no enunciado.",
+      "Incorreto. Diminuta nao corresponde ao conceito teorico pedido no enunciado.",
+      "Incorreto. Aumentada nao corresponde ao conceito teorico pedido no enunciado."
+    ]
+  },
+  {
+    "nivel": "dificil",
+    "tema": "teoria",
+    "subtema": "analise_e_aplicacao",
+    "topico": "teoria-musical",
+    "pergunta": "Em leitura tonal, acorde diminuto de VII grau tem funcao de:",
+    "opcoes": [
+      "Dominante",
+      "Tonica",
+      "Subdominante",
+      "Mediante"
+    ],
+    "resposta": 0,
+    "explicacoes": [
+      "Correto. Dominante.",
+      "Incorreto. Tonica nao corresponde ao conceito teorico pedido no enunciado.",
+      "Incorreto. Subdominante nao corresponde ao conceito teorico pedido no enunciado.",
+      "Incorreto. Mediante nao corresponde ao conceito teorico pedido no enunciado."
+    ]
+  },
+  {
+    "nivel": "dificil",
+    "tema": "teoria",
+    "subtema": "analise_e_aplicacao",
+    "topico": "teoria-musical",
+    "pergunta": "Acorde meio-diminuto e simbolizado com frequencia por:",
+    "opcoes": [
+      "m7(b5)",
+      "maj7",
+      "sus4",
+      "add9"
+    ],
+    "resposta": 0,
+    "explicacoes": [
+      "Correto. m7(b5).",
+      "Incorreto. maj7 nao corresponde ao conceito teorico pedido no enunciado.",
+      "Incorreto. sus4 nao corresponde ao conceito teorico pedido no enunciado.",
+      "Incorreto. add9 nao corresponde ao conceito teorico pedido no enunciado."
+    ]
+  },
+  {
+    "nivel": "dificil",
+    "tema": "teoria",
+    "subtema": "analise_e_aplicacao",
+    "topico": "teoria-musical",
+    "pergunta": "Acorde aumentado e formado por:",
+    "opcoes": [
+      "Terca maior + terca maior",
+      "Terca menor + terca menor",
+      "Quarta justa + terca menor",
+      "Segunda maior + quarta justa"
+    ],
+    "resposta": 0,
+    "explicacoes": [
+      "Correto. Terca maior + terca maior.",
+      "Incorreto. Terca menor + terca menor nao corresponde ao conceito teorico pedido no enunciado.",
+      "Incorreto. Quarta justa + terca menor nao corresponde ao conceito teorico pedido no enunciado.",
+      "Incorreto. Segunda maior + quarta justa nao corresponde ao conceito teorico pedido no enunciado."
+    ]
+  },
+  {
+    "nivel": "dificil",
+    "tema": "teoria",
+    "subtema": "analise_e_aplicacao",
+    "topico": "teoria-musical",
+    "pergunta": "No ditado melodico tonal, identificar graus conjuntos primeiro ajuda a:",
+    "opcoes": [
+      "Reconstruir contorno com mais seguranca",
+      "Definir timbre",
+      "Determinar compasso sem ouvir",
+      "Evitar referencia tonal"
+    ],
+    "resposta": 0,
+    "explicacoes": [
+      "Correto. Reconstruir contorno com mais seguranca.",
+      "Incorreto. Definir timbre nao corresponde ao conceito teorico pedido no enunciado.",
+      "Incorreto. Determinar compasso sem ouvir nao corresponde ao conceito teorico pedido no enunciado.",
+      "Incorreto. Evitar referencia tonal nao corresponde ao conceito teorico pedido no enunciado."
+    ]
+  },
+  {
+    "nivel": "dificil",
+    "tema": "teoria",
+    "subtema": "analise_e_aplicacao",
+    "topico": "teoria-musical",
+    "pergunta": "No ditado harmonico basico, reconhecer cadencias auxilia a:",
+    "opcoes": [
+      "Inferir funcoes e centros tonais",
+      "Apenas contar compassos",
+      "Escolher andamento",
+      "Definir instrumentacao"
+    ],
+    "resposta": 0,
+    "explicacoes": [
+      "Correto. Inferir funcoes e centros tonais.",
+      "Incorreto. Apenas contar compassos nao corresponde ao conceito teorico pedido no enunciado.",
+      "Incorreto. Escolher andamento nao corresponde ao conceito teorico pedido no enunciado.",
+      "Incorreto. Definir instrumentacao nao corresponde ao conceito teorico pedido no enunciado."
+    ]
+  },
+  {
+    "nivel": "dificil",
+    "tema": "teoria",
+    "subtema": "analise_e_aplicacao",
+    "topico": "teoria-musical",
+    "pergunta": "Quando ha modulacao, um acorde piv? e util porque:",
+    "opcoes": [
+      "Pertence a duas tonalidades e facilita transicao",
+      "Sempre e dissonante",
+      "Elimina necessidade de sensivel",
+      "Impede resolucao"
+    ],
+    "resposta": 0,
+    "explicacoes": [
+      "Correto. Pertence a duas tonalidades e facilita transicao.",
+      "Incorreto. Sempre e dissonante nao corresponde ao conceito teorico pedido no enunciado.",
+      "Incorreto. Elimina necessidade de sensivel nao corresponde ao conceito teorico pedido no enunciado.",
+      "Incorreto. Impede resolucao nao corresponde ao conceito teorico pedido no enunciado."
+    ]
+  }
+];
+
+perguntas.push(...teoria_balanceamento);
+
+for (const q of perguntas) {
+  if (q.topico === "teoria-musical" && (!Array.isArray(q.explicacoes) || q.explicacoes.length !== q.opcoes.length)) {
+    q.explicacoes = q.opcoes.map((op, i) => i === q.resposta
+      ? `Correto. ${op}.`
+      : `Incorreto. ${op} nao representa a resposta correta para este conceito de teoria musical.`
+    );
+  }
+}
+
 module.exports = { perguntas, TOPICOS };
