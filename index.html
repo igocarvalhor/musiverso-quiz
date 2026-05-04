@@ -6,7 +6,7 @@
     <meta name="theme-color" content="#4da9ff" />
     <meta name="apple-mobile-web-app-capable" content="yes" />
     <meta name="apple-mobile-web-app-status-bar-style" content="default" />
-    <title>Musiverso Quiz</title>
+    <title>MusiversoDois</title>
     <link rel="manifest" href="/manifest.webmanifest" />
     <link rel="icon" href="/favicon.ico" sizes="any" />
     <link rel="icon" href="/favicon-v3.png" type="image/png" sizes="512x512" />
@@ -18,111 +18,115 @@
       href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;700;800&family=Nunito:wght@400;700;800&display=swap"
       rel="stylesheet"
     />
-    <link rel="stylesheet" href="styles.css" />
+    <link rel="stylesheet" href="styles.css?v=20260504e" />
   </head>
   <body>
     <div class="aurora aurora-a"></div>
     <div class="aurora aurora-b"></div>
     <div class="stars"></div>
 
-    <main class="app-shell">
-      <header class="hero">
-        <img class="hero-logo" src="img/logo-original-v3.png" alt="Logo do Musiverso Quiz" />
-        <h1>Quiz Musical</h1>
-        <p class="subtitle">
-          Aprenda musica brincando, conquiste titulos e brilhe no ranking galactico.
-        </p>
+    <main class="app-shell md2-shell">
+      <header class="hero md2-hero md2-hero--logo-only">
+        <img class="hero-logo md2-hero__logo" src="img/logo-original.png" alt="Logo do MusiversoDois" />
       </header>
 
-      <section class="grid-layout">
-        <article class="panel game-panel" id="gamePanel">
-          <div class="mobile-header-tools">
-            <button id="toggleHeaderBtn" class="header-toggle-btn" type="button" aria-expanded="true">
-                Fechar perfil
-            </button>
+      <section class="md2-layout">
+        <section class="panel md2-map-panel">
+          <div class="md2-screen-nav" id="screenNav" aria-live="polite">
+            <button id="screenBackBtn" class="ghost-btn md2-screen-back" type="button">Voltar ao mapa</button>
+            <p id="screenTitle" class="md2-screen-title">Explore seu conhecimento musical no Musiverso</p>
           </div>
 
-          <div id="quizHeader" class="quiz-header">
-            <div class="game-top">
-              <div>
-                <p class="mini-label">Jogador</p>
-                <h2 id="playerLabel">-</h2>
-                <div class="profile-box">
-                  <label for="profileInput" class="profile-frame-button" aria-label="Adicionar foto de perfil">
-                    <div class="profile-frame">
-                      <span id="profilePlaceholder" class="profile-placeholder"></span>
-                      <img id="profileImage" class="profile-image" alt="Foto de perfil" />
-                      <span class="profile-plus" aria-hidden="true">+</span>
-                    </div>
-                  </label>
-                  <input id="profileInput" type="file" accept="image/*" hidden />
+          <div class="md2-screen md2-screen--map" id="mapScreen">
+          <div class="md2-map-toolbar">
+            <div>
+              <p class="mini-label">Mapa Musical</p>
+              <h2 id="mapHeadline">Escolha um mundo</h2>
+            </div>
+            <button id="audioToggleBtn" class="ghost-btn md2-audio-toggle" type="button">Som ligado</button>
+          </div>
+
+          <div class="md2-soundtrack-bar">
+            <div>
+              <span class="mini-label">Camadas musicais</span>
+              <strong id="soundtrackLabel">Base em preparacao</strong>
+            </div>
+            <span id="mapProgressLabel" class="chip">0 mundos desbloqueados</span>
+          </div>
+
+          <div class="md2-world-map" id="worldMap" aria-label="Mapa musical interativo"></div>
+          </div>
+
+          <div class="md2-screen md2-screen--detail" id="detailScreen">
+            <div id="worldDetail" class="md2-world-detail"></div>
+          </div>
+        </section>
+
+        <aside class="md2-sidebar">
+          <div class="panel md2-profile-panel">
+            <div class="md2-profile-card">
+              <div class="md2-avatar-wrap">
+                <div class="md2-avatar-glow"></div>
+                <div class="profile-frame md2-avatar-frame">
+                  <span id="profilePlaceholder" class="profile-placeholder md2-avatar-placeholder">♪</span>
+                  <img id="profileImage" class="profile-image" alt="Foto de perfil" />
                 </div>
               </div>
-              <div class="status-chips">
-                <span id="titleChip" class="chip chip-gold">Aventureiro Ritmico</span>
-                <button id="logoutBtn" class="logout-power" type="button" title="Sair" aria-label="Sair">
-                  <span aria-hidden="true">⏻</span>
-                </button>
+
+              <div class="md2-player-copy">
+                <p class="mini-label">Explorador atual</p>
+                <h2 id="playerName">Carregando...</h2>
+                <span id="playerTitle" class="chip chip-gold">Aventureiro Ritmico</span>
               </div>
+
+              <button id="logoutBtn" class="logout-power md2-logout" type="button" title="Sair" aria-label="Sair">
+                <span aria-hidden="true">⏻</span>
+              </button>
             </div>
 
-            <div class="score-strip">
-              <p>Pontos: <strong id="scoreValue">0</strong></p>
-              <p>Acertos seguidos: <strong id="streakValue">0</strong></p>
-              <p>Acertos: <strong id="correctValue">0</strong></p>
+            <div class="md2-stats-grid">
+              <article class="md2-stat-card">
+                <span>XP</span>
+                <strong id="playerXp">0</strong>
+              </article>
+              <article class="md2-stat-card">
+                <span>Precisao</span>
+                <strong id="playerAccuracy">0%</strong>
+              </article>
+              <article class="md2-stat-card">
+                <span>Mundos</span>
+                <strong id="playerUnlockedWorlds">0/9</strong>
+              </article>
+              <article class="md2-stat-card">
+                <span>Tier</span>
+                <strong id="playerTier">Iniciante</strong>
+              </article>
             </div>
-          </div>
 
-          <div class="level-select" id="levelSelect"></div>
-
-          <div class="topic-select-wrap">
-            <p class="topic-select-label">Topico</p>
-            <div class="topic-select" id="topicSelect"></div>
-          </div>
-
-          <div class="progress-wrap">
-            <div class="progress-bar" id="progressBar"></div>
-          </div>
-
-          <div class="question-box">
-            <div id="quizStartCta" class="quiz-start-cta">
-              <button id="startGameBtn" class="start-quiz-btn">Comecar Quiz</button>
-              <p class="hint">Responda rapido e ganhe mais pontos.</p>
-            </div>
-            <p id="questionCounter" class="question-counter">Pergunta 0/0</p>
-            <div class="timebar-wrap" id="timebarWrap" aria-label="Tempo restante">
-              <div class="timebar-fill" id="timebarFill"></div>
-            </div>
-            <h3 id="questionText">Clique em comecar para jogar.</h3>
-            <div id="answersWrap" class="answers-wrap"></div>
-            <p id="feedbackText" class="feedback"></p>
-          </div>
-
-          <div class="action-row">
-            <button id="nextBtn" class="secondary-btn" disabled>Proxima</button>
-          </div>
-        </article>
-
-        <aside class="panel ranking-panel">
-          <div class="ranking-head">
-            <h2>Top Ranking</h2>
-            <div class="ranking-actions">
-              <button id="overallBtn" class="pill-btn active">Geral</button>
-              <button id="byLevelBtn" class="pill-btn">Por nivel</button>
+            <div class="md2-achievements-panel">
+              <div class="md2-section-head">
+                <h3>Conquistas</h3>
+                <span id="achievementCount">0</span>
+              </div>
+              <div id="achievementList" class="md2-achievements-list"></div>
             </div>
           </div>
 
-          <ul id="rankingList" class="ranking-list"></ul>
-          <p id="rankingHint" class="hint">Complete uma rodada para atualizar sua posicao.</p>
+          <div class="panel md2-ranking-wrap">
+            <div class="md2-ranking-panel">
+              <div class="md2-section-head">
+                <h3>Top Ranking</h3>
+                <button id="refreshRankingBtn" class="pill-btn" type="button">Atualizar</button>
+              </div>
+              <ol id="rankingList" class="ranking-list md2-ranking-list"></ol>
+              <p id="rankingHint" class="hint">O ranking usa a pontuacao geral ja existente do Musiverso.</p>
+            </div>
+          </div>
         </aside>
       </section>
     </main>
 
-    <template id="answerButtonTemplate">
-      <button class="answer-btn"></button>
-    </template>
-
-    <script src="pwa.js"></script>
-    <script src="app-legacy.js"></script>
+    <script src="pwa.js?v=20260504e"></script>
+    <script src="musiverso-app.js?v=20260504e"></script>
   </body>
 </html>

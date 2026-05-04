@@ -50,6 +50,10 @@
       "use": "@vercel/static"
     },
     {
+      "src": "img/logo.gif",
+      "use": "@vercel/static"
+    },
+    {
       "src": "favicon.png",
       "use": "@vercel/static"
     },
@@ -59,6 +63,10 @@
     },
     {
       "src": "img/logo-original.png",
+      "use": "@vercel/static"
+    },
+    {
+      "src": "img/logoDois.png",
       "use": "@vercel/static"
     },
     {

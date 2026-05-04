@@ -60,6 +60,10 @@ create table if not exists public.player_progress (
 create table if not exists public.quiz_questions (
   id bigserial primary key,
   level difficulty_level not null,
+  tema text,
+  topico text,
+  subtema text,
+  tags jsonb not null default '[]'::jsonb,
   question_text text not null,
   options jsonb not null,
   correct_option smallint not null,
@@ -67,10 +71,34 @@ create table if not exists public.quiz_questions (
   active boolean not null default true,
   created_at timestamptz not null default now(),
   updated_at timestamptz not null default now(),
+  constraint quiz_questions_tags_is_array check (jsonb_typeof(tags) = 'array'),
   constraint quiz_questions_options_is_array check (jsonb_typeof(options) = 'array'),
   constraint quiz_questions_options_len check (jsonb_array_length(options) = 4),
   constraint quiz_questions_correct_option_range check (correct_option between 0 and 3)
 );
+
+-- -------------------------------------
+-- Migracao de metadados tematicos em bases existentes
+-- Garante colunas novas antes de criar indices e usar seed/update
+-- -------------------------------------
+alter table if exists public.quiz_questions add column if not exists tema text;
+alter table if exists public.quiz_questions add column if not exists topico text;
+alter table if exists public.quiz_questions add column if not exists subtema text;
+alter table if exists public.quiz_questions add column if not exists tags jsonb not null default '[]'::jsonb;
+
+do $$
+begin
+  if not exists (
+    select 1
+    from pg_constraint
+    where conname = 'quiz_questions_tags_is_array'
+      and conrelid = 'public.quiz_questions'::regclass
+  ) then
+    alter table public.quiz_questions
+      add constraint quiz_questions_tags_is_array check (jsonb_typeof(tags) = 'array');
+  end if;
+end
+$$;
 
 -- -------------------------------------
 -- Sessoes/partidas do quiz
@@ -96,6 +124,12 @@ create table if not exists public.game_sessions (
 -- -------------------------------------
 create index if not exists idx_quiz_questions_level_active
   on public.quiz_questions(level, active);
+
+create index if not exists idx_quiz_questions_topico_active
+  on public.quiz_questions(topico, active);
+
+create index if not exists idx_quiz_questions_tema_active
+  on public.quiz_questions(tema, active);
 
 create index if not exists idx_game_sessions_player_id
   on public.game_sessions(player_id);
@@ -160,15 +194,182 @@ group by p.name, gs.level;
 -- Seed minimo de perguntas (exemplo)
 -- Pode ser removido depois que voce inserir seu conteudo oficial.
 -- -------------------------------------
-insert into public.quiz_questions (level, question_text, options, correct_option, explanation)
+-- Compatibilidade defensiva: se este bloco for executado isoladamente,
+-- garante as colunas tematicas antes do insert abaixo.
+alter table if exists public.quiz_questions add column if not exists tema text;
+alter table if exists public.quiz_questions add column if not exists topico text;
+alter table if exists public.quiz_questions add column if not exists subtema text;
+alter table if exists public.quiz_questions add column if not exists tags jsonb not null default '[]'::jsonb;
+
+do $$
+begin
+  if not exists (
+    select 1
+    from pg_constraint
+    where conname = 'quiz_questions_tags_is_array'
+      and conrelid = 'public.quiz_questions'::regclass
+  ) then
+    alter table public.quiz_questions
+      add constraint quiz_questions_tags_is_array check (jsonb_typeof(tags) = 'array');
+  end if;
+end
+$$;
+
+insert into public.quiz_questions (level, tema, topico, subtema, tags, question_text, options, correct_option, explanation)
 values
-  ('easy', 'Qual instrumento tem teclas?', '["Tambor", "Piano", "Chocalho", "Triangulo"]', 1, 'O piano e um instrumento de teclas.'),
-  ('easy', 'Quando cantamos bem baixinho, o volume esta...', '["Baixo", "Alto", "Raspado", "Quebrado"]', 0, 'Baixo significa som suave.'),
-  ('medium', 'Qual instrumento pertence a familia das cordas?', '["Violao", "Pandeiro", "Flauta", "Bateria"]', 0, 'O violao produz som com cordas vibrando.'),
-  ('medium', 'O que indica se a musica esta rapida ou lenta?', '["Tempo", "Cor", "Cheiro", "Peso"]', 0, 'Tempo musical define a velocidade da musica.'),
-  ('hard', 'Sequencia principal de notas que podemos cantar chama-se...', '["Melodia", "Ritmo visual", "Ruido", "Silencio"]', 0, 'Melodia e uma sequencia organizada de notas.'),
-  ('hard', 'Qual sinal pode indicar repeticao de um trecho?', '["Barra com pontos", "Pausa longa", "Clave de Sol", "Sustenido"]', 0, 'A barra com pontos indica repeticao de parte da musica.')
+  ('easy', 'teoria-musical', 'teoria-musical', 'instrumentos', '["teclas", "instrumentos"]', 'Qual instrumento tem teclas?', '["Tambor", "Piano", "Chocalho", "Triangulo"]', 1, 'O piano e um instrumento de teclas.'),
+  ('easy', 'teoria-musical', 'teoria-musical', 'dinamica', '["volume", "intensidade", "dinamica"]', 'Quando cantamos bem baixinho, o volume esta...', '["Baixo", "Alto", "Raspado", "Quebrado"]', 0, 'Baixo significa som suave.'),
+  ('medium', 'teoria-musical', 'teoria-musical', 'instrumentos', '["cordas", "instrumentos"]', 'Qual instrumento pertence a familia das cordas?', '["Violao", "Pandeiro", "Flauta", "Bateria"]', 0, 'O violao produz som com cordas vibrando.'),
+  ('medium', 'teoria-musical', 'teoria-musical', 'ritmo', '["tempo", "andamento", "ritmo"]', 'O que indica se a musica esta rapida ou lenta?', '["Tempo", "Cor", "Cheiro", "Peso"]', 0, 'Tempo musical define a velocidade da musica.'),
+  ('hard', 'teoria-musical', 'teoria-musical', 'melodia', '["melodia", "notas"]', 'Sequencia principal de notas que podemos cantar chama-se...', '["Melodia", "Ritmo visual", "Ruido", "Silencio"]', 0, 'Melodia e uma sequencia organizada de notas.'),
+  ('hard', 'teoria-musical', 'teoria-musical', 'notacao', '["repeticao", "notacao", "partitura"]', 'Qual sinal pode indicar repeticao de um trecho?', '["Barra com pontos", "Pausa longa", "Clave de Sol", "Sustenido"]', 0, 'A barra com pontos indica repeticao de parte da musica.')
 on conflict do nothing;
+
+update public.quiz_questions
+set
+  topico = case
+    when coalesce(topico, '') <> '' then topico
+    when lower(question_text || ' ' || coalesce(explanation, '')) ~ '(cadenc|acorde|triad|tetra|dominante|subdominante|tonica|harmonia|modulac|campo harmonico|ii-v-i|v/i|funcao)' then 'harmonia-funcional'
+    when lower(question_text || ' ' || coalesce(explanation, '')) ~ '(idade media|barroco|classico|romantico|renascimento|notre-dame|perotin|leonin|bach|mozart|beethoven|debussy|palestrina|chopin|historia)' then 'historia-da-musica'
+    else 'teoria-musical'
+  end,
+  tema = case
+    when coalesce(tema, '') <> '' then tema
+    when lower(question_text || ' ' || coalesce(explanation, '')) ~ '(cadenc|acorde|triad|tetra|dominante|subdominante|tonica|harmonia|modulac|campo harmonico|ii-v-i|v/i|funcao)' then 'harmonia-funcional'
+    when lower(question_text || ' ' || coalesce(explanation, '')) ~ '(idade media|barroco|classico|romantico|renascimento|notre-dame|perotin|leonin|bach|mozart|beethoven|debussy|palestrina|chopin|historia)' then 'historia-da-musica'
+    else 'teoria-musical'
+  end,
+  subtema = case
+    when coalesce(subtema, '') <> '' then subtema
+    when lower(question_text || ' ' || coalesce(explanation, '')) ~ '(pentagrama|clave|partitura|pauta)' then 'notacao'
+    when lower(question_text || ' ' || coalesce(explanation, '')) ~ '(ritmo|compasso|seminima|minima|semibreve|colcheia|pausa|andamento|tempo)' then 'ritmo'
+    when lower(question_text || ' ' || coalesce(explanation, '')) ~ '(intervalo|escala|semitom|tom|oitava|modo)' then 'intervalos-escalas'
+    when lower(question_text || ' ' || coalesce(explanation, '')) ~ '(timbre|intensidade|duracao|altura|som|vibracao)' then 'elementos-do-som'
+    when lower(question_text || ' ' || coalesce(explanation, '')) ~ '(cadenc)' then 'cadencias'
+    when lower(question_text || ' ' || coalesce(explanation, '')) ~ '(acorde|triad|tetra|campo harmonico)' then 'acordes'
+    when lower(question_text || ' ' || coalesce(explanation, '')) ~ '(dominante|subdominante|tonica|funcao)' then 'harmonia-funcional'
+    when lower(question_text || ' ' || coalesce(explanation, '')) ~ '(bach|mozart|beethoven|debussy|palestrina|chopin|perotin|leonin|notre-dame)' then 'compositores'
+    else null
+  end,
+  tags = case
+    when jsonb_typeof(tags) = 'array' and jsonb_array_length(tags) > 0 then tags
+    else jsonb_build_array(
+      coalesce(topico, tema, 'teoria-musical'),
+      coalesce(subtema, 'geral')
+    )
+  end;
+
+-- -------------------------------------
+-- Normalizacao de nicknames e unificacao de contas duplicadas
+-- Exemplo: "Igor" e "igor" viram uma conta unica
+-- -------------------------------------
+do $$
+declare
+  group_row record;
+  canonical_player_id uuid;
+  duplicate_player_id uuid;
+  idx integer;
+  canonical_auth_exists boolean;
+begin
+  for group_row in
+    select
+      lower(trim(name)) as normalized_name,
+      array_agg(id order by created_at asc, id asc) as player_ids
+    from public.players
+    group by lower(trim(name))
+    having count(*) > 1
+  loop
+    canonical_player_id := group_row.player_ids[1];
+
+    update public.players
+      set name = group_row.normalized_name
+      where id = canonical_player_id;
+
+    for idx in 2..array_length(group_row.player_ids, 1) loop
+      duplicate_player_id := group_row.player_ids[idx];
+
+      update public.game_sessions
+        set player_id = canonical_player_id
+        where player_id = duplicate_player_id;
+
+      if exists (select 1 from public.player_progress where player_id = duplicate_player_id) then
+        if exists (select 1 from public.player_progress where player_id = canonical_player_id) then
+          update public.player_progress as canonical_progress
+          set
+            total_score = coalesce(canonical_progress.total_score, 0) + coalesce(duplicate_progress.total_score, 0),
+            unlocked_medium = canonical_progress.unlocked_medium or duplicate_progress.unlocked_medium,
+            unlocked_hard = canonical_progress.unlocked_hard or duplicate_progress.unlocked_hard,
+            current_level = case
+              when canonical_progress.current_level = 'hard'::difficulty_level
+                or duplicate_progress.current_level = 'hard'::difficulty_level
+                or canonical_progress.unlocked_hard
+                or duplicate_progress.unlocked_hard
+              then 'hard'::difficulty_level
+              when canonical_progress.current_level = 'medium'::difficulty_level
+                or duplicate_progress.current_level = 'medium'::difficulty_level
+                or canonical_progress.unlocked_medium
+                or duplicate_progress.unlocked_medium
+              then 'medium'::difficulty_level
+              else 'easy'::difficulty_level
+            end,
+            highest_title = case
+              when char_length(coalesce(duplicate_progress.highest_title, '')) > char_length(coalesce(canonical_progress.highest_title, ''))
+              then duplicate_progress.highest_title
+              else canonical_progress.highest_title
+            end,
+            updated_at = greatest(canonical_progress.updated_at, duplicate_progress.updated_at)
+          from public.player_progress as duplicate_progress
+          where canonical_progress.player_id = canonical_player_id
+            and duplicate_progress.player_id = duplicate_player_id;
+
+          delete from public.player_progress
+            where player_id = duplicate_player_id;
+        else
+          update public.player_progress
+            set player_id = canonical_player_id
+            where player_id = duplicate_player_id;
+        end if;
+      end if;
+
+      select exists(
+        select 1 from public.player_auth where player_id = canonical_player_id
+      ) into canonical_auth_exists;
+
+      if canonical_auth_exists then
+        delete from public.player_auth
+          where player_id = duplicate_player_id;
+      else
+        update public.player_auth
+          set player_id = canonical_player_id
+          where player_id = duplicate_player_id;
+      end if;
+
+      delete from public.players
+        where id = duplicate_player_id;
+    end loop;
+  end loop;
+
+  update public.players
+    set name = lower(trim(name));
+end
+$$;
+
+create unique index if not exists idx_players_name_lower_unique
+  on public.players ((lower(name)));
+
+do $$
+begin
+  if not exists (
+    select 1
+    from pg_constraint
+    where conname = 'players_name_lowercase'
+      and conrelid = 'public.players'::regclass
+  ) then
+    alter table public.players
+      add constraint players_name_lowercase check (name = lower(name));
+  end if;
+end
+$$;
 
 -- -------------------------------------
 -- RLS e politicas

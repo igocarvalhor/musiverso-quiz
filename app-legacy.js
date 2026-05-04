@@ -5,6 +5,8 @@ const state = {
   activeLevel: "facil",
   unlockedLevels: ["facil"],
   totalScore: 0,
+  profileTotalCorrect: 0,
+  profileBestStreak: 0,
   roundScore: 0,
   streak: 0,
   roundBestStreak: 0,
@@ -174,9 +176,12 @@ function updateUiStats() {
   recalculateUnlockedLevels();
   el.playerLabel.textContent = state.playerName || "-";
   el.titleChip.textContent = getTitleByScore(state.totalScore);
-  el.scoreValue.textContent = state.roundScore;
-  el.streakValue.textContent = state.streak;
-  el.correctValue.textContent = state.roundCorrectAnswers;
+  const displayedScore = state.totalScore + (state.isRoundStarted ? state.roundScore : 0);
+  const displayedCorrect = state.profileTotalCorrect + (state.isRoundStarted ? state.roundCorrectAnswers : 0);
+  const displayedStreak = state.isRoundStarted ? state.streak : state.profileBestStreak;
+  el.scoreValue.textContent = displayedScore;
+  el.streakValue.textContent = displayedStreak;
+  el.correctValue.textContent = displayedCorrect;
 
   const total = state.questions.length || 1;
   const progress = (state.questionIndex / total) * 100;
@@ -354,6 +359,8 @@ function saveSessionUser() {
       id: state.playerId,
       nickname: state.playerName,
       totalScore: state.totalScore,
+      totalCorrect: state.profileTotalCorrect,
+      bestStreak: state.profileBestStreak,
       currentLevel: state.activeLevel,
       profilePhoto: el.profileImage.src || "",
     })
@@ -382,6 +389,8 @@ async function syncSessionWithServer() {
     state.playerId = payload.player?.id || state.playerId;
     state.playerName = payload.player?.nickname || state.playerName;
     state.totalScore = Number(payload.progress?.totalScore) || 0;
+    state.profileTotalCorrect = Number(payload.stats?.totalCorrect) || 0;
+    state.profileBestStreak = Number(payload.stats?.bestStreak) || 0;
     state.activeLevel = payload.progress?.currentLevel || state.activeLevel;
 
     // Sync profile photo from server if available
@@ -737,7 +746,6 @@ async function handleAnswer(selectedIndex) {
 
   if (isCorrect) {
     const gained = LEVEL_META[state.activeLevel].basePoints + bonus;
-    state.totalScore += gained;
     state.roundScore += gained;
     state.roundCorrectAnswers += 1;
     state.streak += 1;
@@ -765,6 +773,10 @@ async function handleAnswer(selectedIndex) {
 }
 
 async function autoFinishRound() {
+  const finalRoundScore = state.roundScore;
+  const finalCorrectAnswers = state.roundCorrectAnswers;
+  const finalQuestionCount = state.questions.length;
+
   clearQuestionTimer();
   el.nextBtn.disabled = true;
   el.questionCounter.textContent = "Rodada concluida";
@@ -774,11 +786,29 @@ async function autoFinishRound() {
   updateTimeBar();
   await submitScore();
   await loadRanking();
-  setFeedback(
-    `Rodada finalizada! Voce marcou ${state.roundScore} pontos. Inicie outra rodada quando quiser.`,
-    "ok"
-  );
-  resetToIdleState();
+
+  const resultTone = finalCorrectAnswers <= 3 ? "danger" : finalCorrectAnswers <= 6 ? "warning" : "success";
+  const resultLabel = resultTone === "danger"
+    ? "Continue treinando"
+    : resultTone === "warning"
+      ? "Voce esta evoluindo"
+      : "Desempenho excelente";
+  const resultIcon = resultTone === "danger"
+    ? "🎯"
+    : resultTone === "warning"
+      ? "🌟"
+      : "🏆";
+
+  resetToIdleState({
+    score: finalRoundScore,
+    correctAnswers: finalCorrectAnswers,
+    totalQuestions: finalQuestionCount,
+    tone: resultTone,
+    label: resultLabel,
+    icon: resultIcon,
+  });
+
+  setFeedback("Rodada finalizada! Confira seu resultado no balao e inicie outra rodada.", "ok");
 }
 
 async function nextQuestion() {
@@ -793,7 +823,7 @@ async function nextQuestion() {
   renderCurrentQuestion();
 }
 
-function resetToIdleState() {
+function resetToIdleState(summary = null) {
   clearQuestionTimer();
   state.isRoundStarted = false;
   state.questions = [];
@@ -806,9 +836,24 @@ function resetToIdleState() {
   state.secondsLeft = 0;
 
   showStartCta(true);
-  el.questionCounter.textContent = "Pergunta 0/0";
-  el.questionText.textContent = "Toque em Comecar Quiz para iniciar sua rodada.";
-  el.answersWrap.innerHTML = "";
+  if (summary) {
+    el.questionCounter.textContent = "Resultado da rodada";
+    el.questionText.textContent = "Veja seu desempenho e tente superar na proxima!";
+    el.answersWrap.innerHTML = `
+      <div class="score-balloon score-balloon--${summary.tone}" role="status" aria-live="polite">
+        <div class="score-balloon__glow" aria-hidden="true"></div>
+        <div class="score-balloon__icon" aria-hidden="true">${summary.icon || "⭐"}</div>
+        <div class="score-balloon__label">${summary.label}</div>
+        <div class="score-balloon__score">${summary.score} pontos</div>
+        <div class="score-balloon__meta">${summary.correctAnswers}/${summary.totalQuestions} acertos</div>
+      </div>
+    `;
+  } else {
+    el.questionCounter.textContent = "Pergunta 0/0";
+    el.questionText.textContent = "Toque em Comecar Quiz para iniciar sua rodada.";
+    el.answersWrap.innerHTML = "";
+  }
+
   el.nextBtn.disabled = true;
   updateUiStats();
 }
@@ -834,12 +879,13 @@ async function startRound() {
 }
 
 async function submitScore() {
-  if (!state.playerName) {
+  if (!state.playerName && !state.playerId) {
     return;
   }
 
   try {
     const payload = {
+      playerId: state.playerId,
       playerName: state.playerName,
       score: state.roundScore,
       level: state.activeLevel,
@@ -854,10 +900,12 @@ async function submitScore() {
       body: JSON.stringify(payload),
     });
 
-    if (data?.progress?.totalScore) {
-      state.totalScore = data.progress.totalScore;
+    if (Number.isFinite(Number(data?.progress?.totalScore))) {
+      state.totalScore = Number(data.progress.totalScore);
       saveSessionUser();
     }
+
+    await syncSessionWithServer();
   } catch (_error) {
     // O app continua funcional mesmo sem backend configurado.
   }
@@ -973,6 +1021,8 @@ async function bootstrap() {
   state.playerId = sessionUser.id || localStorage.getItem("playerId") || "";
   state.playerName = sessionUser.nickname;
   state.totalScore = Number(sessionUser.totalScore) || 0;
+  state.profileTotalCorrect = Number(sessionUser.totalCorrect) || 0;
+  state.profileBestStreak = Number(sessionUser.bestStreak) || 0;
   state.activeLevel = sessionUser.currentLevel || "facil";
 
   await syncSessionWithServer();

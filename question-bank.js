@@ -5580,6 +5580,266 @@ const teoria_escalas_modos = [
 
 perguntas.push(...teoria_escalas_modos);
 
+const harmonia_documento_avancado = [
+  {
+    nivel: "dificil",
+    tema: "harmonia",
+    subtema: "modulacao",
+    topico: "harmonia-funcional",
+    pergunta: "Em C maior, qual evento confirma melhor uma modulacao para G maior?",
+    opcoes: ["Aparecimento isolado de F#", "Cadeia A7 - D7 - G com resolucao estavel em G", "Uso de Bb em um compasso", "Repeticao de C no baixo"],
+    resposta: 1,
+    explicacoes: [
+      "Incorreto. Um acidente isolado pode ser apenas coloracao local.",
+      "Correto. Dominantes aplicadas e estabilizacao em G confirmam novo centro tonal.",
+      "Incorreto. Bb tende a emprestimo modal em C, nao modulacao para G.",
+      "Incorreto. Repetir C tende a reforcar o centro original.",
+    ],
+  },
+  {
+    nivel: "dificil",
+    tema: "harmonia",
+    subtema: "dominante_secundaria",
+    topico: "harmonia-funcional",
+    pergunta: "Na tonalidade de D maior, qual acorde funciona como V/V?",
+    opcoes: ["A7", "E7", "B7", "F#7"],
+    resposta: 1,
+    explicacoes: [
+      "Incorreto. A7 e o proprio V de D maior.",
+      "Correto. E7 e dominante de A, que por sua vez e o V de D.",
+      "Incorreto. B7 aponta para Em (II).",
+      "Incorreto. F#7 aponta para Bm (VI).",
+    ],
+  },
+  {
+    nivel: "dificil",
+    tema: "harmonia",
+    subtema: "rearmonizacao",
+    topico: "harmonia-funcional",
+    pergunta: "Qual substituicao tritonal pode substituir G7 rumo a C maior?",
+    opcoes: ["F7", "Db7", "Ab7", "E7"],
+    resposta: 1,
+    explicacoes: [
+      "Incorreto. F7 tende a outras resolucoes funcionais.",
+      "Correto. Db7 compartilha tritono funcional com G7 e pode resolver em C.",
+      "Incorreto. Ab7 nao e substituicao tritonal de G7.",
+      "Incorreto. E7 e dominante de Am.",
+    ],
+  },
+  {
+    nivel: "dificil",
+    tema: "harmonia",
+    subtema: "emprestimo_modal",
+    topico: "harmonia-funcional",
+    pergunta: "Em C maior, o uso de iv menor (Fm) caracteriza principalmente:",
+    opcoes: ["Dominante secundaria", "Emprestimo modal do paralelo menor", "Modulacao obrigatoria para F menor", "Cadencia auttentica"],
+    resposta: 1,
+    explicacoes: [
+      "Incorreto. Nao e dominante aplicada tipica.",
+      "Correto. iv menor em modo maior e recurso classico de intercambio modal.",
+      "Incorreto. Pode ocorrer sem consolidar nova tonalidade.",
+      "Incorreto. Cadencia autentica e V-I.",
+    ],
+  },
+  {
+    nivel: "dificil",
+    tema: "harmonia",
+    subtema: "analise",
+    topico: "harmonia-funcional",
+    pergunta: "Na progressao C - A7 - Dm - G7 - C, a leitura funcional mais adequada e:",
+    opcoes: ["T - V/II - II - V - T", "T - VI - II - IV - T", "T - SD - D - D - T", "T - V/VI - VI - V - T"],
+    resposta: 0,
+    explicacoes: [
+      "Correto. A7 funciona como V/II antes de Dm (II).",
+      "Incorreto. A7 nao e VI em C maior.",
+      "Incorreto. A7 nao e subdominante no contexto.",
+      "Incorreto. Dm nao e VI em C maior.",
+    ],
+  },
+  {
+    nivel: "dificil",
+    tema: "harmonia",
+    subtema: "cadencia",
+    topico: "harmonia-funcional",
+    pergunta: "Qual sequencia representa melhor uma semicadencia em G maior?",
+    opcoes: ["I - IV - I", "ii - V", "V - I", "IV - I"],
+    resposta: 1,
+    explicacoes: [
+      "Incorreto. Termina em tonica.",
+      "Correto. A semicadencia encerra em dominante (V).",
+      "Incorreto. Isso e fechamento autentico.",
+      "Incorreto. Isso e fechamento plagal.",
+    ],
+  },
+  {
+    nivel: "dificil",
+    tema: "harmonia",
+    subtema: "modulacao",
+    topico: "harmonia-funcional",
+    pergunta: "Em analise tonal, um acorde pivo e definido como:",
+    opcoes: ["Acorde exclusivo da tonalidade de chegada", "Acorde comum as duas tonalidades na transicao", "Acorde sem funcao harmonica", "Acorde sempre diminuto"],
+    resposta: 1,
+    explicacoes: [
+      "Incorreto. Isso nao caracteriza pivo funcional.",
+      "Correto. O pivo pertence aos dois campos e facilita a modulacao.",
+      "Incorreto. Ele tem funcao no contexto de transicao.",
+      "Incorreto. Pode ter varias qualidades.",
+    ],
+  },
+  {
+    nivel: "dificil",
+    tema: "harmonia",
+    subtema: "dominante_secundaria",
+    topico: "harmonia-funcional",
+    pergunta: "Na tonalidade de C maior, qual acorde e analisado como V/VI?",
+    opcoes: ["E7", "B7", "D7", "A7"],
+    resposta: 0,
+    explicacoes: [
+      "Correto. E7 aponta para Am (VI).",
+      "Incorreto. B7 aponta para Em (III).",
+      "Incorreto. D7 e V/V.",
+      "Incorreto. A7 e V/II.",
+    ],
+  },
+  {
+    nivel: "dificil",
+    tema: "harmonia",
+    subtema: "rearmonizacao",
+    topico: "harmonia-funcional",
+    pergunta: "Qual opcao descreve melhor o efeito de uma rearmonizacao por dominantes em cadeia?",
+    opcoes: ["Reduzir tensao funcional", "Aumentar direcionalidade e impulso cadencial", "Eliminar necessidade de tonica", "Transformar todo acorde em modal"],
+    resposta: 1,
+    explicacoes: [
+      "Incorreto. Dominantes em cadeia tendem a elevar tensao.",
+      "Correto. A cadeia reforca direcao para pontos de resolucao.",
+      "Incorreto. A tonica segue como polo de estabilizacao.",
+      "Incorreto. Nao implica conversao integral para modalismo.",
+    ],
+  },
+  {
+    nivel: "dificil",
+    tema: "harmonia",
+    subtema: "analise",
+    topico: "harmonia-funcional",
+    pergunta: "Na progressao G - B7 - Em - A7 - D - G, B7 e A7 exercem, respectivamente:",
+    opcoes: ["V/vi e V/V", "V/V e V/ii", "SubV e V/V", "IV e V"],
+    resposta: 0,
+    explicacoes: [
+      "Correto. Em G maior, B7 resolve em Em (vi) e A7 resolve em D (V).",
+      "Incorreto. B7 nao aponta para V em G maior.",
+      "Incorreto. Nao se trata de substituicoes tritonais aqui.",
+      "Incorreto. Sao dominantes aplicadas, nao IV e V diatonicos simples.",
+    ],
+  },
+  {
+    nivel: "dificil",
+    tema: "harmonia",
+    subtema: "cadencia",
+    topico: "harmonia-funcional",
+    pergunta: "Qual descricao distingue melhor a cadencia deceptiva da autentica?",
+    opcoes: ["Ambas resolvem em I", "Deceptiva desvia V para VI, evitando fechamento pleno", "Deceptiva e IV-I", "Autentica ocorre apenas no modo menor"],
+    resposta: 1,
+    explicacoes: [
+      "Incorreto. Na deceptiva, a resolucao esperada em I e evitada.",
+      "Correto. V-VI prolonga o discurso e evita conclusao total.",
+      "Incorreto. IV-I define cadencia plagal.",
+      "Incorreto. Cadencia autentica ocorre em varios contextos tonais.",
+    ],
+  },
+  {
+    nivel: "dificil",
+    tema: "harmonia",
+    subtema: "emprestimo_modal",
+    topico: "harmonia-funcional",
+    pergunta: "Em G maior, o acorde bVI (Eb) costuma indicar:",
+    opcoes: ["Dominante secundaria de D", "Emprestimo modal do paralelo menor", "Acorde diatonico de G maior", "Substituicao tritonal de A7"],
+    resposta: 1,
+    explicacoes: [
+      "Incorreto. Nao cumpre funcao de dominante aplicada de D.",
+      "Correto. bVI e recurso tipico de intercambio modal.",
+      "Incorreto. Eb nao pertence ao campo maior de G.",
+      "Incorreto. Nao corresponde a essa substituicao.",
+    ],
+  },
+  {
+    nivel: "dificil",
+    tema: "harmonia",
+    subtema: "modulacao",
+    topico: "harmonia-funcional",
+    pergunta: "Qual fator pesa mais para afirmar modulacao real, e nao tonicizacao passageira?",
+    opcoes: ["Um unico acorde cromatico", "Estabilizacao prolongada da nova tonica", "Mudanca de dinamica", "Alteracao de andamento"],
+    resposta: 1,
+    explicacoes: [
+      "Incorreto. Isoladamente, isso nao confirma modulacao.",
+      "Correto. E necessario perceber novo centro com estabilidade funcional.",
+      "Incorreto. Dinamica nao define centro tonal.",
+      "Incorreto. Andamento nao define tonalidade.",
+    ],
+  },
+  {
+    nivel: "dificil",
+    tema: "harmonia",
+    subtema: "rearmonizacao",
+    topico: "harmonia-funcional",
+    pergunta: "Em contexto tonal, aplicar Db7 no lugar de G7 antes de C maior e exemplo de:",
+    opcoes: ["Emprestimo modal", "Substituicao tritonal", "Cadencia plagal", "Acorde pivo"],
+    resposta: 1,
+    explicacoes: [
+      "Incorreto. Nao e intercambio modal nesse uso especifico.",
+      "Correto. Db7 substitui G7 por compartilhar tritono funcional.",
+      "Incorreto. Plagal seria IV-I.",
+      "Incorreto. Nao e pivo entre duas tonalidades neste caso.",
+    ],
+  },
+  {
+    nivel: "dificil",
+    tema: "harmonia",
+    subtema: "analise",
+    topico: "harmonia-funcional",
+    pergunta: "Na progressao C - Fm - C - G7 - C, o Fm e melhor analisado como:",
+    opcoes: ["IV diatonico", "iv menor por emprestimo modal", "V/IV", "SubV de G7"],
+    resposta: 1,
+    explicacoes: [
+      "Incorreto. IV diatonico em C maior seria F maior.",
+      "Correto. Fm e iv menor, tipico de intercambio modal.",
+      "Incorreto. V/IV seria C7.",
+      "Incorreto. Nao corresponde a substituicao tritonal de G7.",
+    ],
+  },
+  {
+    nivel: "dificil",
+    tema: "harmonia",
+    subtema: "dominante_secundaria",
+    topico: "harmonia-funcional",
+    pergunta: "Em F maior, qual acorde pode atuar como V/ii?",
+    opcoes: ["A7", "E7", "D7", "G7"],
+    resposta: 0,
+    explicacoes: [
+      "Correto. ii em F maior e Gm; seu dominante aplicado e A7.",
+      "Incorreto. E7 tende a Am.",
+      "Incorreto. D7 tende a G (ou Gm por mistura).",
+      "Incorreto. G7 e V de C, nao de Gm.",
+    ],
+  },
+  {
+    nivel: "dificil",
+    tema: "harmonia",
+    subtema: "cadencia",
+    topico: "harmonia-funcional",
+    pergunta: "Qual sequencia melhor exemplifica uma cadencia interrompida em C maior?",
+    opcoes: ["G7 - C", "F - C", "G7 - Am", "Dm - G7"],
+    resposta: 2,
+    explicacoes: [
+      "Incorreto. Isso e cadencia autentica.",
+      "Incorreto. Isso e cadencia plagal.",
+      "Correto. V resolve em VI, evitando o fechamento esperado em I.",
+      "Incorreto. Isso e preparacao cadencial sem resolucao final.",
+    ],
+  },
+];
+
+perguntas.push(...harmonia_documento_avancado);
+
 function classificarTrilhaDidaticaTeoria(pergunta) {
   const p = String(pergunta || "").toLowerCase();
 
@@ -5626,6 +5886,66 @@ function classificarTrilhaDidaticaTeoria(pergunta) {
   return { nivel: "medio", subtema: "estrutura_musical" };
 }
 
+function classificarSubtemaHarmonia(pergunta, subtemaAtual) {
+  if (subtemaAtual && normalizeText(subtemaAtual) !== "sem-subtema") {
+    return String(subtemaAtual).replace(/-/g, "_");
+  }
+
+  const p = normalizeText(pergunta);
+  if (/(rearmonizacao|substituicao tritonal|substituicoes e variacoes|subv)/.test(p)) return "rearmonizacao";
+  if (/(dominante secundaria|v\/v|v\/ii|v\/iii|v\/vi|dominante de)/.test(p)) return "dominante_secundaria";
+  if (/(modulacao|acorde pivo|novo centro tonal|tonicizacao)/.test(p)) return "modulacao";
+  if (/(emprestimo modal|paralelo menor|iv menor|bvi|biii|bVII)/.test(p)) return "emprestimo_modal";
+  if (/(cadenc|semicadencia|autentica|plagal|deceptiva|imperfeita|interrompida)/.test(p)) return "cadencia";
+  if (/(inversao|baixo|estado fundamental|primeira inversao|segunda inversao|6\/4|I6)/.test(p)) return "inversao";
+  if (/(ii-v-i|i-iv-v-i|progressao|ciclo de quintas|turnaround)/.test(p)) return "progressao";
+  if (/(triade|tetrade|acorde diminuto|aumentado|setima|enarmonia)/.test(p)) return "acordes";
+  if (/(funcao|tonica|subdominante|dominante|sensivel|relativa)/.test(p)) return "funcao";
+  if (/(campo harmonico|grau|ii grau|iii grau|iv grau|v grau|vi grau|vii grau)/.test(p)) return "campo_harmonico";
+  return "analise";
+}
+
+function classificarSubtemaHistoria(pergunta, subtemaAtual) {
+  if (subtemaAtual && normalizeText(subtemaAtual) !== "sem-subtema") {
+    return String(subtemaAtual).replace(/-/g, "_");
+  }
+
+  const p = normalizeText(pergunta);
+  if (/(idade media|gregoriano|organum|moteto|notre dame|leonin|perotin|ars nova|ars antiqua)/.test(p)) return "unidade1";
+  if (/(renascimento|barroco|classico|romantico|bach|mozart|beethoven|chopin|palestrina|flauta magica|cravo bem temperado)/.test(p)) return "unidade2";
+  if (/(impressionismo|debussy|modernismo|historiografia|anacronismo|musica absoluta|programatica|seculo xx)/.test(p)) return "unidade3";
+  return "unidade2";
+}
+
+function inferirAutorBase(topico) {
+  if (topico === "harmonia-funcional") return "ian_guest";
+  if (topico === "teoria-musical") return "bohumil_med";
+  if (topico === "historia-da-musica") return "roy_bennett";
+  return "geral";
+}
+
+function inferirCompetencia(nivel, subtema, pergunta) {
+  const p = normalizeText(pergunta);
+  if (/(analise|interpreta|melhor descreve|leitura funcional|compar|diferenca|por que|principal indicio)/.test(p)) {
+    return "analise";
+  }
+  if (nivel === "dificil") {
+    return "aplicacao";
+  }
+  if (nivel === "medio") {
+    return /cadencia|progressao|modulacao|campo_harmonico|estrutura/.test(subtema || "") ? "aplicacao" : "compreensao";
+  }
+  return "identificacao";
+}
+
+function normalizeText(value) {
+  return String(value || "")
+    .normalize("NFD")
+    .replace(/[\u0300-\u036f]/g, "")
+    .toLowerCase()
+    .trim();
+}
+
 for (const q of perguntas) {
   if (q.topico === "teoria-musical") {
     const trilha = classificarTrilhaDidaticaTeoria(q.pergunta);
@@ -5638,6 +5958,34 @@ for (const q of perguntas) {
     q.explicacoes = q.opcoes.map((op, i) => i === q.resposta
       ? `Correto. ${op}.`
       : `Incorreto. ${op} nao representa a resposta correta para este conceito de teoria musical.`
+    );
+  }
+
+  if (q.topico === "harmonia-funcional") {
+    q.tema = "harmonia";
+    q.subtema = classificarSubtemaHarmonia(q.pergunta, q.subtema);
+  }
+
+  if (q.topico === "historia-da-musica") {
+    q.tema = "historia";
+    q.subtema = classificarSubtemaHistoria(q.pergunta, q.subtema);
+  }
+
+  q.autor_base = inferirAutorBase(q.topico);
+  q.competencia = inferirCompetencia(q.nivel, q.subtema, q.pergunta);
+
+  const existingTags = Array.isArray(q.tags) ? q.tags : [];
+  const tagsSet = new Set(existingTags.map((t) => normalizeText(t)).filter(Boolean));
+  tagsSet.add(normalizeText(q.topico));
+  tagsSet.add(normalizeText(q.subtema));
+  tagsSet.add(normalizeText(q.autor_base));
+  tagsSet.add(normalizeText(q.competencia));
+  q.tags = Array.from(tagsSet).filter(Boolean);
+
+  if (!Array.isArray(q.explicacoes) || q.explicacoes.length !== (q.opcoes || []).length) {
+    q.explicacoes = (q.opcoes || []).map((op, i) => i === q.resposta
+      ? `Correto. ${op}.`
+      : `Incorreto. ${op} nao representa a resposta correta para este item.`
     );
   }
 }

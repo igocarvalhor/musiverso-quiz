@@ -1,4 +1,4 @@
-const CACHE_NAME = "musiverso-v12";
+const CACHE_NAME = "musiverso-v16";
 const APP_ASSETS = [
   "/",
   "/index.html",
@@ -12,6 +12,9 @@ const APP_ASSETS = [
   "/favicon.ico",
   "/favicon-v3.png",
   "/apple-touch-icon-v3.png",
+  "/img/logo.gif",
+  "/img/logo-original.png",
+  "/img/logoDois.png",
   "/img/logo-original-v3.png"
 ];
 

@@ -71,6 +71,110 @@ select id, 3, 'O Pentagrama', 'Linhas, espaços, claves', 50 from public.worlds 
 insert into public.lessons (world_id, order_number, name, description, xp_reward)
 select id, 4, 'Figuras Rítmicas', 'Semibreve, mínima, semínima', 50 from public.worlds where order_number = 1 on conflict do nothing;
 
+-- World 2: Leitura e Ritmo
+insert into public.lessons (world_id, order_number, name, description, xp_reward)
+select id, 1, 'Compassos Básicos', '2/4, 3/4 e 4/4', 60 from public.worlds where order_number = 2 on conflict do nothing;
+
+insert into public.lessons (world_id, order_number, name, description, xp_reward)
+select id, 2, 'Síncope e Contratempo', 'Deslocamentos rítmicos', 60 from public.worlds where order_number = 2 on conflict do nothing;
+
+insert into public.lessons (world_id, order_number, name, description, xp_reward)
+select id, 3, 'Claves e Leitura', 'Clave de Sol e de Fá', 60 from public.worlds where order_number = 2 on conflict do nothing;
+
+insert into public.lessons (world_id, order_number, name, description, xp_reward)
+select id, 4, 'Ditado Rítmico', 'Percepção e escrita de padrões', 60 from public.worlds where order_number = 2 on conflict do nothing;
+
+-- World 3: Intervalos e Escalas
+insert into public.lessons (world_id, order_number, name, description, xp_reward)
+select id, 1, 'Intervalos Simples', 'Classificação e semitons', 70 from public.worlds where order_number = 3 on conflict do nothing;
+
+insert into public.lessons (world_id, order_number, name, description, xp_reward)
+select id, 2, 'Escala Maior', 'Fórmula T-T-ST-T-T-T-ST', 70 from public.worlds where order_number = 3 on conflict do nothing;
+
+insert into public.lessons (world_id, order_number, name, description, xp_reward)
+select id, 3, 'Escala Menor', 'Natural, harmônica e melódica', 70 from public.worlds where order_number = 3 on conflict do nothing;
+
+insert into public.lessons (world_id, order_number, name, description, xp_reward)
+select id, 4, 'Aplicação em Tons', 'Transposição básica', 70 from public.worlds where order_number = 3 on conflict do nothing;
+
+-- World 4: Acordes
+insert into public.lessons (world_id, order_number, name, description, xp_reward)
+select id, 1, 'Tríades Maiores e Menores', 'Empilhamento de terças', 80 from public.worlds where order_number = 4 on conflict do nothing;
+
+insert into public.lessons (world_id, order_number, name, description, xp_reward)
+select id, 2, 'Acordes Diminutos e Aumentados', 'Qualidade dos acordes', 80 from public.worlds where order_number = 4 on conflict do nothing;
+
+insert into public.lessons (world_id, order_number, name, description, xp_reward)
+select id, 3, 'Campo Harmônico Maior', 'Graus e funções', 80 from public.worlds where order_number = 4 on conflict do nothing;
+
+insert into public.lessons (world_id, order_number, name, description, xp_reward)
+select id, 4, 'Tétrades Básicas', 'Acordes com sétima', 80 from public.worlds where order_number = 4 on conflict do nothing;
+
+-- World 5: Harmonia Funcional
+insert into public.lessons (world_id, order_number, name, description, xp_reward)
+select id, 1, 'Funções Harmônicas', 'Tônica, subdominante e dominante', 90 from public.worlds where order_number = 5 on conflict do nothing;
+
+insert into public.lessons (world_id, order_number, name, description, xp_reward)
+select id, 2, 'Cadência Autêntica', 'Relação V-I', 90 from public.worlds where order_number = 5 on conflict do nothing;
+
+insert into public.lessons (world_id, order_number, name, description, xp_reward)
+select id, 3, 'Cadência Plagal e Deceptiva', 'IV-I e V-VI', 90 from public.worlds where order_number = 5 on conflict do nothing;
+
+insert into public.lessons (world_id, order_number, name, description, xp_reward)
+select id, 4, 'Análise Funcional Básica', 'Leitura por graus', 90 from public.worlds where order_number = 5 on conflict do nothing;
+
+-- World 6: Progressões
+insert into public.lessons (world_id, order_number, name, description, xp_reward)
+select id, 1, 'Progressão II-V-I', 'Encadeamento essencial', 100 from public.worlds where order_number = 6 on conflict do nothing;
+
+insert into public.lessons (world_id, order_number, name, description, xp_reward)
+select id, 2, 'Progressão I-IV-V-I', 'Base tonal', 100 from public.worlds where order_number = 6 on conflict do nothing;
+
+insert into public.lessons (world_id, order_number, name, description, xp_reward)
+select id, 3, 'Ciclo de Quintas', 'Movimento por dominantes', 100 from public.worlds where order_number = 6 on conflict do nothing;
+
+insert into public.lessons (world_id, order_number, name, description, xp_reward)
+select id, 4, 'Turnarounds', 'Padrões de retorno', 100 from public.worlds where order_number = 6 on conflict do nothing;
+
+-- World 7: Cadências
+insert into public.lessons (world_id, order_number, name, description, xp_reward)
+select id, 1, 'Cadência Perfeita', 'Fechamento forte', 110 from public.worlds where order_number = 7 on conflict do nothing;
+
+insert into public.lessons (world_id, order_number, name, description, xp_reward)
+select id, 2, 'Cadência Imperfeita', 'Resolução parcial', 110 from public.worlds where order_number = 7 on conflict do nothing;
+
+insert into public.lessons (world_id, order_number, name, description, xp_reward)
+select id, 3, 'Cadência Plagal', 'Resolução suave', 110 from public.worlds where order_number = 7 on conflict do nothing;
+
+insert into public.lessons (world_id, order_number, name, description, xp_reward)
+select id, 4, 'Cadência Deceptiva', 'Desvio de expectativa', 110 from public.worlds where order_number = 7 on conflict do nothing;
+
+-- World 8: Análise Real
+insert into public.lessons (world_id, order_number, name, description, xp_reward)
+select id, 1, 'Análise por Graus', 'Leitura de função', 120 from public.worlds where order_number = 8 on conflict do nothing;
+
+insert into public.lessons (world_id, order_number, name, description, xp_reward)
+select id, 2, 'Análise de Progressões', 'Identificação em contexto', 120 from public.worlds where order_number = 8 on conflict do nothing;
+
+insert into public.lessons (world_id, order_number, name, description, xp_reward)
+select id, 3, 'Análise de Cadências', 'Reconhecimento auditivo', 120 from public.worlds where order_number = 8 on conflict do nothing;
+
+insert into public.lessons (world_id, order_number, name, description, xp_reward)
+select id, 4, 'Estudo de Repertório', 'Aplicação em exemplos reais', 120 from public.worlds where order_number = 8 on conflict do nothing;
+
+-- World 9: Avançado
+insert into public.lessons (world_id, order_number, name, description, xp_reward)
+select id, 1, 'Dominantes Secundárias', 'Funções temporárias', 140 from public.worlds where order_number = 9 on conflict do nothing;
+
+insert into public.lessons (world_id, order_number, name, description, xp_reward)
+select id, 2, 'Modulação', 'Mudança de centro tonal', 140 from public.worlds where order_number = 9 on conflict do nothing;
+
+insert into public.lessons (world_id, order_number, name, description, xp_reward)
+select id, 3, 'Empréstimo Modal', 'Acordes do paralelo', 140 from public.worlds where order_number = 9 on conflict do nothing;
+
+insert into public.lessons (world_id, order_number, name, description, xp_reward)
+select id, 4, 'Rearmonização', 'Substituições e variações', 140 from public.worlds where order_number = 9 on conflict do nothing;
+
 -- =====================================================
 -- 3. ESTENDER PLAYERS COM GAMIFICAÇÃO
 -- =====================================================

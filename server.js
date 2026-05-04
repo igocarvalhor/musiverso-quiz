@@ -251,7 +251,7 @@ function calculateTitle(totalScore) {
 }
 
 function normalizeNickname(value) {
-  return String(value || "").trim();
+  return String(value || "").trim().toLowerCase();
 }
 
 function isValidNickname(nickname) {
@@ -1226,6 +1226,24 @@ app.get("/api/player/sync", async (req, res) => {
       throw progressError;
     }
 
+    const { data: sessionRows, error: sessionsError } = await supabase
+      .from("game_sessions")
+      .select("correct_answers,best_streak")
+      .eq("player_id", player.id);
+
+    if (sessionsError) {
+      throw sessionsError;
+    }
+
+    const stats = (sessionRows || []).reduce(
+      (acc, row) => {
+        acc.totalCorrect += Math.max(Number(row.correct_answers) || 0, 0);
+        acc.bestStreak = Math.max(acc.bestStreak, Math.max(Number(row.best_streak) || 0, 0));
+        return acc;
+      },
+      { totalCorrect: 0, bestStreak: 0 }
+    );
+
     const totalScore = Number(progressRow?.total_score) || 0;
     return res.status(200).json({
       ok: true,
@@ -1238,6 +1256,7 @@ app.get("/api/player/sync", async (req, res) => {
         currentLevel: toAppLevel(progressRow?.current_level),
         highestTitle: progressRow?.highest_title || calculateTitle(totalScore),
       },
+      stats,
       profilePhoto: player.profile_photo || null,
     });
   } catch (error) {
@@ -1280,6 +1299,7 @@ app.patch("/api/player/photo", async (req, res) => {
 });
 
 
+app.post("/api/submit-score", async (req, res) => {
   if (!supabase) {
     return res.status(503).json({
       error: "Supabase nao configurado",
@@ -1288,6 +1308,7 @@ app.patch("/api/player/photo", async (req, res) => {
 
   try {
     const {
+      playerId,
       playerName,
       score,
       level,
@@ -1303,7 +1324,17 @@ app.patch("/api/player/photo", async (req, res) => {
     const safeCorrectAnswers = Math.max(Number(correctAnswers) || 0, 0);
     const safeBestStreak = Math.max(Number(bestStreak) || 0, 0);
 
-    const player = await getOrCreatePlayer(playerName);
+    let player = null;
+    const safePlayerId = String(playerId || "").trim();
+
+    if (safePlayerId) {
+      player = await findPlayerById(safePlayerId);
+      if (!player) {
+        return res.status(404).json({ error: "Jogador nao encontrado." });
+      }
+    } else {
+      player = await getOrCreatePlayer(playerName);
+    }
 
     const { error: sessionError } = await supabase.from("game_sessions").insert({
       player_id: player.id,
